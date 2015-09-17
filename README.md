@@ -10,5 +10,7 @@ Membre du projet :
 - Vincent CALISTO
 
 Description :
+Jeu de Role-Play, codé en C++
 
-	TODO
+Travail à faire pour le moment : 
+-Faire des ébauches sur l'environnement et le gameplay
