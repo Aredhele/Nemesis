@@ -10,5 +10,11 @@ Membre du projet :
 - Vincent CALISTO
 
 Description :
+Jeu de Role-Play, codé en C++
 
+<<<<<<< HEAD
 	A venir.
+=======
+Travail à faire pour le moment : 
+-Faire des ébauches sur l'environnement et le gameplay
+>>>>>>> origin/master
