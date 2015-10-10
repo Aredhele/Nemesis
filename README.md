@@ -1,7 +1,7 @@
 # Nemesis
 Projet IUT BM S3
 
-Membre du projet :
+Membres du projet :
 
 - Remi PEREIRA
 - Lucas PIERRAT
@@ -12,3 +12,4 @@ Membre du projet :
 Description :
 
 
+Je suis la :')
