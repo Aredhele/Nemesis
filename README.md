@@ -1,16 +1,13 @@
 # Nemesis
-Projet IUT BM S3
+Projet : Nemesis
+IUT BM 2015 - 2016
 
-Membres du projet :
+The Nemesis project is a client-server game based on a role game.
 
-- Remi PEREIRA
-- Lucas PIERRAT
-- Mathieu POURCHOT
-- Jehan MILLERET
-- Vincent CALISTO
+Project Member :
 
-Description :
-
-
-P'tit coucou de Math'
-2eme cc
+  - Aredhele
+  - Kariamoss
+  - Gaan25
+  - Pachobo16
+  - TheLordLoss
