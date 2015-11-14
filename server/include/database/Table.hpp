@@ -1,17 +1,40 @@
-#ifndef SERVER_TABLE_HPP
-#define SERVER_TABLE_HPP
+/**
+ * \brief Contains db data
+ * \file Table.hpp
+ * \author Aredhele
+ * \version 0.1
+ * \date 14/11/2015
+ * \class Table
+ */
+
+#ifndef DEF_SERVER_TABLE_HPP
+#define DEF_SERVER_TABLE_HPP
+
+// Header
+#include <string>
+#include <vector>
+
+#include "Field.hpp"
 
 class Table
 {
     private:
-
-    protected:
+        std::string m_name;
+        std::vector < std::vector < Field > > m_fieldArray;
 
     public:
+        // Constructors
         Table();
+        Table(std::string name);
+
+        // Destructor
         ~Table();
 
-    long message();
+        // Methods
+
+        // Getters
+        std::string getTableName();
+        std::vector < std::vector < Field > > * getFieldArray();
 };
 
-#endif //SERVER_TABLE_HPP
+#endif // DEF_SERVER_TABLE_HPP
