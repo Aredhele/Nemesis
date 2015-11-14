@@ -33,11 +33,6 @@ Table::~Table() {
 }
 
 /**
- * Methods
- */
-
-
-/**
  * Getters
  * \return m_name the name of the table
  */

@@ -30,8 +30,6 @@ class Table
         // Destructor
         ~Table();
 
-        // Methods
-
         // Getters
         std::string getTableName();
         std::vector < std::vector < Field > > * getFieldArray();
