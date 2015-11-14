@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 
-#include "ItemDB.hpp"
+#include <database/ItemDB.hpp>
 
 using namespace std;
 

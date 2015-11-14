@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ItemDB.hpp"
+#include <database/ItemDB.hpp>
 
 ItemDB::ItemDB() {
     // None
