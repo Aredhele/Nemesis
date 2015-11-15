@@ -24,9 +24,18 @@ Field::~Field() {
 }
 
 /**
+ * Getter
  * \brief Return the value of field
  * \return m_fieldData
  */
 std::string Field::getFieldData() {
     return m_fieldData;
+}
+
+/**
+ * Setter
+ * \brief Set the field to data
+ */
+void Field::setFieldData(std::string data) {
+    m_fieldData = data;
 }

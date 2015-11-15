@@ -7,22 +7,35 @@
  * \class Table
  */
 
+// Header
+#include <stdarg.h>
+
 #include "database/Table.hpp"
 
 /**
  * \brief Constructor.
- * \param field a field of a row
+ * \param name name of the table
  */
-Table::Table() {
-    m_name = "unknow";
+Table::Table(std::string name) {
+    m_name = name;
 }
 
 /**
  * \brief Constructor.
- * \param field a field of a row
+ * \param name name of the table
+ * \param arg name of columns
  */
-Table::Table(std::string name) {
+Table::Table(std::string name, const char *arg, ...) {
     m_name = name;
+
+    // Creating columns
+    va_list arguments;
+
+    for (va_start(arguments, arg); arg != NULL; arg = va_arg(arguments, const char *)) {
+        m_columnsName.push_back(arg);
+    }
+
+    va_end(arguments);
 }
 
 /**
@@ -41,8 +54,15 @@ std::string Table::getTableName() {
 }
 
 /**
+ * \return m_columnsName The name of all columns
+ */
+std::vector < std::string > *Table::getColumnsName() {
+    return &m_columnsName;
+}
+
+/**
  * \return m_fieldArray the data of the table
  */
-std::vector <std::vector < Field > > *Table::getFieldArray() {
+std::vector <std::vector < Field* > > *Table::getFieldArray() {
     return &m_fieldArray;
 }

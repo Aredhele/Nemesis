@@ -36,7 +36,7 @@ std::string Querie::select(Table *table, const char *arg,  ...) {
         std::cout << arg << std::endl;
     }
 
-    table->message();
+    table->getTableName();
 
     va_end(arguments);
 

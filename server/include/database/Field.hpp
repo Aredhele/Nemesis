@@ -28,6 +28,9 @@ class Field
 
         // Getter
         std::string getFieldData();
+
+        // Setter
+        void setFieldData(std::string data);
 };
 
 #endif // DEF_SERVER_FIELD_HPP

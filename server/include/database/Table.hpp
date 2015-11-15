@@ -20,19 +20,21 @@ class Table
 {
     private:
         std::string m_name;
-        std::vector < std::vector < Field > > m_fieldArray;
+        std::vector < std::string > m_columnsName;
+        std::vector < std::vector < Field* > > m_fieldArray;
 
     public:
         // Constructors
-        Table();
         Table(std::string name);
+        Table(std::string name, const char *arg, ...);
 
         // Destructor
         ~Table();
 
         // Getters
         std::string getTableName();
-        std::vector < std::vector < Field > > * getFieldArray();
+        std::vector < std::string > * getColumnsName();
+        std::vector < std::vector < Field* > > * getFieldArray();
 };
 
 #endif // DEF_SERVER_TABLE_HPP
