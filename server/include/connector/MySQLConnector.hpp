@@ -12,11 +12,13 @@
 
 // Header
 #include <string>
+#include <stdio.h>
 #include <iostream>
 #include <winsock2.h>
 #include "mysql/mysql.h"
 
-#include <tool/Config.hpp>
+#include "tool/Config.hpp"
+#include "database/Table.hpp"
 
 class MySQLConnector {
 
@@ -46,6 +48,9 @@ class MySQLConnector {
         // Methods
         int connect();
         void disconnect();
+
+        // Querie
+        std::vector < Table* > getTablesName();
 
         // Getter
         // TODO

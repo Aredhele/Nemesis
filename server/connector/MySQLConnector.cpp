@@ -96,3 +96,48 @@ void MySQLConnector::disconnect() {
 void MySQLConnector::setId(std::string id) {
     strcpy(m_id, id.c_str());
 }
+
+/**
+ * \brief return all the table name from the current database
+ * \return
+ */
+    std::vector<Table *> MySQLConnector::getTablesName() {
+    // Connection to the mysql server
+    connect();
+
+    // Querie
+    mysql_query(m_ptr_mysql, "SELECT TABLE_NAME "
+            "FROM INFORMATION_SCHEMA.TABLES "
+            "WHERE TABLE_SCHEMA = 'NEMESIS'");
+
+    MYSQL_RES *result = NULL;
+    MYSQL_ROW row;
+
+    unsigned int fieldNum = 0;
+
+    // Getting result
+    // Getting field number
+    result = mysql_store_result(m_ptr_mysql);
+    fieldNum = mysql_num_fields(result);
+
+    // Declaring vector of tables to return
+    std::vector < Table* > tables;
+
+    while((row = mysql_fetch_row(result))) {
+
+        // Getting lenghts of row
+        mysql_fetch_lengths(result);
+
+        for(int i = 0; i < fieldNum; i++) {
+            tables.push_back(new Table(row[i]));
+        }
+    }
+
+    // Releasing result game
+    mysql_free_result(result);
+
+    // Disconnection from the server
+    disconnect();
+
+    return tables;
+}
