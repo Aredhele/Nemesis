@@ -35,6 +35,15 @@ MySQLConnector::MySQLConnector(Config conf) {
 }
 
 /**
+ * Destructor.
+ * \brief delete m_ptr_mysql
+ */
+MySQLConnector::~MySQLConnector() {
+    delete m_ptr_mysql;
+    m_ptr_mysql = 0;
+}
+
+/**
  * \brief Configure the connection data
  * \param adr Adress of mysql server
  * \param id Login to access the mysql server
@@ -44,7 +53,7 @@ MySQLConnector::MySQLConnector(Config conf) {
  * \param flag options
  */
 void MySQLConnector::init(std::string adr, std::string id, std::string pass,
-std::string bdname, int port, int flag) {
+std::string bdname, unsigned int port, unsigned long flag) {
 
     strcpy(m_adr, adr.c_str());
     strcpy(m_id, id.c_str());
@@ -53,4 +62,29 @@ std::string bdname, int port, int flag) {
     m_socket = NULL;
     m_port = port;
     m_flag = flag;
+}
+
+/**
+ * \brief Etablish a persistant connection with mysql server
+ * \Deprecated Prefer use a temporary connection
+ */
+int MySQLConnector::connect() {
+    if(mysql_real_connect(m_ptr_mysql, m_adr, m_id, m_pass,
+    m_bdName, m_port, m_socket, m_flag)) {
+        // TODO - ConsoleDisplayer
+    } else {
+        // Error
+        // TODO - ConsoleDisplayer
+        std::cout << "Error : " << m_ptr_mysql->server_status << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return  EXIT_SUCCESS;
+}
+
+/**
+ * \brief Disconnect server from the mysql server
+ */
+void MySQLConnector::disconnect() {
+    mysql_close(m_ptr_mysql);
 }

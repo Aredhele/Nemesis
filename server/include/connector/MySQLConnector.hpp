@@ -12,6 +12,7 @@
 
 // Header
 #include <string>
+#include <iostream>
 #include <winsock2.h>
 #include "mysql/mysql.h"
 
@@ -27,16 +28,24 @@ class MySQLConnector {
         char m_pass[255];
         char m_bdName[255];
         char *m_socket;
-        int m_port;
-        int m_flag;
+        unsigned int m_port;
+        unsigned long m_flag;
 
         // Method
         void init(std::string adr, std::string id, std::string pass,
-                  std::string bdname, int port, int flag);
+                  std::string bdname, unsigned int port, unsigned long flag);
 
     public:
+        // Constructor
         MySQLConnector();
         MySQLConnector(Config conf);
+
+        // Destructor
+        ~MySQLConnector();
+
+        // Methods
+        int connect();
+        void disconnect();
 };
 
 #endif // DEF_SERVER_MYSQL_CONNECTOR_HPP
