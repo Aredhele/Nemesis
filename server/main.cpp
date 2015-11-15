@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "database/MySQLConnector.hpp"
+#include "connector/MySQLConnector.hpp"
 
 int main(int argc, char ** argv)
 {
