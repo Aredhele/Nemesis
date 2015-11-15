@@ -268,4 +268,3 @@ void MySQLConnector::getFieldFromTable(Table *table) {
 void MySQLConnector::setId(std::string id) {
     strcpy(m_id, id.c_str());
 }
-
