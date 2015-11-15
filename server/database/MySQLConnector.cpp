@@ -7,11 +7,12 @@
  * \class MySQL
  */
 
-#ifndef DEF_SERVER_MYSQL_HPP
-#define DEF_SERVER_MYSQL_HPP
+// Header
+#include "database/MySQLConnector.hpp"
 
-class MySQL {
+/**
+ * \brief Constructor.
+ */
+MySQLConnector::MySQLConnector() {
 
-};
-
-#endif // DEF_ERVER_MYSQL_HPP
+}
