@@ -1,14 +1,21 @@
-//
-// Created by Vincent on 15/11/2015.
-//
+/**
+ * \brief Configuration class
+ * \file Config.hpp
+ * \author Aredhele
+ * \version 0.1
+ * \date 15/11/2015
+ * \class Config
+ */
 
-#ifndef SERVER_CONFIG_HPP
-#define SERVER_CONFIG_HPP
-
+#ifndef DEF_SERVER_CONFIG_HPP
+#define DEF_SERVER_CONFIG_HPP
 
 class Config {
 
+    // TODO
+    public:
+        // Constructor
+        Config();
 };
 
-
-#endif //SERVER_CONFIG_HPP
+#endif // DEF_SERVER_CONFIG_HPP

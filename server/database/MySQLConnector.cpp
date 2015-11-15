@@ -14,7 +14,7 @@
  * \brief Constructor.
  */
 MySQLConnector::MySQLConnector() {
-
+    // TODO
 }
 
 /**
@@ -22,5 +22,5 @@ MySQLConnector::MySQLConnector() {
  * \param conf The config for db connection
  */
 MySQLConnector::MySQLConnector(Config conf) {
-
+    // TODO
 }
