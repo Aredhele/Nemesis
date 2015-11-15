@@ -16,3 +16,11 @@
 MySQLConnector::MySQLConnector() {
 
 }
+
+/**
+ * \brief Constructor.
+ * \param conf The config for db connection
+ */
+MySQLConnector::MySQLConnector(Config conf) {
+
+}

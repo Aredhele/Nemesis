@@ -14,13 +14,16 @@
 #include <winsock2.h>
 #include "mysql/mysql.h"
 
+#include <tool/Config.hpp>
+
 class MySQLConnector {
 
     private:
         MYSQL * m_ptr_mysql;
-    
+
     public:
         MySQLConnector();
+        MySQLConnector(Config conf);
 };
 
 #endif // DEF_SERVER_MYSQL_CONNECTOR_HPP
