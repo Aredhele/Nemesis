@@ -46,6 +46,13 @@ class MySQLConnector {
         // Methods
         int connect();
         void disconnect();
+
+        // Getter
+        // TODO
+
+        // Setters
+        void setId(std::string id);
+
 };
 
 #endif // DEF_SERVER_MYSQL_CONNECTOR_HPP

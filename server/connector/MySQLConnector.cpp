@@ -75,7 +75,6 @@ int MySQLConnector::connect() {
     } else {
         // Error
         // TODO - ConsoleDisplayer
-        std::cout << "Error : " << m_ptr_mysql->server_status << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -87,4 +86,13 @@ int MySQLConnector::connect() {
  */
 void MySQLConnector::disconnect() {
     mysql_close(m_ptr_mysql);
+    // TODO - ConsoleDisplayer
+}
+
+/**
+ * Setters
+ * \param id The login of the mysql server
+ */
+void MySQLConnector::setId(std::string id) {
+    strcpy(m_id, id.c_str());
 }
