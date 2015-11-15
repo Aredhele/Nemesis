@@ -37,6 +37,9 @@ class MySQLConnector {
         void init(std::string adr, std::string id, std::string pass,
                   std::string bdname, unsigned int port, unsigned long flag);
 
+        void buildQuery(std::string *query);
+        void buildQuery(std::string *query, std::string tableName);
+
     public:
         // Constructor
         MySQLConnector();
@@ -51,6 +54,8 @@ class MySQLConnector {
 
         // Querie
         std::vector < Table* > getTablesName();
+        void getColumnsFromTable(Table *table);
+        void getFieldFromTable(Table *table);
 
         // Getter
         // TODO

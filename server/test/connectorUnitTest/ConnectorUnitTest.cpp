@@ -65,4 +65,19 @@ TEST_F(ConnectorFixture, connectorTableNameCheck) {
     }
 }
 
+TEST_F(ConnectorFixture, connectorColumnsNameCheck) {
+    const char * names[6] = {"classId", "classRole", "classAttribut",
+                             "classSkill", "classDescription", "classSpriteId"};
+
+    // Getting table
+    std::vector < Table* > tablesName = m_testConnector->getTablesName();
+
+    // Getting columns of table 0
+    m_testConnector->getColumnsFromTable(tablesName[0]);
+
+    // Checking values
+    for(int i = 0; i < tablesName[0]->getColumnsName()->size(); i++) {
+        EXPECT_EQ(names[i], (*tablesName[0]->getColumnsName())[i]);
+    }
+}
 

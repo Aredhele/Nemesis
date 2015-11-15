@@ -13,6 +13,8 @@
 // Header
 #include <string>
 #include <vector>
+#include <iostream>
+#include <stdarg.h>
 
 #include "Field.hpp"
 
@@ -31,10 +33,18 @@ class Table
         // Destructor
         ~Table();
 
+        // Method
+        void addColumns(std::string columnName);
+        void addRow();
+        void displayColumns();
+        void displayDash();
+        void displayFields();
+
         // Getters
         std::string getTableName();
         std::vector < std::string > * getColumnsName();
         std::vector < std::vector < Field* > > * getFieldArray();
+
 };
 
 #endif // DEF_SERVER_TABLE_HPP
