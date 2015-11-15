@@ -2,6 +2,7 @@
 .idea/
 *.txt
 lib/
+mysql/
 
 # Compiled Object files 
 *.slo

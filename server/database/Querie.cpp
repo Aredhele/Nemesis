@@ -19,7 +19,7 @@
  * \return TODO
  */
 std::string Querie::select(Table *table) {
-
+    // TODO
 }
 
 /**
@@ -30,15 +30,5 @@ std::string Querie::select(Table *table) {
  * \return TODO
  */
 std::string Querie::select(Table *table, const char *arg,  ...) {
-    va_list arguments;
-
-    for (va_start(arguments, arg); arg != NULL; arg = va_arg(arguments, const char *)) {
-        std::cout << arg << std::endl;
-    }
-
-    table->getTableName();
-
-    va_end(arguments);
-
-    return "";
+    // TODO
 }

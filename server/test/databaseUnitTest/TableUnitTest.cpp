@@ -21,7 +21,7 @@ class TableFixture : public ::testing::Test {
     public:
         TableFixture() : Test() {
             m_testTable = new Table("TABLE");
-            m_testTableC = new Table("TABLE", "id", "name", "level", NULL);
+            m_testTableC = new Table("TABLE", "id", "name", "level", (void *) NULL);
         }
 
         /**
