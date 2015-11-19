@@ -24,46 +24,46 @@
 
 class MySQLConnector {
 
-private:
-    MYSQL * m_ptr_mysql;
+    private:
+        MYSQL * m_ptr_mysql;
 
-    char m_adress[32];
-    char m_blogin[32];
-    char m_passwd[32];
-    char m_bdName[32];
-    char *m_socket = NULL;
-    unsigned int m_port;
-    unsigned long m_flag;
+        char m_adress[32];
+        char m_blogin[32];
+        char m_passwd[32];
+        char m_bdName[32];
+        char *m_socket = NULL;
+        unsigned int m_port;
+        unsigned long m_flag;
 
-    // Method
-    void init(std::string adress, std::string blogin, std::string passwd,
-              std::string bdName, unsigned int port, unsigned long flag);
+        // Method
+        void init(std::string adress, std::string blogin, std::string passwd,
+                  std::string bdName, unsigned int port, unsigned long flag);
 
-    void buildQuery(std::string *query);
-    void buildQuery(std::string *query, std::string tableName);
+        void buildQuery(std::string *query);
+        void buildQuery(std::string *query, std::string tableName);
 
-public:
-    // Constructor
-    MySQLConnector();
-    MySQLConnector(Config conf);
+    public:
+        // Constructor
+        MySQLConnector();
+        MySQLConnector(Config conf);
 
-    // Destructor
-    ~MySQLConnector();
+        // Destructor
+        ~MySQLConnector();
 
-    // Methods
-    int connect();
-    void disconnect();
+        // Methods
+        int connect();
+        void disconnect();
 
-    // Querie
-    std::vector < Table* > getTablesName();
-    void getColumnsFromTable(Table *table);
-    void getFieldFromTable(Table *table);
+        // Querie
+        std::vector < Table* > getTablesName();
+        void getColumnsFromTable(Table *table);
+        void getFieldFromTable(Table *table);
 
-    // Getter
-    // TODO
+        // Getter
+        // TODO
 
-    // Setters
-    void setId(std::string login);
+        // Setters
+        void setId(std::string login);
 };
 
 #endif // DEF_SERVER_MYSQL_CONNECTOR_HPP
