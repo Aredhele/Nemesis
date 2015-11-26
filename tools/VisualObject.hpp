@@ -29,7 +29,7 @@ class VisualObject
 		VisualObject(sf::Vector2f position, std::string pathToTexture);
 
 		// Destructor
-		~VisualObject();
+		virtual ~VisualObject();
 
 		// Methods
 		// Getters
