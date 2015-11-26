@@ -56,3 +56,18 @@ void Configuration::displayConfig() {
         m_ptr_displayer->displayMessage("$" + it->first + " = " + it->second);
     }
 }
+
+/**
+ * \param paramName the Name of the param
+ * \return param
+ */
+std::string Configuration::getParam(std::string paramName) {
+    std::map <std::string, std::string>::iterator it = m_config.begin();
+
+    for(it = m_config.begin(); it !=m_config.end(); ++it) {
+        if(it->first == paramName)
+            return it->second;
+    }
+
+    return NULL;
+}

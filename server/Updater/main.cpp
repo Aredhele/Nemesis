@@ -9,12 +9,15 @@
 // Header
 #include <stdlib.h>
 
-#include "Parser/Parser.hpp"
+#include "parser/Parser.hpp"
+#include "remote/Remote.hpp"
 
 int main(int argc, const char ** argv) {
 
     Parser * parser;
+    Remote * remote;
     Configuration * configuration;
+
     ConsoleDisplayer * displayer = new ConsoleDisplayer();
 
     displayer->displayStartMessage();
@@ -33,6 +36,19 @@ int main(int argc, const char ** argv) {
     }
 
     configuration->displayConfig();
+    std::cout << std::endl;
+
+    remote = new Remote(configuration, displayer);
+
+    if(remote->init() != 0) {
+        displayer->displayWarn("Could'nt initialize remote .. ");
+        return EXIT_FAILURE;
+    }
+
+    if(remote->start() !=0) {
+        displayer->displayWarn("Could'nt start remote .. ");
+        return  EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }

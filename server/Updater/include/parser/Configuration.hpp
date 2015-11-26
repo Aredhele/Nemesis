@@ -35,6 +35,9 @@ class Configuration {
         void addParam(Vector2Str * param);
         void addParam(std::string param, std::string value);
         void displayConfig();
+
+        // Getter
+        std::string getParam(std::string paramName);
 };
 
 #endif // DEF_PARSER_CONFIGURATION_HPP
