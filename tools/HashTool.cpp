@@ -55,27 +55,29 @@ int HashTool::SHA256() {
 	fclose(f);
 
 	if (err) {
-        std::cerr << "An I/O error was encountered !" << std::endl;
-        return -1;
-    }
+	    std::cerr << "An I/O error was encountered !" << std::endl;
+	    return -1;
+	}
 
-    SHA1_Final(out, &sc);
-    m_hash = "";
- 	tmp = fopen("hash", "w");
+	SHA1_Final(out, &sc);
+	m_hash = "";
 
- 	for(int i = 0; i < 20; i++) {
- 		fprintf(tmp, "%x", out[i]);
- 	}
+	tmp = fopen("hash", "w");
 
- 	fclose(tmp);
+	for(int i = 0; i < 20; i++) {
+		fprintf(tmp, "%x", out[i]);
+	}
 
- 	std::string line;
- 	std::ifstream file("hash");
+	fclose(tmp);
 
- 	while (getline(file, line))
-      m_hash += line;
+	std::string line;
+	std::ifstream file("hash");
 
-   	file.close();
+	while (getline(file, line)) {
+	  	m_hash += line;
+	}
+
+	file.close();
 
     return 0;
 }
