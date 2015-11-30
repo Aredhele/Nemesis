@@ -10,12 +10,12 @@
 
 class FileManager{
 private:
-    sf::Vector2f * m_fileInfoList;
-    HashTool * m_hashTool;
+    std::vector * m_ptr_fileInfoList;
+    HashTool * m_ptr_hashTool;
     int m_descriptor;
 
     void setFilesInfo();
-    void setFilesHash();
+    std::string setFilesHash(std::string path);
     void createFile(std::string name, std::string path);
     void insertContent();
     void closeDescriptor();
@@ -23,7 +23,8 @@ private:
 public:
     FileManager();
     ~FileManager();
-    sf::Vector2f getFileInfoList();
+    std::vector * getFileInfoList();
+    void setFileInfoList(std::vector * ptr_fileInfoList);
 };
 
 #endif //UPDATER_FILEMANAGER_H

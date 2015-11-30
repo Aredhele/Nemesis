@@ -14,6 +14,7 @@ void FTPManager::startFTP() {
 
 }
 
-void FTPManager::launchFTPManager() {
-
+std::vector* FTPManager::launchFTPManager(std::vector * ptr_file) {
+    m_fileManager.setFileInfoList(ptr_file);
+    return m_fileManager.getFileInfoList();
 }

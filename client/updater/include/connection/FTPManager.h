@@ -3,13 +3,14 @@
 
 #include <iostream>
 #include <string>
+#include <bits/stl_vector.h>
 #include "ServerConnection.h"
 #include "FileManager.h"
 
 class FTPManager{
 private:
     void startFTP();
-    void launchFTPManager();
+    std::vector* launchFTPManager(std::vector * ptr_file);
 
 public:
     ServerConnection m_serveurConnection;
