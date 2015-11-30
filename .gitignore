@@ -4,6 +4,9 @@
 lib/
 mysql/
 
+# SFML Files
+.SFML-2.3.2/
+
 # Compiled Object files 
 *.slo
 *.lo
