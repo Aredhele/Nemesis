@@ -7,6 +7,9 @@ mysql/
 # SFML Files
 SFML-2.3.2/
 
+# OpenSSL Files
+openssl/
+
 # Compiled Object files 
 *.slo
 *.lo
