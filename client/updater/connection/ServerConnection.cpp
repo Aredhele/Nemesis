@@ -1,4 +1,5 @@
-#include "../include/connection/ServerConnection.h"
+
+#include "connection/ServerConnection.h"
 
 //Constructor
 ServerConnection::ServerConnection() {
@@ -10,11 +11,11 @@ ServerConnection::~ServerConnection() {
 
 }
 
-boolean ServerConnection::connect() {
+bool ServerConnection::connect() {
 
 }
 
-boolean ServerConnection::disconnect() {
+bool ServerConnection::disconnect() {
 
 }
 
@@ -30,14 +31,14 @@ std::string ServerConnection::receiveFilePath(std::string name) {
 
 }
 
-boolean ServerConnection::sendHashFile(std::string hash) {
+bool ServerConnection::sendHashFile(std::string hash) {
 
 }
 
-boolean ServerConnection::sendNameFile(std::string name) {
+bool ServerConnection::sendNameFile(std::string name) {
 
 }
 
-boolean ServerConnection::sendPathFile(std::string path) {
+bool ServerConnection::sendPathFile(std::string path) {
 
 }

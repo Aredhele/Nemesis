@@ -1,4 +1,4 @@
-#include "../include/connection/FTPManager.h"
+#include "connection/FTPManager.h"
 
 //Constructor
 FTPManager::FTPManager() {

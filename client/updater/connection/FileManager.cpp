@@ -2,7 +2,7 @@
 // Created by Jehan on 29/11/2015.
 //
 
-#include "../include/connection/FileManager.h"
+#include "connection/FileManager.h"
 
 FileManager::FileManager() {
 

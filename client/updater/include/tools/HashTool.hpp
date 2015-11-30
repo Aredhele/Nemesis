@@ -15,7 +15,7 @@
 #include <fstream>
 #include <iostream>
 
-//#include <openssl/sha.h> TODO Include lib openSSL
+#include <openssl/sha.h>
 
 class HashTool {
 

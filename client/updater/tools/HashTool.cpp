@@ -7,7 +7,7 @@
  */
 
 
-#include "../include/tools/HashTool.hpp"
+#include "tools/HashTool.hpp"
 
 /*!
  * \brief Constructor.

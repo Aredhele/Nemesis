@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "string"
-#include <rpcndr.h>
 
 class ServerConnection{
 private:
@@ -15,11 +14,11 @@ public:
     //Destructor
     ~ServerConnection();
 
-    boolean connect();
-    boolean disconnect();
-    boolean sendHashFile(std::string hash);
-    boolean sendNameFile(std::string name);
-    boolean sendPathFile(std::string path);
+    bool connect();
+    bool disconnect();
+    bool sendHashFile(std::string hash);
+    bool sendNameFile(std::string name);
+    bool sendPathFile(std::string path);
     std::string receiveFileName(std::string name);
     std::string receiveFilePath(std::string name);
     std::string receiveFileContent(std::string name);
