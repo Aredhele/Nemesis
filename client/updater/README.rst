@@ -6,12 +6,12 @@ A rajouter
 Un dossier bin 
 ###################
 Les .dll de SFML
-Les .dll de la openSSL
+Les .dll de la openssl
 
 ###################
 Le dossier include/openssl
 ###################
-Contient les .h
+Contient les .h de la openssl
 
 ###################
 Le dossier lib
