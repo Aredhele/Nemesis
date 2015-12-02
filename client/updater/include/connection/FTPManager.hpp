@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <dirent.h>
+#include <cstdarg>
+#include <windef.h>
+#include <winbase.h>
 #include "ServerConnection.hpp"
 #include "FileManager.hpp"
 
@@ -10,7 +14,10 @@ class FTPManager{
 private:
 
     std::vector<std::string> getHash(std::vector<std::string>  file);
-    bool createFile(std::vector<std::string> ptr_file);
+    void createFile(std::vector<std::string> file);
+    std::string getExePath();
+
+    std::vector<std::string> createFileListInfo();
 
 public:
     ServerConnection  * m_ptr_serveurConnection;

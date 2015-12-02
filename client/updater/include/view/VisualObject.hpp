@@ -19,6 +19,7 @@ class VisualObject
 {
 	protected:
 		// Members
+
 		sf::Sprite * m_ptr_sprite;
 		sf::Texture * m_ptr_texture;
 		sf::Vector2f * m_ptr_position;
