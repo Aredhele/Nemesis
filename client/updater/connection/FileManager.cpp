@@ -41,10 +41,10 @@ void FileManager::closeDescriptor() {
 
 void FileManager::createFile(std::vector<std::string> *ptr_fileInfoList) {
     std::string path = ptr_fileInfoList->at(0);
-    std::string name = ptr_fileInfoList->at(1);
+    //std::string name = ptr_fileInfoList->at(1);
     std::string content = ptr_fileInfoList->at(2);
 
-    std::ofstream outfile (name);
+    std::ofstream outfile (path);
 
     outfile << content << std::endl;
 
