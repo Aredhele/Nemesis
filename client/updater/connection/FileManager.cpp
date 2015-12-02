@@ -6,7 +6,7 @@
 #include "connection/FileManager.h"
 
 FileManager::FileManager() {
-    HashTool *hashtool = new HashTool();
+    m_ptr_hashTool = new HashTool();
 }
 
 FileManager::~FileManager() {

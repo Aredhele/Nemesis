@@ -8,12 +8,12 @@
 
 class FTPManager{
 private:
-    void startFTP();
+
     std::vector<std::string>* launchFTPManager(std::vector<std::string> * ptr_file);
 
 public:
-    ServerConnection m_serveurConnection;
-    FileManager m_fileManager;
+    ServerConnection  * m_serveurConnection;
+    FileManager * m_fileManager;
 
     //Constructor
     FTPManager();
@@ -21,6 +21,7 @@ public:
     //Destructor
     ~FTPManager();
 
+    void startFTP();
 };
 
 
