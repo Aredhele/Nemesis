@@ -2,22 +2,22 @@
 // Created by Jehan on 29/11/2015.
 //
 
-#include <bits/stl_bvector.h>
+#include <vector>
 #include "connection/FileManager.h"
 
 FileManager::FileManager() {
-
+    HashTool *hashtool = new(HashTool);
 }
 
 FileManager::~FileManager() {
 
 }
 
-std::vector * FileManager::getFileInfoList() {
+std::vector<std::string> * FileManager::getFileInfoList() {
     return m_ptr_fileInfoList;
 }
 
-void FileManager::setFileInfoList(std::vector* ptr_fileInfoList) {
+void FileManager::setFileInfoList(std::vector<std::string>* ptr_fileInfoList) {
     std::string path;
 
     m_ptr_fileInfoList = ptr_fileInfoList;

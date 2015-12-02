@@ -5,12 +5,13 @@
 #ifndef UPDATER_FILEMANAGER_H
 #define UPDATER_FILEMANAGER_H
 
-#include <SFML/System/Vector2.hpp>
+
 #include "../tools/HashTool.hpp"
+#include <vector>
 
 class FileManager{
 private:
-    std::vector * m_ptr_fileInfoList;
+    std::vector<std::string> * m_ptr_fileInfoList;
     HashTool * m_ptr_hashTool;
     int m_descriptor;
 
@@ -23,8 +24,8 @@ private:
 public:
     FileManager();
     ~FileManager();
-    std::vector * getFileInfoList();
-    void setFileInfoList(std::vector * ptr_fileInfoList);
+    std::vector<std::string> * getFileInfoList();
+    void setFileInfoList(std::vector<std::string> * ptr_fileInfoList);
 };
 
 #endif //UPDATER_FILEMANAGER_H
