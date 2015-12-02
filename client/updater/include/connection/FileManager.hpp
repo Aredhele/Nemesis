@@ -13,7 +13,7 @@
 
 class FileManager{
 private:
-    std::vector<std::string> * m_ptr_fileInfoList;
+    std::vector<std::string> m_fileInfoList;
     HashTool * m_ptr_hashTool;
     int m_descriptor;
 
@@ -25,9 +25,9 @@ private:
 public:
     FileManager();
     ~FileManager();
-    std::vector<std::string> * getFileInfoList();
-    void setFileInfoList(std::vector<std::string> * ptr_fileInfoList);
-    void createFile(std::vector<std::string> * ptr_fileInfoList);
+    std::vector<std::string>  getFileInfoList();
+    void setFileInfoList(std::vector<std::string> fileInfoList);
+    void createFile(std::vector<std::string> fileInfoList);
 };
 
 #endif //UPDATER_FILEMANAGER_H

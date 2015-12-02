@@ -3,7 +3,8 @@
 //
 
 
-#include "connection/FileManager.h"
+
+#include <connection/FileManager.hpp>
 
 
 FileManager::FileManager() {
@@ -11,26 +12,23 @@ FileManager::FileManager() {
 }
 
 FileManager::~FileManager() {
-    m_ptr_fileInfoList = 0;
-    delete(m_ptr_fileInfoList);
-
-    m_ptr_hashTool = 0;
-    delete(m_ptr_fileInfoList);
+    delete(m_ptr_hashTool);
+    m_ptr_hashTool = nullptr;
 }
 
-std::vector<std::string> * FileManager::getFileInfoList() {
-    return m_ptr_fileInfoList;
+std::vector<std::string>  FileManager::getFileInfoList() {
+    return m_fileInfoList;
 }
 
-void FileManager::setFileInfoList(std::vector<std::string>* ptr_fileInfoList) {
+void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
     std::string path;
 
-    m_ptr_fileInfoList = ptr_fileInfoList;
+    m_fileInfoList = fileInfoList;
 
     //Get info file
-    path = ptr_fileInfoList->at(0);
+    path = fileInfoList.at(0);
 
-    m_ptr_fileInfoList->push_back(setFilesHash(path));
+    m_fileInfoList.push_back(setFilesHash(path));
 
 }
 
@@ -39,10 +37,10 @@ void FileManager::closeDescriptor() {
 
 }
 
-void FileManager::createFile(std::vector<std::string> *ptr_fileInfoList) {
-    std::string path = ptr_fileInfoList->at(0);
+void FileManager::createFile(std::vector<std::string> fileInfoList) {
+    std::string path = fileInfoList.at(0);
     //std::string name = ptr_fileInfoList->at(1);
-    std::string content = ptr_fileInfoList->at(2);
+    std::string content = fileInfoList.at(2);
 
     std::ofstream outfile (path);
 

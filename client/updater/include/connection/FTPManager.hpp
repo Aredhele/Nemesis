@@ -3,14 +3,14 @@
 
 #include <iostream>
 #include <string>
-#include "ServerConnection.h"
-#include "FileManager.h"
+#include "ServerConnection.hpp"
+#include "FileManager.hpp"
 
 class FTPManager{
 private:
 
-    std::vector<std::string>* getHash(std::vector<std::string> * ptr_file);
-    bool createFile(std::vector<std::string> * ptr_file);
+    std::vector<std::string> getHash(std::vector<std::string>  file);
+    bool createFile(std::vector<std::string> ptr_file);
 
 public:
     ServerConnection  * m_ptr_serveurConnection;

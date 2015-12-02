@@ -1,4 +1,5 @@
-#include "connection/FTPManager.h"
+#include <connection/FTPManager.hpp>
+
 
 //Constructor
 FTPManager::FTPManager() {
@@ -8,20 +9,20 @@ FTPManager::FTPManager() {
 
 //Destructor
 FTPManager::~FTPManager() {
-    m_ptr_fileManager->~FileManager();
-    m_ptr_fileManager = 0;
     delete(m_ptr_fileManager);
+    m_ptr_fileManager = nullptr;
 
-    m_ptr_serveurConnection->~ServerConnection();
-    m_ptr_serveurConnection = 0;
     delete(m_ptr_serveurConnection);
+    m_ptr_serveurConnection = nullptr;
 }
 
 void FTPManager::startFTP() {
     m_ptr_serveurConnection->connect();
     std::vector<std::string> v = m_ptr_serveurConnection->getFileInfoList();
-    getHash(&v);
-    createFile(&v);
+    //getHash(v);
+    createFile(v);
+
+
 
     //Test du Hash
     /*
@@ -33,12 +34,12 @@ void FTPManager::startFTP() {
         std::cout << v[i] << " ";*/
 }
 
-std::vector<std::string>* FTPManager::getHash(std::vector<std::string> * ptr_file) {
-    m_ptr_fileManager->setFileInfoList(ptr_file);
+std::vector<std::string> FTPManager::getHash(std::vector<std::string> file) {
+    m_ptr_fileManager->setFileInfoList(file);
     return m_ptr_fileManager->getFileInfoList();
 }
 
-bool FTPManager::createFile(std::vector<std::string> *ptr_file) {
-    m_ptr_fileManager->createFile(ptr_file);
+bool FTPManager::createFile(std::vector<std::string> file) {
+    m_ptr_fileManager->createFile(file);
 }
 

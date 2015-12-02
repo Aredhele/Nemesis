@@ -1,5 +1,5 @@
+#include <connection/ServerConnection.hpp>
 
-#include "connection/ServerConnection.h"
 
 //Constructor
 ServerConnection::ServerConnection() {
@@ -28,7 +28,7 @@ std::string ServerConnection::receiveFileName() {
 }
 
 std::string ServerConnection::receiveFilePath() {
-    return "E:/testEnvoi.txt";
+    return "E:/Projets/testEnvoi.txt";
 }
 
 std::vector<std::string> ServerConnection::getFileInfoList() {

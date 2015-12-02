@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <connection/FTPManager.h>
+#include <connection/FTPManager.hpp>
+
 
 int main()
 {
