@@ -21,8 +21,7 @@ void FTPManager::startFTP() {
     m_ptr_serveurConnection->connect();
     std::vector<std::string> v = m_ptr_serveurConnection->getFileInfoList();
     getHash(&v);
-    for(int i = 0; i < v.size(); i++)
-        std::cout << v[i] << " ";
+    createFile(&v);
 
     //Test du Hash
     /*
@@ -40,6 +39,6 @@ std::vector<std::string>* FTPManager::getHash(std::vector<std::string> * ptr_fil
 }
 
 bool FTPManager::createFile(std::vector<std::string> *ptr_file) {
-
+    m_ptr_fileManager->createFile(ptr_file);
 }
 

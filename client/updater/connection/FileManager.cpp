@@ -2,8 +2,9 @@
 // Created by Jehan on 29/11/2015.
 //
 
-#include <vector>
+
 #include "connection/FileManager.h"
+
 
 FileManager::FileManager() {
     m_ptr_hashTool = new HashTool();
@@ -38,8 +39,16 @@ void FileManager::closeDescriptor() {
 
 }
 
-void FileManager::createFile(std::string name, std::string path) {
+void FileManager::createFile(std::vector<std::string> *ptr_fileInfoList) {
+    std::string path = ptr_fileInfoList->at(0);
+    std::string name = ptr_fileInfoList->at(1);
+    std::string content = ptr_fileInfoList->at(2);
 
+    std::ofstream outfile (name);
+
+    outfile << content << std::endl;
+
+    outfile.close();
 }
 
 

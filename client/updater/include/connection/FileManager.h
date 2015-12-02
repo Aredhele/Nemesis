@@ -8,6 +8,8 @@
 
 #include "../tools/HashTool.hpp"
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 class FileManager{
 private:
@@ -17,7 +19,6 @@ private:
 
     void setFilesInfo();
     std::string setFilesHash(std::string path);
-    void createFile(std::string name, std::string path);
     void insertContent();
     void closeDescriptor();
 
@@ -26,6 +27,7 @@ public:
     ~FileManager();
     std::vector<std::string> * getFileInfoList();
     void setFileInfoList(std::vector<std::string> * ptr_fileInfoList);
+    void createFile(std::vector<std::string> * ptr_fileInfoList);
 };
 
 #endif //UPDATER_FILEMANAGER_H
