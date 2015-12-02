@@ -9,11 +9,12 @@
 class FTPManager{
 private:
 
-    std::vector<std::string>* launchFTPManager(std::vector<std::string> * ptr_file);
+    std::vector<std::string>* getHash(std::vector<std::string> * ptr_file);
+    bool createFile(std::vector<std::string> * ptr_file);
 
 public:
-    ServerConnection  * m_serveurConnection;
-    FileManager * m_fileManager;
+    ServerConnection  * m_ptr_serveurConnection;
+    FileManager * m_ptr_fileManager;
 
     //Constructor
     FTPManager();

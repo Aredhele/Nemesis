@@ -3,11 +3,17 @@
 
 #include <iostream>
 #include "string"
+#include <vector>
 
 class ServerConnection{
 private:
     //Configuration m_conf;
     //Socket m_socket;
+
+    std::string receiveFileName();
+    std::string receiveFilePath();
+    std::string receiveFileContent();
+
 public:
     //Constructor
     ServerConnection();
@@ -19,9 +25,8 @@ public:
     bool sendHashFile(std::string hash);
     bool sendNameFile(std::string name);
     bool sendPathFile(std::string path);
-    std::string receiveFileName(std::string name);
-    std::string receiveFilePath(std::string name);
-    std::string receiveFileContent(std::string name);
+    std::vector<std::string> getFileInfoList();
+
 };
 
 
