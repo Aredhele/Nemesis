@@ -6,11 +6,15 @@
 #include "connection/FileManager.h"
 
 FileManager::FileManager() {
-    HashTool *hashtool = new(HashTool);
+    HashTool *hashtool = new HashTool();
 }
 
 FileManager::~FileManager() {
+    m_ptr_fileInfoList = 0;
+    delete(m_ptr_fileInfoList);
 
+    m_ptr_hashTool = 0;
+    delete(m_ptr_fileInfoList);
 }
 
 std::vector<std::string> * FileManager::getFileInfoList() {

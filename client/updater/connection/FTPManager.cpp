@@ -12,6 +12,7 @@ FTPManager::~FTPManager() {
 
 void FTPManager::startFTP() {
 
+
 }
 
 std::vector<std::string>* FTPManager::launchFTPManager(std::vector<std::string> * ptr_file) {
