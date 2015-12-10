@@ -16,10 +16,6 @@ FileManager::~FileManager() {
     m_ptr_hashTool = nullptr;
 }
 
-std::vector<std::string>  FileManager::getFileInfoList() {
-    return m_fileInfoList;
-}
-
 void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
     std::string path;
 
@@ -31,6 +27,12 @@ void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
     m_fileInfoList.push_back(setFilesHash(path));
 
 }
+
+std::vector<std::string>  FileManager::getFileInfoList() {
+    return m_fileInfoList;
+}
+
+
 
 
 void FileManager::closeDescriptor() {

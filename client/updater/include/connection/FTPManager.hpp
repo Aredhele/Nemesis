@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <dirent.h>
+#include <cstdlib>
 #include <cstdarg>
 #include <windef.h>
 #include <winbase.h>
@@ -17,11 +18,12 @@ private:
     void createFile(std::vector<std::string> file);
     std::string getExePath();
 
-    std::vector<std::string> createFileListInfo();
+    void createFilesListInfo();
 
 public:
     ServerConnection  * m_ptr_serveurConnection;
     FileManager * m_ptr_fileManager;
+    std::vector<std::vector<std::string>> clientFilesInfoList;
 
     //Constructor
     FTPManager();

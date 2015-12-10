@@ -1,7 +1,6 @@
 #include <connection/FTPManager.hpp>
 
 
-
 //Constructor
 FTPManager::FTPManager() {
     m_ptr_fileManager = new FileManager;
@@ -19,21 +18,37 @@ FTPManager::~FTPManager() {
 
 void FTPManager::startFTP() {
     m_ptr_serveurConnection->connect();
-    std::vector<std::string> v = m_ptr_serveurConnection->getFileInfoList();
-    //getHash(v);
-    createFile(v);
-    createFileListInfo();
+    std::vector<std::string> fileS = m_ptr_serveurConnection->getFileInfoList();
+    std::vector<std::vector<std::string>> clientFilesInfoList;
 
 
-
-    //Test du Hash
+    //Get the hash of the file :
     /*
-    const char* args[] = {"E:/testHash.txt", "02", "03", "04"};
-    std::vector<std::string> v(args, args + 4);
-    launchFTPManager(&v);
 
-    for(int i = 0; i < v.size(); i++)
-        std::cout << v[i] << " ";*/
+    fileS = getHash(fileS);
+
+    std::cout << "Voici les infos du fichier recu :" << std::endl;
+    for(int i = 0; i < fileS.size(); i++)
+        std::cout << fileS[i] << " ";
+    */
+
+
+    //Create the file  :
+    /*
+        createFile(fileS);
+     */
+
+    //Get the infoList with hash of our files (TODO !)
+    /*
+    createFilesListInfo();
+    for(int i = 0; i < clientFilesInfoList.size(); i++)
+    {
+        for(int j = 0; j < clientFilesInfoList[i].size(); j++)
+            std::cout << clientFilesInfoList[i][j] << " ";
+
+        std::cout << std::endl;
+    }*/
+
 }
 
 std::vector<std::string> FTPManager::getHash(std::vector<std::string> file) {
@@ -45,15 +60,22 @@ void FTPManager::createFile(std::vector<std::string> file) {
     m_ptr_fileManager->createFile(file);
 }
 
-std::vector<std::string> FTPManager::createFileListInfo() {
+void FTPManager::createFilesListInfo() {
     DIR *dir;
     struct dirent *ent;
     const char* path = getExePath().c_str();
+    std::vector<std::string> fileC;
     std::cout << "Here\'s the files of this directory path : " << path << std::endl;
     if ((dir = opendir (path)) != NULL) {
         /* print all the files and directories within directory */
         while ((ent = readdir (dir)) != NULL) {
-            std::cout << ent->d_name << std::endl;
+            fileC.clear();
+            fileC.push_back(path + std::string(ent->d_name));
+            std::cout <<  path + std::string(ent->d_name)<< std::endl;
+            fileC.push_back(ent->d_name);
+            fileC.push_back("Contents here soon...");
+            fileC = getHash(fileC);
+            clientFilesInfoList.push_back(fileC);
         }
         closedir (dir);
     }
@@ -76,7 +98,5 @@ std::string FTPManager::getExePath()
         path = path.substr(0, path.size() - ext.size());
     }
     return path;
-
-
 }
 
