@@ -12,7 +12,7 @@
 /**
  * \brief Constructor
  */
-MusicManager::MusicManager(bool debug, bool ploop) {
+MusicManager::MusicManager(bool debug, bool ploop) : Manager() {
 
     m_debug = debug;
     m_playListLoop = ploop;

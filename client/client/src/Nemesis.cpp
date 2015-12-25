@@ -1,6 +1,5 @@
 #include "VideoPlayer.hpp"
-#include "TextureManager.hpp"
-#include "MusicManager.hpp"
+#include "ResourceLoader.hpp"
 
 int main()
 {
@@ -11,7 +10,7 @@ int main()
     musicManager.getPlaylist("plist")->start();
 
     VideoPlayer videoPlayer(DEBUG);
-    videoPlayer.init(1024, 768, 40, 125, "../res/animation/splash/");
+    videoPlayer.init(1024, 768, 40, 170, "../res/animation/splash/splash_0/");
     videoPlayer.setVideoState(videoState::PLAY);
 
     sf::Clock clock;

@@ -11,6 +11,6 @@
 
 #define SUCCESS 1
 #define FAILURE 0
-#define DEBUG 0
+#define DEBUG 1
 
 #endif // DEF_CONSTANT_HPP

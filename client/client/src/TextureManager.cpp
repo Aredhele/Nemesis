@@ -7,14 +7,14 @@
  * \class TextureManager.hpp
  */
 
-
 #include "TextureManager.hpp"
 
 /**
  *  \brief Constructor
  */
-TextureManager::TextureManager(bool debug) {
+TextureManager::TextureManager(bool debug) : Manager() {
 	m_debug = debug;
+    m_state = false;
 }
 
 /**

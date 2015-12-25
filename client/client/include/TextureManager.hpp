@@ -17,10 +17,11 @@
 
 #include <SFML/Graphics.hpp>
 
-class TextureManager
+#include "Manager.hpp"
+
+class TextureManager : public Manager
 {
     private:
-        bool m_debug;
         std::map <std::string, sf::Texture *> m_textureMap;
 
     public:

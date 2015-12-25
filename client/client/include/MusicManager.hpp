@@ -15,8 +15,9 @@
 #include <string>
 
 #include "Playlist.hpp"
+#include "Manager.hpp"
 
-class MusicManager
+class MusicManager : public Manager
 {
     private:
         std::vector < std::string > m_keyList;
@@ -26,7 +27,6 @@ class MusicManager
 
         unsigned int m_currentPlaylist;
         bool m_playListLoop;
-        bool m_debug;
 
     public:
         // Constructor
