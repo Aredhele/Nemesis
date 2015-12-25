@@ -26,8 +26,8 @@ Playlist::Playlist(bool debug, int volume, int loop, float pitch) {
     m_pitchValue = pitch;
 
     if(debug) {
-        std::cout << "m_isFinished " << m_isFinished << std::endl;
-        std::cout << "m_isActive " << m_active << std::endl;
+        std::cout << "- m_isFinished " << m_isFinished << std::endl;
+        std::cout << "- m_isActive " << m_active << std::endl;
     }
 }
 

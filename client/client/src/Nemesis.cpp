@@ -1,17 +1,26 @@
-#include "VideoPlayer.hpp"
 #include "ResourceLoader.hpp"
+#include "SplashScreen.hpp"
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(1024, 768), "Nemesis", sf::Style::Titlebar | sf::Style::Close);
-    window.setFramerateLimit(120);
+int main(int argc, char ** argv)
+{   
+    // Checking args
+    if(argc > 1) return FAILURE;
+    std::cout << "\nRuuning program : " << argv[0] << "\n" << std::endl;
 
-    MusicManager musicManager(DEBUG, true);
-    musicManager.getPlaylist("plist")->start();
+    // Starting load of heavy resources
+    // Launching thread
+    ResourceLoader rLoader(DEBUG);
+    rLoader.start();
 
-    VideoPlayer videoPlayer(DEBUG);
-    videoPlayer.init(1024, 768, 40, 170, "../res/animation/splash/splash_0/");
-    videoPlayer.setVideoState(videoState::PLAY);
+    // Creating window
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+    WINDOW_NAME, sf::Style::Titlebar | sf::Style::Close);
+
+    // Window framerate - Default : 120 fps
+    window.setFramerateLimit(WINDOW_FPS);
+
+    SplashScreen splash(DEBUG);
+    splash.start(&window);
 
     sf::Clock clock;
     while (window.isOpen())
@@ -25,24 +34,10 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
-            if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::P)
-                    musicManager.pausePlaylist();
-
-                if (event.key.code == sf::Keyboard::A)
-                    musicManager.playPlaylist();
-
-                if (event.key.code == sf::Keyboard::Q)
-                    musicManager.stopPlaylist();
-            }
         }
 
-        videoPlayer.draw(&window, elapsedTime);
-
         window.display();
-        musicManager.update();
     }
 
-    return 0;
+    return SUCCESS;
 }

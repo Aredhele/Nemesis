@@ -13,8 +13,7 @@
  * \param debug the debug mode
  */
 ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(), 
-m_thread(&ResourceLoader::load, this)
-{
+m_thread(&ResourceLoader::load, this) {
 	m_debug = debug;
 }
 
@@ -30,7 +29,10 @@ ResourceLoader::~ResourceLoader() {
  * \brief to not lock the main thread
  */
 void ResourceLoader::load() {
-	// TODO
+	/*while(1) {
+		std::cout << "I AM WORKING !" << std::endl;
+		sf::sleep(sf::milliseconds(200));
+	}*/
 }
 
 /*!

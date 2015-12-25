@@ -9,6 +9,11 @@
 #ifndef DEF_CONSTANT_HPP
 #define DEF_CONSTANT_HPP
 
+#define WINDOW_NAME "Nemesis"
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
+#define WINDOW_FPS 120
+
 #define SUCCESS 1
 #define FAILURE 0
 #define DEBUG 1

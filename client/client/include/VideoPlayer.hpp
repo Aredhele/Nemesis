@@ -15,6 +15,7 @@
 #include <vector>
 #include <iostream>
 
+#include "VideoParam.hpp"
 #include "Drawable.hpp"
 #include "Constant.hpp"
 #include "Patch.hpp"
@@ -33,6 +34,7 @@ class VideoPlayer : public Drawable
 	private:
 		// Member
 		bool m_debug;
+		bool m_isFinished;
 		videoState m_enum_state;
 
 		std::string m_fileName;
@@ -55,13 +57,13 @@ class VideoPlayer : public Drawable
 		virtual ~VideoPlayer();
 
 		// Methods
-		int init(const ushort frameWidht, const ushort frameHeight,
-		const ushort frameRate, const ushort frameNumber, const std::string & file);
+		int init(VideoParam * param);
 
 		virtual void draw(sf::RenderWindow * window, double frameTime);
 
 		// Getters
 		videoState getVideoState();
+		bool isFinished();
 
 		// Setters
 		void setVideoState(const videoState & state);

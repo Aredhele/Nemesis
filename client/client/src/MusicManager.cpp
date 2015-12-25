@@ -19,7 +19,7 @@ MusicManager::MusicManager(bool debug, bool ploop) : Manager() {
     m_currentPlaylist = 0;
 
     // Initialize playlist(s)
-    createPlaylist("plist", 50, 1, 0.9);
+    createPlaylist("plist", 50, 1, 1.2);
 
     // Setting playlist
 	getPlaylist("plist")->addMusic("../res/music/menu/LifeWater.ogg");

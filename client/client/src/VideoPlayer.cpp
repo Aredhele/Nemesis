@@ -30,20 +30,17 @@ VideoPlayer::~VideoPlayer() {
 
 /*!
  * \brief Intitialize a new video player
- * \param frameHeight The height of each frame in pixel
- * \param frameWidht The widht of each frame in pixel
- * \param frameRate The speed of video
- * \param file The input file to read
+ * \param param all parameters
  */
-int VideoPlayer::init(const ushort frameWidht, const ushort frameHeight, 
-const ushort frameRate, const ushort frameNumber, const std::string & file) {
+int VideoPlayer::init(VideoParam * param) {
 
 	m_enum_state = videoState::STOP;
-	m_frameHeight = frameHeight;
-	m_frameNumber = frameNumber;
-	m_frameWidht = frameWidht;
-	m_frameRate = frameRate;
-	m_fileName = file;
+	m_frameHeight = param->fHeight;
+	m_frameNumber = param->fNumber;
+	m_frameWidht = param->fWidth;
+	m_frameRate = param->fRate;
+	m_fileName = param->path;
+	m_isFinished = false;
 
 	if(m_debug) {
 		std::cout << "- Stream name  : " << m_fileName << std::endl;
@@ -66,15 +63,16 @@ const ushort frameRate, const ushort frameNumber, const std::string & file) {
  	}
 
  	// Building vector
+ 	m_pathList.clear();
  	std::string part = "";
- 	for(uint i = 1; i <= frameNumber; ++i) {
+ 	for(uint i = 1; i <= m_frameNumber; ++i) {
  		std::string str_i = cast::toString(i);
 
  		if(i < 10) part = "000" + str_i;
 		else if(i < 100) part = "00" + str_i;
 		else if(i < 1000) part = "0" + str_i;
 
-		m_pathList.push_back(file + part + EXTENSION);
+		m_pathList.push_back(m_fileName + part + EXTENSION);
 		part = "";
  	}
 
@@ -92,8 +90,11 @@ void VideoPlayer::draw(sf::RenderWindow * window, double frameTime) {
 	if(m_enum_state == videoState::PLAY) {
 		if(m_totalFrameTime >= 1 / (double)m_frameRate) {
 			m_totalFrameTime = 0;
-			if(m_currentIndex == m_frameNumber) 
+			if(m_currentIndex == m_frameNumber) {
 				m_currentIndex = 1;
+				m_isFinished = true;
+				return;
+			}
 			else m_currentIndex++;
 			m_texture.loadFromFile(m_pathList[m_currentIndex - 1]);
 		}
@@ -108,4 +109,12 @@ void VideoPlayer::draw(sf::RenderWindow * window, double frameTime) {
  */
 void VideoPlayer::setVideoState(const videoState & state) {
 	m_enum_state = state;
+}
+
+/*!
+ * \brief
+ * \return true if the current video is finished
+ */
+bool VideoPlayer::isFinished() {
+	return m_isFinished;
 }
