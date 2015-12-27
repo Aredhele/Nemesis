@@ -1,6 +1,5 @@
 #include <connection/FTPManager.hpp>
 
-
 //Constructor
 FTPManager::FTPManager() {
     m_ptr_fileManager = new FileManager;
@@ -35,7 +34,7 @@ void FTPManager::startFTP() {
 
     //Create the file  :
 
-        createFile(fileS);
+    createFile(fileS);
 
 
     //Get the infoList with hash of our files (TODO !)
@@ -47,13 +46,13 @@ void FTPManager::startFTP() {
     std::cout << std::endl;
     std::cout << "clientFilesInfoList : " << std::endl;
 
-   for(int i = 0; i < m_clientFilesInfoList.size(); i++)
-   {
-       for(int j = 0; j < m_clientFilesInfoList[i].size(); j++)
-           std::cout << m_clientFilesInfoList[i][j] << " ";
+    for(int i = 0; i < m_clientFilesInfoList.size(); i++)
+    {
+        for(int j = 0; j < m_clientFilesInfoList[i].size(); j++)
+            std::cout << m_clientFilesInfoList[i][j] << " ";
 
-       std::cout << std::endl;
-   }
+        std::cout << std::endl;
+    }
 
 }
 
@@ -82,8 +81,8 @@ std::string FTPManager::getExePath()
     std::string path =  std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
 
     if ( path != ext &&
-            path.size() > ext.size() &&
-            path.substr(path.size() - ext.size()) == "bin\\updater.exe" )
+         path.size() > ext.size() &&
+         path.substr(path.size() - ext.size()) == "bin\\updater.exe" )
     {
         // if so then strip them off
         path = path.substr(0, path.size() - ext.size());
@@ -110,49 +109,41 @@ void FTPManager::route(std::string path)
     std::vector<std::string> fileC;
 
 
-        if((dir=opendir(path.c_str()))!=NULL)
-        {
-            /* print all the files and directories within directory */
-            int fileNumero=0;
-            while ((ent = readdir (dir)) != NULL) {
+    if((dir=opendir(path.c_str()))!=NULL)
+    {
+        /* print all the files and directories within directory */
+        int fileNumero=0;
+        while ((ent = readdir (dir)) != NULL) {
 
-                std::string pathFile = path + std::string(ent->d_name);
-                dirBis = opendir(pathFile.c_str());
-                if (fileNumero >=2 && dirBis==NULL) {
+            std::string pathFile = path + std::string(ent->d_name);
+            dirBis = opendir(pathFile.c_str());
+            if (fileNumero >=2 && dirBis==NULL) {
 
-                    fileC.clear();
-                    fileC.push_back(path + std::string(ent->d_name));
-                    std::cout << "path to file in vector : " << fileC.at(0) << std::endl;
-                    fileC.push_back(ent->d_name);
-                    std::cout << "file\'s name in vector : " << fileC.at(1) << std::endl;
+                fileC.clear();
+                fileC.push_back(path + std::string(ent->d_name));
+                std::cout << "path to file in vector : " << fileC.at(0) << std::endl;
+                fileC.push_back(ent->d_name);
+                std::cout << "file\'s name in vector : " << fileC.at(1) << std::endl;
 
-                    fileC.push_back("Contents here soon...");
-                    std::cout << "file\'s content in vector : " << fileC.at(2) << std::endl;
-                    fileC = getHash(fileC);
-                    std::cout << "file\'s hash in vector : " << fileC.at(3) << std::endl;
+                fileC.push_back("Contents here soon...");
+                std::cout << "file\'s content in vector : " << fileC.at(2) << std::endl;
+                fileC = getHash(fileC);
+                std::cout << "file\'s hash in vector : " << fileC.at(3) << std::endl;
 
-                    m_clientFilesInfoList.push_back(fileC);
+                m_clientFilesInfoList.push_back(fileC);
 
-                    std::cout << std::endl;
-                }
-                else if (fileNumero>=2){
-                    route(path + std::string(ent->d_name) + "\\");
-                }
-                fileNumero++;
-
+                std::cout << std::endl;
             }
-            closedir (dir);
+            else if (fileNumero>=2){
+                route(path + std::string(ent->d_name) + "\\");
+            }
+            fileNumero++;
+
         }
-        else
-        {
+        closedir (dir);
+    }
+    else
+    {
         std::cerr << "Problem" << std::endl;
     }
 }
-
-
-
-
-
-
-
-

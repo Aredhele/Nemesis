@@ -17,10 +17,9 @@ private:
     std::vector<std::string> getHash(std::vector<std::string>  file);
     void createFile(std::vector<std::string> file);
     std::string getExePath();
-
-    void createFilesListInfo();
-    void route(std::string path);
     bool isFile(struct dirent* ent);
+    void route(std::string path);
+    void createFilesListInfo();
 
 public:
     ServerConnection  * m_ptr_serveurConnection;
