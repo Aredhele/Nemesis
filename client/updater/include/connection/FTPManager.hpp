@@ -17,13 +17,14 @@ private:
     std::vector<std::string> getHash(std::vector<std::string>  file);
     void createFile(std::vector<std::string> file);
     std::string getExePath();
-
+    bool isFile(struct dirent* ent);
+    void route(std::string path);
     void createFilesListInfo();
 
 public:
     ServerConnection  * m_ptr_serveurConnection;
     FileManager * m_ptr_fileManager;
-    std::vector<std::vector<std::string>> clientFilesInfoList;
+    std::vector<std::vector<std::string>> m_clientFilesInfoList;
 
     //Constructor
     FTPManager();

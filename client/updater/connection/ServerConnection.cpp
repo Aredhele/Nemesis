@@ -28,7 +28,7 @@ std::string ServerConnection::receiveFileName() {
 }
 
 std::string ServerConnection::receiveFilePath() {
-    return "E:/Projets/Applications/Nemesis/client/updater/bin/testEnvoi.txt";
+    return "C:/Users/PROPRIETAIRE/Desktop/Nemesis/client/updater/bin/testEnvoi.txt";
 }
 
 std::vector<std::string> ServerConnection::getFileInfoList() {
