@@ -19,11 +19,13 @@ private:
     std::string getExePath();
 
     void createFilesListInfo();
+    void route(std::string path);
+    bool isFile(struct dirent* ent);
 
 public:
     ServerConnection  * m_ptr_serveurConnection;
     FileManager * m_ptr_fileManager;
-    std::vector<std::vector<std::string>> clientFilesInfoList;
+    std::vector<std::vector<std::string>> m_clientFilesInfoList;
 
     //Constructor
     FTPManager();

@@ -24,15 +24,14 @@ void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
     //Get info file
     path = fileInfoList.at(0);
 
-    m_fileInfoList.push_back(setFilesHash(path));
+    std::string s = setFilesHash(path);
 
+    m_fileInfoList.push_back(s);
 }
 
 std::vector<std::string>  FileManager::getFileInfoList() {
     return m_fileInfoList;
 }
-
-
 
 
 void FileManager::closeDescriptor() {
@@ -44,7 +43,8 @@ void FileManager::createFile(std::vector<std::string> fileInfoList) {
     //std::string name = ptr_fileInfoList->at(1);
     std::string content = fileInfoList.at(2);
 
-    std::ofstream outfile (path);
+    std::ofstream outfile /*(path)*/;
+    outfile.open(path);
 
     outfile << content << std::endl;
 
@@ -59,7 +59,8 @@ void FileManager::insertContent() {
 
 std::string FileManager::setFilesHash(std::string path) {
     m_ptr_hashTool->setPathToFile(path);
-    return m_ptr_hashTool->getHash();
+    std::string s = m_ptr_hashTool->getHash();
+    return s;
 }
 
 void FileManager::setFilesInfo() {
