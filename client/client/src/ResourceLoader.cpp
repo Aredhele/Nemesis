@@ -15,6 +15,10 @@
 ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(), 
 m_thread(&ResourceLoader::load, this) {
 	m_debug = debug;
+	m_managerGroup.ptr_musicManager = new MusicManager(m_debug, false);
+	m_managerGroup.ptr_textureManager = new TextureManager(m_debug);
+	m_managerGroup.ptr_musicManager->setState(false);
+	m_managerGroup.ptr_textureManager->setState(false);
 }
 
 /*!
@@ -29,10 +33,18 @@ ResourceLoader::~ResourceLoader() {
  * \brief to not lock the main thread
  */
 void ResourceLoader::load() {
-	/*while(1) {
-		std::cout << "I AM WORKING !" << std::endl;
-		sf::sleep(sf::milliseconds(200));
-	}*/
+
+	// Loading ...
+	m_managerGroup.ptr_textureManager->addTexture("topBarLogMenu", 
+	"../res/texture/menu/login/topBarLogMenu.png");
+
+	m_managerGroup.ptr_musicManager->setState(true);
+	m_managerGroup.ptr_textureManager->setState(true);
+
+	if(m_debug) {
+		std::cout << "- Music Manager successfully loaded" << std::endl;
+		std::cout << "- Texture Manager successfully loaded" << std::endl;
+	}
 }
 
 /*!
