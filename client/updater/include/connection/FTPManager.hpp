@@ -10,6 +10,7 @@
 #include <winbase.h>
 #include "ServerConnection.hpp"
 #include "FileManager.hpp"
+#include <windows.h>
 
 class FTPManager{
 private:

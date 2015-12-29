@@ -1,4 +1,5 @@
 #include <connection/FTPManager.hpp>
+#include <SFML/System/Clock.hpp>
 
 //Constructor
 FTPManager::FTPManager() {
@@ -38,21 +39,26 @@ void FTPManager::startFTP() {
 
 
     //Get the infoList with hash of our files (TODO !)
-
+    sf::Clock clock;
     createFilesListInfo();
+    sf::Time time = clock.getElapsedTime();
 
-
+    /*
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "clientFilesInfoList : " << std::endl;
 
     for(int i = 0; i < m_clientFilesInfoList.size(); i++)
     {
-        for(int j = 0; j < m_clientFilesInfoList[i].size(); j++)
+        std::cout << std::endl << "ClientFileInfoList[" << i+1 <<"] : " << std::endl;
+        for(int j = 0; j < m_clientFilesInfoList[i].size(); j++) {
             std::cout << m_clientFilesInfoList[i][j] << " ";
-
+        }
         std::cout << std::endl;
     }
+    */
+    std::cout << std::endl;
+    std::cout <<  m_clientFilesInfoList.size() << " files hashed in " << time.asMilliseconds() << " ms" << std::endl;
 
 }
 
@@ -67,11 +73,12 @@ void FTPManager::createFile(std::vector<std::string> file) {
 
 void FTPManager::createFilesListInfo() {
 
-    const char* path = getExePath().c_str();
-    std::cout << "Here\'s the files of this directory path : " << path << std::endl;
+    std::string path = getExePath();
+    std::cout  << std::endl << std::endl << "Here\'s the files of this directory path : " << path << std::endl;
     std::cout << std::endl;
 
     route(path);
+
 }
 
 std::string FTPManager::getExePath()
@@ -114,25 +121,36 @@ void FTPManager::route(std::string path)
         /* print all the files and directories within directory */
         int fileNumero=0;
         while ((ent = readdir (dir)) != NULL) {
-
+            fileC.clear();
             std::string pathFile = path + std::string(ent->d_name);
             dirBis = opendir(pathFile.c_str());
             if (fileNumero >=2 && dirBis==NULL) {
 
-                fileC.clear();
                 fileC.push_back(path + std::string(ent->d_name));
-                std::cout << "path to file in vector : " << fileC.at(0) << std::endl;
+                //std::cout << "path : " << fileC[0] << std::endl;
                 fileC.push_back(ent->d_name);
-                std::cout << "file\'s name in vector : " << fileC.at(1) << std::endl;
+                //std::cout << "name : " << fileC[1] << std::endl;
 
                 fileC.push_back("Contents here soon...");
-                std::cout << "file\'s content in vector : " << fileC.at(2) << std::endl;
-                fileC = getHash(fileC);
-                std::cout << "file\'s hash in vector : " << fileC.at(3) << std::endl;
+                //std::cout << "content : " << fileC[2] << std::endl;
+                //fileC = getHash(fileC);
+                fileC.push_back(m_ptr_fileManager->getHash(path + std::string(ent->d_name)));
+                //std::cout << "hash : " << fileC[3] << std::endl;
+
+                //std::cout << std::endl << "File : " << std::endl;
+
+                //for(int i = 0; i < fileC.size(); i++)
+                  //  std::cout << fileC[i] << std::endl;
 
                 m_clientFilesInfoList.push_back(fileC);
+                //std::cout << "Size of ClientFilesInfoList : " << m_clientFilesInfoList.size() << std::endl;
 
-                std::cout << std::endl;
+
+                //std::cout << "----------------------------" << std::endl;
+                //Sleep(1000);
+
+
+                //std::cout << std::endl;
             }
             else if (fileNumero>=2){
                 route(path + std::string(ent->d_name) + "\\");
@@ -144,6 +162,6 @@ void FTPManager::route(std::string path)
     }
     else
     {
-        std::cerr << "Problem" << std::endl;
+        std::cerr << "Problem while opening the directory " << path << std::endl;
     }
 }

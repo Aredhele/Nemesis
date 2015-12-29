@@ -22,7 +22,7 @@ void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
     m_fileInfoList = fileInfoList;
 
     //Get info file
-    path = fileInfoList.at(0);
+    path = fileInfoList[0];
 
     std::string s = setFilesHash(path);
 
@@ -31,6 +31,11 @@ void FileManager::setFileInfoList(std::vector<std::string> fileInfoList) {
 
 std::vector<std::string>  FileManager::getFileInfoList() {
     return m_fileInfoList;
+}
+
+std::string FileManager::getHash(std::string path) {
+    std::string hash = setFilesHash(path);
+    return hash;
 }
 
 

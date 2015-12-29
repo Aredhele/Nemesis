@@ -28,6 +28,8 @@ public:
     std::vector<std::string>  getFileInfoList();
     void setFileInfoList(std::vector<std::string> fileInfoList);
     void createFile(std::vector<std::string> fileInfoList);
+
+    std::string getHash(std::string path);
 };
 
 #endif //UPDATER_FILEMANAGER_H
