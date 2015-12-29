@@ -15,8 +15,9 @@
 #include <vector>
 #include <iostream>
 
+#include <SFML/Graphics.hpp>
+
 #include "VideoParam.hpp"
-#include "Drawable.hpp"
 #include "Constant.hpp"
 #include "Patch.hpp"
 
@@ -26,7 +27,7 @@ enum videoState {
 	STOP
 };
 
-class VideoPlayer : public Drawable
+class VideoPlayer
 {
 	using ushort = unsigned short;
 	using uint = unsigned int;
@@ -46,6 +47,8 @@ class VideoPlayer : public Drawable
 		ushort m_frameNumber;
 		ushort m_currentIndex;
 
+		double m_totalFrameTime;
+
 		sf::Sprite m_sprite;
 		sf::Texture m_texture;
 		
@@ -59,7 +62,7 @@ class VideoPlayer : public Drawable
 		// Methods
 		int init(VideoParam * param);
 
-		virtual void draw(sf::RenderWindow * window, double frameTime);
+		void draw(sf::RenderWindow * window, double frameTime);
 
 		// Getters
 		videoState getVideoState();

@@ -5,12 +5,15 @@ int main(int argc, char ** argv)
 {   
     // Checking args
     if(argc > 1) return FAILURE;
-    std::cout << "\nRuuning program : " << argv[0] << "\n" << std::endl;
+    std::cout << "\nRunning program : " << argv[0] << "\n" << std::endl;
 
     // Starting load of heavy resources
     // Launching thread
     ResourceLoader rLoader(DEBUG);
     rLoader.start();
+
+    // Creating targets
+    // TODO
 
     // Creating window
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
@@ -19,8 +22,14 @@ int main(int argc, char ** argv)
     // Window framerate - Default : 120 fps
     window.setFramerateLimit(WINDOW_FPS);
 
+    // Starting some videos while loading res
     SplashScreen splash(DEBUG);
     splash.start(&window);
+
+    // Getting loaded resources
+    // Wait if not finished
+    while(!rLoader.getLoadState()) sf::sleep(sf::milliseconds(WAIT_TIME));
+    ManagerGroup * managerGroup = rLoader.getManager();
 
     sf::Clock clock;
     while (window.isOpen())

@@ -13,17 +13,9 @@
  * \brief Constructor
  */
 MusicManager::MusicManager(bool debug, bool ploop) : Manager() {
-
     m_debug = debug;
     m_playListLoop = ploop;
     m_currentPlaylist = 0;
-
-    // Initialize playlist(s)
-    createPlaylist("plist", 50, 1, 1.2);
-
-    // Setting playlist
-	getPlaylist("plist")->addMusic("../res/music/menu/LifeWater.ogg");
-    getPlaylist("plist")->addMusic("../res/music/menu/Epipath.ogg");
 }
 
 /**
@@ -55,7 +47,7 @@ void MusicManager::createPlaylist(std::string key, int volume, int loop, float p
 /**
  * \brief create a sound from a sound memory buffer
  * \param path the path to the sound
- * \param key the key to reference the sound
+ * \param key The key to find the sound in map
  * \param volume the volume of the sound
  * \param pitch the pitch of the sound
  */

@@ -13,7 +13,6 @@
 * \param debug 1 debug mode - 0 none
 */
 VideoPlayer::VideoPlayer(bool debug) : 
-Drawable(),
 m_sprite(),
 m_texture()
 {

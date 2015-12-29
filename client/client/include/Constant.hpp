@@ -18,4 +18,6 @@
 #define FAILURE 0
 #define DEBUG 1
 
+#define WAIT_TIME 100
+
 #endif // DEF_CONSTANT_HPP

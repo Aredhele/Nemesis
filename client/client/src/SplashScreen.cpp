@@ -40,6 +40,8 @@ SplashScreen::~SplashScreen() {
  */
 void SplashScreen::start(sf::RenderWindow * window) {
 
+	bool isPlaying = true;
+
 	m_videoPlayer.init(m_videoList[m_currentVideoIndex]);
 	m_videoPlayer.setVideoState(videoState::PLAY);
 
@@ -53,7 +55,7 @@ void SplashScreen::start(sf::RenderWindow * window) {
 	music.play();
 
 	sf::Clock clock;
-    while (1)
+    while (isPlaying)
     {
         double elapsedTime = clock.getElapsedTime().asSeconds();
         clock.restart().asMilliseconds();
@@ -62,8 +64,11 @@ void SplashScreen::start(sf::RenderWindow * window) {
         sf::Event event;
         while (window->pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window->close();
+                music.stop();
+                isPlaying = false;
+            }
         }
 
         m_videoPlayer.draw(window, elapsedTime);
