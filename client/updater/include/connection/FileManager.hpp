@@ -10,24 +10,30 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <SFML/Network.hpp>
+#include <windows.h>
+#include <dirent.h>
 
 class FileManager{
 private:
-    std::vector<std::string> m_fileInfoList;
-    HashTool * m_ptr_hashTool;
-    int m_descriptor;
 
-    void setFilesInfo();
+    HashTool * m_ptr_hashTool;
     std::string setFilesHash(std::string path);
-    void insertContent();
-    void closeDescriptor();
+    bool compareHash(std::string hashReceived, std::string hash);
+    int m_nbReceived;
 
 public:
     FileManager();
     ~FileManager();
-    std::vector<std::string>  getFileInfoList();
-    void setFileInfoList(std::vector<std::string> fileInfoList);
-    void createFile(std::vector<std::string> fileInfoList);
+
+    std::string getHash(std::string path);
+
+    void createFile(int nbFile, std::string path, sf::TcpSocket* socket);
+
+
+    std::string backslashToSlash(std::string path);
+
+    void createPathFile(std::string path);
 };
 
 #endif //UPDATER_FILEMANAGER_H

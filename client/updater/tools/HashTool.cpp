@@ -66,7 +66,7 @@ int HashTool::SHA256() {
 	tmp = fopen("hash", "w");
 
 	for(int i = 0; i < 20; i++) {
-		fprintf(tmp, "%x", out[i]);
+		fprintf(tmp, "%02x", out[i]);
 	}
 
 	fclose(tmp);

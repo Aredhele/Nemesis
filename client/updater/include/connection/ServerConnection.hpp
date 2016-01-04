@@ -2,17 +2,22 @@
 #define UPDATER_SERVERCONNECTION_H
 
 #include <iostream>
+
+#include <SFML/System.hpp>
+#include <SFML/Network.hpp>
+
 #include "string"
+#include "FileManager.hpp"
 #include <vector>
+#include <stdio.h>
 
 class ServerConnection{
 private:
     //Configuration m_conf;
     //Socket m_socket;
 
-    std::string receiveFileName();
-    std::string receiveFilePath();
-    std::string receiveFileContent();
+    sf::Socket::Status m_status;
+    sf::TcpSocket m_socket;
 
 public:
     //Constructor
@@ -21,12 +26,16 @@ public:
     ~ServerConnection();
 
     bool connect();
-    bool disconnect();
-    bool sendHashFile(std::string hash);
-    bool sendNameFile(std::string name);
-    bool sendPathFile(std::string path);
-    std::vector<std::string> getFileInfoList();
 
+    void sendSizeList(int size);
+
+    void sendPathHash(std::vector<std::vector<std::string>> list);
+
+    int getNumberFile();
+
+    void receiveFiles(int nbFile, std::string path, FileManager *m_ptr_filemanager);
+
+    int m_sizeList;
 };
 
 
