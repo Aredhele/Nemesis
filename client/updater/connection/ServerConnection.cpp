@@ -38,8 +38,8 @@ void ServerConnection::sendSizeList(int size){
 void ServerConnection::sendPathHash(std::vector<std::vector<std::string>> list) {
     FILE* f = fopen("result.txt", "w");
     int rep; size_t received;
-
     for (int i = 0; i < m_sizeList; i++){
+
 
         while(m_socket.send(list[i][0].c_str(), 200) == sf::Socket::Disconnected) {
             std::cerr << "Paquet re - send" << std::endl;
@@ -78,6 +78,7 @@ int ServerConnection::getNumberFile(){
 
     return nbFile;
 }
+
 
 void ServerConnection::receiveFiles(int nbFile, std::string path, FileManager * m_ptr_filemanager){
     m_ptr_filemanager->createFile(nbFile, path, &m_socket);

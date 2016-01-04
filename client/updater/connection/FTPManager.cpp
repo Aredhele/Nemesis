@@ -1,5 +1,4 @@
 #include <connection/FTPManager.hpp>
-#include <SFML/System/Clock.hpp>
 #include <stdexcept>
 
 //Constructor

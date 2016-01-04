@@ -10,11 +10,13 @@
 #include <winbase.h>
 #include "ServerConnection.hpp"
 #include "FileManager.hpp"
+#include <windows.h>
 
 class FTPManager{
 private:
 
     std::string getExePath();
+
     void route(std::string path);
     void createFilesListInfo();
     std::string getRelativePath(std::string absolutePath);
