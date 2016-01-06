@@ -10,6 +10,8 @@
 #define DEF_MANAGER_GROUP_HPP
 
 #include "MusicManager.hpp"
+#include "OptionManager.hpp"
+#include "TargetManager.hpp"
 #include "TextureManager.hpp"
 
 class ManagerGroup
@@ -24,6 +26,8 @@ class ManagerGroup
 		// Token
 		MusicManager * ptr_musicManager;
 		TextureManager * ptr_textureManager;
+		TargetManager * ptr_targetManager;
+		OptionManager * ptr_optionManager;
 };
 
 #endif // DEF_MANAGER_GROUP_HPP

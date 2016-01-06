@@ -12,133 +12,137 @@
 /*
  * \brief Constructor
  * \param volume the volume of all music
- * \param loop number of loop in the playlist
+ * \param loop if true endless loop
  * \param pitch the frequency of the music
  */
-Playlist::Playlist(bool debug, int volume, int loop, float pitch) {
-    m_debug = debug;
-    m_nbLoop = loop;
-    m_volume = volume;
-    m_active = false;
-    m_currentIndex = 0;
-    m_currentNbLoop = 1;
-    m_isFinished = true;
-    m_pitchValue = pitch;
+Playlist::Playlist(bool debug, int volume, bool loop, 
+float pitch) : m_music() {
 
-    if(debug) {
-        std::cout << "- m_isFinished " << m_isFinished << std::endl;
-        std::cout << "- m_isActive " << m_active << std::endl;
-    }
+    m_loop = loop;
+    m_debug = debug;
+    m_isFinished = true;
+    m_isActive = false;
+    m_currentIndex = 0;
+    m_music.setPitch(pitch);
+    m_music.setVolume(volume);
 }
 
 /*
  * \brief Destructor
  */
 Playlist::~Playlist() {
-    m_musicList.clear();
+    // None
 }
 
-/*
- * \brief add a music to the vector
- * \param path the path of the music
+/*!
+ * \brief Add a music path to the list
+ * \param path The path to the music
  */
 void Playlist::addMusic(std::string path) {
-    sf::Music * ptr_music = nullptr;
-	ptr_music = new sf::Music();
-
-    // Opening music stream
-    if(!ptr_music->openFromFile(path)) {
-        if(m_debug)
-            std::cerr << "Failed to open music stream" << std::endl;
-    }
-
-    ptr_music->setPitch(m_pitchValue);
-    ptr_music->setVolume(m_volume);
-    m_musicList.push_back(ptr_music);
+    m_pathList.push_back(path);
 }
 
-/**
- * \brief Start the playlist
- */
-void Playlist::start() {
-    if(m_musicList.size() > 0) {
-        m_active = true;
-        m_isFinished = false;
-        m_currentIndex = 0;
-        m_musicList[m_currentIndex]->play();
-    } else {
-        if(m_debug)
-            std::cerr << "No musics to play" << std::endl;
-    }
-}
-
-/**
- * \brief Play the current song
- */
-void Playlist::play() {
-    m_active = true;
-    m_musicList[m_currentIndex]->play();
-    if(m_debug)
-        std::cout << "Music played" << std::endl;
-}
-
-/**
- * \brief Pause the current song
- */
-void Playlist::pause() {
-    m_active = false;
-    m_musicList[m_currentIndex]->pause();
-    if(m_debug)
-        std::cout << "Music paused" << std::endl;
-}
-
-/**
- * \brief Stop the playlist
- */
-void Playlist::stop() {
-    m_active = false;
-    m_isFinished = true;
-    m_musicList[m_currentIndex]->stop();
-    m_currentIndex = 0;
-    if(m_debug)
-	   std::cout << "Music stopped" << std::endl;
-}
-
-/**
- * \brief Update the current music
+/*!
+ * \brief Check the state of the current music
+ * \return None
  */
 void Playlist::update() {
-    if(m_active) {
-        if(m_musicList[m_currentIndex]->getStatus() == sf::Music::Status::Stopped)
-        {
-            m_active = false;
+
+    if(!m_isActive) return;
+
+    switch(m_music.getStatus()) 
+    {
+        case sf::Music::Status::Stopped:
+            next();
+            break;
+
+        case sf::Music::Status::Playing:
+            break;
+
+        case sf::Music::Status::Paused:
+            break;
+
+        default:
+            break;
+    }
+}
+
+/*!
+ * \brief Handle next music
+ */
+void Playlist::next() {
+
+    if(m_currentIndex + 1 < m_pathList.size())
+    {
+        m_currentIndex++;
+        load();
+    } 
+    else
+    {
+        if(m_loop) {
+            m_currentIndex = 0;
+            load();
+        } else {
             m_isFinished = true;
-            if(m_currentIndex + 1 < m_musicList.size()) {
-                m_currentIndex++;
-                m_active = true;
-                m_isFinished = false;
-                m_musicList[m_currentIndex]->play();
-                return;
-            }
-            else if(m_currentIndex + 1 >= m_musicList.size()) {
-                if(m_currentNbLoop + 1 < m_nbLoop) {
-                    m_currentIndex = 0;
-                    m_active = true;
-					m_isFinished = false;
-                    m_musicList[m_currentIndex]->play();
-                } else {
-                    m_isFinished = true;
-                    m_currentIndex = 0;
-                    m_active = false;
-                    return;
-                }
-            }
         }
     }
 }
 
-/*
- * \brief return the global state of the playlist
+/*!
+ * \brief Open a music from a file
+ */
+void Playlist::load() {
+    m_music.openFromFile(m_pathList[m_currentIndex]);
+    play();
+}
+
+/*!
+ * \brief Play the current song
+ */
+void Playlist::play() {
+    m_music.play();
+    if(m_debug) {
+        std::cout << "- Playing : ";
+        std::cout << m_pathList[m_currentIndex] << std::endl;
+    }
+    m_isFinished = false;
+    m_isActive = true;
+}
+
+/*!
+ * \brief Pause the current song
+ */
+void Playlist::pause() {
+    m_music.pause();
+}
+
+/*!
+ * \brief Stop the current song
+ */
+void Playlist::stop() {
+    m_music.stop();
+    m_isFinished = true;
+    m_isActive = false;
+}
+
+/*!
+ * \brief Change the volume
+ * \param volume The volume to assign
+ */
+void Playlist::setVolume(int volume) {
+    m_music.setVolume(volume);  
+}
+
+/*!
+ * \brief Change the pitch of the current song
+ * \param pitch The pitch to assign
+ */
+void Playlist::setPitch(float pitch) {
+    m_music.setPitch(pitch);
+}
+
+/*!
+ * \return true if the music is stopped
  */
 bool Playlist::isFinished() {
     return m_isFinished;

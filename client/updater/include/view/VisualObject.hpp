@@ -19,23 +19,22 @@ class VisualObject
 {
 	protected:
 		// Members
-
-		sf::Sprite * m_ptr_sprite;
-		sf::Texture * m_ptr_texture;
-		sf::Vector2f * m_ptr_position;
+		sf::Sprite m_sprite;
+		sf::Texture m_texture;
 		
 	public:
 		// Constructor
-		VisualObject();
 		VisualObject(sf::Vector2f position, std::string pathToTexture);
 
 		// Destructor
 		virtual ~VisualObject();
 
 		// Methods
+		virtual void draw(sf::RenderWindow *window) = 0;
+
 		// Getters
 		sf::Sprite * getMainSprite();
-		sf::Vector2f * getPosition();
+		sf::Vector2f getPosition();
 
 		// Setters
 		void setMainSprite(std::string pathToTexture);

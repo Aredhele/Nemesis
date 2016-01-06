@@ -15,10 +15,16 @@
 ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(), 
 m_thread(&ResourceLoader::load, this) {
 	m_debug = debug;
-	m_managerGroup.ptr_musicManager = new MusicManager(m_debug, false);
+
+	m_managerGroup.ptr_musicManager = new MusicManager(m_debug);
 	m_managerGroup.ptr_textureManager = new TextureManager(m_debug);
+	m_managerGroup.ptr_targetManager = new TargetManager(m_debug);
+	m_managerGroup.ptr_optionManager = new OptionManager(m_debug);
+
 	m_managerGroup.ptr_musicManager->setState(false);
 	m_managerGroup.ptr_textureManager->setState(false);
+	m_managerGroup.ptr_targetManager->setState(false);
+	m_managerGroup.ptr_optionManager->setState(false);
 }
 
 /*!
@@ -34,16 +40,40 @@ ResourceLoader::~ResourceLoader() {
  */
 void ResourceLoader::load() {
 
-	// Loading ...
-	m_managerGroup.ptr_textureManager->addTexture("topBarLogMenu", 
-	"../res/texture/menu/login/topBarLogMenu.png");
+	// Aliases
+	MusicManager& a_mm = *m_managerGroup.ptr_musicManager;
+	TextureManager& a_tm = *m_managerGroup.ptr_textureManager;
+	TargetManager& a_tarm = *m_managerGroup.ptr_targetManager;
+	OptionManager& a_optm = *m_managerGroup.ptr_optionManager;
 
-	m_managerGroup.ptr_musicManager->setState(true);
-	m_managerGroup.ptr_textureManager->setState(true);
+	// Path
+	const std::string pathLogin = "../res/texture/menu/login/";
+
+	// Loading ...
+	a_tm.addTexture("topBarLogMenu", pathLogin + "topBarLogMenu.png");
+	a_tm.addTexture("topBarOptButton_1", pathLogin + "topBarOptionButton_1.png");
+	a_tm.addTexture("topBarOptButton_2", pathLogin + "topBarOptionButton_2.png");
+
+	a_tm.addTexture("topBarOptButton_3", pathLogin + "topBarOptionButton_1.png");
+	a_tm.addTexture("topBarOptButton_4", pathLogin + "topBarOptionButton_2.png");
+
+	a_tm.addTexture("topBarExitButton_1", pathLogin + "topBarExitButton_1.png");
+	a_tm.addTexture("topBarExitButton_2", pathLogin + "topBarExitButton_2.png");
+	a_tm.addTexture("loginBackground", pathLogin + "background.png");
+	a_tm.addTexture("optionPane", pathLogin + "optionPane.png");
+	a_tm.addTexture("altimitLoad", pathLogin + "altimitFull.png");
+	a_tm.addTexture("simplePanel", pathLogin + "simplePanel.png");
+
+	a_mm.setState(true);
+	a_tm.setState(true);
+	a_tarm.setState(true);
+	a_optm.setState(true);
+
 
 	if(m_debug) {
-		std::cout << "- Music Manager successfully loaded" << std::endl;
 		std::cout << "- Texture Manager successfully loaded" << std::endl;
+		std::cout << "- Target Manager successfully loaded" << std::endl;
+		std::cout << "- Option Manager successfully loaded" << std::endl;
 	}
 }
 
@@ -69,7 +99,9 @@ void ResourceLoader::stop() {
 bool ResourceLoader::getLoadState() {
 	return (
 	m_managerGroup.ptr_musicManager->getState() &&
-	m_managerGroup.ptr_textureManager->getState());
+	m_managerGroup.ptr_textureManager->getState() &&
+	m_managerGroup.ptr_targetManager->getState() &&
+	m_managerGroup.ptr_optionManager->getState());
 }
 
 /*!

@@ -14,17 +14,20 @@
 class LoginMenu : public BasicInterface
 {
 	private:
+		NPanel m_monSuperPanel;
+		AnimatableObject m_maSuperAnimation;
+		NButton m_monSuperBouton;
 
 	public:
 		// Constructor
-		LoginMenu(ManagerGroup * ptr_managerGroup);
+		LoginMenu(bool debug, ManagerGroup * ptr_managerGroup);
 
 		// Destructor
 		~LoginMenu();
 
 		// Methods
 		virtual void update(sf::RenderWindow * window, 
-		sf::Event e, double frameTime);
+		sf::Event * e, double frameTime);
 };
 
 #endif // DEF_LOGING_MENU_HPP

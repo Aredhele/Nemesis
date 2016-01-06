@@ -9,12 +9,12 @@
 
 #include <MusicManager.hpp>
 
-/**
+/*!
  * \brief Constructor
+ * \param debug The debug mode
  */
-MusicManager::MusicManager(bool debug, bool ploop) : Manager() {
+MusicManager::MusicManager(bool debug) : Manager() {
     m_debug = debug;
-    m_playListLoop = ploop;
     m_currentPlaylist = 0;
 }
 
@@ -35,13 +35,12 @@ MusicManager::~MusicManager() {
  * \param loop loop number to play the playlist
  * \param pitch global frequency of the playlist
  */
-void MusicManager::createPlaylist(std::string key, int volume, int loop, float pitch) {
+void MusicManager::createPlaylist(std::string key, int volume, bool loop, float pitch) {
 
     m_playlistMap.insert(std::pair < std::string, Playlist * >
     (key, new Playlist(m_debug, volume, loop, pitch)));
 
     m_keyList.push_back(key);
-    m_currentPlaylist = 0;
 }
 
 /**
@@ -61,9 +60,10 @@ void MusicManager::createSound(std::string path, std::string key, int volume, fl
 
     if(!ptr_soundBuffer->loadFromFile(path)) {
         if(m_debug)
-            std::cerr << "Failed to load sound buffer from memory" << std::endl;
+            std::cerr << "- Failed to load sound buffer from memory" << std::endl;
         return;
     }
+
     ptr_sound->setBuffer(*ptr_soundBuffer);
     ptr_sound->setVolume(volume);
     ptr_sound->setPitch(pitch);
@@ -74,7 +74,7 @@ void MusicManager::createSound(std::string path, std::string key, int volume, fl
     (key, ptr_sound));
 
     if(m_debug)
-        std::cout << "Sound successfully loaded !" << std::endl;
+        std::cout << "- Sound successfully loaded !" << std::endl;
 }
 
 /**
@@ -82,31 +82,26 @@ void MusicManager::createSound(std::string path, std::string key, int volume, fl
  * \param key the key of the map
  */
 void MusicManager::startPlaylist(std::string key) {
-    m_playlistMap[key]->start();
+
+    // Make sure of the current playlist is stopped
+    // Updating current index
+    stopPlaylist();
+    m_currentPlaylist = findIndex(key);
+
+    m_playlistMap[key]->load();
     if(m_debug)
-	   std::cout << "Start playlist" << std::endl;
-
-}
-
-/*!
- * \brief Play (unpause) the current playlist
- */
-void MusicManager::playPlaylist() {
-    m_playlistMap[m_keyList[m_currentPlaylist]]->play();
-}
-
-/*!
- * \brief Pause the current playlist
- */
-void MusicManager::pausePlaylist() {
-    m_playlistMap[m_keyList[m_currentPlaylist]]->pause();
+	   std::cout << "- Start playlist : " << key << std::endl;
 }
 
 /*!
  * \brief Stop the current playlist
  */
 void MusicManager::stopPlaylist() {
-    m_playlistMap[m_keyList[m_currentPlaylist]]->stop();
+    if(!m_playlistMap[m_keyList[m_currentPlaylist]]->isFinished()) {
+        m_playlistMap[m_keyList[m_currentPlaylist]]->stop();
+        if(m_debug)
+            std::cout << "- Playlist stopped" << std::endl;
+    } 
 }
 
 /*
@@ -116,18 +111,6 @@ void MusicManager::update() {
 
     for(unsigned int i = 0; i < m_keyList.size(); i++)
         m_playlistMap[m_keyList[i]]->update();
-
-    if(m_playlistMap[m_keyList[m_currentPlaylist]]->isFinished()) {
-        if(m_currentPlaylist + 1 < m_keyList.size()) {
-            m_currentPlaylist++;
-            m_playlistMap[m_keyList[m_currentPlaylist]]->start();
-        } else {
-            if(m_playListLoop) {
-                m_currentPlaylist = 0;
-                m_playlistMap[m_keyList[m_currentPlaylist]]->start();
-            }
-        }
-    }
 }
 
 /**
@@ -137,6 +120,14 @@ void MusicManager::playSound(std::string key) {
     m_soundMap[key]->play();
 }
 
+/*!
+ * \brief return the current playlist
+ * \return the good playlist
+ */
+Playlist * MusicManager::getPlaylist() {
+    return m_playlistMap[m_keyList[m_currentPlaylist]];
+}
+
 /**
  * \brief return a playlist from the map
  * \param key the key to get the good playlist
@@ -144,4 +135,16 @@ void MusicManager::playSound(std::string key) {
  */
 Playlist * MusicManager::getPlaylist(std::string key) {
     return m_playlistMap[key];
+}
+
+/*!
+ * \brief Find the index of the key in the map
+ * \param key The current key
+ * \return The index of the key
+ */
+int MusicManager::findIndex(std::string key) {
+
+    for(unsigned int i = 0; i < m_keyList.size(); i++)
+        if(m_keyList[i] == key) return i;
+    return 0;
 }

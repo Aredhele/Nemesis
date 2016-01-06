@@ -10,13 +10,16 @@
 
 /*!
  * \brief Constructor
- * \param id The id of the object
+ * \return None
  */
-VisualObject::VisualObject(std::string id) :
+VisualObject::VisualObject() :
 m_mainSprite(),
 m_position()
 {
-	m_id = id;
+	m_hidden = false;
+	m_isActive = false;
+	m_isOver = false;
+	m_timeElapsed = 0;
 }
 
 /*!
@@ -26,12 +29,10 @@ m_position()
  * \param y The y abs position of the sprite
  * \param texture The texture of the main sprite
  */
-VisualObject::VisualObject(std::string id, int x, int y, 
-sf::Texture * texture) : 
-m_mainSprite(),
-m_position(x, y)
-{
+void VisualObject::init(std::string id, int x, int y, 
+sf::Texture * texture) {
 	m_id = id;
+	setPosition(x, y);
 	m_mainSprite.setTexture(*texture);
 	m_mainSprite.setPosition(m_position);
 }
@@ -49,6 +50,18 @@ VisualObject::~VisualObject() {
  */
 void VisualObject::draw(sf::RenderWindow * window) {
 	window->draw(m_mainSprite);
+}
+
+/*!
+ * \brief default code (must be redefined)
+ * \param o the pointer on the triggerObject
+ */
+void VisualObject::bind(TriggerableObject * o) {
+	// If an visualObject has to trigger
+	// an object, it must set an member
+	// variable to o - Ex:
+	// m_ptr_triggerableObject = o;
+	(void)o;
 }
 
 /*!
@@ -97,6 +110,13 @@ void VisualObject::setPosition(float x, float y) {
 	m_mainSprite.setPosition(m_position);
 }
 
-
+/*!
+ * \brief If false, object will be hidden
+ * \param state The display state of the objecy
+ * \return None
+ */
+void VisualObject::setVisible(bool state) {
+	m_hidden = state;
+}
 
 

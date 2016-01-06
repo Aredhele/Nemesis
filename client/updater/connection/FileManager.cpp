@@ -5,10 +5,12 @@
 
 
 #include <connection/FileManager.hpp>
+#include <tools/Patch.hpp>
 
 
-FileManager::FileManager() {
+FileManager::FileManager(RenderEngine *renderEngine) {
     m_ptr_hashTool = new HashTool();
+    m_ptr_renderEngine = renderEngine;;
 }
 
 FileManager::~FileManager() {
@@ -48,6 +50,7 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
     m_nbReceived = 0;
 
     std::string pathBis = path;
+    std::string pathTier = path;
 
     for(int i = 0; i < nbFile; i++) {
         path = pathBis;
@@ -56,35 +59,47 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
         tries = 0;
 
         std::cout << "\n --- FILE[" << i + 1 << "] ---" << std::endl;
+        //m_ptr_renderEngine->getLog()->addText(L"Réception du fichier "
+         //       + cast::towstring(i) + L" / " + cast::towstring(nbFile), sf::Color::Blue);
         char fileToCreate[200];
 
         // Reception of the file's name
         socket->receive(fileToCreate, 200, received);
-
-        std::cout << "Received path (relativ) : "  << fileToCreate << std::endl;
+        //std::cout << "Received path (relativ) : "  << fileToCreate << std::endl;
         path += fileToCreate;
-        std::cout << "Absolute path \\ : " << path << std::endl;
-        path = backslashToSlash(path);
-        std::cout << "Absolute path / : " << path << std::endl;
+        //std::cout << "Absolute path \\ : " << path << std::endl;
+        //path = backslashToSlash(path);
+        //std::cout << "Absolute path / : " << path << std::endl;
 
-        std::cout << "File name [" << received << "] : " << fileToCreate << std::endl;
+        std::wstring s(L"");
+        int tmp = cast::toString(i).size();
 
+        for(int i = 4 - tmp; i > 0; i--) {
+            s += L" ";
+        }
+        std::cout << 4 - tmp << std::endl;
+        std::cout << "SIZE : " << s.size() << std::endl;
+
+        m_ptr_renderEngine->getLog()->addText(L"Fichier : "
+                                              + cast::towstring(fileToCreate), sf::Color::Blue);
         // Getting file's size
         socket->receive((void*)&sizeOfFile, 4, received);
-
-        std::cout << "Size of the file : " << sizeOfFile << " bytes" << std::endl;
+        std::cerr << "3" << std::endl;
+        //m_ptr_renderEngine->getLog()->addText(L"Taille du fichier :  " + cast::towstring(sizeOfFile), sf::Color::Blue);
 
         //Work only if a folder needs to be create
 
-
+        std::cerr << "4" << std::endl;
         while(!check && tries != 3) {
-
 
             std::ofstream os (path, std::ofstream::binary | std::ofstream::trunc);
 
             if((os.rdstate() & std::ofstream::failbit) != 0) {
                 std::cerr << "Unable to open ouput stream !" << std::endl;
+                //pathTier = slashToBackSlash(path);
                 createPathFile(path);
+                os.close();
+                sf::sleep(sf::seconds(10));
                 continue;
             } else {
                 std::cout << "The file is opened !" << std::endl;
@@ -98,11 +113,25 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
 
             // Getting content
             std::cout << "Jump into the send loop !" << std::endl;
+            sf::Clock clock;
+            sf::Time time;
+            int compt=0;
+            sf::sleep(sf::seconds(0.01));
             while(1) {
+                time = clock.getElapsedTime();
+                if (time.asSeconds()>=1){
+                    //m_ptr_renderEngine->getLog()->getLastText()->setString(L"Débit : "
+                    //+ cast::towstring(compt/1000) + L" ko/s -- "
+                    //+ cast::towstring(size/1000)
+                    //+ L"/"+ cast::towstring(sizeOfFile/1000)
+                    //+ L" ko");
+                    compt=0;
+                    clock.restart();
+                }
 
                 socket->receive(buffer, 1024, received);
                 // std::cout << "Bytes received : " << received << " bytes." << std::endl;
-
+                compt+=received;
 
                 os.write(buffer, received);
 
@@ -113,8 +142,6 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
 
                 size += received;
                 counter++;
-                std::cout << "Paquet [" << counter << "] : " << size << " on ";
-                std::cout << sizeOfFile << " bytes. (received : " << received << ")" << std::endl;
                 if(size >= sizeOfFile) break;
             }
             os.close();
@@ -122,18 +149,12 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
 
             // Send ack
             socket->send((void*)&sortie, 4);
-            std::cout << "Out of the send loop" << std::endl;
 
             // Getting server hash
             socket->receive(hashServer, 200, received);
 
-            // Get hash of the new file
-            std::cout << "Path to hash : " << path << std::endl;
             hashFile = getHash(path);
 
-            // Seems to be OK up to here !
-            std::cout << "Hash file : " << hashFile << std::endl;
-            std::cout << "Hash serv : " << hashServer << std::endl;
 
 
             //Comparaison between hash client/hash server and return answer
@@ -153,9 +174,12 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
 }
 
 void FileManager::createPathFile(std::string path) {
-    unsigned int pos = path.rfind("/");
+    unsigned int pos = path.rfind("\\");
     path = path.substr(0, pos);
-    CreateDirectory( path.c_str(), NULL );
+    std::string mkdir = "mkdir " + path;
+    std::cout << mkdir << std::endl;
+    system(mkdir.c_str());
+    //CreateDirectory( path.c_str(), NULL );
     /*If not a recursive creation check that out :
      * #include <boost/filesystem.hpp>
      * boost::filesystem::create_directories("/tmp/a/b/c");
@@ -166,6 +190,15 @@ std::string FileManager::backslashToSlash(std::string path) {
     for (int i = 0; i < path.size(); i++) {
         if ((path[i] ==  '\\')){
             path[i]=  '/';
+        }
+    }
+    return path;
+}
+
+std::string FileManager::slashToBackSlash(std::string path) {
+    for (int i = 0; i < path.size(); i++) {
+        if ((path[i] ==  '/')){
+            path[i]=  '\\';
         }
     }
     return path;

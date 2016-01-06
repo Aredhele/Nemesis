@@ -14,7 +14,6 @@
 class Updatable
 {
 	protected:
-		// TODO
 		double m_totalFrameTime;
 
 	public:
@@ -26,7 +25,7 @@ class Updatable
 
 		// Methods
 		virtual void update(sf::RenderWindow * window, 
-		sf::Event e, double frameTime) = 0;
+		sf::Event * e, double frameTime) = 0;
 };
 
 #endif // DEF_UPDATABLE_HPP

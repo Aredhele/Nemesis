@@ -18,32 +18,32 @@
 class Playlist
 {
     private:
-        // Member
-        unsigned int m_nbLoop;
-        unsigned int m_currentNbLoop;
-        unsigned int m_volume;
-        unsigned int m_currentIndex;
-        bool m_isFinished;
-        bool m_active;
+        bool m_loop;
         bool m_debug;
-        float m_pitchValue;
+        bool m_isFinished;
+        bool m_isActive;
+        unsigned int m_currentIndex;
 
-        std::vector < sf::Music * > m_musicList;
+        sf::Music m_music;
+        std::vector < std::string > m_pathList;
 
     public:
         // Constructor
-        Playlist(bool debug, int volume, int loop, float pitch);
+        Playlist(bool debug, int volume, bool loop, float pitch);
 
         // Destructor
         ~Playlist();
 
         // Methods
         void addMusic(std::string path);
-        void start();
-        void play();
-        void pause();
-        void stop();
         void update();
+        void next();
+        void load();
+        void play();
+        void stop();
+        void pause();
+        void setVolume(int volume);
+        void setPitch(float pitch);
 
         // Getters
         bool isFinished();

@@ -1,5 +1,10 @@
+// TODO : Gérer cette histoire d'option
+// OK   : Bouton clic
+// TODO : Gérer la propriété hidden des objets
+
 #include "ResourceLoader.hpp"
 #include "SplashScreen.hpp"
+#include "LoginMenu.hpp"
 
 int main(int argc, char ** argv)
 {   
@@ -11,9 +16,6 @@ int main(int argc, char ** argv)
     // Launching thread
     ResourceLoader rLoader(DEBUG);
     rLoader.start();
-
-    // Creating targets
-    // TODO
 
     // Creating window
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
@@ -31,9 +33,22 @@ int main(int argc, char ** argv)
     while(!rLoader.getLoadState()) sf::sleep(sf::milliseconds(WAIT_TIME));
     ManagerGroup * managerGroup = rLoader.getManager();
 
+    // Creating menu
+    LoginMenu loginMenu(DEBUG, managerGroup);
+
+    // Setting main target
+    managerGroup->ptr_targetManager->isOnLoginMenu();
+
     sf::Clock clock;
     while (window.isOpen())
-    {
+    {   
+        // Exiting program
+        if(!managerGroup->ptr_targetManager->isExit()) {
+            managerGroup->ptr_musicManager->stopPlaylist();
+            window.close();
+            continue;
+        }
+
         double elapsedTime = clock.getElapsedTime().asSeconds();
         clock.restart().asMilliseconds();
         window.clear();
@@ -44,6 +59,10 @@ int main(int argc, char ** argv)
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        // Updating game logic
+        loginMenu.update(&window, &event, elapsedTime);
+        managerGroup->ptr_musicManager->update();
 
         window.display();
     }

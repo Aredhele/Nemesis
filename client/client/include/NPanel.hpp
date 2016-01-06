@@ -20,12 +20,23 @@ class NPanel : public VisualObject
 
 	public:
 		// Constructor
-		NPanel(std::string id);
-		NPanel(std::string id, int x, int y, 
-		sf::Texture * texture);
+		NPanel();
 
 		// Destructor
 		virtual ~NPanel();
+
+		// Methods
+		void create(std::string id, int x, int y, 
+		sf::Texture * texture);
+		
+		virtual void draw(sf::RenderWindow * window);
+		virtual std::string eventMousePressed(sf::Event * e);
+		virtual std::string eventMouseMoved(sf::Event * e);
+		virtual void eventTextEntered(sf::Event * e);
+		virtual void update(double frameTime);
+
+		void addComponent(VisualObject * component);
+		void removeLastComponent();
 };
 
 #endif // DEF_NPANEL_HPP

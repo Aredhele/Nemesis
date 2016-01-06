@@ -36,30 +36,20 @@ void ServerConnection::sendSizeList(int size){
 }
 
 void ServerConnection::sendPathHash(std::vector<std::vector<std::string>> list) {
-    FILE* f = fopen("result.txt", "w");
+
     int rep; size_t received;
     for (int i = 0; i < m_sizeList; i++){
 
-
+        sf::sleep(sf::milliseconds(5));
         while(m_socket.send(list[i][0].c_str(), 200) == sf::Socket::Disconnected) {
             std::cerr << "Paquet re - send" << std::endl;
         }
 
-        std::cout << "Path sent : [" << i << "] : " << list[i][0] << std::endl;
-
-        // Saving to file
-        fprintf(f, "[%d] %s\n", i, list[i][0].c_str());
-
         while(m_socket.send(list[i][1].c_str(), 40) == sf::Socket::Disconnected) {
-            std::cerr << "Paquet re - send" << std::endl;
+            //std::cerr << "Paquet re - send" << std::endl;
         }
-
-        std::cout << "hash sent : [" << i << "] : " << list[i][1] << std::endl;
-
-        // Saving to file
-        fprintf(f, "[%d] %s\n", i, list[i][1].c_str());
     }
-    fclose(f);
+
 
     // Synchronisation
     sf::sleep(sf::microseconds(500));

@@ -2,8 +2,11 @@
 #include <stdexcept>
 
 //Constructor
-FTPManager::FTPManager() {
-    m_ptr_fileManager = new FileManager;
+FTPManager::FTPManager(RenderEngine *renderEngine)
+{
+    m_ptr_renderEngine = renderEngine;
+
+    m_ptr_fileManager = new FileManager(m_ptr_renderEngine);
     m_ptr_serveurConnection = new ServerConnection;
 }
 
@@ -17,17 +20,22 @@ FTPManager::~FTPManager() {
 }
 
 int FTPManager::startFTP() {
-    if (!m_ptr_serveurConnection->connect()) {
-        std::cerr << "Error connection" << std::endl;
-        return -1;
+
+    m_ptr_renderEngine->getLog()->addText(L"Connexion au serveur...", sf::Color::Blue);
+    while (!m_ptr_serveurConnection->connect()) {
+        m_ptr_renderEngine->getLog()->addText(L"Erreur de connexion", sf::Color::Red);
+
+        m_ptr_renderEngine->getLog()->addText(L"Tentative de reconnexion...", sf::Color::Blue);
+        sf::sleep(sf::seconds(2));
     }
 
+    m_ptr_renderEngine->getLog()->addText(L"Connexion réussie", sf::Color::Green);
 
     //Get the infoList with hash of our files
     createFilesListInfo();
 
-    std::cout << std::endl;
-    std::cout <<  m_clientFilesInfoList.size() << " files hashed" << std::endl;
+    m_ptr_renderEngine->getLog()->addText(cast::towstring(m_clientFilesInfoList.size())+
+            L" fichiers indexés", sf::Color::Blue);
 
     //Send size and content of the list
     m_ptr_serveurConnection->sendSizeList(m_clientFilesInfoList.size());
@@ -35,19 +43,21 @@ int FTPManager::startFTP() {
 
     //Receive number of file to update
     int numberFile = m_ptr_serveurConnection->getNumberFile();
-    std::cout << "Number of file to receive : " << numberFile << std::endl;
-
+    m_ptr_renderEngine->getLog()->addText(
+            cast::towstring(numberFile) + L" fichiers à recevoir", sf::Color::Blue);
+    std::cout << numberFile<< std::endl;
     if (numberFile==0){
-        std::cout << "The game is up to date ! Enjoy :)" << std::endl;
+        m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color::Green);
+        m_ptr_renderEngine->getButton()->enable(true);
         return 0;
     }
 
-    std::cout << "Waiting for the server ..." << std::endl;
     //Reception of the files to update
     m_ptr_serveurConnection->receiveFiles(numberFile, m_path, m_ptr_fileManager);
 
 
-    std::cout << "The game is up to date ! Enjoy :)" << std::endl;
+    m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color::Green);
+    m_ptr_renderEngine->getButton()->enable(true);
     return 0;
 }
 
@@ -56,10 +66,7 @@ void FTPManager::createFilesListInfo() {
 
     m_path = getExePath();
     m_path+="client\\";
-
-    std::cout  << std::endl << std::endl << "Searching all files in the directory : " << m_path << std::endl;
-    std::cout << std::endl;
-
+    m_ptr_renderEngine->getLog()->addText(L"Indexation des fichiers...", sf::Color::Blue);
     route(m_path);
 }
 
@@ -69,17 +76,12 @@ std::string FTPManager::getExePath()
     char result[ MAX_PATH ];
     std::string path =  std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
 
-    // return "";
-    try {
-        if (path != ext &&
-            path.size() > ext.size() &&
-            path.substr(path.size() - ext.size()) == "updater\\bin\\choucroute.exe") {
-            // if so then strip them off
-            path = path.substr(0, path.size() - ext.size());
-        }
-    } catch(std::out_of_range e) {
-        std::cerr << e.what() << std::endl;
-        std::cerr << "Erreur getExePath" << std::endl;
+
+    if (path != ext &&
+        path.size() > ext.size() &&
+        path.substr(path.size() - ext.size()) == "updater\\bin\\choucroute.exe") {
+        // if so then strip them off
+        path = path.substr(0, path.size() - ext.size());
     }
 
     return path;
@@ -104,18 +106,9 @@ void FTPManager::route(std::string path)
                 if (fileNumero >= 2 && dirBis == NULL) {
 
                     fileC.push_back(path + std::string(ent->d_name));
-                    //std::cout << "path : " << fileC[0] << std::endl;
 
-                    std::cout << path << " + " <<  std::string(ent->d_name) << std::endl;
                     fileC.push_back(m_ptr_fileManager->getHash(path + std::string(ent->d_name)));
-                    std::cout << "hash : " << fileC[1] << std::endl;
-                    int taillehash = strlen(fileC[1].c_str());
-                    std::cout << "Taille hash : " << taillehash << std::endl;
-
-
-
                     fileC[0] = getRelativePath(path + std::string(ent->d_name));
-                    std::cout << "relative path : " << fileC[0] << std::endl;
                     m_clientFilesInfoList.push_back(fileC);
 
                 }
@@ -128,11 +121,10 @@ void FTPManager::route(std::string path)
             closedir(dir);
         }
         else {
-            std::cerr << "Problem while opening the directory " << path << std::endl;
+            m_ptr_renderEngine->getLog()->addText(L"Problème lors de l'ouverture des fichiers", sf::Color::Red);
         }
     } catch(std::out_of_range e) {
-        std::cerr << e.what() << std::endl;
-        std::cerr << "Erreur route " << std::endl;
+        m_ptr_renderEngine->getLog()->addText(L"Trop de fichiers", sf::Color::Red);
     }
 }
 

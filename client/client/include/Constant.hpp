@@ -19,5 +19,6 @@
 #define DEBUG 1
 
 #define WAIT_TIME 100
+#define BUTTON_DELAY 0.1
 
 #endif // DEF_CONSTANT_HPP

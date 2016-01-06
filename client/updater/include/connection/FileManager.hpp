@@ -13,17 +13,20 @@
 #include <SFML/Network.hpp>
 #include <windows.h>
 #include <dirent.h>
+#include <view/RenderEngine.hpp>
 
 class FileManager{
 private:
-
+    int m_nbReceived;
     HashTool * m_ptr_hashTool;
+    RenderEngine * m_ptr_renderEngine;
     std::string setFilesHash(std::string path);
     bool compareHash(std::string hashReceived, std::string hash);
-    int m_nbReceived;
+    std::string backslashToSlash(std::string path);
+    std::string slashToBackSlash(std::string path);
 
 public:
-    FileManager();
+    FileManager(RenderEngine * renderEngine);
     ~FileManager();
 
     std::string getHash(std::string path);
@@ -31,7 +34,7 @@ public:
     void createFile(int nbFile, std::string path, sf::TcpSocket* socket);
 
 
-    std::string backslashToSlash(std::string path);
+
 
     void createPathFile(std::string path);
 };

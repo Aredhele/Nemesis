@@ -1,14 +1,17 @@
-#include <SFML/Graphics.hpp>
 #include <connection/FTPManager.hpp>
+#include <view/RenderEngine.hpp>
 
 
 int main()
 {
-    FTPManager manager = FTPManager();
+    RenderEngine renderEngine;
+    renderEngine.startEngine();
+
+    FTPManager manager(&renderEngine);
     manager.startFTP();
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-
-
+    while(renderEngine.getThreadState()){
+        sf::sleep(sf::seconds(0.1));
+    }
 
     return 0;
 }
