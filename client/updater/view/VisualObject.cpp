@@ -26,6 +26,14 @@ m_texture()
 	m_sprite.setPosition(position);
 }
 
+VisualObject::VisualObject(sf::Vector2f position) :
+		m_sprite(),
+		m_texture()
+{
+	m_sprite.setTexture(m_texture);
+	m_sprite.setPosition(position);
+}
+
 /*!
  * \brief Destructor.
  */

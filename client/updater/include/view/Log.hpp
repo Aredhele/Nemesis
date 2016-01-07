@@ -2,6 +2,7 @@
 #define DEF_LOG_HPP
 
 #include "VisualObject.hpp"
+#include <algorithm>
 
 class Log : public VisualObject
 {
@@ -13,6 +14,7 @@ class Log : public VisualObject
     public:
         // Constructor
         Log(sf::Vector2f position, std::string pathToTexture);
+        Log(sf::Vector2f position);
 
         // Destructor
         ~Log();

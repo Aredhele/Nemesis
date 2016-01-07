@@ -25,6 +25,7 @@ class VisualObject
 	public:
 		// Constructor
 		VisualObject(sf::Vector2f position, std::string pathToTexture);
+	    VisualObject(sf::Vector2f position);
 
 		// Destructor
 		virtual ~VisualObject();

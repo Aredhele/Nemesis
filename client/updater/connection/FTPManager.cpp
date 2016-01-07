@@ -21,21 +21,21 @@ FTPManager::~FTPManager() {
 
 int FTPManager::startFTP() {
 
-    m_ptr_renderEngine->getLog()->addText(L"Connexion au serveur...", sf::Color::Blue);
+    m_ptr_renderEngine->getLog()->addText(L"Connexion au serveur...", sf::Color(255,254,206));
     while (!m_ptr_serveurConnection->connect()) {
-        m_ptr_renderEngine->getLog()->addText(L"Erreur de connexion", sf::Color::Red);
+        m_ptr_renderEngine->getLog()->addText(L"Erreur de connexion", sf::Color(255,20,24));
 
-        m_ptr_renderEngine->getLog()->addText(L"Tentative de reconnexion...", sf::Color::Blue);
+        m_ptr_renderEngine->getLog()->addText(L"Tentative de reconnexion...", sf::Color(255,254,206));
         sf::sleep(sf::seconds(2));
     }
 
-    m_ptr_renderEngine->getLog()->addText(L"Connexion réussie", sf::Color::Green);
+    m_ptr_renderEngine->getLog()->addText(L"Connexion réussie", sf::Color(76,255,115));
 
     //Get the infoList with hash of our files
     createFilesListInfo();
 
     m_ptr_renderEngine->getLog()->addText(cast::towstring(m_clientFilesInfoList.size())+
-            L" fichiers indexés", sf::Color::Blue);
+            L" fichiers indexés", sf::Color(255,254,206));
 
     //Send size and content of the list
     m_ptr_serveurConnection->sendSizeList(m_clientFilesInfoList.size());
@@ -43,11 +43,12 @@ int FTPManager::startFTP() {
 
     //Receive number of file to update
     int numberFile = m_ptr_serveurConnection->getNumberFile();
+    m_ptr_renderEngine->getProgressBar()->setNbFileMax(numberFile);
     m_ptr_renderEngine->getLog()->addText(
-            cast::towstring(numberFile) + L" fichiers à recevoir", sf::Color::Blue);
-    std::cout << numberFile<< std::endl;
+            cast::towstring(numberFile) + L" fichiers à recevoir", sf::Color(255,254,206));
     if (numberFile==0){
-        m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color::Green);
+        m_ptr_renderEngine->getProgressBar()->maxProgression();
+        m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(76,255,115));
         m_ptr_renderEngine->getButton()->enable(true);
         return 0;
     }
@@ -55,8 +56,8 @@ int FTPManager::startFTP() {
     //Reception of the files to update
     m_ptr_serveurConnection->receiveFiles(numberFile, m_path, m_ptr_fileManager);
 
-
-    m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color::Green);
+    m_ptr_renderEngine->getProgressBar()->maxProgression();
+    m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(76,255,115));
     m_ptr_renderEngine->getButton()->enable(true);
     return 0;
 }
@@ -66,7 +67,7 @@ void FTPManager::createFilesListInfo() {
 
     m_path = getExePath();
     m_path+="client\\";
-    m_ptr_renderEngine->getLog()->addText(L"Indexation des fichiers...", sf::Color::Blue);
+    m_ptr_renderEngine->getLog()->addText(L"Indexation des fichiers...", sf::Color(255,254,206));
     route(m_path);
 }
 
@@ -121,10 +122,10 @@ void FTPManager::route(std::string path)
             closedir(dir);
         }
         else {
-            m_ptr_renderEngine->getLog()->addText(L"Problème lors de l'ouverture des fichiers", sf::Color::Red);
+            m_ptr_renderEngine->getLog()->addText(L"Problème lors de l'ouverture des fichiers", sf::Color(255,20,24));
         }
     } catch(std::out_of_range e) {
-        m_ptr_renderEngine->getLog()->addText(L"Trop de fichiers", sf::Color::Red);
+        m_ptr_renderEngine->getLog()->addText(L"Trop de fichiers", sf::Color(255,20,24));
     }
 }
 

@@ -9,12 +9,13 @@ RenderEngine::RenderEngine() :
 m_thread(&RenderEngine::graphicEngine,this),
 m_backgroundTexture(),
 m_backgroundSprite(),
-m_log(sf::Vector2f(10,200), "../res/img/Log.png"),
+m_log(sf::Vector2f(10,200)),
 m_playButton(sf::Vector2f(450, 200), "../res/img/arrowLaunch.png", "../res/img/arrowLaunchPress.png"),
 m_upButton(sf::Vector2f(380, 200), "../res/img/arrowUp.png",
            "../res/img/arrowUpPress.png"),
 m_downButton(sf::Vector2f(380, 350), "../res/img/arrowDown.png",
-           "../res/img/arrowDownPress.png")
+           "../res/img/arrowDownPress.png"),
+m_progressBar(sf::Vector2f(3, 120), "../res/img/PenBody.png")
 {
     m_running = false;
     m_backgroundTexture.loadFromFile("../res/img/background.png");
@@ -30,7 +31,7 @@ RenderEngine::~RenderEngine() {
 void RenderEngine::graphicEngine(){
 
     sf::RenderWindow window(sf::VideoMode(650, 400),
-           "Knights of Pen and Paper : Updater",
+           "Heroes of Pen and Paper : Updater",
            sf::Style::Titlebar | sf::Style::Close);
 
     sf::Clock clock;
@@ -74,6 +75,7 @@ void RenderEngine::graphicEngine(){
         window.clear();
         window.draw(m_backgroundSprite);
         m_log.draw(&window);
+        m_progressBar.draw(&window);
         m_upButton.draw(&window);
         m_downButton.draw(&window);
         m_playButton.draw(&window);
@@ -100,4 +102,8 @@ Log* RenderEngine::getLog(){
 
 Button* RenderEngine::getButton(){
     return &m_playButton;
+}
+
+ProgressBar* RenderEngine::getProgressBar(){
+    return &m_progressBar;
 }

@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include "Log.hpp"
 #include "Button.hpp"
+#include "ProgressBar.hpp"
 
 class RenderEngine
 {
@@ -21,6 +22,7 @@ class RenderEngine
         Button m_playButton;
         Button m_upButton;
         Button m_downButton;
+        ProgressBar m_progressBar;
 
 
         void graphicEngine();
@@ -41,7 +43,7 @@ class RenderEngine
         bool getThreadState();
         Log* getLog();
         Button* getButton();
-
+        ProgressBar *getProgressBar();
 };
 
 

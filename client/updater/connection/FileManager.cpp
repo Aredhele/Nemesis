@@ -59,17 +59,14 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
         tries = 0;
 
         std::cout << "\n --- FILE[" << i + 1 << "] ---" << std::endl;
-        //m_ptr_renderEngine->getLog()->addText(L"Réception du fichier "
-         //       + cast::towstring(i) + L" / " + cast::towstring(nbFile), sf::Color::Blue);
+
         char fileToCreate[200];
 
         // Reception of the file's name
         socket->receive(fileToCreate, 200, received);
-        //std::cout << "Received path (relativ) : "  << fileToCreate << std::endl;
+
         path += fileToCreate;
-        //std::cout << "Absolute path \\ : " << path << std::endl;
-        //path = backslashToSlash(path);
-        //std::cout << "Absolute path / : " << path << std::endl;
+
 
         std::wstring s(L"");
         int tmp = cast::toString(i).size();
@@ -77,11 +74,9 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
         for(int i = 4 - tmp; i > 0; i--) {
             s += L" ";
         }
-        std::cout << 4 - tmp << std::endl;
-        std::cout << "SIZE : " << s.size() << std::endl;
 
         m_ptr_renderEngine->getLog()->addText(L"Fichier : "
-                                              + cast::towstring(fileToCreate), sf::Color::Blue);
+                                              + cast::towstring(fileToCreate), sf::Color(255,254,206));
         // Getting file's size
         socket->receive((void*)&sizeOfFile, 4, received);
         std::cerr << "3" << std::endl;
@@ -112,7 +107,6 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
             int counter = 0;
 
             // Getting content
-            std::cout << "Jump into the send loop !" << std::endl;
             sf::Clock clock;
             sf::Time time;
             int compt=0;
@@ -130,7 +124,6 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
                 }
 
                 socket->receive(buffer, 1024, received);
-                // std::cout << "Bytes received : " << received << " bytes." << std::endl;
                 compt+=received;
 
                 os.write(buffer, received);
@@ -163,6 +156,7 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
                 check = true;
                 result = 0;
                 m_nbReceived++;
+                m_ptr_renderEngine->getProgressBar()->incrementeProgression();
             } else {
                 tries++;
                 result = 1;
@@ -177,7 +171,6 @@ void FileManager::createPathFile(std::string path) {
     unsigned int pos = path.rfind("\\");
     path = path.substr(0, pos);
     std::string mkdir = "mkdir " + path;
-    std::cout << mkdir << std::endl;
     system(mkdir.c_str());
     //CreateDirectory( path.c_str(), NULL );
     /*If not a recursive creation check that out :
