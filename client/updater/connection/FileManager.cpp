@@ -76,7 +76,8 @@ void FileManager::createFile(int nbFile, std::string path, sf::TcpSocket* socket
         }
 
         m_ptr_renderEngine->getLog()->addText(L"Fichier : "
-                                              + cast::towstring(fileToCreate), sf::Color(255,254,206));
+                                              + cast::towstring(fileToCreate), sf::Color(36,41,35));
+
         // Getting file's size
         socket->receive((void*)&sizeOfFile, 4, received);
         std::cerr << "3" << std::endl;

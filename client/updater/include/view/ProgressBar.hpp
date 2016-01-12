@@ -11,8 +11,6 @@ class ProgressBar : public VisualObject {
 private:
     int m_progression;
     int m_nbFileMax;
-    sf::Sprite m_spriteHead;
-    sf::Texture m_textureHead;
 
 public:
     ProgressBar(sf::Vector2f position, std::string pathToTexture);

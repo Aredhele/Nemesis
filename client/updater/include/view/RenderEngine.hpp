@@ -10,6 +10,8 @@
 #include "Log.hpp"
 #include "Button.hpp"
 #include "ProgressBar.hpp"
+#include "AnimatableObject.hpp"
+
 
 class RenderEngine
 {
@@ -20,8 +22,10 @@ class RenderEngine
         sf::Sprite m_backgroundSprite;
         Log m_log;
         Button m_playButton;
+        AnimatableObject m_animatedButton;
         Button m_upButton;
         Button m_downButton;
+        Button m_closeButton;
         ProgressBar m_progressBar;
 
 
@@ -44,6 +48,7 @@ class RenderEngine
         Log* getLog();
         Button* getButton();
         ProgressBar *getProgressBar();
+        AnimatableObject* getAnimatableObject();
 };
 
 

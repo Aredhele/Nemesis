@@ -21,21 +21,21 @@ FTPManager::~FTPManager() {
 
 int FTPManager::startFTP() {
 
-    m_ptr_renderEngine->getLog()->addText(L"Connexion au serveur...", sf::Color(255,254,206));
+    m_ptr_renderEngine->getLog()->addText(L"Connexion au serveur...", sf::Color(36,41,35));
     while (!m_ptr_serveurConnection->connect()) {
-        m_ptr_renderEngine->getLog()->addText(L"Erreur de connexion", sf::Color(255,20,24));
+        m_ptr_renderEngine->getLog()->addText(L"Erreur de connexion", sf::Color(196,137,17));
 
-        m_ptr_renderEngine->getLog()->addText(L"Tentative de reconnexion...", sf::Color(255,254,206));
+        m_ptr_renderEngine->getLog()->addText(L"Tentative de reconnexion...", sf::Color(36,41,35));
         sf::sleep(sf::seconds(2));
     }
 
-    m_ptr_renderEngine->getLog()->addText(L"Connexion réussie", sf::Color(76,255,115));
+    m_ptr_renderEngine->getLog()->addText(L"Connexion réussie", sf::Color(42,104,27));
 
     //Get the infoList with hash of our files
     createFilesListInfo();
 
     m_ptr_renderEngine->getLog()->addText(cast::towstring(m_clientFilesInfoList.size())+
-            L" fichiers indexés", sf::Color(255,254,206));
+            L" fichiers indexés", sf::Color(36,41,35));
 
     //Send size and content of the list
     m_ptr_serveurConnection->sendSizeList(m_clientFilesInfoList.size());
@@ -45,10 +45,11 @@ int FTPManager::startFTP() {
     int numberFile = m_ptr_serveurConnection->getNumberFile();
     m_ptr_renderEngine->getProgressBar()->setNbFileMax(numberFile);
     m_ptr_renderEngine->getLog()->addText(
-            cast::towstring(numberFile) + L" fichiers à recevoir", sf::Color(255,254,206));
+            cast::towstring(numberFile) + L" fichiers à recevoir", sf::Color(36,41,35));
     if (numberFile==0){
         m_ptr_renderEngine->getProgressBar()->maxProgression();
-        m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(76,255,115));
+        m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(42,104,27));
+        m_ptr_renderEngine->getAnimatableObject()->loading(true);
         m_ptr_renderEngine->getButton()->enable(true);
         return 0;
     }
@@ -57,9 +58,12 @@ int FTPManager::startFTP() {
     m_ptr_serveurConnection->receiveFiles(numberFile, m_path, m_ptr_fileManager);
 
     m_ptr_renderEngine->getProgressBar()->maxProgression();
-    m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(76,255,115));
+
+    m_ptr_renderEngine->getLog()->addText(L"Le jeu est à jour !", sf::Color(42,104,27));
+    m_ptr_renderEngine->getAnimatableObject()->loading(true);
     m_ptr_renderEngine->getButton()->enable(true);
-    return 0;
+   return 0;
+
 }
 
 
@@ -67,20 +71,24 @@ void FTPManager::createFilesListInfo() {
 
     m_path = getExePath();
     m_path+="client\\";
-    m_ptr_renderEngine->getLog()->addText(L"Indexation des fichiers...", sf::Color(255,254,206));
+
+    m_ptr_renderEngine->getLog()->addText(L"Indexation des fichiers...", sf::Color(36,41,35));
+
     route(m_path);
 }
 
 std::string FTPManager::getExePath()
 {
-    const std::string ext("updater\\bin\\choucroute.exe");
+    const std::string ext("updater\\bin\\NemesisUpdater.exe");
+
     char result[ MAX_PATH ];
     std::string path =  std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
 
 
     if (path != ext &&
         path.size() > ext.size() &&
-        path.substr(path.size() - ext.size()) == "updater\\bin\\choucroute.exe") {
+        path.substr(path.size() - ext.size()) == "updater\\bin\\NemesisUpdater.exe") {
+
         // if so then strip them off
         path = path.substr(0, path.size() - ext.size());
     }
@@ -122,10 +130,10 @@ void FTPManager::route(std::string path)
             closedir(dir);
         }
         else {
-            m_ptr_renderEngine->getLog()->addText(L"Problème lors de l'ouverture des fichiers", sf::Color(255,20,24));
+            m_ptr_renderEngine->getLog()->addText(L"Problème lors de l'ouverture des fichiers", sf::Color(196,137,17));
         }
     } catch(std::out_of_range e) {
-        m_ptr_renderEngine->getLog()->addText(L"Trop de fichiers", sf::Color(255,20,24));
+        m_ptr_renderEngine->getLog()->addText(L"Trop de fichiers", sf::Color(196,137,17));
     }
 }
 

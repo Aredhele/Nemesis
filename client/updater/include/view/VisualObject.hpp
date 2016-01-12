@@ -19,8 +19,12 @@ class VisualObject
 {
 	protected:
 		// Members
+		bool m_hidden;
+		double m_timeElapsed;
 		sf::Sprite m_sprite;
 		sf::Texture m_texture;
+
+
 		
 	public:
 		// Constructor

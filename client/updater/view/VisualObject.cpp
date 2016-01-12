@@ -21,7 +21,8 @@ m_texture()
 	if(!m_texture.loadFromFile(pathToTexture)) {
 		std::cerr << "Unable to load texture" << std::endl;
 	}
-
+	m_hidden = false;
+	m_timeElapsed = 0;
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(position);
 }
@@ -30,6 +31,8 @@ VisualObject::VisualObject(sf::Vector2f position) :
 		m_sprite(),
 		m_texture()
 {
+	m_hidden = false;
+	m_timeElapsed = 0;
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(position);
 }

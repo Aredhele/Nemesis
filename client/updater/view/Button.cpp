@@ -1,20 +1,36 @@
 #include "view/Button.hpp"
 
 // Constructor
-Button::Button(sf::Vector2f position, std::string pathToTexture, std::string p) :
+Button::Button(sf::Vector2f position, std::string pathToTexture, std::string pathSecondTexture) :
 VisualObject(position, pathToTexture),
-m_secondeTexture(),
-m_secondSprite(),
-m_surrounder()
+m_secondTexture(),
+m_secondSprite()
 {
-    m_surrounder.init(m_sprite.getPosition(),
-                      sf::Vector2u(m_sprite.getTexture()->getSize()).x/2,
-                      sf::Color(120,120,120,70));
+
     m_active = false;
     m_totalTime = 0;
-    m_secondeTexture.loadFromFile(p);
-    m_secondSprite.setTexture(m_secondeTexture);
+    m_secondTexture.loadFromFile(pathSecondTexture);
+    m_secondSprite.setTexture(m_secondTexture);
     m_secondSprite.setPosition(position);
+    m_enable = true;
+}
+
+// Constructor
+Button::Button(sf::Vector2f position, std::string pathToTexture, std::string pathSecondTexture, std::string oldTexture) :
+        VisualObject(position, pathToTexture),
+        m_secondTexture(),
+        m_oldTexture(),
+        m_secondSprite()
+{
+
+    m_active = false;
+    m_totalTime = 0;
+    m_secondTexture.loadFromFile(pathSecondTexture);
+    m_oldTexture.loadFromFile(oldTexture);
+    m_secondSprite.setTexture(m_secondTexture);
+    m_secondSprite.setPosition(position);
+    m_oldSprite.setTexture(m_oldTexture);
+    m_oldSprite.setPosition(position);
     m_enable = true;
 }
 
@@ -58,8 +74,8 @@ void Button::handle(sf::Event *e) {
 void Button::draw(sf::RenderWindow *window) {
 
     if (!m_enable) {
-        window->draw(*getMainSprite());
-        window->draw(*m_surrounder.getShape());
+        window->draw(m_oldSprite);
+
         return;
     }
     if(m_active) window->draw(m_secondSprite);

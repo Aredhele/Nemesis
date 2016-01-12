@@ -30,7 +30,9 @@ Log::~Log() {
 void Log::draw(sf::RenderWindow *window) {
     window->draw(m_sprite);
     for(int i = m_cursor, index = 0; i < m_textList.size() && i < m_cursor + 13; i++, index++){
-        m_textList[i]->setPosition(13, 187 + index * 15);
+
+        m_textList[i]->setPosition(310, 100 + index * 13);
+
         window->draw(*m_textList[i]);
     }
 }
@@ -46,7 +48,8 @@ void Log::addText(const std::wstring & text, sf::Color color) {
     if(text.size() != tmp.size()) tmp2+=tmp;
     else tmp2=tmp;
 
-    m_textList.push_back(new sf::Text(tmp2, m_font, 15));
+    m_textList.push_back(new sf::Text(tmp2, m_font, 13));
+
     m_textList[m_textList.size()-1]->setStyle(sf::Text::Bold);
     m_textList[m_textList.size()-1]->setColor(color);
     if(m_textList.size() > 13){
