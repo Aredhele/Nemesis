@@ -12,24 +12,14 @@
  * \brief Constructor
  */
 LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) : 
-<<<<<<< HEAD
-BasicInterface(debug, ptr_managerGroup)
-=======
 BasicInterface(debug, ptr_managerGroup),
 m_monSuperPanel(),
 m_maSuperAnimation(),
 m_monSuperBouton()
->>>>>>> d8cacbeea2c5957685acbb2480367333720d2b33
 {
 	ptr_managerGroup->ptr_musicManager->
 		createPlaylist("playlistMenu", 50, true, 1.2);
 	ptr_managerGroup->ptr_musicManager->
-<<<<<<< HEAD
-		getPlaylist("playlistMenu")->addMusic("../res/music/menu/RiseAbove.ogg");
-	ptr_managerGroup->ptr_musicManager->
-		getPlaylist("playlistMenu")->play();
-
-=======
 		getPlaylist("playlistMenu")->addMusic("../res/music/menu/LifeWater.ogg");
 	ptr_managerGroup->ptr_musicManager->
 		getPlaylist("playlistMenu")->play();
@@ -50,7 +40,6 @@ m_monSuperBouton()
 	m_monSuperPanel.addComponent(&m_maSuperAnimation);
 	m_monSuperPanel.addComponent(&m_monSuperBouton);
 	getContentPane()->addComponent(&m_monSuperPanel);
->>>>>>> d8cacbeea2c5957685acbb2480367333720d2b33
 	
 }
 
@@ -74,10 +63,6 @@ sf::Event * e, double frameTime) {
 
 	// Basic Interface updating
 	basicInput(e, frameTime);
-<<<<<<< HEAD
-
-
-=======
 
 	// LoginMenu updating
 	m_inputHandler.handleInput(e, getContentPane());
@@ -86,7 +71,6 @@ sf::Event * e, double frameTime) {
 		std::cout << "BOUTONNN EVENTTT" << std::endl;
 	
 
->>>>>>> d8cacbeea2c5957685acbb2480367333720d2b33
 	// Drawing all content
 	basicDraw(window);
 }

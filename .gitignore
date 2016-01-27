@@ -45,9 +45,3 @@ openssl/
 *.msm
 *.msp
 *.lnk
-
-#GTEST
-GTEST/
-
-#SFML
-SFML/

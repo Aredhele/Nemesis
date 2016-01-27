@@ -98,13 +98,7 @@ void AnimatableObject::eventTextEntered(sf::Event * e) {
  * \param frameTime The time elapsed since last frame
  */
 void AnimatableObject::update(double frameTime) {
-<<<<<<< HEAD
-/*	if(m_currentStep>=36)
-		m_state = AnimationState::PAUSE;*/
-
-=======
 	
->>>>>>> d8cacbeea2c5957685acbb2480367333720d2b33
 	if(m_state == AnimationState::PLAY) {
 		m_timeElapsed += frameTime;
 
