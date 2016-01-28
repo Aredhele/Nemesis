@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include "connector/MySQLConnector.hpp"
+#include "clientConnector/ClientServer.hpp"
 
 int main(int argc, char ** argv)
 {
     MySQLConnector *connector = new MySQLConnector();
+
     connector->connect();
 
     std::vector < Table* > tablesName = connector->getTablesName();
@@ -19,6 +21,8 @@ int main(int argc, char ** argv)
         tablesName[i]->displayFields();
         std::cout << std::endl;
     }
+
+
 
     connector->disconnect();
     return EXIT_SUCCESS;
