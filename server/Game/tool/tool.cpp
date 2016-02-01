@@ -6,7 +6,7 @@
  * \date 2015-12-04
  */
 
-#include "clientConnector/tool.hpp"
+#include "tool/tool.hpp"
 
 /*!
  * \param s the string to convert
@@ -38,13 +38,4 @@ bool cast::toBool(const std::string& v) {
  */
 bool cast::toBool(const bool& v) {
     return v;
-}
-
-/*!
- * \brief Convert a value into a string
- */
-template <typename T> std::string cast::toString(const T& t) {
-    std::ostringstream os;
-    os << t;
-    return os.str();
 }

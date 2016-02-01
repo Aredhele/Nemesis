@@ -32,11 +32,11 @@
 #include <vector>
 #include <memory>
 
-#include <clientConnector/tool.hpp>
+#include "tool/tool.hpp"
 #include "ClientThread.hpp"
-#include "Configuration.hpp"
+#include "tool/Configuration.hpp"
 
-class SFMLServer
+class ClientServer
 {
 private:
     // SFML
@@ -62,11 +62,11 @@ private:
 
 public:
     // Constructor
-    SFMLServer(ConsoleDisplayer * displayer);
-    SFMLServer(ConsoleDisplayer * displayer, Configuration * config);
+    ClientServer(ConsoleDisplayer * displayer);
+    ClientServer(ConsoleDisplayer * displayer, Configuration * config);
 
     // Destructor
-    ~SFMLServer();
+    ~ClientServer();
 
     // Methods
     int start();

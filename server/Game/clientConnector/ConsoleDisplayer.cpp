@@ -27,11 +27,11 @@ ConsoleDisplayer::~ConsoleDisplayer() {
  * \brief Display a wonderful start message :o
  */
 void ConsoleDisplayer::displayStartMessage() {
-    std::cout << "  _   _                          _           " << std::endl;
+
     std::cout << " | \\ | |                        (_)         " << std::endl;
     std::cout << " |  \\| | ___ _ __ ___   ___  ___ _ ___      " << std::endl;
-    std::cout << " | . ` |/ _ \\ '_ ` _ \\ / _ \\/ __| / __|   " << "\t Version : 0.1" << std::endl;
-    std::cout << " | |\\  |  __/ | | | | |  __/\\__ \\ \\__ \\ " << "\t Author : Aredhele" << std::endl;
+    std::cout << " | . ` |/ _ \\ '_ ` _ \\ / _ \\/ __| / __|   " << "\t Version : On work" << std::endl;
+    std::cout << " | |\\  |  __/ | | | | |  __/\\__ \\ \\__ \\ " << "\t Authors : Aredhele, Kariamoss" << std::endl;
     std::cout << " |_| \\_|\\___|_| |_| |_|\\___||___/_|___/   " << "\t Nemesis Server : FTP" << std::endl;
     std::cout << std::endl;
 }

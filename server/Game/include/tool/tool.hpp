@@ -21,7 +21,14 @@ namespace cast
     bool toBool(const std::string& v);
     bool toBool(const bool& v);
 
-    template <typename T> std::string toString(const T& t);
+    /*!
+     * \brief Convert a value into a std::string
+ 	 */
+    template <typename T> std::string toString(const T& t) {
+        std::ostringstream os;
+        os << t;
+        return os.str();
+    }
 }
 
 #endif // DEF_TOOL_HPP

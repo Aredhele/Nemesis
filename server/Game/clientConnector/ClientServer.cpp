@@ -13,7 +13,7 @@
 /*!
  * \brief Contructor
  */
-SFMLServer::SFMLServer(ConsoleDisplayer * displayer) {
+ClientServer::ClientServer(ConsoleDisplayer * displayer) {
     m_running = false;
     m_multiIp = _DFLT_SMIP_;
     m_serverPort = _DFLT_SPORT_;
@@ -32,7 +32,7 @@ SFMLServer::SFMLServer(ConsoleDisplayer * displayer) {
  * \param serverPort the port of the server
  * \param serverAddress the address of the server
  */
-SFMLServer::SFMLServer(ConsoleDisplayer * displayer, Configuration * config) {
+ClientServer::ClientServer(ConsoleDisplayer * displayer, Configuration * config) {
     m_running = false;
     m_serverAddress = config->getParam(_SERVER_IP_);
     m_multiIp = cast::toBool(config->getParam(_SERVER_MIP_));
@@ -49,7 +49,7 @@ SFMLServer::SFMLServer(ConsoleDisplayer * displayer, Configuration * config) {
 /*!
  * \brief Destructor
  */
-SFMLServer::~SFMLServer() {
+ClientServer::~ClientServer() {
     delete m_ptr_listener;
     delete m_ptr_displayer;
 
@@ -60,7 +60,7 @@ SFMLServer::~SFMLServer() {
 /*!
  * \brief Start the server
  */
-int SFMLServer::start() {
+int ClientServer::start() {
     m_running = true;
     m_ptr_listener = new sf::TcpListener();
 

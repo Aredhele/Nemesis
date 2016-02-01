@@ -8,7 +8,7 @@
  */
 
 // Header
-#include "clientConnector/Vector2Str.hpp"
+#include "tool/Vector2Str.hpp"
 
 /**
  * \brief Constructor.
