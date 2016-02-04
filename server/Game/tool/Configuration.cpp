@@ -1,11 +1,3 @@
-/*!
- * \file Configuration.cpp
- * \brief Store the configuration
- * \author Aredhele
- * \version 0.1
- * \date 2015-12-20
- */
-
 #include <bits/stringfwd.h>
 #include "tool/Configuration.hpp"
 

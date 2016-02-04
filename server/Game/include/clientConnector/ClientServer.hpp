@@ -1,10 +1,4 @@
-/*!
- * \file SFMLServer.hpp
- * \brief Server
- * \author Aredhele
- * \version 0.1
- * \date 2015-11-26
- */
+
 
 #ifndef DEF_SFML_SERVER_HPP
 #define DEF_SFML_SERVER_HPP
@@ -32,15 +26,14 @@
 #include <vector>
 #include <memory>
 
-#include "tool/tool.hpp"
+
 #include "ClientThread.hpp"
 #include "tool/Configuration.hpp"
+#include "WarmUp.hpp"
 
 class ClientServer
 {
 private:
-    // SFML
-    sf::TcpListener * m_ptr_listener;
 
     // Members
     bool m_running;
@@ -55,10 +48,35 @@ private:
     std::string m_serverAddress;
 
     ConsoleDisplayer * m_ptr_displayer;
+    Configuration * m_ptr_configuration;
 
-    // thread handling
+    // Gestion des thread
     std::vector < std::unique_ptr < sf::TcpSocket > > m_socketList;
     std::vector < std::unique_ptr < ClientThread > > m_threadList;
+
+    //Gestion des sockets
+    sf::TcpListener socketTCP;
+    std::vector < std::unique_ptr < sf::TcpSocket > > listeSocket;
+    std::vector < bool > listeVerifSocket;
+    std::vector < bool > listeVerifSocketHelper;
+
+    // Socket à ne plus écouter
+    std::vector < bool > listeSocketOccupee;
+
+    //Gestion des WarmUps
+    std::vector < WarmUp * > listeWarmUp;
+    // Gestion des parties
+    std::vector < Game * > listeGame;
+
+    int indiceClient;
+
+    //Methods
+    void listSocketManager();
+    void requestManager(char requete[1024], std::size_t nbOctetsRecus,
+                        sf::TcpSocket * socket, int indiceSocket);
+    std::string getWarmUpList();
+    void joinWarmUp(sf::TcpSocket * socket, std::string param,
+                    int indiceSocket);
 
 public:
     // Constructor
@@ -70,6 +88,8 @@ public:
 
     // Methods
     int start();
+    void initialiser();
+
 };
 
 #endif // DEF_SFML_SERVER_HPP
