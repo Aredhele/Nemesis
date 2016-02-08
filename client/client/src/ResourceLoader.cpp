@@ -63,6 +63,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("optionPane", pathLogin + "optionPane.png");
 	a_tm.addTexture("altimitLoad", pathLogin + "altimitFull.png");
 	a_tm.addTexture("simplePanel", pathLogin + "simplePanel.png");
+	a_tm.addTexture("connexion_1", pathLogin + "connexion_1.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);

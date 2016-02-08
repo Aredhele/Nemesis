@@ -13,8 +13,6 @@
  */
 LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) : 
 BasicInterface(debug, ptr_managerGroup),
-m_monSuperPanel(),
-m_maSuperAnimation(),
 m_monSuperBouton(),
 m_monSuperLabel()
 {
@@ -29,17 +27,10 @@ m_monSuperLabel()
 	{
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
-    
 
-	m_monSuperPanel.create("monSuperPanel", 100, 100, 
-		ptr_managerGroup->ptr_textureManager->getTexture("simplePanel"));
 
-	m_maSuperAnimation.create("maSuperAnimation", 110, 110, 
-		ptr_managerGroup->ptr_textureManager->getTexture("altimitLoad"),
-		true, 0.05, 30, 35, 7);
-
-	m_monSuperBouton.create("monSuperBouton", 300, 300, 
-		ptr_managerGroup->ptr_textureManager->getTexture("topBarOptButton_3"),
+	m_monSuperBouton.create("monSuperBouton", 412, 550,
+		ptr_managerGroup->ptr_textureManager->getTexture("connexion_1"),
 		ptr_managerGroup->ptr_textureManager->getTexture("topBarOptButton_4"));
 
 
@@ -47,10 +38,9 @@ m_monSuperLabel()
 	m_monSuperLabel.create("monSuperLabel", 10, 10, 20, &m_font, L"Paper Sword : Online", sf::Color::Black);
 
 
-	m_monSuperPanel.addComponent(&m_maSuperAnimation);
-	m_monSuperPanel.addComponent(&m_monSuperBouton);
-	m_monSuperPanel.addComponent(&m_monSuperLabel);
-	getContentPane()->addComponent(&m_monSuperPanel);
+
+	getContentPane()->addComponent(&m_monSuperLabel);
+	getContentPane()->addComponent(&m_monSuperBouton);
 	
 }
 

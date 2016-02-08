@@ -24,7 +24,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
 
 
 
-    m_monSuperLabel.create("monSuperLabel", 400, 100, 20, &m_font, L"Parties en cours", sf::Color::Black);
+    m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours", sf::Color::Black);
 
 
     getContentPane()->addComponent(&m_monSuperLabel);
