@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 
     // Starting some videos while loading res
     SplashScreen splash(DEBUG);
-    splash.start(&window);
+    //splash.start(&window);
 
     // Getting loaded resources
     // Wait if not finished

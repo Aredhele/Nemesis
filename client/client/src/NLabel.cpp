@@ -51,7 +51,7 @@ sf::Font * ptr_font, std::wstring text, sf::Color color) {
  * \param window The pointer on window
  */
 void NLabel::draw(sf::RenderWindow * window) {
-	
+
 	if(m_hidden) return;
 	window->draw(m_text);
 }

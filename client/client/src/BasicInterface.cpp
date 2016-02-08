@@ -101,7 +101,7 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 	// m_inputHandler.handleInput(e, &m_contentPane);
 
 	// Check for topBar event
-	m_inputHandler.handleInput(e, &m_topBar);
+	m_inputHandler.handleInput(e, &m_topBar, false);
 
 	if(m_inputHandler.getComponentId() != "NULL") {
 
@@ -126,12 +126,15 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 
 	// Check for optionPane event
 	if(m_optionActive) {
-		m_inputHandler.handleInput(e, &m_optionPanel);
+		m_inputHandler.handleInput(e, &m_optionPanel, false);
 
 		if(m_inputHandler.getComponentId() != "NULL") {
 			// TODO
 		}
 	}
+
+	//Check for contentPane Event
+	m_inputHandler.handleInput(e, &m_contentPane, true);
 }
 
 /*!

@@ -17,6 +17,9 @@ class LoginMenu : public BasicInterface
 		NPanel m_monSuperPanel;
 		AnimatableObject m_maSuperAnimation;
 		NButton m_monSuperBouton;
+		NLabel m_monSuperLabel;
+		sf::Font m_font;
+
 
 	public:
 		// Constructor

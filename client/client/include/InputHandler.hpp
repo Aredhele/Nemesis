@@ -18,35 +18,37 @@
 
 class InputHandler
 {
-	private:
-		bool m_debug;
-		bool m_mouseState;
+private:
+	bool m_debug;
+	bool m_mouseState;
+	bool m_mouseLock;
 
-		std::string m_pressedId;
-		std::string m_overId;
-		int m_keyCode;
+	std::string m_pressedId;
+	std::string m_overId;
+	int m_keyCode;
 
-		// Game logic
-		void mouseReleasedHandle(sf::Event * e);
-		void mousePressedHandle(sf::Event * e, VisualObject * o);
-		void mouseLeftHandle(sf::Event * e, VisualObject * o);
-		void mouseMovedHandle(sf::Event * e, VisualObject * o);
-		void textEnteredHandle(sf::Event * e, VisualObject * o);
+	// Game logic
+	void mouseReleasedHandle(sf::Event * e);
+	void mousePressedHandle(sf::Event * e, VisualObject * o);
+	void mouseLeftHandle(sf::Event * e, VisualObject * o);
+	void mouseMovedHandle(sf::Event * e, VisualObject * o);
+	void textEnteredHandle(sf::Event * e, VisualObject * o);
 
-	public:
-		// Constructor
-		InputHandler(bool debug);
+public:
+	// Constructor
+	InputHandler(bool debug);
 
-		// Destructor
-		~InputHandler();
+	// Destructor
+	~InputHandler();
 
-		// Methods
-		void handleInput(sf::Event * e, VisualObject * o);
+	// Methods
+	void handleInput(sf::Event * e, VisualObject * o,
+					 bool mouselock);
 
-		// Getters
-		std::string getComponentId();
-		std::string getOverId();
-		int getKeyCode();
+	// Getters
+	std::string getComponentId();
+	std::string getOverId();
+	int getKeyCode();
 };
 
 #endif // DEF_INPUT_HANDLER_HPP

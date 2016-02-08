@@ -100,13 +100,13 @@ void Playlist::load() {
  * \brief Play the current song
  */
 void Playlist::play() {
-    m_music.play();
     if(m_debug) {
         std::cout << "- Playing : ";
         std::cout << m_pathList[m_currentIndex] << std::endl;
     }
     m_isFinished = false;
     m_isActive = true;
+    m_music.play();
 }
 
 /*!

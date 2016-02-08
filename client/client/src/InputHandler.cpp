@@ -14,6 +14,7 @@
  */
 InputHandler::InputHandler(bool debug) {
 	m_debug = debug;
+	m_mouseLock = true;
 }
 
 /*!
@@ -28,8 +29,11 @@ InputHandler::~InputHandler() {
  * \param e The pointer on the event
  * \param objectList Vector of component
  */
-void InputHandler::handleInput(sf::Event * e, 
-VisualObject * o) {
+void InputHandler::handleInput(sf::Event * e,
+							   VisualObject * o, bool mouselock) {
+
+	// Enable or disable mouse blocking
+	m_mouseLock = mouselock;
 
 	switch(e->type)
 	{
@@ -60,9 +64,9 @@ VisualObject * o) {
  * \param e The current event to handle
  * \param objectList Vector of component
  */
-void InputHandler::mousePressedHandle(sf::Event * e, 
-VisualObject * o) {
-	
+void InputHandler::mousePressedHandle(sf::Event * e,
+									  VisualObject * o) {
+
 	switch(e->mouseButton.button)
 	{
 		case sf::Mouse::Left:
@@ -86,7 +90,7 @@ VisualObject * o) {
 void InputHandler::mouseReleasedHandle(sf::Event * e) {
 
 	if (e->mouseButton.button == sf::Mouse::Left) {
-			m_mouseState = false;
+		m_mouseState = false;
 	}
 }
 
@@ -95,16 +99,18 @@ void InputHandler::mouseReleasedHandle(sf::Event * e) {
  * \param e The current event to handle
  * \param objectList Vector of component
  */
-void InputHandler::mouseLeftHandle(sf::Event * e, 
-VisualObject * o) {
-	
+void InputHandler::mouseLeftHandle(sf::Event * e,
+								   VisualObject * o) {
+
 	m_overId = "NULL";
 	m_keyCode = -1;
 
 	m_pressedId = "NULL";
 
 	if(!m_mouseState) {
-		m_mouseState = true;
+
+		if(m_mouseLock) m_mouseState = true;
+
 		m_pressedId = o->eventMousePressed(e);
 
 		if(m_debug) {
@@ -122,7 +128,7 @@ VisualObject * o) {
  * \param objectList Vector of component
  */
 void InputHandler::mouseMovedHandle(sf::Event * e,
-VisualObject * o) {
+									VisualObject * o) {
 
 	m_pressedId = "NULL";
 	m_keyCode = -1;
@@ -144,7 +150,7 @@ VisualObject * o) {
  * \param objectList Vector of component
  */
 void InputHandler::textEnteredHandle(sf::Event * e,
-VisualObject * o) {
+									 VisualObject * o) {
 
 	m_overId = "NULL";
 	m_pressedId = "NULL";
