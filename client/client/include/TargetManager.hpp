@@ -16,6 +16,7 @@ class TargetManager : public Manager
 	private:
 		bool m_onLoginMenu;
 		bool m_onMainMenu;
+		bool m_onLobby;
 
 		// Method
 		void handleTarget();
@@ -33,10 +34,12 @@ class TargetManager : public Manager
 		// Getters
 		bool isExit();
 		bool isLoginMenu();
+		bool isLobby();
 		bool isMainMenu();
 
 		// Setters
 		void isOnLoginMenu();
+		void isOnLobby();
 		void isOnMainMenu();
 };
 

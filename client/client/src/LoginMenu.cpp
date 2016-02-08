@@ -77,7 +77,7 @@ sf::Event * e, double frameTime) {
 
 
 	if(m_inputHandler.getComponentId() == "monSuperBouton")
-		std::cout << "BOUTONNN EVENTTT" << std::endl;
+		m_ptr_managerGroup->ptr_targetManager->isOnLobby();
 	
 
 	// Drawing all content

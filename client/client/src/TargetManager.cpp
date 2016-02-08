@@ -16,6 +16,7 @@ TargetManager::TargetManager(bool debug) : Manager() {
 
 	m_onLoginMenu = false;
 	m_onMainMenu = false;
+	m_onLobby = false;
 }
 
 /*!
@@ -38,13 +39,14 @@ void TargetManager::exit() {
 void TargetManager::handleTarget() {
 	m_onLoginMenu = false;
 	m_onMainMenu = false;
+	m_onLobby = false;
 }
 
 /*!
  * \return true if all target are on false
  */
 bool TargetManager::isExit() {
-	return (m_onLoginMenu || m_onMainMenu);
+	return (m_onLoginMenu || m_onMainMenu || m_onLobby);
 }
 
 /*!
@@ -55,10 +57,25 @@ bool TargetManager::isLoginMenu() {
 }
 
 /*!
+ * \return m_onLobby target state
+ */
+bool TargetManager::isLobby() {
+	return m_onLobby;
+}
+
+/*!
  * \return m_onLoginMenu target state
  */
 bool TargetManager::isMainMenu() {
 	return m_onMainMenu;
+}
+
+/*!
+ * \set m_onLoginMenu target state to true
+ */
+void TargetManager::isOnLobby() {
+	handleTarget();
+	m_onLobby = true;
 }
 
 /*!
@@ -68,6 +85,8 @@ void TargetManager::isOnLoginMenu() {
 	handleTarget();
 	m_onLoginMenu = true;
 }
+
+
 
 /*!
  * \return m_onLoginMenu target state
