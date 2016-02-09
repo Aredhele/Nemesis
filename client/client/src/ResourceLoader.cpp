@@ -20,11 +20,13 @@ m_thread(&ResourceLoader::load, this) {
 	m_managerGroup.ptr_textureManager = new TextureManager(m_debug);
 	m_managerGroup.ptr_targetManager = new TargetManager(m_debug);
 	m_managerGroup.ptr_optionManager = new OptionManager(m_debug);
+	m_managerGroup.ptr_networkManager = new NetworkManager(m_debug);
 
 	m_managerGroup.ptr_musicManager->setState(false);
 	m_managerGroup.ptr_textureManager->setState(false);
 	m_managerGroup.ptr_targetManager->setState(false);
 	m_managerGroup.ptr_optionManager->setState(false);
+    m_managerGroup.ptr_networkManager->setState(false);
 }
 
 /*!
@@ -45,6 +47,8 @@ void ResourceLoader::load() {
 	TextureManager& a_tm = *m_managerGroup.ptr_textureManager;
 	TargetManager& a_tarm = *m_managerGroup.ptr_targetManager;
 	OptionManager& a_optm = *m_managerGroup.ptr_optionManager;
+    NetworkManager& a_ntwm = *m_managerGroup.ptr_networkManager;
+
 
 	// Path
 	const std::string pathLogin = "../res/texture/menu/login/";
@@ -64,17 +68,21 @@ void ResourceLoader::load() {
 	a_tm.addTexture("altimitLoad", pathLogin + "altimitFull.png");
 	a_tm.addTexture("simplePanel", pathLogin + "simplePanel.png");
 	a_tm.addTexture("connexion_1", pathLogin + "connexion_1.png");
+	a_tm.addTexture("connectButton1", pathLogin + "connectButton_1.png");
+	a_tm.addTexture("connectButton2", pathLogin + "connectButton_2.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);
 	a_tarm.setState(true);
 	a_optm.setState(true);
+    a_ntwm.setState(true);
 
 
 	if(m_debug) {
 		std::cout << "- Texture Manager successfully loaded" << std::endl;
 		std::cout << "- Target Manager successfully loaded" << std::endl;
 		std::cout << "- Option Manager successfully loaded" << std::endl;
+        std::cout << "- Network Manager successfully loaded" << std::endl;
 	}
 }
 
@@ -102,7 +110,8 @@ bool ResourceLoader::getLoadState() {
 	m_managerGroup.ptr_musicManager->getState() &&
 	m_managerGroup.ptr_textureManager->getState() &&
 	m_managerGroup.ptr_targetManager->getState() &&
-	m_managerGroup.ptr_optionManager->getState());
+	m_managerGroup.ptr_optionManager->getState() &&
+    m_managerGroup.ptr_networkManager->getState());
 }
 
 /*!

@@ -10,12 +10,15 @@
 #define DEF_LOGING_MENU_HPP
 
 #include "BasicInterface.hpp"
+#include "SFML/System.hpp"
 
 class LoginMenu : public BasicInterface
 {
 	private:
 		NButton m_monSuperBouton;
 		NLabel m_monSuperLabel;
+		NLabel m_connectionErrorLabel;
+
 		sf::Font m_font;
 
 

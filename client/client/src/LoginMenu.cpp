@@ -14,7 +14,8 @@
 LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) : 
 BasicInterface(debug, ptr_managerGroup),
 m_monSuperBouton(),
-m_monSuperLabel()
+m_monSuperLabel(),
+m_connectionErrorLabel()
 {
 	ptr_managerGroup->ptr_musicManager->
 		createPlaylist("playlistMenu", 50, true, 1.2);
@@ -28,18 +29,23 @@ m_monSuperLabel()
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
 
-
-	m_monSuperBouton.create("monSuperBouton", 412, 550,
-		ptr_managerGroup->ptr_textureManager->getTexture("connexion_1"),
-		ptr_managerGroup->ptr_textureManager->getTexture("topBarOptButton_4"));
+	m_monSuperBouton.create("connectButton", 412, 550,
+		ptr_managerGroup->ptr_textureManager->getTexture("connectButton1"),
+		ptr_managerGroup->ptr_textureManager->getTexture("connectButton2"));
 
 
 
 	m_monSuperLabel.create("monSuperLabel", 10, 10, 20, &m_font, L"Paper Sword : Online", sf::Color::Black);
 
+    m_connectionErrorLabel.create("connectionErrorLabel", 150, 150, 20, &m_font,
+                                  L"You have an internet connection problem.\n"
+                                          "Please verify you connection and try again",
+                                  sf::Color::Red);
+    m_connectionErrorLabel.setVisible(true);
 
 
 	getContentPane()->addComponent(&m_monSuperLabel);
+    getContentPane()->addComponent(&m_connectionErrorLabel);
 	getContentPane()->addComponent(&m_monSuperBouton);
 	
 }
@@ -66,8 +72,17 @@ sf::Event * e, double frameTime) {
 	basicInput(e, frameTime);
 
 
-	if(m_inputHandler.getComponentId() == "monSuperBouton")
-		m_ptr_managerGroup->ptr_targetManager->isOnLobby();
+	if(m_inputHandler.getComponentId() == "connectButton") {
+        if(m_ptr_managerGroup->ptr_networkManager->connect())
+            m_ptr_managerGroup->ptr_targetManager->isOnLobby();
+        else{
+            m_connectionErrorLabel.setVisible(false);
+			std::cout << "Error connection" << std::endl;
+		}
+
+
+	}
+
 	
 
 	// Drawing all content

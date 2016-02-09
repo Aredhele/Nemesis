@@ -13,6 +13,7 @@
 #include "OptionManager.hpp"
 #include "TargetManager.hpp"
 #include "TextureManager.hpp"
+#include "NetworkManager.hpp"
 
 class ManagerGroup
 {
@@ -28,6 +29,7 @@ class ManagerGroup
 		TextureManager * ptr_textureManager;
 		TargetManager * ptr_targetManager;
 		OptionManager * ptr_optionManager;
+		NetworkManager * ptr_networkManager;
 };
 
 #endif // DEF_MANAGER_GROUP_HPP
