@@ -19,42 +19,43 @@
 
 class BasicInterface : public Updatable
 {
-	private:
-		NPanel m_contentPane;
-		NPanel m_topBar;
-		NPanel m_optionPanel;
-		NButton m_optButton;
-		NButton m_exitButton;
+private:
+	NPanel m_contentPane;
+	NPanel m_topBar;
+	NPanel m_optionPanel;
+	NButton m_optButton;
+	NButton m_exitButton;
+	NButton m_musicButton;
 
-		std::vector < VisualObject * > m_interface;
+	std::vector < VisualObject * > m_interface;
 
-		// Methods
-		void updateInterface(double frameTime);
+	// Methods
+	void updateInterface(double frameTime);
 
-	protected:
-		bool m_debug;
-		bool m_optionActive;
-		InputHandler m_inputHandler;
-		ManagerGroup * m_ptr_managerGroup;
-		
-	public:
-		// Constructor
-		BasicInterface(bool debug, ManagerGroup * ptr_managerGroup);
+protected:
+	bool m_debug;
+	bool m_optionActive;
+	InputHandler m_inputHandler;
+	ManagerGroup * m_ptr_managerGroup;
 
-		// Destructor
-		~BasicInterface();
+public:
+	// Constructor
+	BasicInterface(bool debug, ManagerGroup * ptr_managerGroup);
 
-		// Main Methods
-		// Game logic
-		void basicDraw(sf::RenderWindow * window);
-		void basicInput(sf::Event * e, double frameTime);
+	// Destructor
+	~BasicInterface();
 
-		// Getters
-		NPanel * getContentPane();
-		NPanel * getTopBar();
+	// Main Methods
+	// Game logic
+	void basicDraw(sf::RenderWindow * window);
+	void basicInput(sf::Event * e, double frameTime);
 
-		// Setters
-		void setContentPane(NPanel * pane);
+	// Getters
+	NPanel * getContentPane();
+	NPanel * getTopBar();
+
+	// Setters
+	void setContentPane(NPanel * pane);
 };
 
 #endif // DEF_BASIC_INTERFACE_HPP

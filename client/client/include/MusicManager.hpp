@@ -26,6 +26,8 @@ class MusicManager : public Manager
         std::map < std::string, sf::Sound * > m_soundMap;
 
         unsigned int m_currentPlaylist;
+        int m_volumeSound;
+        int m_volumeMusic;
 
         // Methods
         int findIndex(std::string key);
@@ -44,9 +46,11 @@ class MusicManager : public Manager
         void startPlaylist(std::string key);
         void stopPlaylist();
 
-        void createPlaylist(std::string key, int volume, bool loop, float pitch);
-        void createSound(std::string path, std::string key, int volume, float pitch);
+        void createPlaylist(std::string key, bool loop, float pitch);
+        void createSound(std::string path, std::string key, float pitch);
 
+        void setMusicVolume(int volumeMusic);
+        int getMusicVolume();
         // Getters
         Playlist * getPlaylist();
         Playlist * getPlaylist(std::string key);
