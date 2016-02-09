@@ -15,6 +15,8 @@
  */
 MusicManager::MusicManager(bool debug) : Manager() {
     m_debug = debug;
+    m_volumeMusic = 50;
+    m_volumeSound = 50 ;
     m_currentPlaylist = 0;
 }
 
@@ -35,10 +37,10 @@ MusicManager::~MusicManager() {
  * \param loop loop number to play the playlist
  * \param pitch global frequency of the playlist
  */
-void MusicManager::createPlaylist(std::string key, int volume, bool loop, float pitch) {
+void MusicManager::createPlaylist(std::string key, bool loop, float pitch) {
 
     m_playlistMap.insert(std::pair < std::string, Playlist * >
-    (key, new Playlist(m_debug, volume, loop, pitch)));
+                                 (key, new Playlist(m_debug, m_volumeMusic, loop, pitch)));
 
     m_keyList.push_back(key);
 }
@@ -50,7 +52,7 @@ void MusicManager::createPlaylist(std::string key, int volume, bool loop, float 
  * \param volume the volume of the sound
  * \param pitch the pitch of the sound
  */
-void MusicManager::createSound(std::string path, std::string key, int volume, float pitch) {
+void MusicManager::createSound(std::string path, std::string key, float pitch) {
     sf::SoundBuffer * ptr_soundBuffer = nullptr;
     sf::Sound * ptr_sound = nullptr;
 
@@ -65,13 +67,13 @@ void MusicManager::createSound(std::string path, std::string key, int volume, fl
     }
 
     ptr_sound->setBuffer(*ptr_soundBuffer);
-    ptr_sound->setVolume(volume);
+    ptr_sound->setVolume(m_volumeSound);
     ptr_sound->setPitch(pitch);
 
     m_soundBufferList.push_back(ptr_soundBuffer);
 
     m_soundMap.insert(std::pair < std::string, sf::Sound * >
-    (key, ptr_sound));
+                              (key, ptr_sound));
 
     if(m_debug)
         std::cout << "- Sound successfully loaded !" << std::endl;
@@ -90,7 +92,7 @@ void MusicManager::startPlaylist(std::string key) {
 
     m_playlistMap[key]->load();
     if(m_debug)
-	   std::cout << "- Start playlist : " << key << std::endl;
+        std::cout << "- Start playlist : " << key << std::endl;
 }
 
 /*!
@@ -101,7 +103,7 @@ void MusicManager::stopPlaylist() {
         m_playlistMap[m_keyList[m_currentPlaylist]]->stop();
         if(m_debug)
             std::cout << "- Playlist stopped" << std::endl;
-    } 
+    }
 }
 
 /*
@@ -147,4 +149,15 @@ int MusicManager::findIndex(std::string key) {
     for(unsigned int i = 0; i < m_keyList.size(); i++)
         if(m_keyList[i] == key) return i;
     return 0;
+}
+
+void MusicManager::setMusicVolume(int volumeMusic){
+    m_volumeMusic=volumeMusic;
+
+    for(unsigned int i = 0; i < m_keyList.size(); i++)
+        m_playlistMap[m_keyList[i]]->setVolume(m_volumeMusic);
+}
+
+int MusicManager::getMusicVolume(){
+    return m_volumeMusic;
 }

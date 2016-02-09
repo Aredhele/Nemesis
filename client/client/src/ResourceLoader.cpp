@@ -12,11 +12,11 @@
  * \brief Constructor
  * \param debug the debug mode
  */
-ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(), 
-m_thread(&ResourceLoader::load, this) {
+ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(),
+											 m_thread(&ResourceLoader::load, this) {
 	m_debug = debug;
 
-	m_managerGroup.ptr_musicManager = new MusicManager(m_debug);
+	m_managerGroup.ptr_musicManager = new MusicManager(m_debug); //The default volume
 	m_managerGroup.ptr_textureManager = new TextureManager(m_debug);
 	m_managerGroup.ptr_targetManager = new TargetManager(m_debug);
 	m_managerGroup.ptr_optionManager = new OptionManager(m_debug);
@@ -26,7 +26,7 @@ m_thread(&ResourceLoader::load, this) {
 	m_managerGroup.ptr_textureManager->setState(false);
 	m_managerGroup.ptr_targetManager->setState(false);
 	m_managerGroup.ptr_optionManager->setState(false);
-    m_managerGroup.ptr_networkManager->setState(false);
+	m_managerGroup.ptr_networkManager->setState(false);
 }
 
 /*!
@@ -47,7 +47,7 @@ void ResourceLoader::load() {
 	TextureManager& a_tm = *m_managerGroup.ptr_textureManager;
 	TargetManager& a_tarm = *m_managerGroup.ptr_targetManager;
 	OptionManager& a_optm = *m_managerGroup.ptr_optionManager;
-    NetworkManager& a_ntwm = *m_managerGroup.ptr_networkManager;
+	NetworkManager& a_ntwm = *m_managerGroup.ptr_networkManager;
 
 
 	// Path
@@ -70,19 +70,23 @@ void ResourceLoader::load() {
 	a_tm.addTexture("connexion_1", pathLogin + "connexion_1.png");
 	a_tm.addTexture("connectButton1", pathLogin + "connectButton_1.png");
 	a_tm.addTexture("connectButton2", pathLogin + "connectButton_2.png");
+	a_tm.addTexture("volume_1", pathLogin + "volume_1.png");
+	a_tm.addTexture("volume_2", pathLogin + "volume_2.png");
+	a_tm.addTexture("volumeOff_1", pathLogin + "volumeOff_1.png");
+	a_tm.addTexture("volumeOff_2", pathLogin + "volumeOff_2.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);
 	a_tarm.setState(true);
 	a_optm.setState(true);
-    a_ntwm.setState(true);
+	a_ntwm.setState(true);
 
 
 	if(m_debug) {
 		std::cout << "- Texture Manager successfully loaded" << std::endl;
 		std::cout << "- Target Manager successfully loaded" << std::endl;
 		std::cout << "- Option Manager successfully loaded" << std::endl;
-        std::cout << "- Network Manager successfully loaded" << std::endl;
+		std::cout << "- Network Manager successfully loaded" << std::endl;
 	}
 }
 
@@ -107,11 +111,11 @@ void ResourceLoader::stop() {
  */
 bool ResourceLoader::getLoadState() {
 	return (
-	m_managerGroup.ptr_musicManager->getState() &&
-	m_managerGroup.ptr_textureManager->getState() &&
-	m_managerGroup.ptr_targetManager->getState() &&
-	m_managerGroup.ptr_optionManager->getState() &&
-    m_managerGroup.ptr_networkManager->getState());
+			m_managerGroup.ptr_musicManager->getState() &&
+			m_managerGroup.ptr_textureManager->getState() &&
+			m_managerGroup.ptr_targetManager->getState() &&
+			m_managerGroup.ptr_optionManager->getState() &&
+			m_managerGroup.ptr_networkManager->getState());
 }
 
 /*!

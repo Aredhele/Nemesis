@@ -12,14 +12,15 @@
  * \brief Constructor
  * \param ptr_managerGroup
  */
-BasicInterface::BasicInterface(bool debug, 
-ManagerGroup * ptr_managerGroup) : Updatable(),
-m_contentPane(),
-m_topBar(),
-m_optionPanel(),
-m_optButton(),
-m_exitButton(),
-m_inputHandler(debug)
+BasicInterface::BasicInterface(bool debug,
+							   ManagerGroup * ptr_managerGroup) : Updatable(),
+																  m_contentPane(),
+																  m_topBar(),
+																  m_optionPanel(),
+																  m_optButton(),
+																  m_exitButton(),
+																  m_musicButton(),
+																  m_inputHandler(debug)
 {
 	m_debug = debug;
 	m_optionActive = false;
@@ -29,25 +30,32 @@ m_inputHandler(debug)
 	TextureManager& a_tm = *m_ptr_managerGroup->ptr_textureManager;
 
 	// Creating m_contentPane
-	m_contentPane.create("mainPanel", 0, 0, 
-	a_tm.getTexture("loginBackground"));
+	m_contentPane.create("mainPanel", 0, 0,
+						 a_tm.getTexture("loginBackground"));
 
 	// Adding top-bar
-	m_topBar.create("topBar", 0, 0, 
-	a_tm.getTexture("topBarLogMenu"));
-	
+	m_topBar.create("topBar", 0, 0,
+					a_tm.getTexture("topBarLogMenu"));
+
 	// Adding buttons
 	m_optButton.create("optButton", 805, 5,
-	a_tm.getTexture("topBarOptButton_1"), 
-	a_tm.getTexture("topBarOptButton_2"));
+					   a_tm.getTexture("topBarOptButton_1"),
+					   a_tm.getTexture("topBarOptButton_2"));
+
+	m_musicButton.create("volumeButton", 650,250,
+						 a_tm.getTexture("volume_1"),
+						 a_tm.getTexture("volume_2"));
+
 
 	m_exitButton.create("exitButton", 913, 5,
-	a_tm.getTexture("topBarExitButton_1"), 
-	a_tm.getTexture("topBarExitButton_2"));
+						a_tm.getTexture("topBarExitButton_1"),
+						a_tm.getTexture("topBarExitButton_2"));
 
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 0, 50,
-	a_tm.getTexture("optionPane"));
+						 a_tm.getTexture("optionPane"));
+
+	m_optionPanel.addComponent(&m_musicButton);
 
 	m_topBar.addComponent(&m_optButton);
 	m_topBar.addComponent(&m_exitButton);
@@ -109,13 +117,13 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 		if(m_inputHandler.getComponentId() == "exitButton") {
 			m_ptr_managerGroup->ptr_targetManager->exit();
 		}
-		// Option menu
+			// Option menu
 		else if(m_inputHandler.getComponentId() == "optButton") {
-			if(!m_optionActive) 
+			if(!m_optionActive)
 			{
 				m_optionActive = true;
 				m_interface.push_back(&m_optionPanel);
-			} 
+			}
 			else
 			{
 				m_optionActive = false;
@@ -129,7 +137,29 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 		m_inputHandler.handleInput(e, &m_optionPanel, false);
 
 		if(m_inputHandler.getComponentId() != "NULL") {
-			// TODO
+			if(m_inputHandler.getComponentId() == "volumeButton")
+			{
+				TextureManager& a_tm = *m_ptr_managerGroup->ptr_textureManager;
+
+				if(m_ptr_managerGroup->ptr_musicManager->getMusicVolume()>0)
+				{
+					m_ptr_managerGroup->ptr_musicManager->setMusicVolume(0);
+					m_musicButton.setSprite(a_tm.getTexture("volumeOff_1"),
+											a_tm.getTexture("volumeOff_2"));
+
+					std::cout << "Music volume : On" << std::endl;
+				}
+				else
+				{
+					m_ptr_managerGroup->ptr_musicManager->setMusicVolume(50);
+					m_musicButton.setSprite(a_tm.getTexture("volume_1"),
+											a_tm.getTexture("volume_2"));
+
+					std::cout << "Music volume : Off" << std::endl;
+				}
+
+
+			}
 		}
 	}
 
