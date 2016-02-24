@@ -6,15 +6,20 @@
  * \date 2016-01-02
  */
 
-#include "NTextField.hpp"
-
+#include "Vues/Interfaces/NTextField.hpp"
+#include <iostream>
 /*!
  * \brief Constructor
  * \param id The id of the object
  */
 NTextField::NTextField() :
-VisualObject() {
-	//
+	VisualObject(),
+	m_cursorPosition(0, 0) 
+{
+	m_flashingDelay = 1.0;
+	m_isFlashed = false;
+	m_maxSize = 20;
+	m_fontSize = 10;
 }
 
 /*!
@@ -25,17 +30,59 @@ NTextField::~NTextField() {
 }
 
 /*!
+ * \brief Constructor
+ * \param id The id of the object
+ * \param x The x abs position of the sprite
+ * \param y The y abs position of the sprite
+ * \param texture_1 The texture of the main sprite
+ * \param texture_2 The texture of the second sprite
+ * \param ptr_font A pointer on the font
+ * \param fontSize The size of the displayed text
+ * \param flashingDelay The time between two flahses
+ */
+void NTextField::create(std::string id, int x, int y, 
+	sf::Texture * texture_1, sf::Texture * texture_2,
+	sf::Font * ptr_font, int fontSize, 
+	float flashingDelay, std::string const& text,
+	int maxSize, sf::Color color) {
+
+	// Call super method
+	init(id, x, y, texture_1);
+
+	m_cursorPosition.x = x + 15;
+	m_cursorPosition.y = y + 10;
+
+	m_secondSprite.setTexture(*texture_2);
+	m_secondSprite.setPosition(m_cursorPosition);
+
+	sf::Vector2f textPosition(
+		m_cursorPosition.x - 3,
+		m_cursorPosition.y + 2);
+
+	// Init sf::texte
+	m_text.setFont(*ptr_font);
+	m_text.setString("");
+	m_text.setCharacterSize(fontSize);
+	m_text.setPosition(textPosition);
+	m_text.setColor(color);
+
+	m_maxSize = maxSize;
+	m_fontSize = fontSize;
+}
+
+/*!
  * \brief Draw the current state of the button
  * \param window The pointer on the window
  */
 void NTextField::draw(sf::RenderWindow * window) {
 
-	if(!m_hidden) return;
+	if(m_hidden || !m_isEnable) return;
+
+	window->draw(m_mainSprite);
+	window->draw(m_text);
 
 	if(m_isActive) {
-		window->draw(m_secondSprite);
-	} else {
-		window->draw(m_mainSprite);
+		if(m_isFlashed) window->draw(m_secondSprite);
 	}
 }
 
@@ -67,7 +114,24 @@ void NTextField::setPosition(float x, float y) {
  * \return id NULL if not found
  */
 std::string NTextField::eventMousePressed(sf::Event * e) {
-	return "NULL";
+
+	std::string id = "NULL";
+	if(!m_isEnable) return id;
+
+	sf::FloatRect mousePosition(e->mouseButton.x, 
+	e->mouseButton.y, 1, 1);
+
+	if(m_mainSprite.getGlobalBounds().
+	intersects(mousePosition)) {
+
+		id = m_id;
+		m_isActive = true;
+	}
+	else {
+		m_isActive = false;
+	}
+
+	return id;
 }
 
 /*!
@@ -76,7 +140,8 @@ std::string NTextField::eventMousePressed(sf::Event * e) {
  * \return id NULL if not found
  */
 std::string NTextField::eventMouseMoved(sf::Event * e) {
-	return "NULL";
+	
+	if(!m_isEnable) return "NULL";
 }
 
 /*!
@@ -85,7 +150,48 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  * \return id NULL if not found
  */
 void NTextField::eventTextEntered(sf::Event * e) {
-	// None
+	
+	if(!m_isEnable || !m_isActive) return;
+	if(m_text.getString().getSize() < m_maxSize) {
+
+		if(e->text.unicode == 8)  { // BackSpace
+			if(m_charList.size() > 0) {
+				m_charList.pop_back();
+				m_cursorPosition.x -= m_text.getCharacterSize() / 1.6;
+				m_secondSprite.setPosition(m_cursorPosition);
+			}
+		} else if(e->text.unicode == 32) { // Space
+			m_charList.push_back(' ');
+			m_cursorPosition.x += m_text.getCharacterSize() / 1.6;
+			m_secondSprite.setPosition(m_cursorPosition);
+		} else if(e->text.unicode == 13) { // Carriage Return
+			m_isActive = false;
+		}
+		 else {
+			m_charList.push_back(
+				static_cast < char >(e->text.unicode));
+			m_cursorPosition.x += m_text.getCharacterSize() / 1.6;
+			m_secondSprite.setPosition(m_cursorPosition);
+		}
+
+		// Updating string
+		m_text.setString(m_charList);
+	} 
+	else {
+		if(m_text.getString().getSize() > 0) {
+			if(e->text.unicode == 8)  { // BackSpace
+				if(m_charList.size() > 0) {
+					m_charList.pop_back();
+					m_cursorPosition.x -= m_text.getCharacterSize() / 1.6;
+					m_secondSprite.setPosition(m_cursorPosition);
+
+					// Updating string
+					m_text.setString(m_charList);
+				}
+			}
+		}
+		return;
+	}
 }
 
 /*! 
@@ -94,4 +200,10 @@ void NTextField::eventTextEntered(sf::Event * e) {
  */
 void NTextField::update(double frameTime) {
 
+	if(m_isActive) m_timeElapsed += frameTime;
+
+	if(m_timeElapsed > m_flashingDelay) {
+		m_isFlashed = !m_isFlashed;
+		m_timeElapsed = 0;
+	}
 }
