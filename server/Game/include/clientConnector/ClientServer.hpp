@@ -5,6 +5,7 @@
 
 // Const
 #define _DFLT_SMCO_   10
+//TODO : Recompiler le server avec le port 6002
 #define _DFLT_SPORT_  6001
 #define _DFLT_MPORT_  6000
 #define _DFLT_SMIP_   false

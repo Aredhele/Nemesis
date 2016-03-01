@@ -16,9 +16,9 @@ NetworkManager::NetworkManager(bool debug) :
 
 	m_debug = debug;
 	m_serverAddress = "127.0.0.1";
-	m_serverPort = 6002;
+	m_serverPort = 6001;
 
-	//TODO : Régler le problème avec Configuration
+	//TODO : Régler le problème avec fichier de Configuration
 	/*
 	m_serverAddress = m_ptr_config->getParam(SERVER_IP);
 	m_serverPort = cast::toInt(m_ptr_config->getParam(SERVER_PORT));

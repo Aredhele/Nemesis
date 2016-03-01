@@ -11,7 +11,7 @@
 
 #include <vector>
 
-#include "Vues/Interfaces/VisualObject.hpp"
+#include "VisualObject.hpp"
 
 class NTextField : public VisualObject
 {
@@ -49,6 +49,9 @@ class NTextField : public VisualObject
 		sf::Texture * texture_2);
 
 		virtual void setPosition(float x, float y);
+
+		// Getters
+		std::string const& getString();
 };
 
 #endif // DEF_NTEXT_FIELD_HPP

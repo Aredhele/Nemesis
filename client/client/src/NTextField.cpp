@@ -6,7 +6,7 @@
  * \date 2016-01-02
  */
 
-#include "Vues/Interfaces/NTextField.hpp"
+#include "NTextField.hpp"
 #include <iostream>
 /*!
  * \brief Constructor
@@ -17,7 +17,7 @@ NTextField::NTextField() :
 	m_cursorPosition(0, 0) 
 {
 	m_flashingDelay = 1.0;
-	m_isFlashed = false;
+	m_isFlashed = true;
 	m_maxSize = 20;
 	m_fontSize = 10;
 }
@@ -49,14 +49,14 @@ void NTextField::create(std::string id, int x, int y,
 	// Call super method
 	init(id, x, y, texture_1);
 
-	m_cursorPosition.x = x + 15;
+	m_cursorPosition.x = x + 20;
 	m_cursorPosition.y = y + 10;
 
 	m_secondSprite.setTexture(*texture_2);
 	m_secondSprite.setPosition(m_cursorPosition);
 
 	sf::Vector2f textPosition(
-		m_cursorPosition.x - 3,
+		m_cursorPosition.x + 3,
 		m_cursorPosition.y + 2);
 
 	// Init sf::texte
@@ -65,7 +65,6 @@ void NTextField::create(std::string id, int x, int y,
 	m_text.setCharacterSize(fontSize);
 	m_text.setPosition(textPosition);
 	m_text.setColor(color);
-
 	m_maxSize = maxSize;
 	m_fontSize = fontSize;
 }
@@ -141,7 +140,7 @@ std::string NTextField::eventMousePressed(sf::Event * e) {
  */
 std::string NTextField::eventMouseMoved(sf::Event * e) {
 	
-	if(!m_isEnable) return "NULL";
+	return "NULL";
 }
 
 /*!
@@ -151,18 +150,21 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  */
 void NTextField::eventTextEntered(sf::Event * e) {
 	
+	float coefFont = 1.85;
+
 	if(!m_isEnable || !m_isActive) return;
 	if(m_text.getString().getSize() < m_maxSize) {
 
 		if(e->text.unicode == 8)  { // BackSpace
 			if(m_charList.size() > 0) {
 				m_charList.pop_back();
-				m_cursorPosition.x -= m_text.getCharacterSize() / 1.6;
+				m_cursorPosition.x -= m_fontSize / coefFont;
 				m_secondSprite.setPosition(m_cursorPosition);
 			}
 		} else if(e->text.unicode == 32) { // Space
 			m_charList.push_back(' ');
-			m_cursorPosition.x += m_text.getCharacterSize() / 1.6;
+			//m_cursorPosition.x += m_fontSize / 1.5;
+			m_cursorPosition.x += m_fontSize / coefFont;
 			m_secondSprite.setPosition(m_cursorPosition);
 		} else if(e->text.unicode == 13) { // Carriage Return
 			m_isActive = false;
@@ -170,7 +172,14 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		 else {
 			m_charList.push_back(
 				static_cast < char >(e->text.unicode));
-			m_cursorPosition.x += m_text.getCharacterSize() / 1.6;
+			if(e->text.unicode > 96 || e->text.unicode < 123) {
+				m_cursorPosition.x += m_fontSize / coefFont;
+				//m_cursorPosition.x += m_fontSize;
+			} else if(e->text.unicode > 64 || e->text.unicode < 91) {
+				//m_cursorPosition.x += m_fontSize * 2;
+				m_cursorPosition.x += m_fontSize / coefFont;
+			}
+			
 			m_secondSprite.setPosition(m_cursorPosition);
 		}
 
@@ -182,7 +191,7 @@ void NTextField::eventTextEntered(sf::Event * e) {
 			if(e->text.unicode == 8)  { // BackSpace
 				if(m_charList.size() > 0) {
 					m_charList.pop_back();
-					m_cursorPosition.x -= m_text.getCharacterSize() / 1.6;
+					m_cursorPosition.x -= m_fontSize / coefFont;
 					m_secondSprite.setPosition(m_cursorPosition);
 
 					// Updating string
@@ -206,4 +215,12 @@ void NTextField::update(double frameTime) {
 		m_isFlashed = !m_isFlashed;
 		m_timeElapsed = 0;
 	}
+}
+
+/*! 
+ * \brief Return the text
+ * \return m_charList The string of the textfield
+ */
+std::string const& NTextField::getString() {
+	return m_charList;
 }
