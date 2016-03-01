@@ -1,8 +1,6 @@
 
 #include "clientConnector/WarmUp.hpp"
 
-
-//TODO Creer le WarmUp, en thread
 WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socketOccupe,
              std::vector < Game * > * listePartie) :
         thread(&WarmUp::threadWarmUp, this)

@@ -18,6 +18,7 @@
 #define CONF_BUFFER_SIZE 256
 #define CONF_MAX_P 20
 
+
 #define SERVER_PACKET_SIZE 1024
 
 #endif // DEF_CONSTANT_HPP

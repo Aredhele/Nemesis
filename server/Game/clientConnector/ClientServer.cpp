@@ -282,7 +282,7 @@ void ClientServer::requestManager(char requete[1024], std::size_t nbOctetsRecus,
     switch(actionID)
     {
         case 1: // Le client veut créer un salon
-            // Inutile car rejoindre un salon vide = créer
+            // Salons déjà créés
             break;
 
         case 2: // Le client veut rejoindre un salon
