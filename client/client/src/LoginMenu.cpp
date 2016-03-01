@@ -14,10 +14,11 @@
 LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		BasicInterface(debug, ptr_managerGroup),
 		m_monSuperBouton(),
-		m_monSuperLabel(),
+		m_titleLabel(),
 		m_connectionErrorLabel(),
 		m_textFieldLogin(),
-		m_nemesisLogo()
+		m_nemesisLogo(),
+		m_errorPanel()
 {
 	ptr_managerGroup->ptr_musicManager->
 			createPlaylist("playlistMenu", true, 1.2);
@@ -26,40 +27,45 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 	ptr_managerGroup->ptr_musicManager->
 			getPlaylist("playlistMenu")->play();
 
-	if (!m_font.loadFromFile("../res/font/Quicksand.ttf"))
+	if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
 	{
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
 
-	m_monSuperBouton.create("connectButton", 412, 550,
+	m_monSuperBouton.create("connectButton", 421, 605,
 							ptr_managerGroup->ptr_textureManager->getTexture("connectButton1"),
 							ptr_managerGroup->ptr_textureManager->getTexture("connectButton2"));
 
 
 
-	m_monSuperLabel.create("monSuperLabel", 10, 10, 20, &m_font, L"Paper Sword : Online", sf::Color::Black);
+	m_titleLabel.create("monSuperLabel", 10, 10, 20, &m_fontLabel, L"Paper Sword : Online", sf::Color::Black);
 
-	m_connectionErrorLabel.create("connectionErrorLabel", 150, 150, 20, &m_font,
-								  L"You have an internet connection problem.\n"
-										  "Please verify you connection and try again",
-								  sf::Color::Red);
+	m_connectionErrorLabel.create("connectionErrorLabel", 335, 665, 20, &m_fontLabel,
+								  L"Un problème de connexion est survenue.\n"
+										    "Vérifiez votre connnexion et réessayez.",
+								  sf::Color(181, 51, 0));
 
-    m_textFieldLogin.create("textFieldLogin", 420, 325,
+    m_textFieldLogin.create("textFieldLogin", 420, 555,
                             ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
-                            &m_font,
-                       15, 0.5, "", 15, sf::Color::Black);
+                            &m_fontTextbox,
+                       15, 0.5, "Votre pseudo", 15, sf::Color::Black);
 
-	m_nemesisLogo.create("nemesisLogo", 367, ,
+	m_nemesisLogo.create("nemesisLogo", 367, 59,
 						 ptr_managerGroup->ptr_textureManager->getTexture("nemesis"));
 
+	m_errorPanel.create("ErrorPanel", 303, 660,
+						ptr_managerGroup->ptr_textureManager->getTexture("errorPanel"));
 
-	m_connectionErrorLabel.setVisible(true);
+	m_errorPanel.addComponent(&m_connectionErrorLabel);
+
+	//m_connectionErrorLabel.setVisible(false);
+	m_errorPanel.setVisible(false);
 
 	getContentPane()->addComponent(&m_nemesisLogo);
 	getContentPane()->addComponent(&m_textFieldLogin);
-	getContentPane()->addComponent(&m_monSuperLabel);
-	getContentPane()->addComponent(&m_connectionErrorLabel);
+	getContentPane()->addComponent(&m_titleLabel);
+	getContentPane()->addComponent(&m_errorPanel);
 	getContentPane()->addComponent(&m_monSuperBouton);
 
 }
@@ -90,7 +96,8 @@ void LoginMenu::update(sf::RenderWindow * window,
 		if(m_ptr_managerGroup->ptr_networkManager->connect())
 			m_ptr_managerGroup->ptr_targetManager->isOnLobby();
 		else{
-			m_connectionErrorLabel.setVisible(false);
+			m_connectionErrorLabel.setVisible(true);
+			m_errorPanel.setVisible(true);
 			std::cout << "Error connection" << std::endl;
 		}
 

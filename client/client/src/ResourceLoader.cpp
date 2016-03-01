@@ -68,15 +68,16 @@ void ResourceLoader::load() {
 	a_tm.addTexture("altimitLoad", pathLogin + "altimitFull.png");
 	a_tm.addTexture("simplePanel", pathLogin + "simplePanel.png");
 	a_tm.addTexture("connexion_1", pathLogin + "connexion_1.png");
-	a_tm.addTexture("connectButton1", pathLogin + "connectButton_1.png");
-	a_tm.addTexture("connectButton2", pathLogin + "connectButton_2.png");
+	a_tm.addTexture("connectButton1", pathLogin + "connect_1.png");
+	a_tm.addTexture("connectButton2", pathLogin + "connect_2.png");
 	a_tm.addTexture("volume_1", pathLogin + "volume_1.png");
 	a_tm.addTexture("volume_2", pathLogin + "volume_2.png");
 	a_tm.addTexture("volumeOff_1", pathLogin + "volumeOff_1.png");
 	a_tm.addTexture("volumeOff_2", pathLogin + "volumeOff_2.png");
-	a_tm.addTexture("textBox", pathLogin + "FondTextBox.png");
+	a_tm.addTexture("textBox", pathLogin + "textBox.png");
     a_tm.addTexture("textBoxCursor", pathLogin + "curseurTextBox.png");
 	a_tm.addTexture("nemesis", pathLogin + "NEMESIS_logo.png");
+	a_tm.addTexture("errorPanel", pathLogin + "ErrorPanel.png");
 
 
 	a_mm.setState(true);

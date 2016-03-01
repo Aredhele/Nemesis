@@ -54,7 +54,9 @@ void InputHandler::handleInput(sf::Event * e,
 			break;
 
 		default:
-			// None
+			m_overId = "NULL";
+			m_keyCode = -1;
+			m_pressedId = "NULL";
 			break;
 	}
 }

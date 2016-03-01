@@ -113,11 +113,11 @@ void VisualObject::setPosition(float x, float y) {
 
 /*!
  * \brief If false, object will be hidden
- * \param state The display state of the objecy
+ * \param state The display state of the object
  * \return None
  */
 void VisualObject::setVisible(bool state) {
-	m_hidden = state;
+	m_hidden = !state;
 }
 
 

@@ -16,12 +16,14 @@ class LoginMenu : public BasicInterface
 {
 	private:
 		NButton m_monSuperBouton;
-		NLabel m_monSuperLabel;
+		NLabel m_titleLabel;
 		NLabel m_connectionErrorLabel;
 		NTextField m_textFieldLogin;
 		NPanel m_nemesisLogo;
+		NPanel m_errorPanel;
 
-		sf::Font m_font;
+		sf::Font m_fontLabel;
+        sf::Font m_fontTextbox;
 
 
 	public:

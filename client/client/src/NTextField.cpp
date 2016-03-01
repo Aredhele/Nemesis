@@ -150,7 +150,7 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  */
 void NTextField::eventTextEntered(sf::Event * e) {
 	
-	float coefFont = 1.85;
+	float coefFont = 1.65;
 
 	if(!m_isEnable || !m_isActive) return;
 	if(m_text.getString().getSize() < m_maxSize) {
