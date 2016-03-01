@@ -16,6 +16,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		m_monSuperBouton(),
 		m_titleLabel(),
 		m_connectionErrorLabel(),
+		m_pseudoErrorLabel(),
 		m_textFieldLogin(),
 		m_nemesisLogo(),
 		m_errorPanel()
@@ -40,9 +41,14 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 
 	m_titleLabel.create("monSuperLabel", 10, 10, 20, &m_fontLabel, L"Paper Sword : Online", sf::Color::Black);
 
-	m_connectionErrorLabel.create("connectionErrorLabel", 335, 665, 20, &m_fontLabel,
+	m_connectionErrorLabel.create("connectionErrorLabel", 330, 665, 20, &m_fontLabel,
 								  L"Un problème de connexion est survenue.\n"
-										    "Vérifiez votre connnexion et réessayez.",
+										    "  Vérifiez votre connnexion et réessayez.",
+								  sf::Color(181, 51, 0));
+
+	m_pseudoErrorLabel.create("pseudoErrorLabel", 345, 665, 20, &m_fontLabel,
+							  L"  Vous n'avez pas saisi votre pseudo.\n"
+									  "Saississiez votre pseudo et réessayez.",
 								  sf::Color(181, 51, 0));
 
     m_textFieldLogin.create("textFieldLogin", 420, 555,
@@ -57,9 +63,11 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 	m_errorPanel.create("ErrorPanel", 303, 660,
 						ptr_managerGroup->ptr_textureManager->getTexture("errorPanel"));
 
+	m_errorPanel.addComponent(&m_pseudoErrorLabel);
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 
-	//m_connectionErrorLabel.setVisible(false);
+	m_pseudoErrorLabel.setVisible(false);
+	m_connectionErrorLabel.setVisible(false);
 	m_errorPanel.setVisible(false);
 
 	getContentPane()->addComponent(&m_nemesisLogo);
@@ -93,13 +101,23 @@ void LoginMenu::update(sf::RenderWindow * window,
 
 
 	if(m_inputHandler.getComponentId() == "connectButton") {
-		if(m_ptr_managerGroup->ptr_networkManager->connect())
-			m_ptr_managerGroup->ptr_targetManager->isOnLobby();
-		else{
-			m_connectionErrorLabel.setVisible(true);
-			m_errorPanel.setVisible(true);
-			std::cout << "Error connection" << std::endl;
+		if(m_textFieldLogin.getString() != ""){
+			if(m_ptr_managerGroup->ptr_networkManager->connect())
+				m_ptr_managerGroup->ptr_targetManager->isOnLobby();
+			else{
+				m_pseudoErrorLabel.setVisible(false);
+				m_connectionErrorLabel.setVisible(true);
+				m_errorPanel.setVisible(true);
+				std::cout << "Error connection" << std::endl;
+			}
 		}
+		else {
+			m_pseudoErrorLabel.setVisible(true);
+			m_connectionErrorLabel.setVisible(false);
+			m_errorPanel.setVisible(true);
+			std::cout << "Saisir pseudo !" << std::endl;
+		}
+
 
 
 	}

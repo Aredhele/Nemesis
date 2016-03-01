@@ -18,6 +18,7 @@ class LoginMenu : public BasicInterface
 		NButton m_monSuperBouton;
 		NLabel m_titleLabel;
 		NLabel m_connectionErrorLabel;
+		NLabel m_pseudoErrorLabel;
 		NTextField m_textFieldLogin;
 		NPanel m_nemesisLogo;
 		NPanel m_errorPanel;
