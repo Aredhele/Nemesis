@@ -74,6 +74,10 @@ void ResourceLoader::load() {
 	a_tm.addTexture("volume_2", pathLogin + "volume_2.png");
 	a_tm.addTexture("volumeOff_1", pathLogin + "volumeOff_1.png");
 	a_tm.addTexture("volumeOff_2", pathLogin + "volumeOff_2.png");
+	a_tm.addTexture("textBox", pathLogin + "FondTextBox.png");
+    a_tm.addTexture("textBoxCursor", pathLogin + "curseurTextBox.png");
+	a_tm.addTexture("nemesis", pathLogin + "NEMESIS_logo.png");
+
 
 	a_mm.setState(true);
 	a_tm.setState(true);

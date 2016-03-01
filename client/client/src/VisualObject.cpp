@@ -19,6 +19,7 @@ m_position()
 	m_hidden = false;
 	m_isActive = false;
 	m_isOver = false;
+	m_isEnable = true;
 	m_timeElapsed = 0;
 }
 

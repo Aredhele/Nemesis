@@ -16,6 +16,7 @@ NetworkManager::NetworkManager(bool debug) :
 
 	m_debug = debug;
 	m_serverAddress = "127.0.0.1";
+    //TODO : Changer le port en 6002
 	m_serverPort = 6001;
 
 	//TODO : Régler le problème avec fichier de Configuration

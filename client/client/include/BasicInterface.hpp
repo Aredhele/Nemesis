@@ -16,6 +16,7 @@
 #include "NButton.hpp"
 #include "NPanel.hpp"
 #include "NLabel.hpp"
+#include "NTextField.hpp"
 
 class BasicInterface : public Updatable
 {

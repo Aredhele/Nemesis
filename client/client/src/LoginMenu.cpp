@@ -15,7 +15,9 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		BasicInterface(debug, ptr_managerGroup),
 		m_monSuperBouton(),
 		m_monSuperLabel(),
-		m_connectionErrorLabel()
+		m_connectionErrorLabel(),
+		m_textFieldLogin(),
+		m_nemesisLogo()
 {
 	ptr_managerGroup->ptr_musicManager->
 			createPlaylist("playlistMenu", true, 1.2);
@@ -41,9 +43,21 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 								  L"You have an internet connection problem.\n"
 										  "Please verify you connection and try again",
 								  sf::Color::Red);
+
+    m_textFieldLogin.create("textFieldLogin", 420, 325,
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
+                            &m_font,
+                       15, 0.5, "", 15, sf::Color::Black);
+
+	m_nemesisLogo.create("nemesisLogo", 367, ,
+						 ptr_managerGroup->ptr_textureManager->getTexture("nemesis"));
+
+
 	m_connectionErrorLabel.setVisible(true);
 
-
+	getContentPane()->addComponent(&m_nemesisLogo);
+	getContentPane()->addComponent(&m_textFieldLogin);
 	getContentPane()->addComponent(&m_monSuperLabel);
 	getContentPane()->addComponent(&m_connectionErrorLabel);
 	getContentPane()->addComponent(&m_monSuperBouton);

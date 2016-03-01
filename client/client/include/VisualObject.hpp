@@ -22,6 +22,7 @@ class VisualObject
 		bool m_hidden;
 		bool m_isActive;
 		bool m_isOver;
+		bool m_isEnable;
 		double m_timeElapsed;
 
 		std::string m_id;

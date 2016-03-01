@@ -18,6 +18,8 @@ class LoginMenu : public BasicInterface
 		NButton m_monSuperBouton;
 		NLabel m_monSuperLabel;
 		NLabel m_connectionErrorLabel;
+		NTextField m_textFieldLogin;
+		NPanel m_nemesisLogo;
 
 		sf::Font m_font;
 
