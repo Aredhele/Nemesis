@@ -37,6 +37,7 @@ public TriggerableObject
         ~NetworkManager();
 
         bool connect();
+		bool  request(std::string Request[2]);
 		void trigger(uint id);
 		void trigger(uint id, std::vector < std::string> v);
 };

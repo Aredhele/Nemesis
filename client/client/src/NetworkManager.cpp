@@ -17,7 +17,7 @@ NetworkManager::NetworkManager(bool debug) :
 	m_debug = debug;
 	m_serverAddress = "127.0.0.1";
     //TODO : Changer le port en 6002
-	m_serverPort = 6001;
+	m_serverPort = 6002;
 
 	//TODO : Régler le problème avec fichier de Configuration
 	/*
@@ -52,6 +52,23 @@ bool NetworkManager::connect(){
     std::cout << "Connection established !" << std::endl;
     std::cerr << "Socket status : " << m_status << std::endl;
 
+    return true;
+}
+/**
+ *  Request sent to the server
+ *  id 1 : get list of WarmUp
+ */
+bool NetworkManager::request(std::string Request[2]){
+
+    m_status = m_socket.send(Request, sizeof(Request)); //TODO Requetes en commun
+
+    if (m_status != sf::Socket::Done) {
+        std::cerr << "Unable to connect with server" << std::endl;
+        return false;
+    }
+
+    std::cout << "Request send !" << std::endl;
+    std::cerr << "Socket status : " << m_status << std::endl;
     return true;
 }
 

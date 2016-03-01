@@ -8,6 +8,7 @@
 
 #include "NTextField.hpp"
 #include <iostream>
+#include <unistd.h>
 /*!
  * \brief Constructor
  * \param id The id of the object
@@ -179,13 +180,13 @@ void NTextField::eventTextEntered(sf::Event * e) {
 				//m_cursorPosition.x += m_fontSize * 2;
 				m_cursorPosition.x += m_fontSize / coefFont;
 			}
-			
 			m_secondSprite.setPosition(m_cursorPosition);
 		}
 
 		// Updating string
 		m_text.setString(m_charList);
-	} 
+
+	}
 	else {
 		if(m_text.getString().getSize() > 0) {
 			if(e->text.unicode == 8)  { // BackSpace
