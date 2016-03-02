@@ -2,6 +2,8 @@
 // Created by Lucas on 02/03/2016.
 //
 
+#include "Character.hpp"
+
 Character::Character(){
 
     m_choosed = false;
@@ -36,7 +38,7 @@ void Character::setDescription(std::wstring description){
     m_description = description;
 }
 
-void Character::setId(std::string id){
+void Character::setId(std::wstring id){
     m_id = id;
 }
 

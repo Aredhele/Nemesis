@@ -21,12 +21,14 @@ ResourceLoader::ResourceLoader(bool debug) : m_managerGroup(),
 	m_managerGroup.ptr_targetManager = new TargetManager(m_debug);
 	m_managerGroup.ptr_optionManager = new OptionManager(m_debug);
 	m_managerGroup.ptr_networkManager = new NetworkManager(m_debug);
+    m_managerGroup.ptr_gameManager = new GameManager(m_debug);
 
 	m_managerGroup.ptr_musicManager->setState(false);
 	m_managerGroup.ptr_textureManager->setState(false);
 	m_managerGroup.ptr_targetManager->setState(false);
 	m_managerGroup.ptr_optionManager->setState(false);
 	m_managerGroup.ptr_networkManager->setState(false);
+    m_managerGroup.ptr_gameManager->setState(false);
 }
 
 /*!
@@ -48,6 +50,7 @@ void ResourceLoader::load() {
 	TargetManager& a_tarm = *m_managerGroup.ptr_targetManager;
 	OptionManager& a_optm = *m_managerGroup.ptr_optionManager;
 	NetworkManager& a_ntwm = *m_managerGroup.ptr_networkManager;
+    GameManager& a_gm = *m_managerGroup.ptr_gameManager;
 
 
 	// Path
@@ -95,6 +98,7 @@ void ResourceLoader::load() {
 	a_tarm.setState(true);
 	a_optm.setState(true);
 	a_ntwm.setState(true);
+    a_gm.setState(true);
 
 
 	if(m_debug) {
@@ -102,6 +106,7 @@ void ResourceLoader::load() {
 		std::cout << "- Target Manager successfully loaded" << std::endl;
 		std::cout << "- Option Manager successfully loaded" << std::endl;
 		std::cout << "- Network Manager successfully loaded" << std::endl;
+        std::cout << "- Game Manager successfully loaded" << std::endl;
 	}
 }
 
@@ -130,7 +135,8 @@ bool ResourceLoader::getLoadState() {
 			m_managerGroup.ptr_textureManager->getState() &&
 			m_managerGroup.ptr_targetManager->getState() &&
 			m_managerGroup.ptr_optionManager->getState() &&
-			m_managerGroup.ptr_networkManager->getState());
+			m_managerGroup.ptr_networkManager->getState() &&
+            m_managerGroup.ptr_networkManager->getState());
 }
 
 /*!

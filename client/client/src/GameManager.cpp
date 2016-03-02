@@ -2,24 +2,23 @@
 // Created by Lucas on 02/03/2016.
 //
 
-#include <MusicManager.hpp>
+#include <GameManager.hpp>
 
 /*!
  * \brief Constructor
  * \param debug The debug mode
  */
-GameManager::GameManager(bool debug) : Manager() {
+GameManager::GameManager(bool debug) : Manager(),
+                                       m_player()
+                                               {
+
     m_debug = debug;
-
-    //create a player
-    m_player = new Player();
-
 
     //Create characters
     int nbChar = 4;
 
     for (int i = 0; i < nbChar; i++){
-        characterList.push_back(new Character());
+        m_characterList.push_back(new Character());
     }
 
     initCharacters();
@@ -34,7 +33,7 @@ GameManager::~GameManager() {
 
 
 //Getters
-Player * GameManager::getPlayer(){
+Player *  GameManager::getPlayer(){
     return &m_player;
 }
 
@@ -44,18 +43,19 @@ Player * GameManager::getPlayer(){
  * \The id will serve to identify character to select one
  */
 void GameManager::initCharacters(){
-    characterList[0].setName(L"Numero 8");
-    characterList[0].setId(L"numero8");
-    characterList[1].setName(L"Remington");
-    characterList[1].setId(L"remington");
-    characterList[2].setName(L"Eldora Dragnir");
-    characterList[2].setId(L"eldora");
-    characterList[3].setName(L"Tristan de la Mortifère");
-    characterList[3].setId(L"tristan");
+    m_characterList[0]->setName(L"Numero 8");
+    m_characterList[0]->setId(L"numero8");
+    m_characterList[1]->setName(L"Remington");
+    m_characterList[1]->setId(L"remington");
+    m_characterList[2]->setName(L"Eldora Dragnir");
+    m_characterList[2]->setId(L"eldora");
+    m_characterList[3]->setName(L"Tristan de la Mortifère");
+    m_characterList[3]->setId(L"tristan");
 
     for (int i = 0; i < 4; i++){
-        characterList[i].setDescription(L"Bonjour ! \nJe m\'appelle "
-                                        + characterList[i].getName() + " !");
+        m_characterList[i]->setDescription(L"Bonjour ! \nJe m\'appelle "
+                                        + m_characterList[i]->getName()
+                                           + L" !");
     }
 }
 

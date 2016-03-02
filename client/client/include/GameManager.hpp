@@ -8,13 +8,16 @@
 #include "Manager.hpp"
 #include "Player.hpp"
 #include "Character.hpp"
+#include <vector>
+
+#include <string>
 
 class GameManager : public Manager {
 
     private:
         bool m_debug;
-        Player m_player;
-        std::vector < Character* > characterList;
+        Player  m_player;
+        std::vector < Character* > m_characterList;
 
     public:
         // Constructor
@@ -22,6 +25,8 @@ class GameManager : public Manager {
 
         // Destructor
         ~GameManager();
+        void initCharacters();
+        Player *  getPlayer();
 
 };
 

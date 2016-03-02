@@ -5,6 +5,7 @@
 #ifndef DEF_CHARACTER_HPP
 #define DEF_CHARACTER_HPP
 
+#include <string>
 
 class Character{
 
@@ -12,7 +13,7 @@ class Character{
         bool m_choosed;
         std::wstring m_description;
         std::wstring m_name;
-        std::string m_id;
+        std::wstring m_id;
 
     public:
         //Constructor
@@ -28,7 +29,7 @@ class Character{
         std::wstring getName();
         void setName(std::wstring name);
         void setDescription(std::wstring description);
-        void setId(std::string id);
+        void setId(std::wstring id);
 
 };
 #endif //DEF_CHARACTER_HPP

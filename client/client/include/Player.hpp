@@ -5,6 +5,7 @@
 #ifndef DEF_PLAYER_HPP
 #define DEF_PLAYER_HPP
 
+#include <string>
 #include "Character.hpp"
 
 class Player{
