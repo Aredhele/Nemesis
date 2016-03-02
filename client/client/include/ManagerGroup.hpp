@@ -14,6 +14,7 @@
 #include "TargetManager.hpp"
 #include "TextureManager.hpp"
 #include "NetworkManager.hpp"
+#include "GameManager.hpp"
 
 class ManagerGroup
 {
@@ -25,6 +26,7 @@ class ManagerGroup
 		~ManagerGroup();
 
 		// Token
+		GameManager * ptr_gameManager;
 		MusicManager * ptr_musicManager;
 		TextureManager * ptr_textureManager;
 		TargetManager * ptr_targetManager;
