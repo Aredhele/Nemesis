@@ -27,6 +27,13 @@ private:
 	NButton m_optButton;
 	NButton m_exitButton;
 	NButton m_musicButton;
+	NButton m_soundButton;
+	NLabel m_volumeLabel;
+	NLabel m_soundLabel;
+	NLabel m_titleLabel;
+
+	sf::Font m_fontLabel;
+
 
 	std::vector < VisualObject * > m_interface;
 

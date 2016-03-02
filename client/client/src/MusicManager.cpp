@@ -158,6 +158,20 @@ void MusicManager::setMusicVolume(int volumeMusic){
         m_playlistMap[m_keyList[i]]->setVolume(m_volumeMusic);
 }
 
+//TODO : Modifier cette méthode !!
+void MusicManager::setSoundVolume(int soundVolume){
+    m_volumeSound=soundVolume;
+
+    /*
+    for(unsigned int i = 0; i < m_keyList.size(); i++)
+        m_playlistMap[m_keyList[i]]->setVolume(soundVolume);
+    */
+}
+
 int MusicManager::getMusicVolume(){
     return m_volumeMusic;
+}
+
+int MusicManager::getSoundVolume(){
+    return m_volumeSound;
 }

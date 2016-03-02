@@ -15,10 +15,9 @@
 class LoginMenu : public BasicInterface
 {
 	private:
-		NButton m_monSuperBouton;
+		NButton m_connectButton;
 		NLabel m_titleLabel;
 		NLabel m_connectionErrorLabel;
-		NLabel m_pseudoErrorLabel;
 		NTextField m_textFieldLogin;
 		NPanel m_nemesisLogo;
 		NPanel m_errorPanel;
@@ -36,7 +35,7 @@ class LoginMenu : public BasicInterface
 
 		// Methods
 		virtual void update(sf::RenderWindow * window, 
-		sf::Event * e, double frameTime);
+							sf::Event * e, double frameTime);
 };
 
 #endif // DEF_LOGING_MENU_HPP

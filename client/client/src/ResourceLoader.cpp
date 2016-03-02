@@ -52,6 +52,7 @@ void ResourceLoader::load() {
 
 	// Path
 	const std::string pathLogin = "../res/texture/menu/login/";
+	const std::string pathChar = "../res/characters/";
 
 	// Loading ...
 	a_tm.addTexture("topBarLogMenu", pathLogin + "topBarLogMenu.png");
@@ -76,8 +77,17 @@ void ResourceLoader::load() {
 	a_tm.addTexture("volumeOff_2", pathLogin + "volumeOff_2.png");
 	a_tm.addTexture("textBox", pathLogin + "textBox.png");
     a_tm.addTexture("textBoxCursor", pathLogin + "curseurTextBox.png");
-	a_tm.addTexture("nemesis", pathLogin + "NEMESIS_logo.png");
+	a_tm.addTexture("nemesis", pathLogin + "NEMESIS_logo_full.png");
 	a_tm.addTexture("errorPanel", pathLogin + "ErrorPanel.png");
+	a_tm.addTexture("selectCharacterPanel", pathLogin + "selectCharacterPanel.png");
+    a_tm.addTexture("infoCharacterPanel", pathLogin + "infoCharacterPanel.png");
+    a_tm.addTexture("playButton_1", pathLogin + "playButton_1.png");
+    a_tm.addTexture("playButton_2", pathLogin + "playButton_2.png");
+
+	a_tm.addTexture("perso0", pathChar +  "Numero_8.png");
+	a_tm.addTexture("perso1", pathChar + "Remington.png");
+	a_tm.addTexture("perso2", pathChar + "Tristan_De_La_Mortifere.png");
+	a_tm.addTexture("perso3", pathChar +  "Eldora_Dragnir.png");
 
 
 	a_mm.setState(true);

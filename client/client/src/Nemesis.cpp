@@ -6,6 +6,7 @@
 #include "SplashScreen.hpp"
 #include "LoginMenu.hpp"
 #include "Lobby.hpp"
+#include "WarmUp.hpp"
 
 int main(int argc, char ** argv)
 {   
@@ -37,11 +38,15 @@ int main(int argc, char ** argv)
     // Creating menu
     LoginMenu loginMenu(DEBUG, managerGroup);
 
+    //Creating lobby
+    Lobby lobby(DEBUG, managerGroup);
+
+    //Creating warmUp
+    WarmUp warmUp(DEBUG, managerGroup);
+
     // Setting main target
     managerGroup->ptr_targetManager->isOnLoginMenu();
 
-    //Creating lobby
-    Lobby lobby(DEBUG, managerGroup);
 
     sf::Clock clock;
     while (window.isOpen())
@@ -67,6 +72,7 @@ int main(int argc, char ** argv)
         // Updating game logic
         loginMenu.update(&window, &event, elapsedTime);
         lobby.update(&window, &event, elapsedTime);
+        warmUp.update(&window, &event, elapsedTime);
         managerGroup->ptr_musicManager->update();
 
         window.display();

@@ -17,6 +17,7 @@ class TargetManager : public Manager
 		bool m_onLoginMenu;
 		bool m_onMainMenu;
 		bool m_onLobby;
+		bool m_onWarmUp;
 
 		// Method
 		void handleTarget();
@@ -36,11 +37,13 @@ class TargetManager : public Manager
 		bool isLoginMenu();
 		bool isLobby();
 		bool isMainMenu();
+		bool isWarmUp();
 
 		// Setters
 		void isOnLoginMenu();
 		void isOnLobby();
 		void isOnMainMenu();
+		void isOnWarmUp();
 };
 
 #endif // DEF_TARGER_MANAGER_HPP

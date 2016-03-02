@@ -49,11 +49,18 @@ public:
     void createPlaylist(std::string key, bool loop, float pitch);
     void createSound(std::string path, std::string key, float pitch);
 
-    void setMusicVolume(int volumeMusic);
-    int getMusicVolume();
+
+
     // Getters
     Playlist * getPlaylist();
     Playlist * getPlaylist(std::string key);
+
+    int getMusicVolume();
+    int getSoundVolume();
+
+    //Setters
+    void setMusicVolume(int volumeMusic);
+    void setSoundVolume(int soundVolume);
 };
 
 #endif // DEF_MUSIC_MANAGER_HPP

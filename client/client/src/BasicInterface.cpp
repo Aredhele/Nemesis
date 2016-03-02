@@ -20,6 +20,10 @@ BasicInterface::BasicInterface(bool debug,
 																  m_optButton(),
 																  m_exitButton(),
 																  m_musicButton(),
+																  m_soundButton(),
+																  m_volumeLabel(),
+																  m_soundLabel(),
+                                                                  m_titleLabel(),
 																  m_inputHandler(debug)
 {
 	m_debug = debug;
@@ -28,6 +32,12 @@ BasicInterface::BasicInterface(bool debug,
 
 	// Setting up aliases
 	TextureManager& a_tm = *m_ptr_managerGroup->ptr_textureManager;
+
+	if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
+	{
+		std::cout << "Probleme dans le chargement des textures" << std::endl;
+	}
+
 
 	// Creating m_contentPane
 	m_contentPane.create("mainPanel", 0, 0,
@@ -42,7 +52,11 @@ BasicInterface::BasicInterface(bool debug,
 					   a_tm.getTexture("topBarOptButton_1"),
 					   a_tm.getTexture("topBarOptButton_2"));
 
-	m_musicButton.create("volumeButton", 650,250,
+	m_musicButton.create("volumeButton", 600,300,
+						 a_tm.getTexture("volume_1"),
+						 a_tm.getTexture("volume_2"));
+
+	m_soundButton.create("soundButton", 600,436,
 						 a_tm.getTexture("volume_1"),
 						 a_tm.getTexture("volume_2"));
 
@@ -51,11 +65,29 @@ BasicInterface::BasicInterface(bool debug,
 						a_tm.getTexture("topBarExitButton_1"),
 						a_tm.getTexture("topBarExitButton_2"));
 
+	//Adding labels
+	m_volumeLabel.create("volumeLabel", 370, 314, 20, &m_fontLabel,
+						 L"Volume de la musique",
+						 sf::Color::White);
+
+	m_soundLabel.create("soundLabel", 370, 450, 20, &m_fontLabel,
+						 L"Volume des effets",
+						 sf::Color::White);
+
+	m_titleLabel.create("monSuperLabel", 10, 10, 20, &m_fontLabel,
+						L"Paper Sword : Online",
+						sf::Color(232,200,20));
+
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 0, 50,
 						 a_tm.getTexture("optionPane"));
 
+
+    getContentPane()->addComponent(&m_titleLabel);
+	m_optionPanel.addComponent(&m_volumeLabel);
+	m_optionPanel.addComponent(&m_soundLabel);
 	m_optionPanel.addComponent(&m_musicButton);
+	m_optionPanel.addComponent(&m_soundButton);
 
 	m_topBar.addComponent(&m_optButton);
 	m_topBar.addComponent(&m_exitButton);
@@ -158,6 +190,29 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 					std::cout << "Music volume : Off" << std::endl;
 				}
 
+
+			}
+			else if(m_inputHandler.getComponentId() == "soundButton"){
+
+				TextureManager& a_tm = *m_ptr_managerGroup->ptr_textureManager;
+
+
+				if(m_ptr_managerGroup->ptr_musicManager->getSoundVolume()>0)
+				{
+					m_ptr_managerGroup->ptr_musicManager->setSoundVolume(0);
+					m_soundButton.setSprite(a_tm.getTexture("volumeOff_1"),
+											a_tm.getTexture("volumeOff_2"));
+
+					std::cout << "Sound volume : On" << std::endl;
+				}
+				else
+				{
+					m_ptr_managerGroup->ptr_musicManager->setSoundVolume(50);
+					m_soundButton.setSprite(a_tm.getTexture("volume_1"),
+											a_tm.getTexture("volume_2"));
+
+					std::cout << "Sound volume : Off" << std::endl;
+				}
 
 			}
 		}

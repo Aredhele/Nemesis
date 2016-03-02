@@ -17,6 +17,7 @@ TargetManager::TargetManager(bool debug) : Manager() {
 	m_onLoginMenu = false;
 	m_onMainMenu = false;
 	m_onLobby = false;
+	m_onWarmUp = false;
 }
 
 /*!
@@ -40,13 +41,15 @@ void TargetManager::handleTarget() {
 	m_onLoginMenu = false;
 	m_onMainMenu = false;
 	m_onLobby = false;
+	m_onWarmUp = false;
 }
 
 /*!
  * \return true if all target are on false
  */
 bool TargetManager::isExit() {
-	return (m_onLoginMenu || m_onMainMenu || m_onLobby);
+	return (m_onLoginMenu || m_onMainMenu
+			|| m_onLobby || m_onWarmUp);
 }
 
 /*!
@@ -64,14 +67,21 @@ bool TargetManager::isLobby() {
 }
 
 /*!
- * \return m_onLoginMenu target state
+ * \return m_onMainMenu target state
  */
 bool TargetManager::isMainMenu() {
 	return m_onMainMenu;
 }
 
 /*!
- * \set m_onLoginMenu target state to true
+ * \return m_onWarmUp target state
+ */
+bool TargetManager::isWarmUp() {
+	return m_onWarmUp;
+}
+
+/*!
+ * \set m_onLobby target state to true
  */
 void TargetManager::isOnLobby() {
 	handleTarget();
@@ -89,9 +99,17 @@ void TargetManager::isOnLoginMenu() {
 
 
 /*!
- * \return m_onLoginMenu target state
+ * \return m_onMainMenu target state
  */
 void TargetManager::isOnMainMenu() {
 	handleTarget();
 	m_onMainMenu = true;
+}
+
+/*!
+ * \return m_onWarmUp target state
+ */
+void TargetManager::isOnWarmUp() {
+	handleTarget();
+	m_onWarmUp = true;
 }

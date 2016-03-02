@@ -96,3 +96,8 @@ void NLabel::update(double frameTime) {
 
 	(void)frameTime;
 }
+
+
+void NLabel::setText(std::wstring text){
+	m_text.setString(text);
+}

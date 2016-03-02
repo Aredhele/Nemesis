@@ -29,6 +29,8 @@ class NLabel : public VisualObject
 		int size, sf::Font * ptr_font,
 		std::wstring text, sf::Color color);
 
+		void setText(std::wstring text);
+
 		virtual void draw(sf::RenderWindow * window);
 		virtual std::string eventMousePressed(sf::Event * e);
 		virtual std::string eventMouseMoved(sf::Event * e);
