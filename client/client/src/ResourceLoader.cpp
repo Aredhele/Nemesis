@@ -86,6 +86,12 @@ void ResourceLoader::load() {
     a_tm.addTexture("infoCharacterPanel", pathLogin + "infoCharacterPanel.png");
     a_tm.addTexture("playButton_1", pathLogin + "playButton_1.png");
     a_tm.addTexture("playButton_2", pathLogin + "playButton_2.png");
+    a_tm.addTexture("refreshButton_1", pathLogin + "refreshButton_1.png");
+    a_tm.addTexture("refreshButton_2", pathLogin + "refreshButton_2.png");
+    a_tm.addTexture("createButton_1", pathLogin + "createButton_1.png");
+    a_tm.addTexture("createButton_2", pathLogin + "createButton_2.png");
+    a_tm.addTexture("rejoindreButton_1", pathLogin + "rejoindreButton_1.png");
+    a_tm.addTexture("rejoindreButton_2", pathLogin + "rejoindreButton_2.png");
 
 	a_tm.addTexture("perso0", pathChar +  "Numero_8.png");
 	a_tm.addTexture("perso1", pathChar + "Remington.png");

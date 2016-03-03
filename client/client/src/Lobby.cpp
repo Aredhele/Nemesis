@@ -15,8 +15,8 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
     noError();
     firstConnect = true;
 
-    ptr_textureButton1 = ptr_managerGroup->ptr_textureManager->getTexture("connectButton1");
-    ptr_textureButton2 = ptr_managerGroup->ptr_textureManager->getTexture("connectButton2");
+    ptr_textureButton1 = ptr_managerGroup->ptr_textureManager->getTexture("rejoindreButton_1");
+    ptr_textureButton2 = ptr_managerGroup->ptr_textureManager->getTexture("rejoindreButton_2");
 
     if (!m_font.loadFromFile("../res/font/Quicksand.ttf"))
     {
@@ -25,12 +25,12 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
 
     m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours...", sf::Color::Black);
 
-    m_refreshButton.create("refreshButton", 100, 700,
-                        ptr_managerGroup->ptr_textureManager->getTexture("playButton_1"),
-                        ptr_managerGroup->ptr_textureManager->getTexture("playButton_2"));
-    m_createButton.create("createButton", 780, 700,
-                        ptr_managerGroup->ptr_textureManager->getTexture("playButton_1"),
-                        ptr_managerGroup->ptr_textureManager->getTexture("playButton_2"));
+    m_refreshButton.create("refreshButton", 50, 700,
+                        ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_1"),
+                        ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_2"));
+    m_createButton.create("createButton", 749, 700,
+                        ptr_managerGroup->ptr_textureManager->getTexture("createButton_1"),
+                        ptr_managerGroup->ptr_textureManager->getTexture("createButton_2"));
 
     getContentPane()->addComponent(&m_monSuperLabel);
     getContentPane()->addComponent(&m_refreshButton);
@@ -175,7 +175,7 @@ void Lobby::updateNewWarmUp(){
 
             std::cout << "Nouveau bouton :"<< tmp << ";" << std::endl;
 
-            warmUpButton[i]->create("connectButton" +tmp, 550, 250 + i/2 * 75,
+            warmUpButton[i]->create("connectButton" +(i+1), 550, 250 + i/2 * 75,
                                     ptr_textureButton1, ptr_textureButton2);
             getContentPane()->addComponent(warmUpButton[i]);
         }
