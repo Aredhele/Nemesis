@@ -100,6 +100,7 @@ void Lobby::createNewWarmUp(){
         std::cout << "Creation WarmUp réussi par " <<
                 m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
         updateNewWarmUp();
+        m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
     }
     else{
         errorConnection();
