@@ -24,6 +24,7 @@ private:
 	NPanel m_contentPane;
 	NPanel m_topBar;
 	NPanel m_optionPanel;
+
 	NButton m_optButton;
 	NButton m_exitButton;
 	NButton m_musicButton;
@@ -31,6 +32,9 @@ private:
 	NLabel m_volumeLabel;
 	NLabel m_soundLabel;
 	NLabel m_titleLabel;
+	NLabel m_connectionErrorLabel;
+	NPanel m_errorPanel;
+
 
 	sf::Font m_fontLabel;
 
@@ -45,6 +49,11 @@ protected:
 	bool m_optionActive;
 	InputHandler m_inputHandler;
 	ManagerGroup * m_ptr_managerGroup;
+
+
+	void errorConnection();
+	void errorPseudo();
+	void noError();
 
 public:
 	// Constructor

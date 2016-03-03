@@ -57,20 +57,43 @@ bool NetworkManager::connect(){
 /**
  *  Request sent to the server
  *  id 1 : get list of WarmUp
+ *  id 1 : create WarmUp
  */
-bool NetworkManager::request(std::string Request[2]){
+bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
 
-    m_status = m_socket.send(Request, sizeof(Request)); //TODO Requetes en commun
+    sf::Packet packet;
+    packet << idRequest << sRequest;
+
+    m_status = m_socket.send(packet);
 
     if (m_status != sf::Socket::Done) {
         std::cerr << "Unable to connect with server" << std::endl;
         return false;
     }
-
     std::cout << "Request send !" << std::endl;
     std::cerr << "Socket status : " << m_status << std::endl;
     return true;
 }
+/**
+ *  Request receive from the server
+ *  id 3 : get list of WarmUp
+ *  id 1 : create WarmUp
+ */
+sf::Packet *  NetworkManager::requestReceive(){
+    sf::Packet  * packet = new sf::Packet();
+    m_status = m_socket.receive(*packet);
+
+    if (m_status == sf::Socket::Done) {
+        std::cout << "Request receive !" << std::endl;
+        std::cerr << "Socket status : " << m_status << std::endl;
+        return packet;
+    }
+    else{
+        std::cerr << "Unable to receive from server" << std::endl;
+        return NULL;
+    }
+}
+
 
 void NetworkManager::trigger(uint id){
     return;

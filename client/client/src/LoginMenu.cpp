@@ -15,11 +15,10 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		BasicInterface(debug, ptr_managerGroup),
 		m_connectButton(),
 		m_titleLabel(),
-		m_connectionErrorLabel(),
 		m_textFieldLogin(),
-		m_nemesisLogo(),
-		m_errorPanel()
+		m_nemesisLogo()
 {
+	noError();
 	ptr_managerGroup->ptr_musicManager->
 			createPlaylist("playlistMenu", true, 1.2);
 	ptr_managerGroup->ptr_musicManager->
@@ -37,10 +36,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 							ptr_managerGroup->ptr_textureManager->getTexture("connectButton2"));
 
 
-	m_connectionErrorLabel.create("connectionErrorLabel", 330, 665, 20, &m_fontLabel,
-								  L"Un problème de connexion est survenue.\n"
-										    "  Vérifiez votre connnexion et réessayez.",
-								  sf::Color(181, 51, 0));
+
 
     m_textFieldLogin.create("textFieldLogin", 420, 555,
                             ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
@@ -51,16 +47,10 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 	m_nemesisLogo.create("nemesisLogo", 251, 50,
 						 ptr_managerGroup->ptr_textureManager->getTexture("nemesis"));
 
-	m_errorPanel.create("ErrorPanel", 303, 660,
-						ptr_managerGroup->ptr_textureManager->getTexture("errorPanel"));
-
-	m_errorPanel.addComponent(&m_connectionErrorLabel);
-
-	m_errorPanel.setVisible(false);
 
 	getContentPane()->addComponent(&m_nemesisLogo);
 	getContentPane()->addComponent(&m_textFieldLogin);
-	getContentPane()->addComponent(&m_errorPanel);
+
 	getContentPane()->addComponent(&m_connectButton);
 
 }
@@ -88,26 +78,20 @@ void LoginMenu::update(sf::RenderWindow * window,
 
 
 	if(m_inputHandler.getComponentId() == "connectButton") {
-		m_errorPanel.setVisible(false);
-		if(m_textFieldLogin.getString() != ""){
-			if(m_ptr_managerGroup->ptr_networkManager->connect())
+		//m_errorPanel.setVisible(false);
+		if(m_textFieldLogin.getString() != "") {
+			if (m_ptr_managerGroup->ptr_networkManager->connect()) {
+				m_ptr_managerGroup->ptr_gameManager->getPlayer()->setName(m_textFieldLogin.getString());
 				m_ptr_managerGroup->ptr_targetManager->isOnLobby();
+			}
 			else{
-				m_connectionErrorLabel.setText(L"Un problème de connexion est survenue.\n"
-													   "  Vérifiez votre connnexion et réessayez.");
-				m_errorPanel.setVisible(true);
+				errorConnection();
 			}
 		}
 		else {
-			m_connectionErrorLabel.setText(L"  Vous n'avez pas saisi votre pseudo.\n"
-												   "Saississiez votre pseudo et réessayez.");
-			m_errorPanel.setVisible(true);
+			errorPseudo();
 		}
-
-
-
 	}
-
 
 
 	// Drawing all content

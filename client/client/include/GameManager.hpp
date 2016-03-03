@@ -7,7 +7,6 @@
 
 #include "Manager.hpp"
 #include "Player.hpp"
-#include "Character.hpp"
 #include <vector>
 
 #include <string>

@@ -20,6 +20,7 @@ class WarmUp : public BasicInterface
         NPanel m_infoCharacterPanel;
         NLabel m_infoCharacterLabel;
         NButton m_playButton;
+        NButton m_returnButton;
 
         sf::Font m_fontLabel;
 

@@ -73,7 +73,7 @@ private:
 
     //Methods
     void listSocketManager();
-    void requestManager(char requete[1024], std::size_t nbOctetsRecus,
+    void requestManager( sf::Int32 idRequest, std::string sRequest,
                         sf::TcpSocket * socket, int indiceSocket);
     std::string getWarmUpList();
     void joinWarmUp(sf::TcpSocket * socket, std::string param,

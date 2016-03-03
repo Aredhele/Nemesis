@@ -56,13 +56,6 @@ void ClientServer::initialiser() {
 
     this->m_ptr_displayer->displayMessage("info", "Initialisation des variables ...");
 
-    // WarmUps creation
-    for(int i = 0; i < cast::toInt(this->m_ptr_configuration->
-            getParam("SERVER_MAX_SALON")); i++) {
-        this->listeWarmUp.push_back(new WarmUp(i, m_ptr_displayer,
-                                               &listeSocketOccupee, &listeGame));
-    }
-
     //Threads Launch
     for(unsigned int i = 0; i < listeWarmUp.size(); i++) {
         listeWarmUp[i]->launchThreadWarmUp();
@@ -162,9 +155,12 @@ int ClientServer::start() {
         // On gère aussi les sockets dans le std::vector
         for(unsigned int i = 0; i < this->listeSocket.size(); i++) {
 
+            sf::Packet packet;
             if(!listeSocketOccupee[i]) {
-                socketStatus = this->listeSocket[i].get()->receive(octetsRecus,
-                                                                   SERVER_PACKET_SIZE, nbOctetsRecus);
+                socketStatus = this->listeSocket[i].get()->receive(packet);
+                sf::Int32 idRequest;
+                std::string sRequest;
+                packet >>idRequest >> sRequest;
 
                 switch(socketStatus)
                 {
@@ -177,7 +173,7 @@ int ClientServer::start() {
                                                          " - " + this->listeSocket[i].get()->getRemoteAddress().toString());
 
                         // Gestion de la requête
-                        requestManager(octetsRecus, nbOctetsRecus, this->listeSocket[i].get(), i);
+                        requestManager(idRequest, sRequest, this->listeSocket[i].get(), i);
                         break;
 
                     case sf::Socket::Error:
@@ -248,66 +244,76 @@ void ClientServer::listSocketManager() {
  * \brief Décide de la méthode à appeler en fonction de la requête
  * \param requete le tableau d'octets contenant le requête
  */
-void ClientServer::requestManager(char requete[1024], std::size_t nbOctetsRecus,
-                           sf::TcpSocket * socket, int indiceSocket) {
-    (void)nbOctetsRecus;
+void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  sf::TcpSocket * socket, int indiceSocket) {
+
+    std::string s;
+    std::string ss;
+
+    std::cout << "ID REQUETE : " << idRequest << std::endl;
+
     // Exemple de trame réseau :
     // Action Paramètre(s)
-    // 1 rejoindre un salon - numéro du salon
-    // 2 créer un salon - aucun
-    char actionID_C[4];
-    char actionParam_C[1020];
+    // 1 créer un salon - aucun
+    // 2 rejoindre un salon - numéro du salon
+    // 3 Recupérer la liste des salons
 
-    // Parcourt de la chaîne
-    if(sscanf(requete, "%s | %s", actionID_C, actionParam_C) != 2) {
-        this->m_ptr_displayer->displayMessage("warn", "Erreur de lecture du paquet");
-        this->m_ptr_displayer->displayMessage("fail", "sscanf n'a pas lu les bons arguments");
-        return;
-    }
 
-    this->m_ptr_displayer->displayMessage("info", "ActionID = " + std::string(actionID_C) +
-                                     ", ARG = " + std::string(actionParam_C));
+    int actionID;
 
-    // Conversion de l'actionID en entier
-    int actionID = cast::toInt(actionID_C);
+    actionID = idRequest;
 
-    // Obtention de la liste des salons
-    std::string listeSalonClient = "3 | " + getWarmUpList();
 
-    // Gestion de l'envoi partiel de données
-    // TODO !
-    // Attention, gérer le cas d'erreur pour le prochaine sprint !
-    std::size_t donneeEnvoyee;
+    std::cout << "ID REQUETE : " << actionID << std::endl;
 
+
+    sf::Packet packet;
+
+    //Traitement de la requete
     switch(actionID)
     {
         case 1: // Le client veut créer un salon
-            // Salons déjà créés
+            this->listeWarmUp.push_back(new WarmUp(listeWarmUp.size()+1, m_ptr_displayer,
+                                                   &listeSocketOccupee, &listeGame, sRequest));
             break;
 
         case 2: // Le client veut rejoindre un salon
-            joinWarmUp(socket, std::string(actionParam_C), indiceSocket);
-            this->m_ptr_displayer->displayMessage(" >> ", "Réponse à la requête n°" +
-                                             std::string(actionID_C) + " - " +
-                                             socket->getRemoteAddress().toString());
+            joinWarmUp(socket, sRequest, indiceSocket);
+
+            s =  "Réponse à la requête n°" + actionID;
+            ss = "- " + socket->getRemoteAddress().toString();
+            this->m_ptr_displayer->displayMessage(" >> ", "" + s+ss);
+
             break;
             //TODO Envoyer au moins une partie de la BDD à ce moment (Persos mini)
 
         case 3: // Le client veut récupérer la liste des salons
+        {
+            std::cout << "CASE 3  " << std::endl;
+            // Obtention de la liste des salons et de l'id de la requete
+            sf::Int32 id = 3;
+            std::string listeSalonClient = getWarmUpList();
+
+
             socket->setBlocking(true);
-            //std::cout << "ENVOYER = " << listeSalonClient << std::endl;
-            socket->send(listeSalonClient.c_str(), 1024, donneeEnvoyee);
+
+            packet << id << listeSalonClient;
+
+            socket->send(packet);
+
             socket->setBlocking(false);
 
             // Trace d'éxécution
-            this->m_ptr_displayer->displayMessage(" >> ", "Réponse à la requête n°" +
-                                             std::string(actionID_C) + " - " +
-                                             socket->getRemoteAddress().toString());
-            break;
+            s = "Réponse à la requête n°" + actionID;
+            ss = " - " + socket->getRemoteAddress().toString();
+            this->m_ptr_displayer->displayMessage(" >> ", "" + s + ss);
 
+            break;
+        }
         default:
             break;
     }
+
+
 }
 /**
  * \brief Retourne la liste de tout les salons dans un std::string

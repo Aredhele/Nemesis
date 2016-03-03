@@ -13,8 +13,11 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_selectCharacterPanel(),
         m_infoCharacterPanel(),
         m_infoCharacterLabel(),
-        m_playButton()
+        m_playButton(),
+        m_returnButton()
 {
+
+    noError();
     int leftBorder = 100;
 
     if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
@@ -36,7 +39,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
                              ptr_managerGroup->ptr_textureManager->getTexture("perso1"));
 
     leftBorder+=220;
-    m_eldoraButton.create("eldoraButton", leftBorder, 70,
+    m_eldoraButton.create("eldoraButton", leftBorder, 71,
                              ptr_managerGroup->ptr_textureManager->getTexture("perso3"),
                              ptr_managerGroup->ptr_textureManager->getTexture("perso3"));
 
@@ -44,6 +47,10 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_tristanButton.create("tristanButton", leftBorder, 70,
                              ptr_managerGroup->ptr_textureManager->getTexture("perso2"),
                              ptr_managerGroup->ptr_textureManager->getTexture("perso2"));
+
+m_returnButton.create("returnButton", 20, 700,
+                           ptr_managerGroup->ptr_textureManager->getTexture("topBarExitButton_1"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("topBarExitButton_2"));
 
 
     m_selectCharacterPanel.create("selectCharacterPanel", 95,65,
@@ -67,6 +74,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     getContentPane()->addComponent(&m_eldoraButton);
     getContentPane()->addComponent(&m_tristanButton);
     getContentPane()->addComponent(&m_playButton);
+    getContentPane()->addComponent(&m_returnButton);
 
 
     //displayCharacters();
@@ -108,7 +116,12 @@ void WarmUp::update(sf::RenderWindow * window,
         displayInfoCharacters("tristan");
         m_selectCharacterPanel.setPosition(755, 65);
     }
-
+    if(m_inputHandler.getComponentId() == "returnButton") {
+        m_playButton.setVisible(false);
+        m_infoCharacterPanel.setVisible(false);
+        m_selectCharacterPanel.setVisible(false);
+        m_ptr_managerGroup->ptr_targetManager->isOnLobby();
+    }
 
 
     // Drawing all content

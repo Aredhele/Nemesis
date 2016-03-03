@@ -29,7 +29,8 @@ public TriggerableObject
 
         sf::Socket::Status m_status;
         sf::TcpSocket m_socket;
-
+		sf::Int32 idRequest;
+		std::string sRequest;
 
 	public:
 
@@ -37,7 +38,10 @@ public TriggerableObject
         ~NetworkManager();
 
         bool connect();
-		bool  request(std::string Request[2]);
+		bool  request(sf::Int32 idRequest, std::string sRequest);
+		sf::Packet  * requestReceive();
+
+
 		void trigger(uint id);
 		void trigger(uint id, std::vector < std::string> v);
 };

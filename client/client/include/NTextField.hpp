@@ -10,7 +10,6 @@
 #define DEF_NTEXT_FIELD_HPP
 
 #include <vector>
-
 #include "VisualObject.hpp"
 
 class NTextField : public VisualObject

@@ -24,7 +24,10 @@ BasicInterface::BasicInterface(bool debug,
 																  m_volumeLabel(),
 																  m_soundLabel(),
                                                                   m_titleLabel(),
+																  m_connectionErrorLabel(),
+																  m_errorPanel(),
 																  m_inputHandler(debug)
+
 {
 	m_debug = debug;
 	m_optionActive = false;
@@ -78,10 +81,21 @@ BasicInterface::BasicInterface(bool debug,
 						L"Paper Sword : Online",
 						sf::Color(232,200,20));
 
+	m_errorPanel.create("ErrorPanel", 303, 660,
+						ptr_managerGroup->ptr_textureManager->getTexture("errorPanel"));
+
+	m_connectionErrorLabel.create("connectionErrorLabel", 330, 665, 20, &m_fontLabel,
+								  L"Un problème de connexion est survenue.\n"
+										  "  Vérifiez votre connnexion et réessayez.",
+								  sf::Color(181, 51, 0));
+
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 0, 50,
 						 a_tm.getTexture("optionPane"));
 
+	m_errorPanel.addComponent(&m_connectionErrorLabel);
+	m_errorPanel.setVisible(false);
+	getContentPane()->addComponent(&m_errorPanel);
 
     getContentPane()->addComponent(&m_titleLabel);
 	m_optionPanel.addComponent(&m_volumeLabel);
@@ -101,6 +115,29 @@ BasicInterface::BasicInterface(bool debug,
  */
 BasicInterface::~BasicInterface() {
 	// None
+}
+
+/*!
+ * Call an error connection on the error panel
+ */
+void BasicInterface::errorConnection() {
+	m_connectionErrorLabel.setText(L"Un problème de connexion est survenue.\n"
+										   "  Vérifiez votre connnexion et réessayez.");
+	m_errorPanel.setVisible(true);
+}
+
+/*!
+ * Call an error pseudo on the error panel
+ */
+void BasicInterface::errorPseudo(){
+	m_connectionErrorLabel.setText(L"  Vous n'avez pas saisi votre pseudo.\n"
+										   "Saississiez votre pseudo et réessayez.");
+	m_errorPanel.setVisible(true);
+}
+
+void BasicInterface::noError(){
+	m_errorPanel.setVisible(false);
+	m_errorPanel.setVisible(false);
 }
 
 /*!

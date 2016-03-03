@@ -11,11 +11,11 @@ Player::~Player(){
 
 }
 
-void Player::setName(std::wstring name){
+void Player::setName(std::string name){
     m_name = name;
 }
 
-std::wstring Player::getName(){
+std::string Player::getName(){
     return m_name;
 }
 

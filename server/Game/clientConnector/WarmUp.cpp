@@ -2,13 +2,13 @@
 #include "clientConnector/WarmUp.hpp"
 
 WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socketOccupe,
-             std::vector < Game * > * listePartie) :
+             std::vector < Game * > * listePartie, std::string nomHote) :
         thread(&WarmUp::threadWarmUp, this)
 {
     this->displayer = displayer;
     this->etatWarmUp = Etat::Disponible;
     this->numeroWarmUp = i;
-    this->nomHote = "Aucun";
+    this->nomHote = nomHote;
     estEnMarche = false;
     this->listePartie = listePartie;
 

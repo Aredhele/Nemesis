@@ -8,6 +8,11 @@
 
 #include "BasicInterface.hpp"
 #include <sstream>
+#include <stdio.h>
+#include <string.h>
+#include <string>
+#include <vector>
+#include "Patch.hpp"
 
 class Lobby : public BasicInterface
 {
@@ -19,8 +24,13 @@ private:
     int nbWarmUp;
     sf::Texture *ptr_textureButton1;
     sf::Texture *ptr_textureButton2;
+    NButton m_refreshButton;
+    NButton m_createButton;
+
+    bool firstConnect;
 
     void updateNewWarmUp();
+    void createNewWarmUp();
 
 public:
     // Constructor

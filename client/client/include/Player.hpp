@@ -11,7 +11,7 @@
 class Player{
 
 private:
-    std::wstring m_name;
+    std::string m_name;
     Character m_character;
 
 public:
@@ -22,8 +22,8 @@ public:
     ~Player();
 
     //Methods
-    void setName(std::wstring name);
-    std::wstring getName();
+    void setName(std::string name);
+    std::string getName();
 };
 
 #endif //DEF_PLAYER_HPP

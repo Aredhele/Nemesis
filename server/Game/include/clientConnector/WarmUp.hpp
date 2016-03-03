@@ -22,7 +22,8 @@ public:
     //Constructor
     WarmUp(int i, ConsoleDisplayer * displayer,
           std::vector<bool>  * socketOccupe,
-          std::vector < Game * > * listePartie);
+          std::vector < Game * > * listePartie,
+          std::string nom);
     //Destructor
     ~WarmUp();
 
