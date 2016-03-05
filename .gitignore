@@ -6,6 +6,7 @@ mysql/
 
 # SFML Files
 SFML-2.3.2/
+SFML/
 
 # OpenSSL Files
 openssl/
