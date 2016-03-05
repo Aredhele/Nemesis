@@ -42,6 +42,7 @@ void TargetManager::handleTarget() {
 	m_onMainMenu = false;
 	m_onLobby = false;
 	m_onWarmUp = false;
+	m_onGame = false;
 }
 
 /*!
@@ -49,7 +50,7 @@ void TargetManager::handleTarget() {
  */
 bool TargetManager::isExit() {
 	return (m_onLoginMenu || m_onMainMenu
-			|| m_onLobby || m_onWarmUp);
+			|| m_onLobby || m_onWarmUp || m_onGame);
 }
 
 /*!
@@ -81,12 +82,22 @@ bool TargetManager::isWarmUp() {
 }
 
 /*!
+ * \return m_game target state
+ */
+bool TargetManager::isGame() {
+	return m_onGame;
+}
+
+
+/*!
  * \set m_onLobby target state to true
  */
 void TargetManager::isOnLobby() {
 	handleTarget();
 	m_onLobby = true;
 }
+
+
 
 /*!
  * \return m_onLoginMenu target state
@@ -112,4 +123,12 @@ void TargetManager::isOnMainMenu() {
 void TargetManager::isOnWarmUp() {
 	handleTarget();
 	m_onWarmUp = true;
+}
+
+/*!
+ * \return m_onGame target state
+ */
+void TargetManager::isOnGame() {
+	handleTarget();
+	m_onGame = true;
 }

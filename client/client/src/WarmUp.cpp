@@ -122,6 +122,12 @@ void WarmUp::update(sf::RenderWindow * window,
         m_selectCharacterPanel.setVisible(false);
         m_ptr_managerGroup->ptr_targetManager->isOnLobby();
     }
+    if(m_inputHandler.getComponentId() == "playButton") {
+        m_playButton.setVisible(false);
+        m_infoCharacterPanel.setVisible(false);
+        m_selectCharacterPanel.setVisible(false);
+        m_ptr_managerGroup->ptr_targetManager->isOnGame();
+    }
 
 
     // Drawing all content

@@ -7,6 +7,7 @@
 #include "LoginMenu.hpp"
 #include "Lobby.hpp"
 #include "WarmUp.hpp"
+#include "Game.hpp"
 
 int main(int argc, char ** argv)
 {   
@@ -44,6 +45,9 @@ int main(int argc, char ** argv)
     //Creating warmUp
     WarmUp warmUp(DEBUG, managerGroup);
 
+    //Creating Game
+    Game game(DEBUG, managerGroup);
+
     // Setting main target
     managerGroup->ptr_targetManager->isOnLoginMenu();
 
@@ -73,6 +77,7 @@ int main(int argc, char ** argv)
         loginMenu.update(&window, &event, elapsedTime);
         lobby.update(&window, &event, elapsedTime);
         warmUp.update(&window, &event, elapsedTime);
+        game.update(&window, &event, elapsedTime);
         managerGroup->ptr_musicManager->update();
 
         window.display();
