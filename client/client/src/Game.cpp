@@ -22,19 +22,19 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //Numero 8
     ptr_numero8InGame = ptr_managerGroup->ptr_textureManager->getTexture("numero8InGame");
     ptr_numero8InGame->setSmooth(true);
-    m_panelNumero8InGame.create("numero8InGame",110,170,ptr_numero8InGame);
+    m_panelNumero8InGame.create("numero8InGame",100,170,ptr_numero8InGame);
     getContentPane()->addComponent(&m_panelNumero8InGame);
 
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
     ptr_mdjInGame->setSmooth(true);
-    m_panelMdjInGame.create("mdjInGame",445,50,ptr_mdjInGame);
+    m_panelMdjInGame.create("mdjInGame",430,50,ptr_mdjInGame);
     getContentPane()->addComponent(&m_panelMdjInGame);
 
     //Tristan
     ptr_tristanInGame = ptr_managerGroup->ptr_textureManager->getTexture("tristanInGame");
     ptr_tristanInGame->setSmooth(true);
-    m_panelTristanInGame.create("tristanInGame",100,312,ptr_tristanInGame);
+    m_panelTristanInGame.create("tristanInGame",95,312,ptr_tristanInGame);
     getContentPane()->addComponent(&m_panelTristanInGame);
 
     //Table
