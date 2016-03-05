@@ -35,7 +35,6 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
     getContentPane()->addComponent(&m_monSuperLabel);
     getContentPane()->addComponent(&m_refreshButton);
     getContentPane()->addComponent(&m_createButton);
-
 }
 
 /*!
