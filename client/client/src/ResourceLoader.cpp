@@ -98,6 +98,15 @@ void ResourceLoader::load() {
 	a_tm.addTexture("perso2", pathChar + "Tristan_De_La_Mortifere.png");
 	a_tm.addTexture("perso3", pathChar +  "Eldora_Dragnir.png");
 
+	//in game
+	a_tm.addTexture("eldoraInGame",pathChar + "Eldora_Dragnir_inGame.png");
+	a_tm.addTexture("mdj",pathChar + "Mdj.png");
+	a_tm.addTexture("numero8InGame",pathChar + "Numero_8_inGame.PNG");
+	a_tm.addTexture("remingtonInGame",pathChar + "Remington_inGame.PNG");
+	a_tm.addTexture("tableInGame",pathChar + "Table_Jeu_inGame.png");
+	a_tm.addTexture("tristanInGame",pathChar + "Tristan_De_La_Mortifere_inGame.png");
+	a_tm.addTexture("mdjInGame",pathChar + "Mdj_inGame.PNG");
+
 
 	a_mm.setState(true);
 	a_tm.setState(true);
