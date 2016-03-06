@@ -23,7 +23,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
 
-    m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours...", sf::Color::Black);
+    m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours...", sf::Color::White);
 
     m_refreshButton.create("refreshButton", 50, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_1"),
@@ -190,7 +190,7 @@ void Lobby::updateNewWarmUp(){
 
             warmUpLabel.push_back(new NLabel());
             warmUpLabel[i]->create("monSuperLabel" + tmp, 200, 255 + i/2 * 75,
-                                   30, &m_font, L"Partie de  " + s, sf::Color::Black);
+                                   30, &m_font, L"Partie de  " + s, sf::Color::White);
             getContentPane()->addComponent(warmUpLabel[i]);
         }
     }

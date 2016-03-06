@@ -80,7 +80,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("volumeOff_2", pathLogin + "volumeOff_2.png");
 	a_tm.addTexture("textBox", pathLogin + "textBox.png");
     a_tm.addTexture("textBoxCursor", pathLogin + "curseurTextBox.png");
-	a_tm.addTexture("nemesis", pathLogin + "NEMESIS_logo_full.png");
+	a_tm.addTexture("nemesis", pathLogin + "background_login.png");
 	a_tm.addTexture("errorPanel", pathLogin + "ErrorPanel.png");
 	a_tm.addTexture("selectCharacterPanel", pathLogin + "selectCharacterPanel.png");
     a_tm.addTexture("infoCharacterPanel", pathLogin + "infoCharacterPanel.png");
@@ -92,6 +92,8 @@ void ResourceLoader::load() {
     a_tm.addTexture("createButton_2", pathLogin + "createButton_2.png");
     a_tm.addTexture("rejoindreButton_1", pathLogin + "rejoindreButton_1.png");
     a_tm.addTexture("rejoindreButton_2", pathLogin + "rejoindreButton_2.png");
+	a_tm.addTexture("bibouPanel", pathLogin + "bibouPanel.png");
+	a_tm.addTexture("paperSwordTitlePanel", pathLogin + "paperSwordTitle.png");
 
 	a_tm.addTexture("perso0", pathChar +  "Numero_8.png");
 	a_tm.addTexture("perso1", pathChar + "Remington.png");
@@ -106,7 +108,6 @@ void ResourceLoader::load() {
 	a_tm.addTexture("tableInGame",pathChar + "Table_Jeu_inGame.png");
 	a_tm.addTexture("tristanInGame",pathChar + "Tristan_De_La_Mortifere_inGame.png");
 	a_tm.addTexture("mdjInGame",pathChar + "Mdj_inGame.PNG");
-
 
 	a_mm.setState(true);
 	a_tm.setState(true);

@@ -19,6 +19,8 @@ class LoginMenu : public BasicInterface
 		NLabel m_titleLabel;
 		NTextField m_textFieldLogin;
 		NPanel m_nemesisLogo;
+		NPanel m_bibouPanel;
+		NPanel m_paperSwordTitlePanel;
 
 		sf::Font m_fontLabel;
         sf::Font m_fontTextbox;

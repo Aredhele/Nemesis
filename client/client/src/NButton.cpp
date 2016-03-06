@@ -49,7 +49,7 @@ sf::Texture * texture_1, sf::Texture * texture_2) {
 
 	m_surrounder.init(m_mainSprite.getPosition(),
 	m_mainSprite.getTexture()->getSize(),
-	sf::Color::Red);
+	sf::Color(196,130,56));
 }
 
 /*!

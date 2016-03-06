@@ -36,7 +36,7 @@ BasicInterface::BasicInterface(bool debug,
 	// Setting up aliases
 	TextureManager& a_tm = *m_ptr_managerGroup->ptr_textureManager;
 
-	if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
+	if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf"))
 	{
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
@@ -47,11 +47,11 @@ BasicInterface::BasicInterface(bool debug,
 						 a_tm.getTexture("loginBackground"));
 
 	// Adding top-bar
-	m_topBar.create("topBar", 0, 0,
-					a_tm.getTexture("topBarLogMenu"));
+	//m_topBar.create("topBar", 0, 0,
+	//				a_tm.getTexture("topBarLogMenu"));
 
 	// Adding buttons
-	m_optButton.create("optButton", 805, 5,
+	m_optButton.create("optButton", 780, 5,
 					   a_tm.getTexture("topBarOptButton_1"),
 					   a_tm.getTexture("topBarOptButton_2"));
 
@@ -64,7 +64,7 @@ BasicInterface::BasicInterface(bool debug,
 						 a_tm.getTexture("volume_2"));
 
 
-	m_exitButton.create("exitButton", 913, 5,
+	m_exitButton.create("exitButton", 900, 5,
 						a_tm.getTexture("topBarExitButton_1"),
 						a_tm.getTexture("topBarExitButton_2"));
 
@@ -77,17 +77,17 @@ BasicInterface::BasicInterface(bool debug,
 						 L"Volume des effets",
 						 sf::Color::White);
 
-	m_titleLabel.create("monSuperLabel", 10, 10, 20, &m_fontLabel,
-						L"Paper Sword : Online",
-						sf::Color(232,200,20));
+	//m_titleLabel.create("monSuperLabel", 10, 10, 20, &m_fontLabel,
+	//					L"Paper Sword : Online",
+	//					sf::Color(232,200,20));
 
-	m_errorPanel.create("ErrorPanel", 303, 660,
+	m_errorPanel.create("ErrorPanel", 332, 685,
 						ptr_managerGroup->ptr_textureManager->getTexture("errorPanel"));
 
-	m_connectionErrorLabel.create("connectionErrorLabel", 330, 665, 20, &m_fontLabel,
+	m_connectionErrorLabel.create("connectionErrorLabel", 410, 705, 12, &m_fontLabel,
 								  L"Un problème de connexion est survenue.\n"
 										  "  Vérifiez votre connnexion et réessayez.",
-								  sf::Color(181, 51, 0));
+								  sf::Color::White);
 
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 0, 50,

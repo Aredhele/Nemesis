@@ -16,7 +16,9 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		m_connectButton(),
 		m_titleLabel(),
 		m_textFieldLogin(),
-		m_nemesisLogo()
+		m_nemesisLogo(),
+		m_bibouPanel(),
+		m_paperSwordTitlePanel()
 {
 	noError();
 	ptr_managerGroup->ptr_musicManager->
@@ -31,24 +33,28 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
 
-	m_connectButton.create("connectButton", 420, 605,
+	m_connectButton.create("connectButton", 442, 570,
 							ptr_managerGroup->ptr_textureManager->getTexture("connectButton1"),
 							ptr_managerGroup->ptr_textureManager->getTexture("connectButton2"));
 
 
 
+	m_bibouPanel.create("bibouPanel", 0, 400,
+						ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel"));
 
-    m_textFieldLogin.create("textFieldLogin", 420, 555,
+
+    m_textFieldLogin.create("textFieldLogin", 412, 500,
                             ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
                             &m_fontTextbox,
-                       15, 0.5, "Votre pseudo", 15, sf::Color::Black);
+                       15, 0.5, "Votre pseudo", 15, sf::Color(196,130,56));
 
-	m_nemesisLogo.create("nemesisLogo", 251, 50,
-						 ptr_managerGroup->ptr_textureManager->getTexture("nemesis"));
+	m_paperSwordTitlePanel.create("paperSwordTitlePanel", 104, 30,
+						 ptr_managerGroup->ptr_textureManager->getTexture("paperSwordTitlePanel"));
 
 
-	getContentPane()->addComponent(&m_nemesisLogo);
+    getContentPane()->addComponent(&m_bibouPanel);
+	getContentPane()->addComponent(&m_paperSwordTitlePanel);
 	getContentPane()->addComponent(&m_textFieldLogin);
 
 	getContentPane()->addComponent(&m_connectButton);
