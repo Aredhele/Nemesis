@@ -3,34 +3,30 @@
 //
 
 #include "Ability.hpp"
-
+/**
+*TYPE: 1er caractère: s pour soi meme, e pour ennemi, a pour allié
+*2eme caractère: un int avec les dmg
+*3eme car: une chaine avec un type de dégat "spécial", altération etc
+**/
 Ability::Ability(){
-	int m_damage;
-	int m_length;
+	m_id = 0;
+	m_name = "";
+	m_type =""; 
 }
 
 Ability::~Ability() {}
 
-void Ability::setAbilityEldora(int dmg, int lgth){
-	m_damage = dmg;
-	m_length = lgth;
+std::string Ability::getType(){
+	return m_type;
 }
-
-void Ability::setAbilityTristan(int dmg, int lgth){
-	m_damage = dmg;
-	m_length = lgth;
+int Ability::getId(){
+	return m_id;
 }
-void Ability::setAbilityRemington(int dmg, int lgth){
-	m_damage = dmg;
-	m_length = lgth;
+std::string Ability::getName(){
+	return m_name;
 }
-void Ability::setAbilityNumero8(int dmg, int lgth){
-	m_damage = dmg;
-	m_length = lgth;
-}
-int Ability::getAbilityDamage(){
-	return m_damage;
-}
-int Ability::getAbilityLength(){
-	return m_length;
+void Ability::setAbility(int id, std::string name,std::string type){
+	m_type = type;
+	m_name = name;
+	m_id = id;
 }

@@ -4,23 +4,23 @@
 
 #ifndef CLIENT_ABILITY_HPP
 #define CLIENT_ABILITY_HPP
+#include <string>
 
 #endif //CLIENT_ABILITY_HPP
 
 class Ability{
 	private:
-		int m_damage;
-		int m_length; // en secondes
+		int m_id;
+		std::string m_name;
+		std::string m_type;
 
 	public:
 		Ability();
 		~Ability();
-		void setAbilityEldora(int dmg, int lgth);
-		void setAbilityTristan(int dmg, int lgth);
-		void setAbilityRemington(int dmg, int lgth);
-		void setAbilityNumero8(int dmg, int lgth);
-		int getAbilityDamage();
-		int getAbilityLength();
+		void setAbility(int id, std::string name,std::string type);
+		std::string getType();
+		std::string getName();
+		int getId();
 
 		
 };

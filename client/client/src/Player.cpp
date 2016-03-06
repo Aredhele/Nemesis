@@ -24,19 +24,35 @@ void Player::setCharacter(int id){
 	switch (id){
 		case 0:
 			m_character.setCaracteristics(50,3000,30);
-			std::cout << "Eldora's caracteristics have been set" << std::endl;
+			m_character.setAbility(0,"Toto","toto");
+			m_character.setAbility(01,"Toto","toto");
+			m_character.setAbility(02,"Toto", "toto");
+			m_character.setAbility(03, "Toto", "toto");
+			std::cout << "Eldora's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 1:
 			m_character.setCaracteristics(500,4000,35);
-			std::cout << "Remington's caracteristics have been set" << std::endl;
+			m_character.setAbility(10, "Toto", "toto");
+			m_character.setAbility(11, "Toto", "toto");
+			m_character.setAbility(12, "Toto", "toto");
+			m_character.setAbility(13, "Toto", "toto");
+			std::cout << "Remington's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 2:
 			m_character.setCaracteristics(250,7000,40);
-			std::cout << "Tristan's caracteristics have been set" << std::endl;
+			m_character.setAbility(20, "Toto", "toto");
+			m_character.setAbility(21, "Toto", "toto");
+			m_character.setAbility(22, "Toto", "toto");
+			m_character.setAbility(23, "Toto", "toto");
+			std::cout << "Tristan's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 3:
 			m_character.setCaracteristics(100,15000,50);
-			std::cout << "Numero8's caracteristics have been set" << std::endl;
+			m_character.setAbility(30, "Toto", "toto");
+			m_character.setAbility(31, "Toto", "toto");
+			m_character.setAbility(32, "Toto", "toto");
+			m_character.setAbility(33, "Toto", "toto");
+			std::cout << "Numero8's caracteristics and abilities have been set" << std::endl;
 			break;
 
 	}

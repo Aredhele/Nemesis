@@ -36,6 +36,7 @@ class Character{
         void setDescription(std::wstring description);
         void setId(std::wstring id);
         void setCaracteristics(int atckDmg, int health, int armor);
+        void setAbility(int id, std::string name,std::string type);
 
 };
 #endif //DEF_CHARACTER_HPP

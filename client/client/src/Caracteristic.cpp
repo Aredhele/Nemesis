@@ -5,9 +5,9 @@
 #include "Caracteristic.hpp"
 
 Caracteristic::Caracteristic(){
-	int m_attackDamage;
-	int m_health;
-	int m_armor;
+	m_attackDamage = 0;
+	m_health = 0;
+	m_armor = 0;
 }
 
 Caracteristic::~Caracteristic(){ }

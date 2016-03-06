@@ -46,3 +46,7 @@ void Character::setCaracteristics(int atckDmg, int health, int armor){
 	ptr_caracteristic->setCaracteristics(atckDmg, health, armor);
 }
 
+void Character::setAbility(int id,std::string name,std::string type){
+	ptr_ability->setAbility(id,name,type);
+}
+
