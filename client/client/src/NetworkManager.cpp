@@ -16,7 +16,6 @@ NetworkManager::NetworkManager(bool debug) :
 
 	m_debug = debug;
 	m_serverAddress = "127.0.0.1";
-    //TODO : Changer le port en 6002
 	m_serverPort = 6002;
 
 	//TODO : Régler le problème avec fichier de Configuration
@@ -54,6 +53,7 @@ bool NetworkManager::connect(){
 
     return true;
 }
+
 /**
  *  Request sent to the server
  *  id 1 : get list of WarmUp

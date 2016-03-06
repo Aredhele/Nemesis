@@ -131,7 +131,16 @@ void BasicInterface::errorConnection() {
  */
 void BasicInterface::errorPseudo(){
 	m_connectionErrorLabel.setText(L"  Vous n'avez pas saisi votre pseudo.\n"
-										   "Saississiez votre pseudo et réessayez.");
+										   "Saisissez votre pseudo et réessayez.");
+	m_errorPanel.setVisible(true);
+}
+
+/*!
+ * Call an error warmup is full on the error panel
+ */
+void BasicInterface::errorWarmUpFull(){
+	m_connectionErrorLabel.setText(L"  Impossible de rejoindre le WarmUp.\n"
+										   "  Il est sûrement complet.");
 	m_errorPanel.setVisible(true);
 }
 

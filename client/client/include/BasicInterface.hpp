@@ -50,7 +50,7 @@ protected:
 	InputHandler m_inputHandler;
 	ManagerGroup * m_ptr_managerGroup;
 
-
+	void errorWarmUpFull();
 	void errorConnection();
 	void errorPseudo();
 	void noError();

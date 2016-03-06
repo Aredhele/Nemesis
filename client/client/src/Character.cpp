@@ -6,13 +6,13 @@
 
 Character::Character(){
 
+	ptr_caracteristic = new Caracteristic();
+	ptr_ability = new Ability();
     m_choosed = false;
 
 }
 
-Character::~Character(){
-
-}
+Character::~Character(){}
 
 void Character::selectCharacter(){
     m_choosed = true;
@@ -40,5 +40,13 @@ void Character::setDescription(std::wstring description){
 
 void Character::setId(std::wstring id){
     m_id = id;
+}
+
+void Character::setCaracteristics(int atckDmg, int health, int armor){
+	ptr_caracteristic->setCaracteristics(atckDmg, health, armor);
+}
+
+void Character::setAbility(int id,std::string name,std::string type){
+	ptr_ability->setAbility(id,name,type);
 }
 

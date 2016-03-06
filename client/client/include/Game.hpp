@@ -23,11 +23,6 @@ private:
     NPanel m_panelNumero8InGame;
     NPanel m_panelMdjInGame;
 
-
-
-
-
-
 public:
     // Constructor
     Game(bool debug, ManagerGroup * ptr_managerGroup);

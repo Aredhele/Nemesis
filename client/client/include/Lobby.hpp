@@ -29,6 +29,7 @@ private:
 
     bool firstConnect;
 
+    void joinWarmUp(int id);
     void updateNewWarmUp();
     void createNewWarmUp();
 
