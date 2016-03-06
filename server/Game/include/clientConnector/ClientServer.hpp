@@ -76,7 +76,7 @@ private:
     void requestManager( sf::Int32 idRequest, std::string sRequest,
                         sf::TcpSocket * socket, int indiceSocket);
     std::string getWarmUpList();
-    void joinWarmUp(sf::TcpSocket * socket, std::string param,
+    bool joinWarmUp(sf::TcpSocket * socket, std::string param,
                     int indiceSocket);
 
 public:

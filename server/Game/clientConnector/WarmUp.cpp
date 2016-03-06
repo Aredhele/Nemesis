@@ -1,4 +1,4 @@
-
+#include <SFML/Network/Packet.hpp>
 #include "clientConnector/WarmUp.hpp"
 
 WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socketOccupe,
@@ -102,10 +102,7 @@ void WarmUp::gererRequete(char requete[1024], std::size_t recu,
 
 
     (void)recu;
-    // Exemple de trame réseau :
-    // Action Paramètre(s)
-    // 1 rejoindre un WarmUp - numéro du WarmUp
-    // 2 créer un WarmUp - aucun
+
     char actionID_C[4];
     char actionParam_C[1020];
 
@@ -174,6 +171,13 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
     for(int i = 0; i < 4; i++) {
         if(!tabPlayer[i]->isHere()) {
             tabPlayer[i]->init(socket, nom, indiceSocket, i);
+
+            sf::Int32 id = 2;
+            std::string rep = "Ok";
+
+            sf::Packet packet;
+            packet << id << rep;
+            socket->send(packet);
 
             if(i == 3) {
                 std::string type = "sa " + cast::toString(numeroWarmUp);

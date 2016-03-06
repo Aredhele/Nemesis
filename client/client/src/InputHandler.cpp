@@ -164,7 +164,7 @@ void InputHandler::textEnteredHandle(sf::Event * e,
 		std::cout << "- Event ID : textEntered" << std::endl;
 		std::cout << "- Key code : " << m_keyCode << std::endl;
 	}
-	sf::sleep(sf::milliseconds(50));
+	//sf::sleep(sf::milliseconds(50));
 }
 
 /*!

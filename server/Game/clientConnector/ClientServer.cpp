@@ -244,12 +244,11 @@ void ClientServer::listSocketManager() {
  * \brief Décide de la méthode à appeler en fonction de la requête
  * \param requete le tableau d'octets contenant le requête
  */
-void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  sf::TcpSocket * socket, int indiceSocket) {
+void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,
+                                   sf::TcpSocket * socket, int indiceSocket) {
 
     std::string s;
     std::string ss;
-
-    std::cout << "ID REQUETE : " << idRequest << std::endl;
 
     // Exemple de trame réseau :
     // Action Paramètre(s)
@@ -264,7 +263,8 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  s
 
 
     std::cout << "ID REQUETE : " << actionID << std::endl;
-
+    sf::Int32 id;
+    std::string rep;
 
     sf::Packet packet;
 
@@ -277,9 +277,19 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  s
             break;
 
         case 2: // Le client veut rejoindre un salon
-            joinWarmUp(socket, sRequest, indiceSocket);
+            id = 2;
+            rep = "False";
 
-            s =  "Réponse à la requête n°" + actionID;
+            //socket->setBlocking(true);
+
+            if(!joinWarmUp(socket, sRequest, indiceSocket)){
+                packet << id << rep;
+                socket->send(packet);
+            }
+
+            //socket->setBlocking(false);
+
+            s =  "Reponse a la requete n " + actionID;
             ss = "- " + socket->getRemoteAddress().toString();
             this->m_ptr_displayer->displayMessage(" >> ", "" + s+ss);
 
@@ -288,9 +298,8 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  s
 
         case 3: // Le client veut récupérer la liste des salons
         {
-            std::cout << "CASE 3  " << std::endl;
             // Obtention de la liste des salons et de l'id de la requete
-            sf::Int32 id = 3;
+            id = 3;
             std::string listeSalonClient = getWarmUpList();
 
 
@@ -303,7 +312,7 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  s
             socket->setBlocking(false);
 
             // Trace d'éxécution
-            s = "Réponse à la requête n°" + actionID;
+            s = "Reponse a la requete n " + actionID;
             ss = " - " + socket->getRemoteAddress().toString();
             this->m_ptr_displayer->displayMessage(" >> ", "" + s + ss);
 
@@ -312,8 +321,6 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,  s
         default:
             break;
     }
-
-
 }
 /**
  * \brief Retourne la liste de tout les salons dans un std::string
@@ -341,36 +348,34 @@ std::string ClientServer::getWarmUpList() {
  * \param
  * \return TODO
  */
-void ClientServer::joinWarmUp(sf::TcpSocket * socket, std::string param,
+bool ClientServer::joinWarmUp(sf::TcpSocket * socket, std::string param,
                              int indiceSocket) {
 
     char idSalon_C[2] = {0};
     char nomJoueur_C[1018] = {0};
 
     // Parcourt de la chaîne
+    this->m_ptr_displayer->displayMessage("warn", param);
     if(sscanf(param.c_str(), "%[^&]&%s", idSalon_C, nomJoueur_C) != 2) {
         this->m_ptr_displayer->displayMessage("warn", "Erreur de lecture des arguments");
         this->m_ptr_displayer->displayMessage("fail", "sscanf n'a pas lu les bons arguments");
-        return;
+        return false;
     }
 
-    if(cast::toInt(idSalon_C) > 9 || cast::toInt(idSalon_C) < 0) return;
+    if(listeWarmUp[cast::toInt(idSalon_C)]->getStateWarmUp()== WarmUp::Indisponible) return false;
 
     this->m_ptr_displayer->displayMessage("info", "ARG_1 = " + std::string(idSalon_C) +
                                      ", ARG_2 = " + std::string(nomJoueur_C));
 
-    this->m_ptr_displayer->displayMessage("info", "Le joueur [" + std::string(nomJoueur_C) +
-                                     "] a rejoint le salon n°" + std::string(idSalon_C));
 
-    int nJoueur = listeWarmUp[cast::toInt(idSalon_C)]->addPlayer(socket, nomJoueur_C,
+
+
+    listeWarmUp[cast::toInt(idSalon_C +1)]->addPlayer(socket, nomJoueur_C,
                                                                  (unsigned int) indiceSocket);
+    this->m_ptr_displayer->displayMessage("info", "Le joueur [" + std::string(nomJoueur_C) +
+                                                  "] a rejoint le salon n°" + std::string(idSalon_C));
 
     listeSocketOccupee[indiceSocket] = true;
-
-    // Envoie de la réponse
-    std::size_t donneeEnvoyee;
-    // 2 | idSalon & numeroJoueur & nomHote
-    std::string reponse = "2 | " + std::string(idSalon_C) + "&" + cast::toString(nJoueur) +
-                          "&" + listeWarmUp[cast::toInt(idSalon_C)]->getMDJName();
-    socket->send(reponse.c_str(), 1024, donneeEnvoyee);
+    
+    return true;
 }

@@ -64,13 +64,7 @@ void Lobby::update(sf::RenderWindow * window,
 
     for(int i = 1; i <= 5; i++){
         if(m_inputHandler.getComponentId() == "connectButton"+i) {
-                //if(m_ptr_managerGroup->ptr_networkManager->connect())
-            m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
-               /*else{
-                    m_connectionErrorLabel.setText(L"Un problème de connexion est survenue.\n"
-                                                           "  Vérifiez votre connnexion et réessayez.");
-                    m_errorPanel.setVisible(true);
-                }*/
+            joinWarmUp(i);
         }
     }
 
@@ -79,6 +73,7 @@ void Lobby::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "createButton") {
         createNewWarmUp();
+        updateNewWarmUp();
     }
 
 
@@ -94,12 +89,12 @@ void Lobby::createNewWarmUp(){
     sf::Int32 idRequest;
     std::string sRequest;
 
-    if(m_ptr_managerGroup->ptr_networkManager->request(1,
-                                                       m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() )){
+    if(m_ptr_managerGroup->ptr_networkManager->request(1, m_ptr_managerGroup
+            ->ptr_gameManager->getPlayer()->getName() )){
+
         std::cout << "Creation WarmUp réussi par " <<
                 m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
         updateNewWarmUp();
-        m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
     }
     else{
         errorConnection();
@@ -193,5 +188,35 @@ void Lobby::updateNewWarmUp(){
                                    30, &m_font, L"Partie de  " + s, sf::Color::Black);
             getContentPane()->addComponent(warmUpLabel[i]);
         }
+    }
+}
+
+void Lobby::joinWarmUp(int idWarmUp){
+    sf::Packet *  packet = new sf::Packet();
+    sf::Int32 idRequest;
+    std::string sRequest;
+
+    if(m_ptr_managerGroup->ptr_networkManager->request(2, ""+ cast::toString(idWarmUp) +
+            std::string("&") + std::string(m_ptr_managerGroup
+            ->ptr_gameManager->getPlayer()->getName() ))){
+
+        std::cout << "Requete pour rejoindre WarmUp réussi par " <<
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
+
+        //We receive the request : if it's ok, when you can enter the WarmUp, if no, then the warmup
+        // is full
+        packet = m_ptr_managerGroup->ptr_networkManager->requestReceive();
+        *packet >> idRequest >> sRequest;
+        if(sRequest == "Ok"){
+            std::cout << "On rejoint bien le warmUp" << std::endl;
+            m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
+        }
+        else{
+            std::cout << "Le warmUp est complet" << std::endl;
+            errorWarmUpFull();
+        }
+    }
+    else{
+        errorConnection();
     }
 }
