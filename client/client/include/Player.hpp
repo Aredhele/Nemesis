@@ -24,6 +24,7 @@ public:
     //Methods
     void setName(std::string name);
     std::string getName();
+    void setCharacter(int id);
 };
 
 #endif //DEF_PLAYER_HPP

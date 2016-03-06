@@ -4,7 +4,7 @@ REM std=gnu++0x std=c++11
 REM CLIENT Compilation
 REM Add to link editor -mwindows -O2 for release mode
 
-SET FLAGS=-Wall -Wextra -std=gnu++0x
+SET FLAGS=-std=gnu++0x
 
 SET EXENAME=Client.exe
 SET DIRBIN=..\bin

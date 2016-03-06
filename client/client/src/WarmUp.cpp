@@ -103,18 +103,22 @@ void WarmUp::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "numero8Button") {
         displayInfoCharacters("numero8");
         m_selectCharacterPanel.setPosition(95, 65);
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(3);
     }
     if(m_inputHandler.getComponentId() == "remingtonButton") {
         displayInfoCharacters("remington");
         m_selectCharacterPanel.setPosition(315, 65);
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(1);
     }
     if(m_inputHandler.getComponentId() == "eldoraButton") {
         displayInfoCharacters("eldora");
         m_selectCharacterPanel.setPosition(535, 65);
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(0);
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
         displayInfoCharacters("tristan");
         m_selectCharacterPanel.setPosition(755, 65);
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(2);
     }
     if(m_inputHandler.getComponentId() == "returnButton") {
         m_playButton.setVisible(false);
