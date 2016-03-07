@@ -18,7 +18,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
     ptr_textureButton1 = ptr_managerGroup->ptr_textureManager->getTexture("rejoindreButton_1");
     ptr_textureButton2 = ptr_managerGroup->ptr_textureManager->getTexture("rejoindreButton_2");
 
-    if (!m_font.loadFromFile("../res/font/Quicksand.ttf"))
+    if (!m_font.loadFromFile("../res/font/Roboto-Regular.ttf"))
     {
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
@@ -28,7 +28,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
     m_refreshButton.create("refreshButton", 50, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_1"),
                         ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_2"));
-    m_createButton.create("createButton", 749, 700,
+    m_createButton.create("createButton", 940, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("createButton_1"),
                         ptr_managerGroup->ptr_textureManager->getTexture("createButton_2"));
 

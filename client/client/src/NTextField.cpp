@@ -62,7 +62,7 @@ void NTextField::create(std::string id, int x, int y,
 
 	// Init sf::texte
 	m_text.setFont(*ptr_font);
-	m_text.setString("");
+	m_text.setString(text);
 	m_text.setCharacterSize(fontSize);
 	m_text.setPosition(textPosition);
 	m_text.setColor(color);

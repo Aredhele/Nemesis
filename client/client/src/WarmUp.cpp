@@ -49,8 +49,8 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
                              ptr_managerGroup->ptr_textureManager->getTexture("perso2"));
 
 m_returnButton.create("returnButton", 20, 700,
-                           ptr_managerGroup->ptr_textureManager->getTexture("topBarExitButton_1"),
-                           ptr_managerGroup->ptr_textureManager->getTexture("topBarExitButton_2"));
+                           ptr_managerGroup->ptr_textureManager->getTexture("backButton_1"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("backButton_2"));
 
 
     m_selectCharacterPanel.create("selectCharacterPanel", 95,65,
