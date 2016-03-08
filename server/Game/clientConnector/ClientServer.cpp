@@ -7,12 +7,7 @@ ClientServer::ClientServer(ConsoleDisplayer * displayer) {
     m_running = false;
     m_multiIp = _DFLT_SMIP_;
     m_serverPort = _DFLT_SPORT_;
-    m_serverAddress = _DFLT_SADDR_;
-    m_serverMaxConnection = _DFLT_SMCO_;
-
-    m_masterPort = _DFLT_MPORT_;
     m_masterCheck = _DFLT_MCHECK_;
-    m_masterAddress = _DFLT_MADDR_;
 
     m_ptr_displayer = displayer;
 }
@@ -24,16 +19,10 @@ ClientServer::ClientServer(ConsoleDisplayer * displayer) {
  */
 ClientServer::ClientServer(ConsoleDisplayer * displayer, Configuration * config) {
     m_running = false;
-    m_serverAddress = config->getParam(_SERVER_IP_);
     m_multiIp = cast::toBool(config->getParam(_SERVER_MIP_));
     m_serverPort = cast::toInt(config->getParam(_SERVER_PORT_));
-    m_serverMaxConnection = cast::toInt(config->getParam(_SERVER_MCO_));
-
-    m_masterAddress = config->getParam(_MSERV_IP_);
-    m_masterPort = cast::toInt(config->getParam(_MSERV_PORT_));
     m_masterCheck = cast::toBool(config->getParam(_MSERV_CHECK_));
 
-    m_ptr_configuration = config;
     m_ptr_displayer = displayer;
     initialiser();
 }
