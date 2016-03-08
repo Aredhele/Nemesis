@@ -7,6 +7,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         BasicInterface(debug, ptr_managerGroup)
 
 {
+
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
     ptr_remingtonInGame->setSmooth(true);

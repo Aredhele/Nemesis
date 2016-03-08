@@ -13,6 +13,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
         m_createButton()
 {
     noError();
+    nbWarmUp = 0;
     firstConnect = true;
 
     ptr_textureButton1 = ptr_managerGroup->ptr_textureManager->getTexture("rejoindreButton_1");
@@ -72,8 +73,13 @@ void Lobby::update(sf::RenderWindow * window,
         updateNewWarmUp();
     }
     if(m_inputHandler.getComponentId() == "createButton") {
+        std::cout << "Creation WarmUp" << std::endl;
         createNewWarmUp();
+        std::cout << "Update liste WarmUp" << std::endl;
         updateNewWarmUp();
+        std::cout << "Join WarmUp" << std::endl;
+        joinWarmUp(nbWarmUp);
+
     }
 
 
@@ -94,7 +100,6 @@ void Lobby::createNewWarmUp(){
 
         std::cout << "Creation WarmUp réussi par " <<
                 m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
-        updateNewWarmUp();
     }
     else{
         errorConnection();
@@ -187,6 +192,8 @@ void Lobby::updateNewWarmUp(){
             warmUpLabel[i]->create("monSuperLabel" + tmp, 200, 255 + i/2 * 75,
                                    30, &m_font, L"Partie de  " + s, sf::Color::White);
             getContentPane()->addComponent(warmUpLabel[i]);
+            nbWarmUp++;
+            std::cout << "Nombre WARMUP " <<nbWarmUp << std::endl;
         }
     }
 }

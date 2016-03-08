@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
     Game game(DEBUG, managerGroup);
 
     // Setting main target
-    managerGroup->ptr_targetManager->isOnWarmUp();
+    managerGroup->ptr_targetManager->isOnLoginMenu();
 
 
     sf::Clock clock;
