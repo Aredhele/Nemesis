@@ -15,6 +15,9 @@ private:
     sf::Texture *ptr_tristanInGame;
     sf::Texture *ptr_tableInGame;
     sf::Texture *ptr_numero8InGame;
+    sf::Texture *ptr_crapaud;
+    sf::Texture *ptr_dragon;
+    sf::Texture *ptr_yeti;
     sf::Texture *ptr_mdjInGame;
     NPanel m_panelEldoraInGame;
     NPanel m_panelRemingtonInGame;
@@ -22,6 +25,9 @@ private:
     NPanel m_panelTableInGame;
     NPanel m_panelNumero8InGame;
     NPanel m_panelMdjInGame;
+    NPanel m_panelYeti;
+    NPanel m_panelDragon;
+    NPanel m_panelCrapaud;
 
 public:
     // Constructor
