@@ -93,10 +93,11 @@ void ResourceLoader::load() {
     a_tm.addTexture("rejoindreButton_1", pathLogin + "rejoindreButton_1.png");
     a_tm.addTexture("rejoindreButton_2", pathLogin + "rejoindreButton_2.png");
 	a_tm.addTexture("bibouPanel", pathLogin + "bibouPanel.png");
-	a_tm.addTexture("paperSwordTitlePanel", pathLogin + "paperSwordTitle.png");
+	a_tm.addTexture("paperSwordTitlePanel", pathLogin + "paperSwordTitleFull.png");
 	a_tm.addTexture("backButton_1", pathLogin + "backButton_1.png");
 	a_tm.addTexture("backButton_2", pathLogin + "backButton_2.png");
 	a_tm.addTexture("popup", pathLogin + "popUpCo.png");
+	a_tm.addTexture("logoSmall", pathLogin + "paperSwordTitleSmall.png");
 
 	a_tm.addTexture("perso0", pathChar +  "Numero_8.png");
 	a_tm.addTexture("perso1", pathChar + "Remington.png");

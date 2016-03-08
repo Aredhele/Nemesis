@@ -12,7 +12,7 @@
 #define WINDOW_NAME "Nemesis"
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
-#define WINDOW_FPS 120
+#define WINDOW_FPS 60
 
 #define SUCCESS 1
 #define FAILURE 0

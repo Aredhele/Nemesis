@@ -150,7 +150,9 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  * \return id NULL if not found
  */
 void NTextField::eventTextEntered(sf::Event * e) {
-	
+
+	std::cout << "NText" << std::endl;
+
 	float coefFont = 1.65;
 
 	if(!m_isEnable || !m_isActive) return;
@@ -170,9 +172,9 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		} else if(e->text.unicode == 13) { // Carriage Return
 			m_isActive = false;
 		}
-		 else {
+		else {
 			m_charList.push_back(
-				static_cast < char >(e->text.unicode));
+					static_cast < char >(e->text.unicode));
 			if(e->text.unicode > 96 || e->text.unicode < 123) {
 				m_cursorPosition.x += m_fontSize / coefFont;
 				//m_cursorPosition.x += m_fontSize;

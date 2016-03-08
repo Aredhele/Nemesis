@@ -19,6 +19,7 @@
 class InputHandler
 {
 private:
+	bool m_textEntered;
 	bool m_debug;
 	bool m_mouseState;
 	bool m_mouseLock;

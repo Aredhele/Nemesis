@@ -32,6 +32,7 @@ private:
 	NLabel m_volumeLabel;
 	NLabel m_soundLabel;
 	NLabel m_titleLabel;
+	NPanel m_smallTitleLogo;
 	NLabel m_connectionErrorLabel;
 	NPanel m_errorPanel;
 

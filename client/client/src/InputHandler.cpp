@@ -15,6 +15,7 @@
 InputHandler::InputHandler(bool debug) {
 	m_debug = debug;
 	m_mouseLock = true;
+	m_textEntered = true;
 }
 
 /*!
@@ -50,8 +51,17 @@ void InputHandler::handleInput(sf::Event * e,
 			break;
 
 		case sf::Event::TextEntered:
-			textEnteredHandle(e, o);
-			break;
+			/*if(m_textEntered){
+				m_textEntered = false;*/
+				textEnteredHandle(e, o);
+				/*}
+                break;
+
+            case sf::Event::KeyReleased:
+                if (!m_textEntered)
+                    m_textEntered = true;
+                    */
+                break;
 
 		default:
 			m_overId = "NULL";
@@ -158,6 +168,7 @@ void InputHandler::textEnteredHandle(sf::Event * e,
 	m_pressedId = "NULL";
 
 	m_keyCode = e->text.unicode;
+
 	o->eventTextEntered(e);
 
 	if(m_debug) {

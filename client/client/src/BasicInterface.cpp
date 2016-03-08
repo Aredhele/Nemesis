@@ -24,6 +24,7 @@ BasicInterface::BasicInterface(bool debug,
 																  m_volumeLabel(),
 																  m_soundLabel(),
                                                                   m_titleLabel(),
+																  m_smallTitleLogo(),
 																  m_connectionErrorLabel(),
 																  m_errorPanel(),
 																  m_inputHandler(debug)
@@ -42,6 +43,8 @@ BasicInterface::BasicInterface(bool debug,
 	}
 
 
+	m_smallTitleLogo.create("smallTitleLogo", 0, 0,
+							 a_tm.getTexture("logoSmall"));
 	// Creating m_contentPane
 	m_contentPane.create("mainPanel", 0, 0,
 						 a_tm.getTexture("loginBackground"));
@@ -93,10 +96,11 @@ BasicInterface::BasicInterface(bool debug,
 	m_optionPanel.create("optionPanel", 0, 50,
 						 a_tm.getTexture("optionPane"));
 
+
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 	m_errorPanel.setVisible(false);
 	getContentPane()->addComponent(&m_errorPanel);
-
+	getContentPane()->addComponent(&m_smallTitleLogo);
     getContentPane()->addComponent(&m_titleLabel);
 	m_optionPanel.addComponent(&m_volumeLabel);
 	m_optionPanel.addComponent(&m_soundLabel);
