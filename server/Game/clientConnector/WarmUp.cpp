@@ -12,7 +12,7 @@ WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socke
     estEnMarche = false;
     this->listePartie = listePartie;
 
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 5; i++) {
         tabPlayer[i] = new Player();
     }
 
@@ -27,7 +27,7 @@ void WarmUp::init() {
     etatWarmUp = WarmUp::Disponible;
     estEnMarche = false;
 
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 5; i++)
         tabPlayer[i]->init();
 }
 
@@ -50,12 +50,16 @@ void WarmUp::threadWarmUp() {
     while(estEnMarche)
     {
         // TODO faire toutes les vérifications
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 5; i++) {
 
             if(tabPlayer[i]->isHere()) {
-
+                sf::Packet packet;
                 socketStatus = tabPlayer[i]->getSocket()->receive(
-                        octetsRecus, 1024, nbOctetsRecus);
+                        packet);
+                sf::Int32 idRequest;
+                std::string sRequest;
+                packet >>idRequest >> sRequest;
+
                 switch(socketStatus)
                 {
                     case sf::Socket::NotReady:
@@ -70,7 +74,7 @@ void WarmUp::threadWarmUp() {
 
 
                         // Gestion de la requête
-                        gererRequete(octetsRecus, nbOctetsRecus, tabPlayer[i]->getSocket(),
+                        gererRequete(idRequest, sRequest, tabPlayer[i]->getSocket(),
                                      tabPlayer[i]->getNumeroPlayer());
                         break;
 
@@ -97,34 +101,19 @@ void WarmUp::threadWarmUp() {
         horloge.restart();
     }
 }
-void WarmUp::gererRequete(char requete[1024], std::size_t recu,
+void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
                          sf::TcpSocket * socket, int numeroPlayer) {
 
+    // Conversion de l'actionID en entier
+    int actionID = cast::toInt(idRequest);
 
-    (void)recu;
-
-    char actionID_C[4];
-    char actionParam_C[1020];
-
-    // Parcourt de la chaîne
-    if(sscanf(requete, "%s | %s", actionID_C, actionParam_C) != 2) {
-        displayer->displayMessage("sa " + cast::toString(numeroWarmUp)+
-                           "warn", "Erreur de lecture du paquet");
-        displayer->displayMessage("sa " + cast::toString(numeroWarmUp)+
-                           "fail", "sscanf n'a pas lu les bons arguments");
-        return;
-    }
-
+    std::string stringActionId = SSTR( actionID );
+    puts( SSTR( actionID ).c_str() );
 
     displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                       "info", "ActionID = " + std::string(actionID_C) +
-                               ", ARG = " + std::string(actionParam_C));
-
-    // Conversion de l'actionID en entier
-    int actionID = cast::toInt(actionID_C);
-
-
-    std::size_t donneeEnvoyee;
+                       "info", "ActionID = " + stringActionId +
+                               ", ARG = " + std::string(sRequest));
+    sf::Packet packet;
 
 
     switch(actionID)
@@ -134,15 +123,53 @@ void WarmUp::gererRequete(char requete[1024], std::size_t recu,
             //launchGame();
 
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                               " >> ", "Réponse à la requête n°" + cast::toString(actionID_C));
+                               " >> ", "Reponse a la requete n " + stringActionId);
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                               "info", "La partie va commencer, la WarmUp va être libéré");
+                               "info", "La partie va commencer, le WarmUp va etre libere");
             break;
-        //TODO Case pour donner son nom, perso etc...
+
+        case 2: //Lock un caractère
+            displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
+                                      " >> ", "Reponse a la requete n " + stringActionId);
+            if(lockCarac(sRequest, numeroPlayer)){
+                packet << actionID << "Ok";
+                socket->send(packet);
+                sendModifLockCarac(sRequest, numeroPlayer);
+            }
+            packet << actionID << "False";
+            socket->send(packet);
+            break;
+
         default:
             break;
     }
 
+}
+
+//Send to a thread listening
+void WarmUp::sendModifLockCarac(std::string sRequest, int numeroPlayer){
+    displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
+                              " >> ", "Envoi du changement du WarmUp : perso lock ");
+    for(int i = 0; i < 5; i++) {
+        if (tabPlayer[i]->isHere()) {
+            sf::Packet packet;
+            sf::Int32 idRequest;
+            std::string nomPlayer = tabPlayer[numeroPlayer]->getNamePlayer();
+            idRequest = 3;
+
+            //Renvoie 3-NomPerso-NomJoueur
+            packet << idRequest << sRequest << nomPlayer;
+            tabPlayer[i]->getSocket()->send(packet);
+        }
+    }
+}
+
+bool WarmUp::lockCarac(std::string sRequest, int nbPLayer ) {
+    for(int i =0; i < sizeof(tabPlayer); i++ ){
+        if(tabPlayer[i]->getNameChar() == sRequest) return false;
+    }
+    (tabPlayer[nbPLayer]->setNameChar(sRequest));
+    return true;
 }
 
 /**
@@ -168,7 +195,7 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
     // TODO exception !
     // TODO retourner qqch si le WarmUp est plein
     // (normalement impossible !)
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 5; i++) {
         if(!tabPlayer[i]->isHere()) {
             tabPlayer[i]->init(socket, nom, indiceSocket, i);
 
@@ -179,7 +206,7 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
             packet << id << rep;
             socket->send(packet);
 
-            if(i == 3) {
+            if(i == 4) {
                 std::string type = "sa " + cast::toString(numeroWarmUp);
                 this->displayer->displayMessage("warn", "Le WarmUp est complet !");
                 etatWarmUp = Etat::Indisponible;

@@ -12,6 +12,7 @@ class WarmUp : public BasicInterface
 {
     private:
 
+        bool m_charSelected;
         NButton m_numero8Button;
         NButton m_remingtonButton;
         NButton m_tristanButton;

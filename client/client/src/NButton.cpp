@@ -40,6 +40,7 @@ sf::Texture * texture_1, sf::Texture * texture_2) {
 
 	m_actionId = -1;
 	m_ptr_trggObject = nullptr;
+	m_isEnabled = true;
 
 	// Call super method
 	init(id, x, y, texture_1);
@@ -79,6 +80,7 @@ std::string NButton::eventMousePressed(sf::Event * e) {
 
 	std::string id = "NULL";
 	if(m_hidden) return id;
+	if(!m_isEnabled) return id;
 
 	sf::FloatRect mousePosition(e->mouseButton.x, 
 	e->mouseButton.y, 1, 1);
@@ -108,8 +110,10 @@ std::string NButton::eventMousePressed(sf::Event * e) {
  */
 std::string NButton::eventMouseMoved(sf::Event * e) {
 
+
 	std::string id = "NULL";
 	if(m_hidden) return id;
+	if(!m_isEnabled) return id;
 
 	sf::FloatRect mousePosition(e->mouseMove.x, 
 	e->mouseMove.y, 1, 1);
@@ -182,4 +186,8 @@ void NButton::setPosition(float x, float y) {
  */
 void NButton::setActionId(unsigned int id) {
 	m_actionId = id;
+}
+
+void NButton::setEnabled(bool enabled){
+	m_isEnabled = enabled;
 }

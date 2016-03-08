@@ -98,6 +98,8 @@ void ResourceLoader::load() {
 	a_tm.addTexture("backButton_2", pathLogin + "backButton_2.png");
 	a_tm.addTexture("popup", pathLogin + "popUpCo.png");
 	a_tm.addTexture("logoSmall", pathLogin + "paperSwordTitleSmall.png");
+	a_tm.addTexture("arrowButton_1", pathLogin + "arrowButton_1.png");
+	a_tm.addTexture("arrowButton_2", pathLogin + "arrowButton_2.png");
 
 	//in warmUp
 	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_175.png");

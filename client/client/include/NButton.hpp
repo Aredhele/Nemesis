@@ -17,6 +17,7 @@
 class NButton : public VisualObject
 {
 	private:
+		bool m_isEnabled;
 		unsigned int m_actionId;
 		TriggerableObject * m_ptr_trggObject;
 
@@ -48,6 +49,7 @@ class NButton : public VisualObject
 		sf::Texture * texture_2);
 		virtual void setPosition(float x, float y);
 
+		void setEnabled(bool enabled);
 		void setActionId(unsigned int id);
 };
 
