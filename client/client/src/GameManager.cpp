@@ -51,6 +51,8 @@ void GameManager::initCharacters(){
     m_characterList[2]->setId(L"eldora");
     m_characterList[3]->setName(L"Tristan de la Mortifère");
     m_characterList[3]->setId(L"tristan");
+    m_characterList[3]->setName(L"Maitre du jeu");
+    m_characterList[3]->setId(L"mdj");
 
     for (int i = 0; i < 4; i++){
         m_characterList[i]->setDescription(L"Bonjour ! \nJe m\'appelle "

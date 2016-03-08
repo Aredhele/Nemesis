@@ -16,9 +16,12 @@ class WarmUp : public BasicInterface
         NButton m_remingtonButton;
         NButton m_tristanButton;
         NButton m_eldoraButton;
+        NButton m_mdjButton;
+
         NPanel m_selectCharacterPanel;
         NPanel m_infoCharacterPanel;
         NLabel m_infoCharacterLabel;
+
         NButton m_playButton;
         NButton m_returnButton;
 

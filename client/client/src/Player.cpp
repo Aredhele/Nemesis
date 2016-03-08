@@ -54,6 +54,14 @@ void Player::setCharacter(int id){
 			m_character.setAbility(33, "Toto", "toto");
 			std::cout << "Numero8's caracteristics and abilities have been set" << std::endl;
 			break;
+		case 4:
+			m_character.setCaracteristics(0,0,0);
+			m_character.setAbility(40, "Toto", "toto");
+			m_character.setAbility(41, "Toto", "toto");
+			m_character.setAbility(42, "Toto", "toto");
+			m_character.setAbility(43, "Toto", "toto");
+			std::cout << "MDJ's caracteristics and abilities have been set" << std::endl;
+			break;
 
 	}
 }
