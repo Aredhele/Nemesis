@@ -11,6 +11,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_tristanButton(),
         m_eldoraButton(),
         m_mdjButton(),
+        m_validateCharacterButton(),
         m_selectCharacterPanel(),
         m_infoCharacterPanel(),
         m_infoCharacterLabel(),
@@ -26,6 +27,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
 
+    //m_validateCharacterButton.create("validateCharButton", )
     m_playButton.create("playButton", 780, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("playButton_1"),
                         ptr_managerGroup->ptr_textureManager->getTexture("playButton_2"));
@@ -46,13 +48,14 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
 
     leftBorder+=205;
     m_tristanButton.create("tristanButton", leftBorder, 70,
-                             ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"),
-                             ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"));
+                           ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"));
 
     leftBorder+=205;
     m_tristanButton.create("mdjButton", leftBorder, 70,
                            ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"),
                            ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"));
+
 
     m_returnButton.create("returnButton", 20, 700,
                            ptr_managerGroup->ptr_textureManager->getTexture("backButton_1"),
@@ -73,15 +76,16 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_infoCharacterPanel.setVisible(false);
     m_selectCharacterPanel.setVisible(false);
     m_infoCharacterPanel.addComponent(&m_infoCharacterLabel);
-    getContentPane()->addComponent(&m_mdjButton);
+
     getContentPane()->addComponent(&m_infoCharacterPanel);
     getContentPane()->addComponent(&m_selectCharacterPanel);
     getContentPane()->addComponent(&m_numero8Button);
     getContentPane()->addComponent(&m_remingtonButton);
     getContentPane()->addComponent(&m_eldoraButton);
     getContentPane()->addComponent(&m_tristanButton);
+    getContentPane()->addComponent(&m_mdjButton);
     getContentPane()->addComponent(&m_playButton);
-    getContentPane()->addComponent(&m_returnButton);
+    //getContentPane()->addComponent(&m_returnButton);
 
 
     //displayCharacters();
