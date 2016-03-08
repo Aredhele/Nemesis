@@ -11,6 +11,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_tristanButton(),
         m_eldoraButton(),
         m_mdjButton(),
+        m_validateCharacterButton(),
         m_selectCharacterPanel(),
         m_infoCharacterPanel(),
         m_infoCharacterLabel(),
