@@ -11,6 +11,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_tristanButton(),
         m_eldoraButton(),
         m_mdjButton(),
+        m_validateCharacterButton(),
         m_selectCharacterPanel(),
         m_infoCharacterPanel(),
         m_infoCharacterLabel(),
@@ -26,7 +27,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
 
-    m_validateCharacterButton.create("validateCharButton", )
+    //m_validateCharacterButton.create("validateCharButton", )
     m_playButton.create("playButton", 780, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("playButton_1"),
                         ptr_managerGroup->ptr_textureManager->getTexture("playButton_2"));

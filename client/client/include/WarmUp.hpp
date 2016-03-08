@@ -17,6 +17,7 @@ class WarmUp : public BasicInterface
         NButton m_tristanButton;
         NButton m_eldoraButton;
         NButton m_mdjButton;
+        NButton m_validateCharacterButton;
 
         NPanel m_selectCharacterPanel;
         NPanel m_infoCharacterPanel;
