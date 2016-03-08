@@ -99,14 +99,15 @@ void ResourceLoader::load() {
 	a_tm.addTexture("popup", pathLogin + "popUpCo.png");
 	a_tm.addTexture("logoSmall", pathLogin + "paperSwordTitleSmall.png");
 
-	a_tm.addTexture("perso0", pathChar +  "Numero_8.png");
-	a_tm.addTexture("perso1", pathChar + "Remington.png");
-	a_tm.addTexture("perso2", pathChar + "Tristan_De_La_Mortifere.png");
-	a_tm.addTexture("perso3", pathChar +  "Eldora_Dragnir.png");
+	//in warmUp
+	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_175.png");
+	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_175.png");
+	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_175.png");
+	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_175.png");
+	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_175.png");
 
 	//in game
 	a_tm.addTexture("eldoraInGame",pathChar + "Eldora_Dragnir_inGame.png");
-	a_tm.addTexture("mdj",pathChar + "Mdj.png");
 	a_tm.addTexture("numero8InGame",pathChar + "Numero_8_inGame.PNG");
 	a_tm.addTexture("remingtonInGame",pathChar + "Remington_inGame.PNG");
 	a_tm.addTexture("tableInGame",pathChar + "Table_Jeu_inGame.png");

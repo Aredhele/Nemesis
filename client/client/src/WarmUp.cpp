@@ -10,6 +10,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_remingtonButton(),
         m_tristanButton(),
         m_eldoraButton(),
+        m_mdjButton(),
         m_selectCharacterPanel(),
         m_infoCharacterPanel(),
         m_infoCharacterLabel(),
@@ -18,7 +19,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
 {
 
     noError();
-    int leftBorder = 100;
+    int leftBorder = 15;
 
     if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
     {
@@ -30,25 +31,30 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
                         ptr_managerGroup->ptr_textureManager->getTexture("playButton_2"));
 
     m_numero8Button.create("numero8Button", leftBorder, 70,
-                           ptr_managerGroup->ptr_textureManager->getTexture("perso0"),
-                           ptr_managerGroup->ptr_textureManager->getTexture("perso0"));
+                           ptr_managerGroup->ptr_textureManager->getTexture("numero8InWarmUp"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("numero8InWarmUp"));
 
-    leftBorder+=220;
+    leftBorder+=205;
     m_remingtonButton.create("remingtonButton", leftBorder, 70,
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso1"),
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso1"));
+                             ptr_managerGroup->ptr_textureManager->getTexture("remingtonInWarmUp"),
+                             ptr_managerGroup->ptr_textureManager->getTexture("remingtonInWarmUp"));
 
-    leftBorder+=220;
-    m_eldoraButton.create("eldoraButton", leftBorder, 71,
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso3"),
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso3"));
+    leftBorder+=205;
+    m_eldoraButton.create("eldoraButton", leftBorder, 70,
+                             ptr_managerGroup->ptr_textureManager->getTexture("eldoraInWarmUp"),
+                             ptr_managerGroup->ptr_textureManager->getTexture("eldoraInWarmUp"));
 
-    leftBorder+=220;
+    leftBorder+=205;
     m_tristanButton.create("tristanButton", leftBorder, 70,
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso2"),
-                             ptr_managerGroup->ptr_textureManager->getTexture("perso2"));
+                             ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"),
+                             ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"));
 
-m_returnButton.create("returnButton", 20, 700,
+    leftBorder+=205;
+    m_tristanButton.create("mdjButton", leftBorder, 70,
+                           ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"));
+
+    m_returnButton.create("returnButton", 20, 700,
                            ptr_managerGroup->ptr_textureManager->getTexture("backButton_1"),
                            ptr_managerGroup->ptr_textureManager->getTexture("backButton_2"));
 
@@ -67,6 +73,7 @@ m_returnButton.create("returnButton", 20, 700,
     m_infoCharacterPanel.setVisible(false);
     m_selectCharacterPanel.setVisible(false);
     m_infoCharacterPanel.addComponent(&m_infoCharacterLabel);
+    getContentPane()->addComponent(&m_mdjButton);
     getContentPane()->addComponent(&m_infoCharacterPanel);
     getContentPane()->addComponent(&m_selectCharacterPanel);
     getContentPane()->addComponent(&m_numero8Button);
@@ -102,24 +109,30 @@ void WarmUp::update(sf::RenderWindow * window,
     //TODO : Afficher les info des personnages
     if(m_inputHandler.getComponentId() == "numero8Button") {
         displayInfoCharacters("numero8");
-        m_selectCharacterPanel.setPosition(95, 65);
+        m_selectCharacterPanel.setPosition(10, 65);
         m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(3);
     }
     if(m_inputHandler.getComponentId() == "remingtonButton") {
         displayInfoCharacters("remington");
-        m_selectCharacterPanel.setPosition(315, 65);
+        m_selectCharacterPanel.setPosition(215, 65);
         m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(1);
     }
     if(m_inputHandler.getComponentId() == "eldoraButton") {
         displayInfoCharacters("eldora");
-        m_selectCharacterPanel.setPosition(535, 65);
+        m_selectCharacterPanel.setPosition(420, 65);
         m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(0);
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
         displayInfoCharacters("tristan");
-        m_selectCharacterPanel.setPosition(755, 65);
+        m_selectCharacterPanel.setPosition(625, 65);
         m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(2);
     }
+    if(m_inputHandler.getComponentId() == "mdjButton") {
+        displayInfoCharacters("mdj");
+        m_selectCharacterPanel.setPosition(830, 65);
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(4);
+    }
+
     if(m_inputHandler.getComponentId() == "returnButton") {
         m_playButton.setVisible(false);
         m_infoCharacterPanel.setVisible(false);
@@ -154,5 +167,8 @@ void WarmUp::displayInfoCharacters(std::string characterName){
         m_infoCharacterLabel.setText(L"Bonjour ! \nJe m\'appelle Eldora Dragnir !");
     else if (characterName == "tristan")
         m_infoCharacterLabel.setText(L"Bonjour ! \nJe m\'appelle Tristan De la Mortifère !");
+    else if (characterName == "mdj")
+        m_infoCharacterLabel.setText(L"Bonjour ! \nJe suis le maitre du jeu. C'est moi qui dirigera la partie !");
+
 
 }
