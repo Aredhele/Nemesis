@@ -56,6 +56,7 @@ void ResourceLoader::load() {
 	// Path
 	const std::string pathLogin = "../res/texture/menu/login/";
 	const std::string pathChar = "../res/characters/";
+	const std::string pathBackground = "../res/backgrounds/";
 
 	// Loading ...
 	a_tm.addTexture("topBarLogMenu", pathLogin + "topBarLogMenu.png");
@@ -118,6 +119,10 @@ void ResourceLoader::load() {
 	a_tm.addTexture("Crapaud",pathChar + "Crapaud.png");
 	a_tm.addTexture("Dragon", pathChar + "Dragon.png");
 	a_tm.addTexture("Yeti",pathChar + "Yeti.png");
+
+	//Backgrounds
+	a_tm.addTexture("background_Landscape",pathBackground + "Background_Landscape_1024.png");
+
 
 	a_mm.setState(true);
 	a_tm.setState(true);

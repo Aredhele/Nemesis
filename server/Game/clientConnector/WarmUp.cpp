@@ -214,7 +214,7 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
 
             if(i == 0) {
                 this->displayer->displayMessage("info", std::string("Le Player [") +
-                                                 nom + "] est devenu l'hôte du WarmUp n°" +
+                                                 nom + "] est devenu l'hote du WarmUp n " +
                         cast::toString(numeroWarmUp));
 
                 nomHote = nom;

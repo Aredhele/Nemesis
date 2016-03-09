@@ -153,6 +153,11 @@ void BasicInterface::noError(){
 	m_errorPanel.setVisible(false);
 }
 
+void BasicInterface::setBackground(sf::Texture * backgroundImg){
+	m_contentPane.create("mainPanel", 0, 0,
+						 backgroundImg);
+}
+
 /*!
  * \brief Draw all object on the window
  * \param window The surface to draw

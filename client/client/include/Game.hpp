@@ -26,8 +26,10 @@ private:
     NPanel m_panelNumero8InGame;
     NPanel m_panelMdjInGame;
     NPanel m_panelYeti;
+    NPanel m_bibouPanel;
     NPanel m_panelDragon;
     NPanel m_panelCrapaud;
+    NPanel m_contentPaneBackground;
 
 public:
     // Constructor

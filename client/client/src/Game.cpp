@@ -7,6 +7,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         BasicInterface(debug, ptr_managerGroup)
 
 {
+    //Background
+    setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Landscape"));
+
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
     ptr_mdjInGame->setSmooth(true);
@@ -42,6 +45,11 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     ptr_tristanInGame->setSmooth(true);
     m_panelTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame);
     getContentPane()->addComponent(&m_panelTristanInGame);
+
+    //Panel interface
+    m_bibouPanel.create("bibouPanel", 0, 485,
+                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel"));
+    getContentPane()->addComponent(&m_bibouPanel);
 
     //Crapaud
     /*ptr_crapaud = ptr_managerGroup->ptr_textureManager->getTexture("Crapaud");

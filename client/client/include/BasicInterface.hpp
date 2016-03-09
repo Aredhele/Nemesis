@@ -55,6 +55,7 @@ protected:
 	void errorConnection();
 	void errorPseudo();
 	void noError();
+	void setBackground(sf::Texture* backgroundImg);
 
 public:
 	// Constructor
