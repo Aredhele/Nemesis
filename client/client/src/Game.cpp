@@ -51,10 +51,10 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     */
 
     //Yeti
-    ptr_yeti = ptr_managerGroup->ptr_textureManager->getTexture("Dragon");
+    /*ptr_yeti = ptr_managerGroup->ptr_textureManager->getTexture("Dragon");
     ptr_yeti->setSmooth(true);
     m_panelYeti.create("Dragon",450,175,ptr_yeti);
-    getContentPane()->addComponent(&m_panelYeti);
+    getContentPane()->addComponent(&m_panelYeti);*/
 
 }
 
