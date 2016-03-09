@@ -4,8 +4,9 @@
 #include "Player.hpp"
 #include <iostream>
 
-Player::Player(): m_character(){
+Player::Player(){
 
+	ptr_character = new Character();
 }
 
 Player::~Player(){
@@ -23,45 +24,49 @@ std::string Player::getName(){
 void Player::setCharacter(int id){
 	switch (id){
 		case 0:
-			m_character.setCaracteristics(50,3000,30);
-			m_character.setAbility(0,"Toto","toto");
-			m_character.setAbility(01,"Toto","toto");
-			m_character.setAbility(02,"Toto", "toto");
-			m_character.setAbility(03, "Toto", "toto");
+			ptr_character->setCaracteristics(50,3000,30);
+			ptr_character->setAbility(0,"Toto","toto");
+			ptr_character->setAbility(01,"Toto","toto");
+			ptr_character->setAbility(02,"Toto", "toto");
+			ptr_character->setAbility(03, "Toto", "toto");
 			std::cout << "Eldora's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 1:
-			m_character.setCaracteristics(500,4000,35);
-			m_character.setAbility(10, "Toto", "toto");
-			m_character.setAbility(11, "Toto", "toto");
-			m_character.setAbility(12, "Toto", "toto");
-			m_character.setAbility(13, "Toto", "toto");
+			ptr_character->setCaracteristics(500,4000,35);
+			ptr_character->setAbility(10, "Toto", "toto");
+			ptr_character->setAbility(11, "Toto", "toto");
+			ptr_character->setAbility(12, "Toto", "toto");
+			ptr_character->setAbility(13, "Toto", "toto");
 			std::cout << "Remington's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 2:
-			m_character.setCaracteristics(250,7000,40);
-			m_character.setAbility(20, "Toto", "toto");
-			m_character.setAbility(21, "Toto", "toto");
-			m_character.setAbility(22, "Toto", "toto");
-			m_character.setAbility(23, "Toto", "toto");
+			ptr_character->setCaracteristics(250,7000,40);
+			ptr_character->setAbility(20, "Toto", "toto");
+			ptr_character->setAbility(21, "Toto", "toto");
+			ptr_character->setAbility(22, "Toto", "toto");
+			ptr_character->setAbility(23, "Toto", "toto");
 			std::cout << "Tristan's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 3:
-			m_character.setCaracteristics(100,15000,50);
-			m_character.setAbility(30, "Toto", "toto");
-			m_character.setAbility(31, "Toto", "toto");
-			m_character.setAbility(32, "Toto", "toto");
-			m_character.setAbility(33, "Toto", "toto");
+			ptr_character->setCaracteristics(100,15000,50);
+			ptr_character->setAbility(30, "Toto", "toto");
+			ptr_character->setAbility(31, "Toto", "toto");
+			ptr_character->setAbility(32, "Toto", "toto");
+			ptr_character->setAbility(33, "Toto", "toto");
 			std::cout << "Numero8's caracteristics and abilities have been set" << std::endl;
 			break;
 		case 4:
-			m_character.setCaracteristics(0,0,0);
-			m_character.setAbility(40, "Toto", "toto");
-			m_character.setAbility(41, "Toto", "toto");
-			m_character.setAbility(42, "Toto", "toto");
-			m_character.setAbility(43, "Toto", "toto");
+			ptr_character->setCaracteristics(0,0,0);
+			ptr_character->setAbility(40, "Toto", "toto");
+			ptr_character->setAbility(41, "Toto", "toto");
+			ptr_character->setAbility(42, "Toto", "toto");
+			ptr_character->setAbility(43, "Toto", "toto");
 			std::cout << "MDJ's caracteristics and abilities have been set" << std::endl;
 			break;
 
 	}
+}
+
+Character * Player::getCharacter(){
+	return ptr_character;
 }
