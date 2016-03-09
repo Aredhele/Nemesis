@@ -12,7 +12,7 @@ class Player{
 
 private:
     std::string m_name;
-    Character m_character;
+    Character * ptr_character;
 
 public:
     //Constructor
@@ -25,6 +25,9 @@ public:
     void setName(std::string name);
     std::string getName();
     void setCharacter(int id);
+
+    //Getters
+    Character * getCharacter();
 };
 
 #endif //DEF_PLAYER_HPP

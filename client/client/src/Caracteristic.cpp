@@ -36,15 +36,40 @@ void Caracteristic::setCaracteristicsNumero8(int atckDmg, int health, int armor)
 	m_armor = armor;
 }
 
-int Caracteristic::getHealth(){
+std::wstring Caracteristic::getHealth(){
+
+	int var = m_health;
+	std::wostringstream ws;
+    ws << var;
+    const std::wstring s(ws.str());
+	return s;
+}
+
+std::wstring Caracteristic::getArmor(){
+	int var = m_armor;
+	std::wostringstream ws;
+    ws << var;
+    const std::wstring s(ws.str());
+    return s;
+}
+
+std::wstring Caracteristic::getAttackDamage(){
+	int var = m_attackDamage;
+	std::wostringstream ws;
+    ws << var;
+    const std::wstring s(ws.str());
+    return s;
+}
+
+int Caracteristic::getHealthInt(){
 	return m_health;
 }
 
-int Caracteristic::getArmor(){
+int Caracteristic::getArmorInt(){
 	return m_armor;
 }
 
-int Caracteristic::getAttackDamage(){
+int Caracteristic::getAttackDamageInt(){
 	return m_attackDamage;
 }
 

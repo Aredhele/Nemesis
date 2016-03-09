@@ -7,11 +7,18 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         BasicInterface(debug, ptr_managerGroup)
 
 {
+
+    if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
+    {
+        std::cout << "Probleme dans le chargement des textures" << std::endl;
+    }
+
+
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
     ptr_mdjInGame->setSmooth(true);
-    m_panelMdjInGame.create("mdjInGame",430,50,ptr_mdjInGame);
-    getContentPane()->addComponent(&m_panelMdjInGame);
+    m_buttonMdjInGame.create("mdjInGame",430,50,ptr_mdjInGame, ptr_mdjInGame);
+    getContentPane()->addComponent(&m_buttonMdjInGame);
 
     //Table
     ptr_tableInGame = ptr_managerGroup->ptr_textureManager->getTexture("tableInGame");
@@ -22,26 +29,65 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
     ptr_remingtonInGame->setSmooth(true);
-    m_panelRemingtonInGame.create("remingtonInGame",700,170,ptr_remingtonInGame);
-    getContentPane()->addComponent(&m_panelRemingtonInGame);
+    m_buttonRemingtonInGame.create("remingtonInGame",700,170,ptr_remingtonInGame, ptr_remingtonInGame);
+    getContentPane()->addComponent(&m_buttonRemingtonInGame);
 
 	//Eldora
     ptr_eldoraInGame = ptr_managerGroup->ptr_textureManager->getTexture("eldoraInGame");
     ptr_eldoraInGame->setSmooth(true);
-    m_panelEldoraInGame.create("eldoraInGame",710,270,ptr_eldoraInGame);
-    getContentPane()->addComponent(&m_panelEldoraInGame);
+    m_buttonEldoraInGame.create("eldoraInGame",710,270,ptr_eldoraInGame, ptr_eldoraInGame);
+    getContentPane()->addComponent(&m_buttonEldoraInGame);
 
     //Numero 8
     ptr_numero8InGame = ptr_managerGroup->ptr_textureManager->getTexture("numero8InGame");
     ptr_numero8InGame->setSmooth(true);
-    m_panelNumero8InGame.create("numero8InGame",250,170,ptr_numero8InGame);
-    getContentPane()->addComponent(&m_panelNumero8InGame);
+    m_buttonNumero8InGame.create("numero8InGame",250,170,ptr_numero8InGame, ptr_numero8InGame);
+    getContentPane()->addComponent(&m_buttonNumero8InGame);
 
     //Tristan
     ptr_tristanInGame = ptr_managerGroup->ptr_textureManager->getTexture("tristanInGame");
     ptr_tristanInGame->setSmooth(true);
-    m_panelTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame);
-    getContentPane()->addComponent(&m_panelTristanInGame);
+    m_buttonTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame, ptr_tristanInGame);
+    getContentPane()->addComponent(&m_buttonTristanInGame);
+
+
+    m_panelCharateristics.create("charateristicsPanel", 824, 468,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+    m_panelNameCharacter.create("nameCharacterPanel",824, 468,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelAttack.create("attackPanel",824, 523,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelDefense.create("defensePanel", 824, 578,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelHealth.create("healthPanel", 824, 633,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+
+
+    m_labelNameCharacter.create("labelNameCharacter", 830, 480, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelAttack.create("labelAttack", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelDefense.create("labelDefense", 830, 600, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelHealth.create("labelHealth", 830, 650, 15, &m_fontLabel, L"", sf::Color::Black);
+
+    std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
+    std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
+    std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
+    std::wstring currentPlayerHealth = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getHealth();
+
+    m_labelNameCharacter.setText(currentPlayerName);
+    m_labelAttack.setText(currentPlayerAttack);
+    m_labelDefense.setText(currentPlayerDefense);
+    m_labelHealth.setText(currentPlayerHealth);
+
+    m_panelNameCharacter.addComponent(&m_labelNameCharacter);
+    m_panelAttack.addComponent(&m_labelAttack);
+    m_panelDefense.addComponent(&m_labelDefense);
+    m_panelHealth.addComponent(&m_labelHealth);
+    m_panelCharateristics.addComponent(&m_panelNameCharacter);
+    m_panelCharateristics.addComponent(&m_panelAttack);
+    m_panelCharateristics.addComponent(&m_panelDefense);
+    m_panelCharateristics.addComponent(&m_panelHealth);
+    getContentPane()->addComponent(&m_panelCharateristics);
+
 
 }
 
@@ -65,6 +111,58 @@ void Game::update(sf::RenderWindow * window,
 
     // Basic Interface updating
     basicInput(e, frameTime);
+
+    //Evenement sur les panneaux des joueurs
+    if(m_inputHandler.getComponentId() == "remingtonInGame") {
+
+        std::wstring remingtonName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getName();
+        std::wstring remingtonAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getAttackDamage();
+        std::wstring remingtonDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getArmor();
+        std::wstring remingtonHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getHealth();
+
+        m_labelNameCharacter.setText(remingtonName);
+        m_labelAttack.setText(remingtonAttack);
+        m_labelDefense.setText(remingtonDefense);
+        m_labelHealth.setText(remingtonHealth);
+
+    }else if(m_inputHandler.getComponentId() == "eldoraInGame"){
+
+
+        std::wstring eldoraName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getName();
+        std::wstring eldoraAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getAttackDamage();
+        std::wstring eldoraDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getArmor();
+        std::wstring eldoraHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getHealth();
+
+        m_labelNameCharacter.setText(eldoraName);
+        m_labelAttack.setText(eldoraAttack);
+        m_labelDefense.setText(eldoraDefense);
+        m_labelHealth.setText(eldoraHealth);
+
+    }else if(m_inputHandler.getComponentId() == "numero8InGame"){
+
+
+        std::wstring numero8Name = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getName();
+        std::wstring numero8Attack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getAttackDamage();
+        std::wstring numero8Defense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getArmor();
+        std::wstring numero8Health = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getHealth();
+
+        m_labelNameCharacter.setText(numero8Name);
+        m_labelAttack.setText(numero8Attack);
+        m_labelDefense.setText(numero8Defense);
+        m_labelHealth.setText(numero8Health);
+
+    }else if(m_inputHandler.getComponentId() == "tristanInGame"){
+
+        std::wstring tristanName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getName();
+        std::wstring tristanAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getAttackDamage();
+        std::wstring tristanDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getArmor();
+        std::wstring tristanHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getHealth();
+
+        m_labelNameCharacter.setText(tristanName);
+        m_labelAttack.setText(tristanAttack);
+        m_labelDefense.setText(tristanDefense);
+        m_labelHealth.setText(tristanHealth);
+    }
 
     // Drawing all content
     basicDraw(window);

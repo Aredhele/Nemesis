@@ -40,25 +40,25 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
                            ptr_managerGroup->ptr_textureManager->getTexture("numero8InWarmUp"),
                            ptr_managerGroup->ptr_textureManager->getTexture("numero8InWarmUp"));
 
-    leftBorder+=205;
+    leftBorder+=195;
     m_remingtonButton.create("remingtonButton", leftBorder, 70,
                              ptr_managerGroup->ptr_textureManager->getTexture("remingtonInWarmUp"),
                              ptr_managerGroup->ptr_textureManager->getTexture("remingtonInWarmUp"));
 
-    leftBorder+=205;
+    leftBorder+=195;
     m_eldoraButton.create("eldoraButton", leftBorder, 70,
                              ptr_managerGroup->ptr_textureManager->getTexture("eldoraInWarmUp"),
                              ptr_managerGroup->ptr_textureManager->getTexture("eldoraInWarmUp"));
 
-    leftBorder+=205;
+    leftBorder+=195;
     m_tristanButton.create("tristanButton", leftBorder, 70,
                            ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"),
                            ptr_managerGroup->ptr_textureManager->getTexture("tristanInWarmUp"));
 
-    leftBorder+=205;
-    m_tristanButton.create("mdjButton", leftBorder, 70,
-                           ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"),
-                           ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"));
+    leftBorder+=195;
+    m_mdjButton.create("mdjButton", leftBorder, 70,
+                       ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"),
+                       ptr_managerGroup->ptr_textureManager->getTexture("mdjInWarmUp"));
 
 
     m_returnButton.create("returnButton", 20, 700,
@@ -130,7 +130,7 @@ void WarmUp::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "remingtonButton") {
         if(!m_charSelected) {
             displayInfoCharacters("remington");
-            m_selectCharacterPanel.setPosition(215, 65);
+            m_selectCharacterPanel.setPosition(205, 65);
             //m_validateCharacterButton.setPosition(400, 211);
             m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(1);
         }
@@ -138,16 +138,15 @@ void WarmUp::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "eldoraButton") {
         if(!m_charSelected){
             displayInfoCharacters("eldora");
-            m_selectCharacterPanel.setPosition(420, 65);
+            m_selectCharacterPanel.setPosition(400, 65);
             //m_validateCharacterButton.setPosition(566,211);
             m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(0);
         }
-
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
         if(!m_charSelected) {
             displayInfoCharacters("tristan");
-            m_selectCharacterPanel.setPosition(625, 65);
+            m_selectCharacterPanel.setPosition(595, 65);
             //m_validateCharacterButton.setPosition(771, 211);
             m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(2);
         }
@@ -155,7 +154,7 @@ void WarmUp::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "mdjButton") {
         if(!m_charSelected) {
             displayInfoCharacters("mdj");
-            m_selectCharacterPanel.setPosition(830, 65);
+            m_selectCharacterPanel.setPosition(790, 65);
             //m_validateCharacterButton.setPosition(976, 211);
             m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(4);
         }

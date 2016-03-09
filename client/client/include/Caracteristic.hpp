@@ -5,7 +5,8 @@
 #ifndef CLIENT_CARACTERISTIC_HPP
 #define CLIENT_CARACTERISTIC_HPP
 
-#endif //CLIENT_CARACTERISTIC_HPP
+#include <string>
+#include <sstream>
 
 class Caracteristic{
 	private:
@@ -27,8 +28,14 @@ class Caracteristic{
 		void setCaracteristicsNumero8(int atckDmg, int health, int armor);
 		void setCaracteristics(int atckDmg, int health, int armor);
 
-		int getArmor();
-		int getHealth();
-		int getAttackDamage();
+		std::wstring getArmor();
+		std::wstring getHealth();
+		std::wstring getAttackDamage();
+
+		int getArmorInt();
+		int getHealthInt();
+		int getAttackDamageInt();
 
 };
+
+#endif //CLIENT_CARACTERISTIC_HPP

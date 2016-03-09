@@ -6,6 +6,9 @@
 #define CLIENT_GAME_HPP
 
 #include "BasicInterface.hpp"
+#include <sstream>
+
+
 
 
 class Game : public BasicInterface {
@@ -16,12 +19,26 @@ private:
     sf::Texture *ptr_tableInGame;
     sf::Texture *ptr_numero8InGame;
     sf::Texture *ptr_mdjInGame;
-    NPanel m_panelEldoraInGame;
-    NPanel m_panelRemingtonInGame;
-    NPanel m_panelTristanInGame;
+    NButton m_buttonEldoraInGame;
+    NButton m_buttonRemingtonInGame;
+    NButton m_buttonTristanInGame;
     NPanel m_panelTableInGame;
-    NPanel m_panelNumero8InGame;
-    NPanel m_panelMdjInGame;
+    NButton m_buttonNumero8InGame;
+    NButton m_buttonMdjInGame;
+    NPanel m_panelCharateristics;
+    NPanel m_panelNameCharacter;
+    NPanel m_panelAttack;
+    NPanel m_panelDefense;
+    NPanel m_panelHealth;
+    NLabel m_labelNameCharacter;
+    NLabel m_labelAttack;
+    NLabel m_labelDefense;
+    NLabel m_labelHealth;
+
+
+    sf::Font m_fontLabel;
+
+
 
 public:
     // Constructor

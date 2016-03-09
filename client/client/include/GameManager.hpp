@@ -27,6 +27,8 @@ class GameManager : public Manager {
         void initCharacters();
         Player *  getPlayer();
 
+        Character * getCharacterById(std::string id);
+
 };
 
 
