@@ -38,7 +38,11 @@ private:
     NLabel m_labelDefense;
     NLabel m_labelHealth;
 
+    NPanel m_panelChat;
+    NTextField m_textFieldLogin;
+
     sf::Font m_fontLabel;
+    sf::Font m_fontTextbox;
 
 
     NPanel m_panelYeti;

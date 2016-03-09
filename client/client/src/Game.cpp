@@ -10,11 +10,15 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Landscape"));
 
-    if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf"))
+    if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
     {
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
 
+    //Panel interface
+    m_bibouPanel.create("bibouPanel", 0, 490,
+                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel"));
+    getContentPane()->addComponent(&m_bibouPanel);
 
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
@@ -52,6 +56,17 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_buttonTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame, ptr_tristanInGame);
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
+    //Text Box Chat
+
+    m_textFieldLogin.create("textFieldLogin", 30, 725,
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
+                            &m_fontTextbox,
+                            15, 0.5, "", 15, sf::Color(196,130,56));
+    //Panel Chat
+    m_panelChat.create("chatPanel", 30, 510,
+                       ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+
 
     m_panelCharateristics.create("charateristicsPanel", 824, 468,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
@@ -75,6 +90,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
     std::wstring currentPlayerHealth = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getHealth();
 
+
+
+
     m_labelNameCharacter.setText(currentPlayerName);
     m_labelAttack.setText(currentPlayerAttack);
     m_labelDefense.setText(currentPlayerDefense);
@@ -89,12 +107,10 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelCharateristics.addComponent(&m_panelDefense);
     m_panelCharateristics.addComponent(&m_panelHealth);
     getContentPane()->addComponent(&m_panelCharateristics);
+    getContentPane()->addComponent(&m_textFieldLogin);
+    getContentPane()->addComponent(&m_panelChat);
 
 
-    //Panel interface
-    m_bibouPanel.create("bibouPanel", 0, 485,
-                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel"));
-    getContentPane()->addComponent(&m_bibouPanel);
 
     //Crapaud
     /*ptr_crapaud = ptr_managerGroup->ptr_textureManager->getTexture("Crapaud");
