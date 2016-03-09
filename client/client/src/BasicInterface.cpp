@@ -139,6 +139,18 @@ void BasicInterface::errorPseudo(){
 	m_errorPanel.setVisible(true);
 }
 
+void BasicInterface::errorGoInGame(){
+	m_connectionErrorLabel.setText(L"  Une erreur s'est produite.\n"
+										   "Vous ne pouvez pas rejoindre le jeu.");
+	m_errorPanel.setVisible(true);
+}
+
+void BasicInterface::errorCharacterSelection(){
+	m_connectionErrorLabel.setText(L"  Une erreur s'est produite.\n"
+										   "Vous ne pouvez pas choisir ce personnage.");
+	m_errorPanel.setVisible(true);
+}
+
 /*!
  * Call an error warmup is full on the error panel
  */

@@ -15,7 +15,7 @@ class Character{
         bool m_choosed;
         std::wstring m_description;
         std::wstring m_name;
-        std::wstring m_id;
+        std::string m_id;
         Caracteristic *ptr_caracteristic;
         Ability *ptr_ability;
 
@@ -32,11 +32,12 @@ class Character{
         void deselectCharacter();
         std::wstring getDescription();
         std::wstring getName();
+        std::string getId();
         void setName(std::wstring name);
         void setDescription(std::wstring description);
-        void setId(std::wstring id);
+        void setId(std::string id);
         void setCaracteristics(int atckDmg, int health, int armor);
         void setAbility(int id, std::string name,std::string type);
-
+        Caracteristic * getCaracteristic();
 };
 #endif //DEF_CHARACTER_HPP

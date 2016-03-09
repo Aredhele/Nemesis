@@ -43,6 +43,32 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame);
     getContentPane()->addComponent(&m_panelTristanInGame);
 
+    m_panelCharateristics.create("charateristicsPanel", 824, 468,
+                                 ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+    m_panelNameCharacter.create("nameCharacterPanel",824, 468,
+                                ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelAttack.create("attackPanel",824, 523,
+                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelDefense.create("defensePanel", 824, 578,
+                          ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+    m_panelHealth.create("healthPanel", 824, 633,
+                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+
+    //m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
+    int var = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
+    std::wostringstream ws;
+    ws << var;
+    const std::wstring s(ws.str());
+
+
+    m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"s", sf::Color::Black);
+    m_panelAttack.addComponent(&m_labelCharacteristics);
+    m_panelCharateristics.addComponent(&m_panelNameCharacter);
+    m_panelCharateristics.addComponent(&m_panelAttack);
+    m_panelCharateristics.addComponent(&m_panelDefense);
+    m_panelCharateristics.addComponent(&m_panelHealth);
+    getContentPane()->addComponent(&m_panelCharateristics);
+
 }
 
 /*!

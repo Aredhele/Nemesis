@@ -114,12 +114,17 @@ void WarmUp::update(sf::RenderWindow * window,
     if(!m_ptr_managerGroup->ptr_targetManager->isWarmUp())
         return;
 
+    if(m_ptr_managerGroup->ptr_networkManager->getHasPacket()){
+        receiveRequest();
+    }
+
     // Basic Interface updating
     basicInput(e, frameTime);
 
     //TODO : Afficher les info des personnages
     if(m_inputHandler.getComponentId() == "numero8Button") {
         if(!m_charSelected){
+            //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(3);
             displayInfoCharacters("numero8");
             m_selectCharacterPanel.setPosition(10, 65);
             //m_validateCharacterButton.setPosition(195,211);
@@ -129,6 +134,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "remingtonButton") {
         if(!m_charSelected) {
+            //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(1);
             displayInfoCharacters("remington");
             m_selectCharacterPanel.setPosition(215, 65);
             //m_validateCharacterButton.setPosition(400, 211);
@@ -137,6 +143,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "eldoraButton") {
         if(!m_charSelected){
+            //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(0);
             displayInfoCharacters("eldora");
             m_selectCharacterPanel.setPosition(420, 65);
             //m_validateCharacterButton.setPosition(566,211);
@@ -146,6 +153,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
         if(!m_charSelected) {
+            //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(2);
             displayInfoCharacters("tristan");
             m_selectCharacterPanel.setPosition(625, 65);
             //m_validateCharacterButton.setPosition(771, 211);
@@ -154,6 +162,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "mdjButton") {
         if(!m_charSelected) {
+            //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(4);
             displayInfoCharacters("mdj");
             m_selectCharacterPanel.setPosition(830, 65);
             //m_validateCharacterButton.setPosition(976, 211);
@@ -161,11 +170,22 @@ void WarmUp::update(sf::RenderWindow * window,
         }
     }
     if(m_inputHandler.getComponentId() == "validateCharButton"){
-        //TODO : Désactiver les autres personnages
-        m_charSelected = true;
-        m_playButton.setEnabled(true);
-        //m_playButton.setVisible(true);
-        std::cout << "Choix validé ! " << std::endl;
+        //TODO : Envoyer la requete de choix au serveur
+        std::wstring wstr = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
+        //std::cout << "NOM PERSO SELECTIONNE WS : " << wstr << std::endl;
+
+        std::string str;
+        for(std::wstring::const_iterator it = wstr.begin();
+            it != wstr.end();
+            ++it)
+        {
+            str.push_back(static_cast<char>(*it));
+        }
+
+        //std::cout << "NOM PERSO SELECTIONNE S : " << str << std::endl;
+        m_ptr_managerGroup->ptr_networkManager->request(2, str);
+        //TODO : Afficher la roue de chargement
+
     }
 
 
@@ -184,6 +204,7 @@ void WarmUp::update(sf::RenderWindow * window,
         }
     }
 
+    //
 
     // Drawing all content
     basicDraw(window);
@@ -209,5 +230,57 @@ void WarmUp::displayInfoCharacters(std::string characterName){
     else if (characterName == "mdj")
         m_infoCharacterLabel.setText(L"Bonjour ! \nJe suis le maitre du jeu. C'est moi qui dirigera la partie !");
 
+
+}
+
+void WarmUp::receiveRequest(){
+    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
+    sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
+
+    sf::Int32 idRequest;
+    *packet >> idRequest;
+    std::string sRequest;
+    std::string sRequest2;
+
+    std::cout << "IdRequest " << idRequest << std::endl;
+    std::cout << "sRequest " << sRequest << std::endl;
+
+    switch (idRequest){
+        case 1:
+            //On peut rentre en jeu
+            *packet >> sRequest;
+            if (sRequest=="Ok"){
+                m_ptr_managerGroup->ptr_targetManager->isOnGame();
+            }
+            else{
+                errorGoInGame();
+            }
+            break;
+
+        case 2:
+            // Personnage sélectionné
+            *packet >> sRequest;
+            if (sRequest=="Ok"){
+                //TODO bloquer les autres personnages
+                m_charSelected = true;
+                //TODO rendre disponible le bouton de lancement du jeu
+                m_playButton.setEnabled(true);
+                //m_playButton.setVisible(true);
+                std::cout << "Choix validé ! " << std::endl;
+
+            }
+            else{
+                errorCharacterSelection();
+            }
+            break;
+
+        case 3:
+            //
+            *packet >> sRequest >> sRequest2;
+            //TODO : Désactiver le personnage (idRequest)
+            //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+
+            break;
+    }
 
 }

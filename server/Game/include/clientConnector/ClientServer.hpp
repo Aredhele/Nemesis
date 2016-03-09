@@ -22,10 +22,7 @@
 #define _MSERV_PORT_  "SERVER_MASTER_PORT"
 #define _MSERV_IP_    "SERVER_MASTER_IP"
 
-// Header
-#include <string>
-#include <vector>
-#include <memory>
+
 
 
 #include "ClientThread.hpp"
@@ -42,18 +39,8 @@ private:
     bool m_masterCheck;
 
     int m_serverPort;
-    int m_masterPort;
-    int m_serverMaxConnection;
-
-    std::string m_masterAddress;
-    std::string m_serverAddress;
 
     ConsoleDisplayer * m_ptr_displayer;
-    Configuration * m_ptr_configuration;
-
-    // Gestion des thread
-    std::vector < std::unique_ptr < sf::TcpSocket > > m_socketList;
-    std::vector < std::unique_ptr < ClientThread > > m_threadList;
 
     //Gestion des sockets
     sf::TcpListener socketTCP;

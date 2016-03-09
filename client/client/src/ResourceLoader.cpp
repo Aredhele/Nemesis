@@ -115,6 +115,8 @@ void ResourceLoader::load() {
 	a_tm.addTexture("tableInGame",pathChar + "Table_Jeu_inGame.png");
 	a_tm.addTexture("tristanInGame",pathChar + "Tristan_De_La_Mortifere_inGame.png");
 	a_tm.addTexture("mdjInGame",pathChar + "Mdj_inGame.PNG");
+	a_tm.addTexture("statPanel", pathLogin + "panel_200-50.png");
+	a_tm.addTexture("charateristicsPanel", pathLogin + "panel_200-250.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);
@@ -158,7 +160,7 @@ bool ResourceLoader::getLoadState() {
 			m_managerGroup.ptr_textureManager->getState() &&
 			m_managerGroup.ptr_targetManager->getState() &&
 			m_managerGroup.ptr_optionManager->getState() &&
-			m_managerGroup.ptr_networkManager->getState() &&
+			m_managerGroup.ptr_gameManager->getState() &&
             m_managerGroup.ptr_networkManager->getState());
 }
 

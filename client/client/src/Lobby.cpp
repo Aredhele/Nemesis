@@ -57,28 +57,32 @@ void Lobby::update(sf::RenderWindow * window,
     if(!m_ptr_managerGroup->ptr_targetManager->isLobby())
         return;
 
+    if(m_ptr_managerGroup->ptr_networkManager->getHasPacket()){
+        receiveRequest();
+    }
+
     if(firstConnect){
         //We call one time the number of WarmUps and their name
-        updateNewWarmUp();
+        requestUpdateWarmUp();
         firstConnect = false;
     }
 
     for(int i = 1; i <= 5; i++){
         if(m_inputHandler.getComponentId() == "connectButton"+i) {
-            joinWarmUp(i);
+            requestJoinWarmUp(i);
         }
     }
 
     if(m_inputHandler.getComponentId() == "refreshButton") {
-        updateNewWarmUp();
+        requestUpdateWarmUp();
     }
     if(m_inputHandler.getComponentId() == "createButton") {
         std::cout << "Creation WarmUp" << std::endl;
-        createNewWarmUp();
+        requestCreateNewWarmUp();
         std::cout << "Update liste WarmUp" << std::endl;
-        updateNewWarmUp();
+        requestUpdateWarmUp();
         std::cout << "Join WarmUp" << std::endl;
-        joinWarmUp(nbWarmUp);
+        requestJoinWarmUp(nbWarmUp);
 
     }
 
@@ -90,13 +94,10 @@ void Lobby::update(sf::RenderWindow * window,
     basicDraw(window);
 }
 
-void Lobby::createNewWarmUp(){
-    sf::Packet *  packet = new sf::Packet();
-    sf::Int32 idRequest;
-    std::string sRequest;
-
-    if(m_ptr_managerGroup->ptr_networkManager->request(1, m_ptr_managerGroup
-            ->ptr_gameManager->getPlayer()->getName() )){
+void Lobby::requestCreateNewWarmUp(){
+    std::cout << "debug 1" << std::endl;
+    if(m_ptr_managerGroup->ptr_networkManager->request(1,
+                         m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() )){
 
         std::cout << "Creation WarmUp réussi par " <<
                 m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
@@ -106,25 +107,70 @@ void Lobby::createNewWarmUp(){
     }
 }
 
-void Lobby::updateNewWarmUp(){
-    sf::Packet *  packet = new sf::Packet();
-    sf::Int32 idRequest;
-    std::string sRequest;
-
+void Lobby::requestUpdateWarmUp(){
+    std::cout << "debug 11" << std::endl;
     if(m_ptr_managerGroup->ptr_networkManager->request(3, "")){
-        packet = m_ptr_managerGroup->ptr_networkManager->requestReceive();
-        if(packet != NULL){
-            *packet >> idRequest >> sRequest;
-            std::cout << "id requete recu : " << idRequest << std::endl << "requete recu " << sRequest << std::endl;
-        }
-        else{
-            errorConnection();
-        }
+        std::cout << "Requete update salon bien envoyé" << std::endl;
     }
     else{
         errorConnection();
     }
+}
 
+void Lobby::requestJoinWarmUp(int idWarmUp){
+    std::cout << "debug 111" << std::endl;
+    if(m_ptr_managerGroup->ptr_networkManager->request(2, "" + cast::toString(idWarmUp) +
+                std::string("&") + std::string(m_ptr_managerGroup
+                 ->ptr_gameManager->getPlayer()->getName() ))){
+
+        std::cout << "Requete pour rejoindre WarmUp réussi par " <<
+        m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
+    }
+    else{
+        errorConnection();
+    }
+}
+
+void Lobby::receiveRequest(){
+
+    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
+    sf::Packet* packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
+
+    sf::Int32 idRequest;
+    std::string sRequest;
+    *packet >> idRequest >> sRequest;
+
+    std::cout << "debug idRequest : " << idRequest << std::endl;
+    std::cout << "debug sRequest : " << sRequest << std::endl;
+
+    switch (idRequest){
+        case 2:
+            //Rejoindre les salons
+            if(sRequest == "Ok"){
+                std::cout << "On rejoint bien le warmUp" << std::endl;
+                m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
+            }
+            else{
+                std::cout << "Le warmUp est complet" << std::endl;
+                errorWarmUpFull();
+            }
+            break;
+
+        case 3:
+            // Récupération la liste des salons
+            std::cout << "debug 22" << std::endl;
+
+            updateNewWarmUp(sRequest);
+            break;
+    }
+
+}
+
+
+
+void Lobby::updateNewWarmUp(std::string sRequest){
+    std::cout << "debug 3" << std::endl;
+    std::cout << sRequest << std::endl;
     if(sRequest.length() != 0) {
         char *cstr = new char[sRequest.length() + 1];
         strcpy(cstr, sRequest.c_str());
@@ -135,8 +181,6 @@ void Lobby::updateNewWarmUp(){
         //Création des vecteurs
         for(int i = 1; i < 6; i++)
             sVectorRequestSplit1.push_back(std::vector < char * > ());
-
-
 
         //Split avec ;
         char *sRequestSplit1 = strtok(cstr, ";");
@@ -168,7 +212,6 @@ void Lobby::updateNewWarmUp(){
         }
 
 
-
         for (int i = 0; i < sVectorRequestSplit.size(); i+=2) {
             warmUpButton.push_back(new NButton());
             std::string tmp = cast::toString(sVectorRequestSplit[i]);
@@ -198,6 +241,7 @@ void Lobby::updateNewWarmUp(){
     }
 }
 
+/*
 void Lobby::joinWarmUp(int idWarmUp){
     sf::Packet *  packet = new sf::Packet();
     sf::Int32 idRequest;
@@ -226,4 +270,4 @@ void Lobby::joinWarmUp(int idWarmUp){
     else{
         errorConnection();
     }
-}
+}*/

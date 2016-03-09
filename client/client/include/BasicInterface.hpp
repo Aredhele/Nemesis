@@ -54,6 +54,8 @@ protected:
 	void errorWarmUpFull();
 	void errorConnection();
 	void errorPseudo();
+	void errorGoInGame();
+	void errorCharacterSelection();
 	void noError();
 
 public:

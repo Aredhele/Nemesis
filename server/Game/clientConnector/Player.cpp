@@ -9,6 +9,7 @@ Player::Player() {
     isPlayerHere = false;
     socketPlayer = nullptr;
     namePlayer = "Joueur fantome";
+    nameChar = "Nan";
     indiceSocket = 0;
     numberPlayer = 0;
 }
@@ -30,6 +31,7 @@ void Player::init() {
     isPlayerHere = false;
     socketPlayer = nullptr;
     namePlayer = "Joueur fantome";
+    nameChar = "Nan";
     indiceSocket = 0;
     numberPlayer = 0;
 }
@@ -57,6 +59,7 @@ void Player::disconnect() {
     isPlayerHere = false;
     delete socketPlayer;
     namePlayer = "NaN";
+    nameChar = "Nan";
     numberPlayer = -1;
     indiceSocket = 0;
 }
@@ -67,6 +70,15 @@ void Player::disconnect() {
 bool Player::isHere() {
     return isPlayerHere;
 }
+
+std::string Player::getNameChar(){
+    return nameChar;
+}
+
+void Player::setNameChar(std::string charac) {
+    nameChar = charac;
+}
+
 
 /**
  * \brief // TODO

@@ -6,6 +6,7 @@
 #define DEF_WARM_UP_HPP
 
 #include "BasicInterface.hpp"
+#include "Patch.hpp"
 #include "SFML/System.hpp"
 
 class WarmUp : public BasicInterface
@@ -42,6 +43,8 @@ public:
                             sf::Event * e, double frameTime);
 
         void displayInfoCharacters(std::string characterName);
+
+        void receiveRequest();
 };
 
 #endif //CLIENT_WARMUP_HPP

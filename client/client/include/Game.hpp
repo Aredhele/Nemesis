@@ -6,6 +6,12 @@
 #define CLIENT_GAME_HPP
 
 #include "BasicInterface.hpp"
+#include <sstream>
+#include <stdio.h>
+#include <string.h>
+#include <string>
+#include <vector>
+#include "Patch.hpp"
 
 
 class Game : public BasicInterface {
@@ -22,6 +28,14 @@ private:
     NPanel m_panelTableInGame;
     NPanel m_panelNumero8InGame;
     NPanel m_panelMdjInGame;
+    NPanel m_panelCharateristics;
+    NPanel m_panelNameCharacter;
+    NPanel m_panelAttack;
+    NPanel m_panelDefense;
+    NPanel m_panelHealth;
+    NLabel m_labelCharacteristics;
+
+    sf::Font m_fontLabel;
 
 public:
     // Constructor

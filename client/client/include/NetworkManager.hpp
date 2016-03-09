@@ -31,16 +31,26 @@ public TriggerableObject
         sf::TcpSocket m_socket;
 		sf::Int32 idRequest;
 		std::string sRequest;
+		sf::Packet m_packet;
+		bool m_hasPacket;
+		sf::Thread m_threadReceiveRequest;
 
 	public:
 
         NetworkManager(bool debug);
         ~NetworkManager();
 
+		void startThread();
+		void stopThread();
+
         bool connect();
 		bool  request(sf::Int32 idRequest, std::string sRequest);
-		sf::Packet  * requestReceive();
+		void requestReceive();
 
+		void setPacket(sf::Packet packet);
+		sf::Packet * getPacket();
+		void setHasPacket(bool hasPacket);
+		bool getHasPacket();
 
 		void trigger(uint id);
 		void trigger(uint id, std::vector < std::string> v);

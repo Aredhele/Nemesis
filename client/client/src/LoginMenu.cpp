@@ -87,6 +87,7 @@ void LoginMenu::update(sf::RenderWindow * window,
 		//m_errorPanel.setVisible(false);
 		if(m_textFieldLogin.getString() != "") {
 			if (m_ptr_managerGroup->ptr_networkManager->connect()) {
+				m_ptr_managerGroup->ptr_networkManager->startThread();
 				m_ptr_managerGroup->ptr_gameManager->getPlayer()->setName(m_textFieldLogin.getString());
 				m_ptr_managerGroup->ptr_targetManager->isOnLobby();
 			}
@@ -98,7 +99,6 @@ void LoginMenu::update(sf::RenderWindow * window,
 			errorPseudo();
 		}
 	}
-
 
 	// Drawing all content
 	basicDraw(window);

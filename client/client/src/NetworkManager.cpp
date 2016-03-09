@@ -11,7 +11,8 @@
 //Constructor
 NetworkManager::NetworkManager(bool debug) :
         Manager(),
-        TriggerableObject()
+        TriggerableObject(),
+        m_threadReceiveRequest(&NetworkManager::requestReceive, this)
 {
 
 	m_debug = debug;
@@ -27,6 +28,9 @@ NetworkManager::NetworkManager(bool debug) :
 		std::cout << "Server Address : " << m_serverAddress << std::endl;
 		std::cout << "Server Port : " << m_serverPort << std::endl;
 	}
+
+    //sf::Thread thread(&requestReceive);
+
 }
 
 
@@ -34,7 +38,6 @@ NetworkManager::NetworkManager(bool debug) :
 NetworkManager::~NetworkManager(){
 
 }
-
 
 
 //Methods
@@ -50,6 +53,9 @@ bool NetworkManager::connect(){
 
     std::cout << "Connection established !" << std::endl;
     std::cerr << "Socket status : " << m_status << std::endl;
+
+    m_socket.setBlocking(true);
+
 
     return true;
 }
@@ -70,6 +76,7 @@ bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
         std::cerr << "Unable to connect with server" << std::endl;
         return false;
     }
+
     std::cout << "Request send !" << std::endl;
     std::cerr << "Socket status : " << m_status << std::endl;
     return true;
@@ -79,18 +86,25 @@ bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
  *  id 3 : get list of WarmUp
  *  id 1 : create WarmUp
  */
-sf::Packet *  NetworkManager::requestReceive(){
-    sf::Packet  * packet = new sf::Packet();
-    m_status = m_socket.receive(*packet);
 
-    if (m_status == sf::Socket::Done) {
-        std::cout << "Request receive !" << std::endl;
-        std::cerr << "Socket status : " << m_status << std::endl;
-        return packet;
-    }
-    else{
-        std::cerr << "Unable to receive from server" << std::endl;
-        return NULL;
+void NetworkManager::requestReceive(){
+    //sf::Packet  * packet = new sf::Packet();
+    while(true){
+        sf::Packet newPacket;
+        m_status = m_socket.receive(newPacket);
+        if (m_status == sf::Socket::Done) {
+            m_packet = newPacket;
+            std::cout << "Request receive !" << std::endl;
+            std::cerr << "Socket status : " << m_status << std::endl;
+            //m_packet = &packet;
+            m_hasPacket = true;
+            //return packet;
+        }
+        else{
+            std::cerr << "Unable to receive from server" << std::endl;
+            m_hasPacket = false;
+            //return NULL;
+        }
     }
 }
 
@@ -102,3 +116,30 @@ void NetworkManager::trigger(uint id){
 void NetworkManager::trigger(uint id, std::vector< std::string> v){
     return;
 }
+
+
+void NetworkManager::setPacket(sf::Packet packet){
+    m_packet = packet;
+}
+
+sf::Packet * NetworkManager::getPacket(){
+    return &m_packet;
+}
+
+void NetworkManager::setHasPacket(bool hasPacket){
+    m_hasPacket = hasPacket;
+}
+
+bool NetworkManager::getHasPacket(){
+    return m_hasPacket;
+}
+
+void NetworkManager::startThread(){
+    m_threadReceiveRequest.launch();
+}
+
+void NetworkManager::stopThread(){
+    m_threadReceiveRequest.terminate();
+}
+
+

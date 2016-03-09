@@ -32,6 +32,8 @@ public:
 
     unsigned int getIndiceSocket();
     int getNumeroPlayer();
+    std::string getNameChar();
+    void setNameChar(std::string charac);
 
     sf::TcpSocket * getSocket();
     std::string getNamePlayer();
@@ -43,8 +45,10 @@ private:
     int numberPlayer;
 
     bool isPlayerHere;
+    std::string nameChar;
 
     std::string namePlayer;
+
 
 };
 

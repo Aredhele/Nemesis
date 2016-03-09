@@ -29,9 +29,10 @@ private:
 
     bool firstConnect;
 
-    void joinWarmUp(int id);
-    void updateNewWarmUp();
-    void createNewWarmUp();
+    void requestJoinWarmUp(int id);
+    void requestUpdateWarmUp();
+    void requestCreateNewWarmUp();
+    void updateNewWarmUp(std::string sRequest);
 
 public:
     // Constructor
@@ -43,7 +44,7 @@ public:
     // Methods
     virtual void update(sf::RenderWindow * window,
                         sf::Event * e, double frameTime);
-
+    void receiveRequest();
 };
 
 #endif // DEF_LOGING_MENU_HPP
