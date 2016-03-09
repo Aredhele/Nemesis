@@ -27,6 +27,8 @@ private:
 	std::string m_pressedId;
 	std::string m_overId;
 	int m_keyCode;
+	int oldKeyCode;
+	int testBug;
 
 	// Game logic
 	void mouseReleasedHandle(sf::Event * e);

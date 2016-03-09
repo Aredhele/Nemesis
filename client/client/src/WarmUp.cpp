@@ -142,7 +142,6 @@ void WarmUp::update(sf::RenderWindow * window,
             //m_validateCharacterButton.setPosition(566,211);
             m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(0);
         }
-
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
         if(!m_charSelected) {

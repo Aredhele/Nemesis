@@ -128,7 +128,7 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
                                "info", "La partie va commencer, le WarmUp va etre libere");
             break;
 
-        case 2: //Lock un caractère
+        case 2: //Lock un perso
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
                                       " >> ", "Reponse a la requete n " + stringActionId);
             if(lockCarac(sRequest, numeroPlayer)){
