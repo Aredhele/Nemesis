@@ -14,7 +14,13 @@
 #include <clientConnector/Player.hpp>
 #include <SFML/Network/TcpSocket.hpp>
 #include "tool/Configuration.hpp"
+#include <string>
+#include <vector>
+#include <memory>
 #include "Game.hpp"
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
+
 
 class WarmUp {
 public:
@@ -70,8 +76,11 @@ private:
 
     // Methods
     void threadWarmUp();
-    void gererRequete(char requete[1024], std::size_t, sf::TcpSocket *, int);
+    void gererRequete(sf::Int32 idRequest, std::string sRequest,
+                      sf::TcpSocket * socket, int numeroPlayer);
     //void launchGame(); //TODO Creer Game
+    bool lockCarac(std::string sRequest, int nbPLayer);
+    void sendModifLockCarac(std::string sRequest1, int numeroPlayer);
 };
 
 

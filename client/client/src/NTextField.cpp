@@ -151,6 +151,7 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  */
 void NTextField::eventTextEntered(sf::Event * e) {
 
+	std::cout << "TextEntered detected" << std::endl;
 	float coefFont = 1.65;
 
 	if(!m_isEnable || !m_isActive) return;

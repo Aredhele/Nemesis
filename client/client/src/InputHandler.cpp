@@ -16,6 +16,7 @@ InputHandler::InputHandler(bool debug) {
 	m_debug = debug;
 	m_mouseLock = true;
 	m_textEntered = true;
+	testBug = 2;
 }
 
 /*!
@@ -51,16 +52,21 @@ void InputHandler::handleInput(sf::Event * e,
 			break;
 
 		case sf::Event::TextEntered:
-			/*if(m_textEntered){
-				m_textEntered = false;*/
+			if(e->text.unicode == 0){
+				break;
+			}
+			if(testBug >= 0 || testBug <= -30){
+				testBug --;
 				textEnteredHandle(e, o);
-				/*}
+			}
+			else {
+				testBug--;
+			}
+		std::cout << testBug << std::endl;
                 break;
 
             case sf::Event::KeyReleased:
-                if (!m_textEntered)
-                    m_textEntered = true;
-                    */
+				testBug = 2;
                 break;
 
 		default:

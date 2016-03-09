@@ -117,6 +117,9 @@ void ResourceLoader::load() {
 	a_tm.addTexture("mdjInGame",pathChar + "Mdj_inGame.PNG");
 	a_tm.addTexture("statPanel", pathLogin + "panel_200-50.png");
 	a_tm.addTexture("charateristicsPanel", pathLogin + "panel_200-250.png");
+	a_tm.addTexture("Crapaud",pathChar + "Crapaud.png");
+	a_tm.addTexture("Dragon", pathChar + "Dragon.png");
+	a_tm.addTexture("Yeti",pathChar + "Yeti.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);

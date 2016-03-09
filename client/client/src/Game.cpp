@@ -89,6 +89,19 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_panelCharateristics);
 
 
+    //Crapaud
+    /*ptr_crapaud = ptr_managerGroup->ptr_textureManager->getTexture("Crapaud");
+    ptr_crapaud->setSmooth(true);
+    m_panelCrapaud.create("Crapaud",300,300,ptr_crapaud);
+    getContentPane()->addComponent(&m_panelCrapaud);
+    */
+
+    //Yeti
+    /*ptr_yeti = ptr_managerGroup->ptr_textureManager->getTexture("Dragon");
+    ptr_yeti->setSmooth(true);
+    m_panelYeti.create("Dragon",450,175,ptr_yeti);
+    getContentPane()->addComponent(&m_panelYeti);*/
+
 }
 
 /*!

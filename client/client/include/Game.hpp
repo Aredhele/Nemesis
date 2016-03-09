@@ -18,6 +18,9 @@ private:
     sf::Texture *ptr_tristanInGame;
     sf::Texture *ptr_tableInGame;
     sf::Texture *ptr_numero8InGame;
+    sf::Texture *ptr_crapaud;
+    sf::Texture *ptr_dragon;
+    sf::Texture *ptr_yeti;
     sf::Texture *ptr_mdjInGame;
     NButton m_buttonEldoraInGame;
     NButton m_buttonRemingtonInGame;
@@ -35,10 +38,12 @@ private:
     NLabel m_labelDefense;
     NLabel m_labelHealth;
 
-
     sf::Font m_fontLabel;
 
 
+    NPanel m_panelYeti;
+    NPanel m_panelDragon;
+    NPanel m_panelCrapaud;
 
 public:
     // Constructor
