@@ -18,13 +18,20 @@ GameManager::GameManager(bool debug) : Manager(),
 
     //Create characters
     int nbChar = 5;
+    int nbMob = 3;
 
 
     for (int i = 0; i < nbChar; i++){
         m_characterList.push_back(new Character());
     }
 
+    for (int j = 0; j < nbMob; j++){
+
+        m_monsterList.push_back(new Monster());
+    }
+
     initCharacters();
+    initMonsters();
 }
 
 /**
@@ -84,6 +91,21 @@ void GameManager::initCharacters(){
     }*/
 }
 
+void GameManager::initMonsters(){
+
+    m_monsterList[0]->setName(L"Insecte Velu");
+    m_monsterList[0]->setId("insecte");
+    m_monsterList[0]->setCaracteristics(5,500,10);
+
+    m_monsterList[1]->setName(L"Chien des Enfers");
+    m_monsterList[1]->setId("chien");
+    m_monsterList[1]->setCaracteristics(150,1500,20);
+
+    m_monsterList[2]->setName(L"Blob Gluant");
+    m_monsterList[2]->setId("boss");
+    m_monsterList[2]->setCaracteristics(300,5000,40);
+}
+
 Character* GameManager::getCharacterById(std::string id){
     for(int i = 0; i<m_characterList.size(); i++){
         if(m_characterList[i]->getId()==id){
@@ -92,6 +114,15 @@ Character* GameManager::getCharacterById(std::string id){
     }
     return 0;
 
+}
+
+Monster* GameManager::getMonsterById(std::string id){
+
+    for (int i = 0; i < m_monsterList.size(); i++){
+        if (m_monsterList[i]->getId()==id){
+            return m_monsterList[i];
+        }
+    }
 }
 
 
