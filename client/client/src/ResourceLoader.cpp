@@ -129,7 +129,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("IconAttack", pathLogin + "attackIcon.png");
 	a_tm.addTexture("IconDefense", pathLogin + "defenseIcon.png");
 	a_tm.addTexture("IconHealth", pathLogin + "healthIcon.png");
-	
+
 	a_tm.addTexture("chatPanel", pathLogin + "chatPanel.png");
 	a_tm.addTexture("chatTextBox", pathLogin + "chatTextBox.png");
 	a_tm.addTexture("textBoxCursorChat", pathLogin + "curseurChatTextBox.png");
@@ -140,11 +140,13 @@ void ResourceLoader::load() {
 
 
 	//Backgrounds
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
+	a_tm.addTexture("background_Castle_2",pathBackground + "Background_Castle_2.png");
+	a_tm.addTexture("Background_Beach",pathBackground + "Background_Beach.png");
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle.png");
+	a_tm.addTexture("Background_Forest",pathBackground + "Background_Forest.png");
+	a_tm.addTexture("Background_Landscape",pathBackground + "Background_Landscape.png");
+	a_tm.addTexture("Background_Room",pathBackground + "Background_Room.png");
+	a_tm.addTexture("Background_Room_2",pathBackground + "Background_Room_2.png");
 
 
 	a_mm.setState(true);
