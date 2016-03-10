@@ -16,9 +16,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     }
 
     //Panel interface
-    m_bibouPanel.create("bibouPanel", 0, 490,
-                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel"));
-    getContentPane()->addComponent(&m_bibouPanel);
+    m_bibouPanel2.create("bibouPanel2", 0, 490,
+                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
+    getContentPane()->addComponent(&m_bibouPanel2);
 
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");

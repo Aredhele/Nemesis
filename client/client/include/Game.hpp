@@ -53,7 +53,7 @@ private:
 
 
     NPanel m_panelYeti;
-    NPanel m_bibouPanel;
+    NPanel m_bibouPanel2;
     NPanel m_panelDragon;
     NPanel m_panelCrapaud;
     NPanel m_contentPaneBackground;
