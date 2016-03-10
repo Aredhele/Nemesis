@@ -36,25 +36,25 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
     ptr_remingtonInGame->setSmooth(true);
-    m_buttonRemingtonInGame.create("remingtonInGame",730,160,ptr_remingtonInGame, ptr_remingtonInGame);
+    m_buttonRemingtonInGame.create("remingtonInGame",730,87,ptr_remingtonInGame, ptr_remingtonInGame);
     getContentPane()->addComponent(&m_buttonRemingtonInGame);
 
 	//Eldora
     ptr_eldoraInGame = ptr_managerGroup->ptr_textureManager->getTexture("eldoraInGame");
     ptr_eldoraInGame->setSmooth(true);
-    m_buttonEldoraInGame.create("eldoraInGame",780,265,ptr_eldoraInGame, ptr_eldoraInGame);
+    m_buttonEldoraInGame.create("eldoraInGame",765,200,ptr_eldoraInGame, ptr_eldoraInGame);
     getContentPane()->addComponent(&m_buttonEldoraInGame);
 
     //Numero 8
     ptr_numero8InGame = ptr_managerGroup->ptr_textureManager->getTexture("numero8InGame");
     ptr_numero8InGame->setSmooth(true);
-    m_buttonNumero8InGame.create("numero8InGame",250,170,ptr_numero8InGame, ptr_numero8InGame);
+    m_buttonNumero8InGame.create("numero8InGame",230,87,ptr_numero8InGame, ptr_numero8InGame);
     getContentPane()->addComponent(&m_buttonNumero8InGame);
 
     //Tristan
     ptr_tristanInGame = ptr_managerGroup->ptr_textureManager->getTexture("tristanInGame");
     ptr_tristanInGame->setSmooth(true);
-    m_buttonTristanInGame.create("tristanInGame",210,270,ptr_tristanInGame, ptr_tristanInGame);
+    m_buttonTristanInGame.create("tristanInGame",215,200,ptr_tristanInGame, ptr_tristanInGame);
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
     //Text Box Chat
