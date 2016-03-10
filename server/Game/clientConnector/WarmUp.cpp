@@ -12,7 +12,7 @@ WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socke
     estEnMarche = false;
     this->listePartie = listePartie;
 
-    for(int i = 0; i < 5; i++) {
+    for(i = 0; i < 5; i++) {
         tabPlayer[i] = new Player();
     }
 
@@ -132,12 +132,19 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
                                       " >> ", "Reponse a la requete n " + stringActionId);
             if(lockCarac(sRequest, numeroPlayer)){
+                displayer->displayMessage("info", "Requete de lock acceptee pour "+sRequest+
+                        ", envoi de la requete");
                 packet << actionID << "Ok";
                 socket->send(packet);
                 sendModifLockCarac(sRequest, numeroPlayer);
             }
-            packet << actionID << "False";
-            socket->send(packet);
+            else{
+                displayer->displayMessage("warn", "Le joueur n'a pas reussi a lock : " + sRequest);
+                packet << actionID << "False";
+                socket->send(packet);
+            }
+
+
             break;
 
         default:
@@ -165,10 +172,12 @@ void WarmUp::sendModifLockCarac(std::string sRequest, int numeroPlayer){
 }
 
 bool WarmUp::lockCarac(std::string sRequest, int nbPLayer ) {
-    for(int i =0; i < sizeof(tabPlayer); i++ ){
-        if(tabPlayer[i]->getNameChar() == sRequest) return false;
+    for(int i =0; i < 5; i++ ){
+        if(tabPlayer[i]->getNameChar() == sRequest){
+            return false;
+        }
     }
-    (tabPlayer[nbPLayer]->setNameChar(sRequest));
+    tabPlayer[nbPLayer]->setNameChar(sRequest);
     return true;
 }
 
@@ -192,9 +201,9 @@ void WarmUp::launchThreadWarmUp() {
 int WarmUp::addPlayer(sf::TcpSocket * socket,
                          std::string nom, unsigned int indiceSocket) {
 
-    // TODO exception !
-    // TODO retourner qqch si le WarmUp est plein
+    // TODO retourner qqch si le WarmUp est plein (Fait ? (bug ?))
     // (normalement impossible !)
+    this->displayer->displayMessage("warn", "Le joueur est ajoute au thread !");
     for(int i = 0; i < 5; i++) {
         if(!tabPlayer[i]->isHere()) {
             tabPlayer[i]->init(socket, nom, indiceSocket, i);
@@ -218,6 +227,7 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
                         cast::toString(numeroWarmUp));
 
                 nomHote = nom;
+                launchThreadWarmUp();
             }
             return i;
         }
@@ -280,46 +290,9 @@ void WarmUp::launchGame() {
     // TODO - Faire les vérifications de début de partie
     // TODO - Creer toutes les méthodes dans Game
 
-    // On initialise la partie
-    // On regarde si les parties sont disponibles
-    for(unsigned int i = 0; i < listePartie->size(); i++) {
-        if(listePartie->at(i)->estPartieDisponible()) {
 
-            // On réinitialise la partie
-            listePartie->at(i)->init();
-
-            // On insère les Players dans la partie
-            for(int j = 0; j < 4; j++) {
-
-                // On vérifie si le Player est présent
-                if(tabPlayer[j]->isHere()) {
-
-                    // On l'ajoute à la partie
-                    listePartie->at(i)->ajouterPlayer();
-                    listePartie->at(i)->obtenirPlayer(j)->init(
-                            tabPlayer[j]->getSocket(),
-                            tabPlayer[j]->getNamePlayer(),
-                            tabPlayer[j]->getIndiceSocket(),
-                            tabPlayer[j]->getNumeroPlayer()
-                    );
-
-                }
-            }
-
-            // On doit maintenant détruire le WarmUp
-            // On le rend disponible
-            init();
-
-            // On lance le thread
-            listePartie->at(i)->demarrerPartie();
-
-            // On quitte la fonction
-            return;
-        }
-    }
-
-    // Aucunes parties disponibles, on crée une nouvelle partie
     //TODO Créer la partie
+
     //listePartie->push_back(new Game(socketOccupe, displayer));
 
     unsigned int index = listePartie->size() - 1;

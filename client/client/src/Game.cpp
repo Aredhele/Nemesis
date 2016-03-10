@@ -60,18 +60,22 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     //Text Box Chat
 
-    m_textFieldLogin.create("textFieldLogin", 30, 725,
-                            ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
-                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
+    m_textFieldLogin.create("textFieldLogin", 5, 690,
+                            ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
-                            15, 0.5, "", 15, sf::Color(196,130,56));
+                            15, 0.5, "", 70, sf::Color(196,130,56));
     //Panel Chat
-    m_panelChat.create("chatPanel", 30, 510,
-                       ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+    m_panelChat.create("chatPanel", 5, 510,
+                       ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
+
 
     //Panel UI du MJ
-    //m_panelMJ.create("MJPanel", 200, 700,null,null,)
+    ptr_launchGame = ptr_managerGroup->ptr_textureManager->getTexture("playButton_1");
+    ptr_launchGame->setSmooth(true);
+    m_launchGameButton.create("playButton_1", 450, 500, ptr_launchGame, ptr_launchGame);
 
+    m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
     m_panelCharateristics.create("charateristicsPanel", 824, 518,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
@@ -121,27 +125,26 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelCharateristics.addComponent(&m_panelAttack);
     m_panelCharateristics.addComponent(&m_panelDefense);
     m_panelCharateristics.addComponent(&m_panelHealth);
+    m_panelMJ.addComponent(&m_launchGameButton);
+    m_panelMJ.setVisible(false);
     getContentPane()->addComponent(&m_panelCharateristics);
     getContentPane()->addComponent(&m_textFieldLogin);
     getContentPane()->addComponent(&m_panelChat);
-
-    
-
+    getContentPane()->addComponent(&m_panelMJ);  
 
 
 
-    //Crapaud
-    /*ptr_crapaud = ptr_managerGroup->ptr_textureManager->getTexture("Crapaud");
-    ptr_crapaud->setSmooth(true);
-    m_panelCrapaud.create("Crapaud",300,300,ptr_crapaud);
-    getContentPane()->addComponent(&m_panelCrapaud);
-    */
 
-    //Yeti
-    /*ptr_yeti = ptr_managerGroup->ptr_textureManager->getTexture("Dragon");
-    ptr_yeti->setSmooth(true);
-    m_panelYeti.create("Dragon",450,175,ptr_yeti);
-    getContentPane()->addComponent(&m_panelYeti);*/
+    ptr_buttonHit = ptr_managerGroup->ptr_textureManager->getTexture("buttonHit");
+    ptr_buttonHit->setSmooth(true);
+    m_buttonHit.create("buttonHit", 487, 620, ptr_buttonHit, ptr_buttonHit);
+    getContentPane()->addComponent(&m_buttonHit);
+
+    ptr_buttonSummon = ptr_managerGroup->ptr_textureManager->getTexture("buttonSummon");
+    ptr_buttonSummon->setSmooth(true);
+    m_buttonSummon.create("buttonSummon", 487, 550, ptr_buttonSummon, ptr_buttonSummon);
+    getContentPane()->addComponent(&m_buttonSummon);
+
 }
 
 /*!
@@ -160,14 +163,15 @@ void Game::update(sf::RenderWindow * window,
                    sf::Event * e, double frameTime) {
 
 
-   /* if(firstConnect){
-        if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
-
-        }
-       return false;
-    }*/ 
     if(!m_ptr_managerGroup->ptr_targetManager->isGame()) //TODO
         return;
+
+    if(firstConnect){
+        if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+            m_panelMJ.setVisible(true);
+        }
+       firstConnect = false;
+    }
 
     // Basic Interface updating
     basicInput(e, frameTime);

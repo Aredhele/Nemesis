@@ -219,15 +219,12 @@ void WarmUp::update(sf::RenderWindow * window,
 
 void WarmUp::displayInfoCharacters(std::string characterName){
 
-
     m_selectCharacterPanel.setVisible(true);
     //m_playButton.setVisible(true);
     m_infoCharacterPanel.setVisible(true);
     m_validateCharacterButton.setVisible(true);
 
     m_infoCharacterLabel.setText(m_ptr_managerGroup->ptr_gameManager->getCharacterById(characterName)->getDescription());
-
-
 
 }
 
@@ -245,7 +242,7 @@ void WarmUp::receiveRequest(){
 
     switch (idRequest){
         case 1:
-            //On peut rentre en jeu
+            //On peut rentrer en jeu
             *packet >> sRequest;
             if (sRequest=="Ok"){
                 m_ptr_managerGroup->ptr_targetManager->isOnGame();

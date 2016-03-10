@@ -26,6 +26,10 @@ private:
     sf::Texture *ptr_dragon;
     sf::Texture *ptr_yeti;
     sf::Texture *ptr_mdjInGame;
+    sf::Texture *ptr_buttonHit;
+    sf::Texture *ptr_buttonSummon;
+    sf::Texture *ptr_launchGame;
+
     NButton m_buttonEldoraInGame;
     NButton m_buttonRemingtonInGame;
     NButton m_buttonTristanInGame;
@@ -34,7 +38,7 @@ private:
 
     NButton m_buttonNumero8InGame;
     NButton m_buttonMdjInGame;
-    NButton m_launchGame;
+    NButton m_launchGameButton;
 
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;
@@ -64,6 +68,9 @@ private:
     NPanel m_panelIconAttack;
     NPanel m_panelIconDefense;
     NPanel m_panelIconHealth;
+
+    NButton m_buttonHit;
+    NButton m_buttonSummon;
 
 
 public:
