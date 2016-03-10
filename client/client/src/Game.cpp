@@ -23,25 +23,25 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //MDJ
     ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
     ptr_mdjInGame->setSmooth(true);
-    m_buttonMdjInGame.create("mdjInGame",430,50,ptr_mdjInGame, ptr_mdjInGame);
+    m_buttonMdjInGame.create("mdjInGame",430,100,ptr_mdjInGame, ptr_mdjInGame);
     getContentPane()->addComponent(&m_buttonMdjInGame);
 
     //Table
     ptr_tableInGame = ptr_managerGroup->ptr_textureManager->getTexture("tableInGame");
     ptr_tableInGame->setSmooth(true);
-    m_panelTableInGame.create("tableInGame",190,170,ptr_tableInGame);
+    m_panelTableInGame.create("tableInGame",160,190,ptr_tableInGame);
     getContentPane()->addComponent(&m_panelTableInGame);
 
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
     ptr_remingtonInGame->setSmooth(true);
-    m_buttonRemingtonInGame.create("remingtonInGame",700,170,ptr_remingtonInGame, ptr_remingtonInGame);
+    m_buttonRemingtonInGame.create("remingtonInGame",730,160,ptr_remingtonInGame, ptr_remingtonInGame);
     getContentPane()->addComponent(&m_buttonRemingtonInGame);
 
 	//Eldora
     ptr_eldoraInGame = ptr_managerGroup->ptr_textureManager->getTexture("eldoraInGame");
     ptr_eldoraInGame->setSmooth(true);
-    m_buttonEldoraInGame.create("eldoraInGame",710,270,ptr_eldoraInGame, ptr_eldoraInGame);
+    m_buttonEldoraInGame.create("eldoraInGame",780,265,ptr_eldoraInGame, ptr_eldoraInGame);
     getContentPane()->addComponent(&m_buttonEldoraInGame);
 
     //Numero 8
@@ -53,7 +53,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //Tristan
     ptr_tristanInGame = ptr_managerGroup->ptr_textureManager->getTexture("tristanInGame");
     ptr_tristanInGame->setSmooth(true);
-    m_buttonTristanInGame.create("tristanInGame",250,280,ptr_tristanInGame, ptr_tristanInGame);
+    m_buttonTristanInGame.create("tristanInGame",210,270,ptr_tristanInGame, ptr_tristanInGame);
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
     //Text Box Chat
@@ -225,6 +225,8 @@ void Game::update(sf::RenderWindow * window,
         m_labelDefense.setText(tristanDefense);
         m_labelHealth.setText(tristanHealth);
     }
+
+    
 
     // Drawing all content
     basicDraw(window);
