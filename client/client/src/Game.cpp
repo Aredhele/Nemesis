@@ -59,14 +59,15 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     //Text Box Chat
 
-    m_textFieldLogin.create("textFieldLogin", 30, 725,
-                            ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
-                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
+    m_textFieldLogin.create("textFieldLogin", 5, 690,
+                            ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
+                            ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
-                            15, 0.5, "", 15, sf::Color(196,130,56));
+                            15, 0.5, "", 70, sf::Color(196,130,56));
     //Panel Chat
-    m_panelChat.create("chatPanel", 30, 510,
-                       ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+    m_panelChat.create("chatPanel", 5, 510,
+                       ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
+
 
 
     m_panelCharateristics.create("charateristicsPanel", 824, 518,

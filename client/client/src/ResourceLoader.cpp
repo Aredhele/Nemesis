@@ -130,7 +130,16 @@ void ResourceLoader::load() {
 	a_tm.addTexture("IconDefense", pathLogin + "defenseIcon.png");
 	a_tm.addTexture("IconHealth", pathLogin + "healthIcon.png");
 
+	a_tm.addTexture("chatPanel", pathLogin + "chatPanel.png");
+	a_tm.addTexture("chatTextBox", pathLogin + "chatTextBox.png");
+	a_tm.addTexture("textBoxCursorChat", pathLogin + "curseurChatTextBox.png");
+	a_tm.addTexture("loading", pathLogin + "loading.png");
+
 	//Backgrounds
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
 	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
 
 
