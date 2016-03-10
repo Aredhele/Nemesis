@@ -24,7 +24,7 @@ private:
 	NPanel m_contentPane;
 	NPanel m_topBar;
 	NPanel m_optionPanel;
-
+	NPanel m_optionPanel_2;
 	NButton m_optButton;
 	NButton m_exitButton;
 	NButton m_musicButton;

@@ -218,16 +218,8 @@ void WarmUp::displayInfoCharacters(std::string characterName){
     m_infoCharacterPanel.setVisible(true);
     m_validateCharacterButton.setVisible(true);
 
-    //if (characterName == "numero8")
-        m_infoCharacterLabel.setText(m_ptr_managerGroup->ptr_gameManager->getCharacterById(characterName)->getDescription());
-    /*else if (characterName == "remington")
-        m_infoCharacterLabel.setText(L"Bonjour ! \nJe m\'appelle Remington !");
-    else if (characterName == "eldora")
-        m_infoCharacterLabel.setText(L"Bonjour ! \nJe m\'appelle Eldora Dragnir !");
-    else if (characterName == "tristan")
-        m_infoCharacterLabel.setText(L"Bonjour ! \nJe m\'appelle Tristan De la Mortifère !");
-    else if (characterName == "mdj")
-        m_infoCharacterLabel.setText(L"Bonjour ! \nJe suis le maitre du jeu. C'est moi qui dirigera la partie !");*/
+    m_infoCharacterLabel.setText(m_ptr_managerGroup->ptr_gameManager->getCharacterById(characterName)->getDescription());
+
 
 
 }

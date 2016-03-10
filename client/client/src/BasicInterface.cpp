@@ -17,6 +17,7 @@ BasicInterface::BasicInterface(bool debug,
 																  m_contentPane(),
 																  m_topBar(),
 																  m_optionPanel(),
+																  m_optionPanel_2(),
 																  m_optButton(),
 																  m_exitButton(),
 																  m_musicButton(),
@@ -58,11 +59,11 @@ BasicInterface::BasicInterface(bool debug,
 					   a_tm.getTexture("topBarOptButton_1"),
 					   a_tm.getTexture("topBarOptButton_2"));
 
-	m_musicButton.create("volumeButton", 600,300,
+	m_musicButton.create("volumeButton", 850,90,
 						 a_tm.getTexture("volume_1"),
 						 a_tm.getTexture("volume_2"));
 
-	m_soundButton.create("soundButton", 600,436,
+	m_soundButton.create("soundButton", 850,165,
 						 a_tm.getTexture("volume_1"),
 						 a_tm.getTexture("volume_2"));
 
@@ -72,11 +73,11 @@ BasicInterface::BasicInterface(bool debug,
 						a_tm.getTexture("topBarExitButton_2"));
 
 	//Adding labels
-	m_volumeLabel.create("volumeLabel", 370, 314, 20, &m_fontLabel,
+	m_volumeLabel.create("volumeLabel", 730, 100, 16, &m_fontLabel,
 						 L"Volume de la musique",
 						 sf::Color::White);
 
-	m_soundLabel.create("soundLabel", 370, 450, 20, &m_fontLabel,
+	m_soundLabel.create("soundLabel", 730, 175, 16, &m_fontLabel,
 						 L"Volume des effets",
 						 sf::Color::White);
 
@@ -93,9 +94,8 @@ BasicInterface::BasicInterface(bool debug,
 								  sf::Color::White);
 
 	// Creating optionPanel
-	m_optionPanel.create("optionPanel", 0, 50,
-						 a_tm.getTexture("optionPane"));
-
+	m_optionPanel.create("optionPanel", 710, 55,
+						 a_tm.getTexture("optionPanel"));
 
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 	m_errorPanel.setVisible(false);
