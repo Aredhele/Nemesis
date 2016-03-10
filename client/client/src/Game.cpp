@@ -103,16 +103,6 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_labelDefense.create("labelDefense", 880, 645, 15, &m_fontLabel, L"", sf::Color::Black);
     m_labelHealth.create("labelHealth", 880, 700, 15, &m_fontLabel, L"", sf::Color::Black);
 
-    std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
-    std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
-    std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
-    std::wstring currentPlayerHealth = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getHealth();
-
-
-    m_labelNameCharacter.setText(currentPlayerName);
-    m_labelAttack.setText(currentPlayerAttack);
-    m_labelDefense.setText(currentPlayerDefense);
-    m_labelHealth.setText(currentPlayerHealth);
 
     m_panelNameCharacter.addComponent(&m_labelNameCharacter);
     m_panelAttack.addComponent(&m_panelIconAttack);
@@ -167,6 +157,18 @@ void Game::update(sf::RenderWindow * window,
         return;
 
     if(firstConnect){
+
+        std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
+        std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
+        std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
+        std::wstring currentPlayerHealth = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getHealth();
+
+        m_labelNameCharacter.setText(currentPlayerName);
+        m_labelAttack.setText(currentPlayerAttack);
+        m_labelDefense.setText(currentPlayerDefense);
+        m_labelHealth.setText(currentPlayerHealth);
+
+
         if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
             m_panelMJ.setVisible(true);
         }
@@ -228,7 +230,7 @@ void Game::update(sf::RenderWindow * window,
         m_labelHealth.setText(tristanHealth);
     }
 
-    
+    //if (e->type == sf::TextE)
     // Drawing all content
     basicDraw(window);
 

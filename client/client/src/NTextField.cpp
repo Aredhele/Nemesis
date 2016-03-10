@@ -172,8 +172,8 @@ void NTextField::eventTextEntered(sf::Event * e) {
 			//m_cursorPosition.x += m_fontSize / 1.5;
 			m_cursorPosition.x += m_fontSize / coefFont;
 			m_secondSprite.setPosition(m_cursorPosition);
-		/*} else if(e->text.unicode == 13) { // Carriage Return
-			m_isActive = false;*/
+		} else if(e->text.unicode == 13) { // Carriage Return
+			m_isActive = false;
 		}
 		else {
 			m_charList.push_back(
@@ -218,14 +218,14 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		return;
 	}
 
-	if(e->text.unicode == 13){
+	/*if(e->text.unicode == 13){
 		if(m_charList.size()!=0){
 			m_charList.clear();
 			m_text.setString("");
 			m_cursorPosition.x = 14;
 			m_cursorPosition.y = 695;
 		}
-	}
+	}*/
 }
 
 /*! 
