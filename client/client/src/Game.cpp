@@ -98,7 +98,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
-    m_labelNameCharacter.create("labelNameCharacter", 730, 529, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelNameCharacter.create("labelNameCharacter", 750, 529, 15, &m_fontLabel, L"", sf::Color::Black);
     m_labelAttack.create("labelAttack", 780, 584, 15, &m_fontLabel, L"", sf::Color::Black);
     m_labelDefense.create("labelDefense", 780, 639, 15, &m_fontLabel, L"", sf::Color::Black);
     m_labelHealth.create("labelHealth", 780, 696, 15, &m_fontLabel, L"", sf::Color::Black);
