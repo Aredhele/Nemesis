@@ -47,7 +47,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
                             ptr_managerGroup->ptr_textureManager->getTexture("textBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursor"),
                             &m_fontTextbox,
-                       15, 0.5, " Votre pseudo", 15, sf::Color(196,130,56));
+                       15, 0.5, "Votre pseudo", 15, sf::Color(196,130,56));
 
 	m_paperSwordTitlePanel.create("paperSwordTitlePanel", 309, 50,
 						 ptr_managerGroup->ptr_textureManager->getTexture("paperSwordTitlePanel"));

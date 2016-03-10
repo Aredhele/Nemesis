@@ -45,7 +45,11 @@ private:
     NLabel m_labelHealth;
     NLabel m_labelCharacteristics;
 
+    NPanel m_panelChat;
+    NTextField m_textFieldLogin;
+
     sf::Font m_fontLabel;
+    sf::Font m_fontTextbox;
 
 
     NPanel m_panelYeti;
