@@ -7,6 +7,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         BasicInterface(debug, ptr_managerGroup)
 
 {
+    firstConnect = true;
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
@@ -63,12 +64,18 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                             ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
-                            15, 0.5, "", 70, sf::Color(196,130,56));
+                            15, 0.5, "", 104, sf::Color(196,130,56));
     //Panel Chat
     m_panelChat.create("chatPanel", 5, 510,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
 
 
+    //Panel UI du MJ
+    ptr_launchGame = ptr_managerGroup->ptr_textureManager->getTexture("playButton_1");
+    ptr_launchGame->setSmooth(true);
+    m_launchGameButton.create("playButton_1", 450, 500, ptr_launchGame, ptr_launchGame);
+
+    m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
     m_panelCharateristics.create("charateristicsPanel", 824, 518,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
@@ -118,9 +125,15 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelCharateristics.addComponent(&m_panelAttack);
     m_panelCharateristics.addComponent(&m_panelDefense);
     m_panelCharateristics.addComponent(&m_panelHealth);
+    m_panelMJ.addComponent(&m_launchGameButton);
+    m_panelMJ.setVisible(false);
     getContentPane()->addComponent(&m_panelCharateristics);
     getContentPane()->addComponent(&m_textFieldLogin);
     getContentPane()->addComponent(&m_panelChat);
+    getContentPane()->addComponent(&m_panelMJ);  
+
+
+
 
     ptr_buttonHit = ptr_managerGroup->ptr_textureManager->getTexture("buttonHit");
     ptr_buttonHit->setSmooth(true);
@@ -149,8 +162,16 @@ Game::~Game() {
 void Game::update(sf::RenderWindow * window,
                    sf::Event * e, double frameTime) {
 
+
     if(!m_ptr_managerGroup->ptr_targetManager->isGame()) //TODO
         return;
+
+    if(firstConnect){
+        if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+            m_panelMJ.setVisible(true);
+        }
+       firstConnect = false;
+    }
 
     // Basic Interface updating
     basicInput(e, frameTime);

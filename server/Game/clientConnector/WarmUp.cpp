@@ -132,6 +132,7 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
                                       " >> ", "Reponse a la requete n " + stringActionId);
             if(lockCarac(sRequest, numeroPlayer)){
+
                 displayer->displayMessage("info", "Requete de lock acceptee pour "+sRequest+
                         ", envoi de la requete");
                 packet << actionID << "Ok";
