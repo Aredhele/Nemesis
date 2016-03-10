@@ -230,6 +230,15 @@ void Game::update(sf::RenderWindow * window,
         m_labelHealth.setText(tristanHealth);
     }
 
+    sf::Event ev = *e;
+    if(ev.key.code == 13) {
+        std::cout << m_textFieldLogin.getString() << std::endl;
+        //TODO : vider le m_textFieldLogin
+        //TODO : envoyer le texte saisie au serveur
+    }
+
+
+
     //if (e->type == sf::TextE)
     // Drawing all content
     basicDraw(window);
