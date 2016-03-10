@@ -121,20 +121,16 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_textFieldLogin);
     getContentPane()->addComponent(&m_panelChat);
 
+    ptr_buttonHit = ptr_managerGroup->ptr_textureManager->getTexture("buttonHit");
+    ptr_buttonHit->setSmooth(true);
+    m_buttonHit.create("buttonHit", 487, 620, ptr_buttonHit, ptr_buttonHit);
+    getContentPane()->addComponent(&m_buttonHit);
 
+    ptr_buttonSummon = ptr_managerGroup->ptr_textureManager->getTexture("buttonSummon");
+    ptr_buttonSummon->setSmooth(true);
+    m_buttonSummon.create("buttonSummon", 487, 550, ptr_buttonSummon, ptr_buttonSummon);
+    getContentPane()->addComponent(&m_buttonSummon);
 
-    //Crapaud
-    /*ptr_crapaud = ptr_managerGroup->ptr_textureManager->getTexture("Crapaud");
-    ptr_crapaud->setSmooth(true);
-    m_panelCrapaud.create("Crapaud",300,300,ptr_crapaud);
-    getContentPane()->addComponent(&m_panelCrapaud);
-    */
-
-    //Yeti
-    /*ptr_yeti = ptr_managerGroup->ptr_textureManager->getTexture("Dragon");
-    ptr_yeti->setSmooth(true);
-    m_panelYeti.create("Dragon",450,175,ptr_yeti);
-    getContentPane()->addComponent(&m_panelYeti);*/
 }
 
 /*!

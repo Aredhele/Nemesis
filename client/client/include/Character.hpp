@@ -42,5 +42,8 @@ class Character{
         void setCaracteristics(int atckDmg, int health, int armor);
         void setAbility(int id, std::string name,std::string type);
         Caracteristic * getCaracteristic();
+
+        int hitDamage(int atckDmg, int pvEnemy);
+        int summonDamage(int atckDmg, int pvEnemy);
 };
 #endif //DEF_CHARACTER_HPP

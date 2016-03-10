@@ -62,9 +62,17 @@ Caracteristic* Character::getCaracteristic(){
 }
 
 
-
-
 void Character::setAbility(int id,std::string name,std::string type){
 	ptr_ability->setAbility(id,name,type);
+}
+
+int Character::hitDamage(int atckDmg, int pvEnemy){
+
+    return pvEnemy - atckDmg;
+}
+
+int Character::summonDamage(int atckDmg, int pvEnemy){
+
+    return pvEnemy - 2 * atckDmg;
 }
 
