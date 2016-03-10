@@ -20,17 +20,18 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                         ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
 
-    //MDJ
-    ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
-    ptr_mdjInGame->setSmooth(true);
-    m_buttonMdjInGame.create("mdjInGame",430,100,ptr_mdjInGame, ptr_mdjInGame);
-    getContentPane()->addComponent(&m_buttonMdjInGame);
 
     //Table
     ptr_tableInGame = ptr_managerGroup->ptr_textureManager->getTexture("tableInGame");
     ptr_tableInGame->setSmooth(true);
     m_panelTableInGame.create("tableInGame",160,190,ptr_tableInGame);
     getContentPane()->addComponent(&m_panelTableInGame);
+
+    //MDJ
+    ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
+    ptr_mdjInGame->setSmooth(true);
+    m_buttonMdjInGame.create("mdjInGame",430,60,ptr_mdjInGame, ptr_mdjInGame);
+    getContentPane()->addComponent(&m_buttonMdjInGame);
 
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
@@ -85,7 +86,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelIconDefense.create("defenseIcon", 824,628,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
 
-    m_panelIconHealth.create("healthIcon", 824,683,
+    m_panelIconHealth.create("healthIcon", 827,686,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
@@ -134,33 +135,6 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     ptr_yeti->setSmooth(true);
     m_panelYeti.create("Dragon",450,175,ptr_yeti);
     getContentPane()->addComponent(&m_panelYeti);*/
-
-    /*m_panelCharateristics.create("charateristicsPanel", 824, 468,
-                                 ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
-    m_panelNameCharacter.create("nameCharacterPanel",824, 468,
-                                ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelAttack.create("attackPanel",824, 523,
-                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelDefense.create("defensePanel", 824, 578,
-                          ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelHealth.create("healthPanel", 824, 633,
-                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));*/
-
-    //m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
-    //int var = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
-    //std::wostringstream ws;
-    //ws << var;
-    //const std::wstring s(ws.str());
-
-
-   /* m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_panelAttack.addComponent(&m_labelCharacteristics);
-    m_panelCharateristics.addComponent(&m_panelNameCharacter);
-    m_panelCharateristics.addComponent(&m_panelAttack);
-    m_panelCharateristics.addComponent(&m_panelDefense);
-    m_panelCharateristics.addComponent(&m_panelHealth);
-    getContentPane()->addComponent(&m_panelCharateristics);*/
-
 }
 
 /*!
@@ -237,7 +211,6 @@ void Game::update(sf::RenderWindow * window,
     }
 
     
-
     // Drawing all content
     basicDraw(window);
 

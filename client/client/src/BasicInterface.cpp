@@ -59,11 +59,11 @@ BasicInterface::BasicInterface(bool debug,
 					   a_tm.getTexture("topBarOptButton_1"),
 					   a_tm.getTexture("topBarOptButton_2"));
 
-	m_musicButton.create("volumeButton", 850,90,
+	m_musicButton.create("volumeButton", 905,92,
 						 a_tm.getTexture("volume_1"),
 						 a_tm.getTexture("volume_2"));
 
-	m_soundButton.create("soundButton", 850,165,
+	m_soundButton.create("soundButton", 905,167,
 						 a_tm.getTexture("volume_1"),
 						 a_tm.getTexture("volume_2"));
 
