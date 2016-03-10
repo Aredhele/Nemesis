@@ -113,7 +113,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("eldoraInGame",pathChar + "Eldora_Dragnir_inGame.png");
 	a_tm.addTexture("numero8InGame",pathChar + "Numero_8_inGame.PNG");
 	a_tm.addTexture("remingtonInGame",pathChar + "Remington_inGame.PNG");
-	a_tm.addTexture("tableInGame",pathChar + "Table_Jeu_inGame.png");
+	a_tm.addTexture("tableInGame",pathChar + "Table_2.png");
 	a_tm.addTexture("tristanInGame",pathChar + "Tristan_De_La_Mortifere_inGame.png");
 	a_tm.addTexture("mdjInGame",pathChar + "Mdj_inGame.PNG");
 	a_tm.addTexture("statPanel", pathLogin + "panel_200-50.png");
@@ -124,7 +124,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("Yeti",pathChar + "Yeti.png");
 
 	//Backgrounds
-	a_tm.addTexture("background_Landscape",pathBackground + "Background_Landscape_1024.png");
+	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
 
 
 	a_mm.setState(true);
