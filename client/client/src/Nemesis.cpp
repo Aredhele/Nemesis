@@ -49,7 +49,8 @@ int main(int argc, char ** argv)
     Game game(DEBUG, managerGroup);
 
     // Setting main target
-    managerGroup->ptr_targetManager->isOnLoginMenu();
+    managerGroup->ptr_targetManager->isOnGame();
+
 
 
     sf::Clock clock;

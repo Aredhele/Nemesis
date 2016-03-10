@@ -43,6 +43,7 @@ Player *  GameManager::getPlayer(){
  * \The id will serve to identify character to select one
  */
 void GameManager::initCharacters(){
+    
     m_characterList[0]->setName(L"Numero 8");
     m_characterList[0]->setId("numero8");
     m_characterList[0]->setDescription(L"Salut à toi !\n J’ai pour seul nom le chiffre 8.\nIl me vient de la prison dans laquelle je suis née.\nJ’y ai été entrainé pour devenir un guerrier puissant. Rien ne m’arrête !\nJe fonce dans la bataille tête baissée et je n’ai jamais été vaincu. ");
