@@ -37,7 +37,6 @@ ClientServer::~ClientServer() {
 }
 
 
-
 /*!
  * \brief Start the server
  */
@@ -362,7 +361,7 @@ bool ClientServer::joinWarmUp(sf::TcpSocket * socket, std::string param,
     listeWarmUp[cast::toInt(idSalon_C +1)]->addPlayer(socket, nomJoueur_C,
                                                                  (unsigned int) indiceSocket);
     this->m_ptr_displayer->displayMessage("info", "Le joueur [" + std::string(nomJoueur_C) +
-                                                  "] a rejoint le salon n°" + std::string(idSalon_C));
+                                                  "] a rejoint le salon n " + std::string(idSalon_C));
 
     listeSocketOccupee[indiceSocket] = true;
     

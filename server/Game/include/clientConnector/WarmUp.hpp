@@ -78,7 +78,7 @@ private:
     void threadWarmUp();
     void gererRequete(sf::Int32 idRequest, std::string sRequest,
                       sf::TcpSocket * socket, int numeroPlayer);
-    //void launchGame(); //TODO Creer Game
+    void launchGame(); //TODO Creer Game
     bool lockCarac(std::string sRequest, int nbPLayer);
     void sendModifLockCarac(std::string sRequest1, int numeroPlayer);
 };
