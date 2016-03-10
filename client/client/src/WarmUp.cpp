@@ -128,7 +128,8 @@ void WarmUp::update(sf::RenderWindow * window,
             displayInfoCharacters("numero8");
             m_selectCharacterPanel.setPosition(10, 65);
             //m_validateCharacterButton.setPosition(195,211);
-            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(3);
+            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+                    m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8"));;
         }
 
     }
@@ -138,7 +139,8 @@ void WarmUp::update(sf::RenderWindow * window,
             displayInfoCharacters("remington");
             m_selectCharacterPanel.setPosition(205, 65);
             //m_validateCharacterButton.setPosition(400, 211);
-            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(1);
+            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+                    m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington"));;
         }
     }
     if(m_inputHandler.getComponentId() == "eldoraButton") {
@@ -147,7 +149,8 @@ void WarmUp::update(sf::RenderWindow * window,
             displayInfoCharacters("eldora");
             m_selectCharacterPanel.setPosition(400, 65);
             //m_validateCharacterButton.setPosition(566,211);
-            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(0);
+            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+                    m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));;
         }
     }
     if(m_inputHandler.getComponentId() == "tristanButton") {
@@ -156,7 +159,8 @@ void WarmUp::update(sf::RenderWindow * window,
             displayInfoCharacters("tristan");
             m_selectCharacterPanel.setPosition(595, 65);
             //m_validateCharacterButton.setPosition(771, 211);
-            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(2);
+            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+                    m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan"));;
         }
     }
     if(m_inputHandler.getComponentId() == "mdjButton") {
@@ -165,7 +169,8 @@ void WarmUp::update(sf::RenderWindow * window,
             displayInfoCharacters("mdj");
             m_selectCharacterPanel.setPosition(790, 65);
             //m_validateCharacterButton.setPosition(976, 211);
-            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(4);
+            m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+                    m_ptr_managerGroup->ptr_gameManager->getCharacterById("mdj"));
         }
     }
     if(m_inputHandler.getComponentId() == "validateCharButton"){
@@ -181,8 +186,10 @@ void WarmUp::update(sf::RenderWindow * window,
             str.push_back(static_cast<char>(*it));
         }
 
-        //std::cout << "NOM PERSO SELECTIONNE S : " << str << std::endl;
-        m_ptr_managerGroup->ptr_networkManager->request(2, str);
+        std::cout << "NOM PERSO SELECTIONNE S : " << str << std::endl;
+        if (!m_ptr_managerGroup->ptr_networkManager->request(2, str)){
+            errorConnection();
+        }
         //TODO : Afficher la roue de chargement
 
     }

@@ -15,7 +15,7 @@ class GameManager : public Manager {
 
     private:
         bool m_debug;
-        Player  m_player;
+        Player m_player;
         std::vector < Character* > m_characterList;
 
     public:

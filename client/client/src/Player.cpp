@@ -6,7 +6,8 @@
 
 Player::Player(){
 
-	ptr_character = new Character();
+    //m_ptr_managerGroup = ptr_managerGroup;
+	m_ptr_character = new Character();
 }
 
 Player::~Player(){
@@ -21,12 +22,12 @@ std::string Player::getName(){
     return m_name;
 }
 
-void Player::setCharacter(int id){
-	//m_ptr_character = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id);
+void Player::setCharacter(Character * ptr_character){
+	m_ptr_character = ptr_character;
 }
 
 Character * Player::getCharacter(){
-	return ptr_character;
+	return m_ptr_character;
 
 }
 
