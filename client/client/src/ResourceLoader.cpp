@@ -139,6 +139,27 @@ void ResourceLoader::load() {
 	a_tm.addTexture("buttonSummon", pathLogin + "buttonSummon.png");
 
 
+	a_tm.addTexture("ambianceButton_1", pathLogin + "ambianceButton_1.png");
+	a_tm.addTexture("ambianceButton_2", pathLogin + "ambianceButton_2.png");
+	a_tm.addTexture("beachButton_1", pathLogin + "beachButton_1.png");
+	a_tm.addTexture("beachButton_2", pathLogin + "beachButton_1.png");
+	a_tm.addTexture("castleButton_1", pathLogin + "castleButton_1.png");
+	a_tm.addTexture("castleButton_2", pathLogin + "castleButton_2.png");
+	a_tm.addTexture("crapaudButton_1", pathLogin + "crapaudButton_1.png");
+	a_tm.addTexture("crapaudButton_2", pathLogin + "crapaudButton_2.png");
+	a_tm.addTexture("forestButton_1", pathLogin + "forestButton_1.png");
+	a_tm.addTexture("forestButton_2", pathLogin + "forestButton_2.png");
+	a_tm.addTexture("landButton_1", pathLogin + "landButton_1.png");
+	a_tm.addTexture("landButton_2", pathLogin + "landButton_2.png");
+	a_tm.addTexture("monsterButton_1", pathLogin + "monsterButton_1.png");
+	a_tm.addTexture("monsterButton_2", pathLogin + "monsterButton_2.png");
+	a_tm.addTexture("roomButton_1", pathLogin + "roomButton_1.png");
+	a_tm.addTexture("roomButton_2", pathLogin + "roomButton_2.png");
+	a_tm.addTexture("yetiButton_1", pathLogin + "yetiButton_1.png");
+	a_tm.addTexture("yetiButton_2", pathLogin + "yetiButton_2.png");
+	a_tm.addTexture("dragonButton_1", pathLogin + "dragonButton_1.png");
+	a_tm.addTexture("dragonButton_2", pathLogin + "dragonButton_2.png");
+
 	//Backgrounds
 	a_tm.addTexture("background_Castle_2",pathBackground + "Background_Castle_2.png");
 	a_tm.addTexture("Background_Beach",pathBackground + "Background_Beach.png");

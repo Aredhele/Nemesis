@@ -178,6 +178,11 @@ void NButton::setPosition(float x, float y) {
 	m_position.y = y;
 	m_mainSprite.setPosition(m_position);
 	m_secondSprite.setPosition(m_position);
+
+	m_surrounder.init(m_mainSprite.getPosition(),
+					  m_mainSprite.getTexture()->getSize(),
+					  sf::Color(196,130,56));
+
 }
 
 /*!

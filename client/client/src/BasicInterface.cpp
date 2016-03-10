@@ -93,9 +93,13 @@ BasicInterface::BasicInterface(bool debug,
 										  "  Vérifiez votre connnexion et réessayez.",
 								  sf::Color::White);
 
+
+
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 710, 55,
 						 a_tm.getTexture("optionPanel"));
+
+
 
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 	m_errorPanel.setVisible(false);

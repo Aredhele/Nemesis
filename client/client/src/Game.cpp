@@ -4,10 +4,52 @@
 
 #include "Game.hpp"
 Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
-        BasicInterface(debug, ptr_managerGroup)
+        BasicInterface(debug, ptr_managerGroup),
+        m_buttonEldoraInGame(),
+        m_buttonRemingtonInGame(),
+        m_buttonTristanInGame(),
+        m_panelTableInGame(),
+        m_buttonNumero8InGame(),
+        m_buttonMdjInGame(),
+        m_launchGameButton(),
+        m_monsterButton(),
+        m_ambianceButton(),
+        m_beachButton(),
+        m_castleButton(),
+        m_forestButton(),
+        m_landButton(),
+        m_roomButton(),
+        m_crapaudButton(),
+        m_dragonButton(),
+        m_yetiButton(),
+        m_panelCharateristics(),
+        m_panelNameCharacter(),
+        m_panelAttack(),
+        m_panelDefense(),
+        m_panelHealth(),
+        m_labelNameCharacter(),
+        m_labelAttack(),
+        m_labelDefense(),
+        m_labelHealth(),
+        m_labelCharacteristics(),
+        m_panelChat(),
+        m_textFieldLogin(),
+        m_bibouPanel2(),
+        m_contentPaneBackground(),
+        m_panelMJ(),
+        m_panelAmbianceMJ(),
+        m_panelMonstresMJ(),
+        m_panelIconAttack(),
+        m_panelIconDefense(),
+        m_panelIconHealth(),
+        m_buttonHit(),
+        m_buttonSummon()
+
 
 {
     firstConnect = true;
+    m_isOnMonstrePanel = false;
+    m_isOnAmbiancePanel = false;
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
@@ -18,7 +60,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     //Panel interface
     m_bibouPanel2.create("bibouPanel2", 0, 490,
-                        ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
+                         ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
 
 
@@ -34,13 +76,13 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_buttonMdjInGame.create("mdjInGame",430,60,ptr_mdjInGame, ptr_mdjInGame);
     getContentPane()->addComponent(&m_buttonMdjInGame);
 
-	//Remington
+    //Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
     ptr_remingtonInGame->setSmooth(true);
     m_buttonRemingtonInGame.create("remingtonInGame",730,87,ptr_remingtonInGame, ptr_remingtonInGame);
     getContentPane()->addComponent(&m_buttonRemingtonInGame);
 
-	//Eldora
+    //Eldora
     ptr_eldoraInGame = ptr_managerGroup->ptr_textureManager->getTexture("eldoraInGame");
     ptr_eldoraInGame->setSmooth(true);
     m_buttonEldoraInGame.create("eldoraInGame",765,200,ptr_eldoraInGame, ptr_eldoraInGame);
@@ -71,31 +113,88 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
 
     //Panel UI du MJ
-    ptr_launchGame = ptr_managerGroup->ptr_textureManager->getTexture("playButton_1");
-    ptr_launchGame->setSmooth(true);
-    m_launchGameButton.create("playButton_1", 450, 500, ptr_launchGame, ptr_launchGame);
-
     m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
+    m_panelAmbianceMJ.create("panelAmbianceMJ", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
+    m_panelMonstresMJ.create("panelMonstresMJ", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
+
+    //Button for MJ
+    m_monsterButton.create("monsterButton", 450, 595,
+                           ptr_managerGroup->ptr_textureManager->getTexture("monsterButton_1"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("monsterButton_2"));
+    m_panelMJ.addComponent(&m_monsterButton);
+    //////////////
+    m_ambianceButton.create("ambianceButton", 450, 650,
+                            ptr_managerGroup->ptr_textureManager->getTexture("ambianceButton_1"),
+                            ptr_managerGroup->ptr_textureManager->getTexture("ambianceButton_2"));
+    m_panelMJ.addComponent(&m_ambianceButton);
+
+    //---AMBIANCES
+    ///////////
+    m_beachButton.create("beachButton", 580, 540,
+                         ptr_managerGroup->ptr_textureManager->getTexture("beachButton_1"),
+                         ptr_managerGroup->ptr_textureManager->getTexture("beachButton_2"));
+    m_panelAmbianceMJ.addComponent(&m_beachButton);
+    ////////////
+    m_castleButton.create("castleButton", 580, 580,
+                          ptr_managerGroup->ptr_textureManager->getTexture("castleButton_1"),
+                          ptr_managerGroup->ptr_textureManager->getTexture("castleButton_2"));
+    m_panelAmbianceMJ.addComponent(&m_castleButton);
+    ///////////
+    m_forestButton.create("forestButton", 580, 620,
+                          ptr_managerGroup->ptr_textureManager->getTexture("forestButton_1"),
+                          ptr_managerGroup->ptr_textureManager->getTexture("forestButton_2"));
+    m_panelAmbianceMJ.addComponent(&m_forestButton);
+    ///////////
+    m_landButton.create("landButton", 580, 660,
+                        ptr_managerGroup->ptr_textureManager->getTexture("landButton_1"),
+                        ptr_managerGroup->ptr_textureManager->getTexture("landButton_2"));
+    m_panelAmbianceMJ.addComponent(&m_landButton);
+    ///////////
+    m_roomButton.create("roomButton", 580, 700,
+                        ptr_managerGroup->ptr_textureManager->getTexture("roomButton_1"),
+                        ptr_managerGroup->ptr_textureManager->getTexture("roomButton_2"));
+    m_panelAmbianceMJ.addComponent(&m_roomButton);
+
+    //---MONSTRES
+    ///////////
+    m_crapaudButton.create("crapaudButton", 580, 560,
+                           ptr_managerGroup->ptr_textureManager->getTexture("crapaudButton_1"),
+                           ptr_managerGroup->ptr_textureManager->getTexture("crapaudButton_2"));
+    m_panelMonstresMJ.addComponent(&m_crapaudButton);
+    ///////////
+    m_dragonButton.create("dragonButton", 580, 620,
+                          ptr_managerGroup->ptr_textureManager->getTexture("dragonButton_1"),
+                          ptr_managerGroup->ptr_textureManager->getTexture("dragonButton_2"));
+    m_panelMonstresMJ.addComponent(&m_dragonButton);
+    ///////////
+    m_yetiButton.create("yetiButton", 580, 680,
+                        ptr_managerGroup->ptr_textureManager->getTexture("yetiButton_1"),
+                        ptr_managerGroup->ptr_textureManager->getTexture("yetiButton_2"));
+    m_panelMonstresMJ.addComponent(&m_yetiButton);
+
+
+
+
 
     m_panelCharateristics.create("charateristicsPanel", 704, 512,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
+                                 ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
     /*m_panelNameCharacter.create("nameCharacterPanel",704, 512,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));*/
     m_panelAttack.create("attackPanel",704, 567,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
     m_panelDefense.create("defensePanel", 704, 622,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+                          ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
     m_panelHealth.create("healthPanel", 704, 677,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
 
     m_panelIconAttack.create("attackIcon", 704,567,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
+                             ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
 
     m_panelIconDefense.create("defenseIcon", 704,622,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
+                              ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
 
     m_panelIconHealth.create("healthIcon", 707,680,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
+                             ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
     m_labelNameCharacter.create("labelNameCharacter", 750, 529, 15, &m_fontLabel, L"", sf::Color::Black);
@@ -105,34 +204,47 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
 
     m_panelNameCharacter.addComponent(&m_labelNameCharacter);
+
     m_panelAttack.addComponent(&m_panelIconAttack);
     m_panelAttack.addComponent(&m_labelAttack);
+
     m_panelDefense.addComponent(&m_labelDefense);
     m_panelDefense.addComponent(&m_panelIconDefense);
+
     m_panelHealth.addComponent(&m_labelHealth);
     m_panelHealth.addComponent(&m_panelIconHealth);
+
     m_panelCharateristics.addComponent(&m_panelNameCharacter);
     m_panelCharateristics.addComponent(&m_panelAttack);
     m_panelCharateristics.addComponent(&m_panelDefense);
     m_panelCharateristics.addComponent(&m_panelHealth);
+
+
     m_panelMJ.addComponent(&m_launchGameButton);
     m_panelMJ.setVisible(false);
+    m_panelMonstresMJ.setVisible(false);
+    m_panelAmbianceMJ.setVisible(false);
     getContentPane()->addComponent(&m_panelCharateristics);
     getContentPane()->addComponent(&m_textFieldLogin);
     getContentPane()->addComponent(&m_panelChat);
-    getContentPane()->addComponent(&m_panelMJ);  
+    getContentPane()->addComponent(&m_panelMJ);
+    getContentPane()->addComponent(&m_panelMJ);
+    getContentPane()->addComponent(&m_panelMonstresMJ);
+    getContentPane()->addComponent(&m_panelAmbianceMJ);
+
+
 
 
 
 
     ptr_buttonHit = ptr_managerGroup->ptr_textureManager->getTexture("buttonHit");
     ptr_buttonHit->setSmooth(true);
-    m_buttonHit.create("buttonHit", 487, 620, ptr_buttonHit, ptr_buttonHit);
+    m_buttonHit.create("buttonHit", 490, 620, ptr_buttonHit, ptr_buttonHit);
     getContentPane()->addComponent(&m_buttonHit);
 
     ptr_buttonSummon = ptr_managerGroup->ptr_textureManager->getTexture("buttonSummon");
     ptr_buttonSummon->setSmooth(true);
-    m_buttonSummon.create("buttonSummon", 487, 550, ptr_buttonSummon, ptr_buttonSummon);
+    m_buttonSummon.create("buttonSummon", 490, 550, ptr_buttonSummon, ptr_buttonSummon);
     getContentPane()->addComponent(&m_buttonSummon);
 
 }
@@ -150,7 +262,7 @@ Game::~Game() {
  * \param frameTime The elpased time
  */
 void Game::update(sf::RenderWindow * window,
-                   sf::Event * e, double frameTime) {
+                  sf::Event * e, double frameTime) {
 
 
     if(!m_ptr_managerGroup->ptr_targetManager->isGame()) //TODO
@@ -158,6 +270,7 @@ void Game::update(sf::RenderWindow * window,
 
     if(firstConnect){
 
+        //TODO : régler ce problème de Label qui ne s'affiche pas
         std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
         std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
         std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
@@ -171,8 +284,14 @@ void Game::update(sf::RenderWindow * window,
 
         if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
             m_panelMJ.setVisible(true);
+            //m_panelAmbianceMJ.setVisible(true);
+            // m_panelMonstresMJ.setVisible(true);
+            m_buttonHit.setPosition(375, 620);
+            m_buttonSummon.setPosition(375, 550);
+
+
         }
-       firstConnect = false;
+        firstConnect = false;
     }
 
     // Basic Interface updating
@@ -180,55 +299,94 @@ void Game::update(sf::RenderWindow * window,
 
     //Evenement sur les panneaux des joueurs
     if(m_inputHandler.getComponentId() == "remingtonInGame") {
+        displayFeature("remington");
 
-        std::wstring remingtonName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getName();
-        std::wstring remingtonAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getAttackDamage();
-        std::wstring remingtonDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getArmor();
-        std::wstring remingtonHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("remington")->getCaracteristic()->getHealth();
-
-        m_labelNameCharacter.setText(remingtonName);
-        m_labelAttack.setText(remingtonAttack);
-        m_labelDefense.setText(remingtonDefense);
-        m_labelHealth.setText(remingtonHealth);
-
-    }else if(m_inputHandler.getComponentId() == "eldoraInGame"){
-
-
-        std::wstring eldoraName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getName();
-        std::wstring eldoraAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getAttackDamage();
-        std::wstring eldoraDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getArmor();
-        std::wstring eldoraHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora")->getCaracteristic()->getHealth();
-
-        m_labelNameCharacter.setText(eldoraName);
-        m_labelAttack.setText(eldoraAttack);
-        m_labelDefense.setText(eldoraDefense);
-        m_labelHealth.setText(eldoraHealth);
-
-    }else if(m_inputHandler.getComponentId() == "numero8InGame"){
-
-
-        std::wstring numero8Name = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getName();
-        std::wstring numero8Attack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getAttackDamage();
-        std::wstring numero8Defense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getArmor();
-        std::wstring numero8Health = m_ptr_managerGroup->ptr_gameManager->getCharacterById("numero8")->getCaracteristic()->getHealth();
-
-        m_labelNameCharacter.setText(numero8Name);
-        m_labelAttack.setText(numero8Attack);
-        m_labelDefense.setText(numero8Defense);
-        m_labelHealth.setText(numero8Health);
-
-    }else if(m_inputHandler.getComponentId() == "tristanInGame"){
-
-        std::wstring tristanName = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getName();
-        std::wstring tristanAttack = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getAttackDamage();
-        std::wstring tristanDefense = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getArmor();
-        std::wstring tristanHealth = m_ptr_managerGroup->ptr_gameManager->getCharacterById("tristan")->getCaracteristic()->getHealth();
-
-        m_labelNameCharacter.setText(tristanName);
-        m_labelAttack.setText(tristanAttack);
-        m_labelDefense.setText(tristanDefense);
-        m_labelHealth.setText(tristanHealth);
     }
+    if(m_inputHandler.getComponentId() == "eldoraInGame"){
+        displayFeature("eldora");
+
+    }
+    if(m_inputHandler.getComponentId() == "numero8InGame"){
+        displayFeature("numero8");
+
+    }
+    if(m_inputHandler.getComponentId() == "tristanInGame"){
+        displayFeature("tristan");
+    }
+
+    if(m_inputHandler.getComponentId() == "monsterButton"){
+        std::cout << "CLIC MONSTRE" << std::endl;
+
+        m_isOnMonstrePanel = true;
+        m_isOnAmbiancePanel = false;
+        m_ambianceButton.setVisible(false);
+        m_panelAmbianceMJ.setVisible(false);
+        m_panelMonstresMJ.setVisible(true);
+    }
+
+    if(m_inputHandler.getComponentId() == "ambianceButton"){
+        m_isOnMonstrePanel = true;
+        m_isOnAmbiancePanel = false;
+        m_monsterButton.setVisible(false);
+        m_panelMonstresMJ.setVisible(false);
+        m_panelAmbianceMJ.setVisible(true);
+    }
+
+
+    /*if(m_isOnAmbiancePanel){*/
+        if(m_inputHandler.getComponentId() == "beachButton"){
+            setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
+            m_panelAmbianceMJ.setVisible(false);
+            m_monsterButton.setVisible(true);
+            m_isOnAmbiancePanel = false;
+        }
+        if(m_inputHandler.getComponentId() == "castleButton"){
+            setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+            m_panelAmbianceMJ.setVisible(false);
+            m_monsterButton.setVisible(true);
+            m_isOnAmbiancePanel = false;
+        }
+        if(m_inputHandler.getComponentId() == "forestButton"){
+            setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
+            m_panelAmbianceMJ.setVisible(false);
+            m_monsterButton.setVisible(true);
+            m_isOnAmbiancePanel = false;
+        }
+        if(m_inputHandler.getComponentId() == "landButton"){
+            setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
+            m_panelAmbianceMJ.setVisible(false);
+            m_monsterButton.setVisible(true);
+            m_isOnAmbiancePanel = false;
+        }
+        if(m_inputHandler.getComponentId() == "roomButton"){
+            setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
+            m_panelAmbianceMJ.setVisible(false);
+            m_monsterButton.setVisible(true);
+            m_isOnAmbiancePanel = false;
+        }
+    /*}*/
+    if(m_isOnMonstrePanel){
+        if(m_inputHandler.getComponentId() == "crapaudButton"){
+            //TODO : afficher une image de crapaud
+            m_isOnMonstrePanel = false;
+            m_ambianceButton.setVisible(true);
+            m_panelMonstresMJ.setVisible(false);
+        }
+        if(m_inputHandler.getComponentId() == "dragonButton"){
+            //TODO : afficher une image de dragon
+            m_isOnMonstrePanel = false;
+            m_ambianceButton.setVisible(true);
+            m_panelMonstresMJ.setVisible(false);
+        }
+        if(m_inputHandler.getComponentId() == "yetiButton"){
+            //TODO : afficher une image de yeti
+            m_isOnMonstrePanel = false;
+            m_ambianceButton.setVisible(true);
+            m_panelMonstresMJ.setVisible(false);
+        }
+    }
+
+
 
     sf::Event ev = *e;
     if(ev.key.code == 13) {
@@ -243,5 +401,18 @@ void Game::update(sf::RenderWindow * window,
     // Drawing all content
     basicDraw(window);
 
+}
+
+
+void Game::displayFeature(std::string id){
+    std::wstring name = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id)->getName();
+    std::wstring attack = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id)->getCaracteristic()->getAttackDamage();
+    std::wstring defense = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id)->getCaracteristic()->getArmor();
+    std::wstring health = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id)->getCaracteristic()->getHealth();
+
+    m_labelNameCharacter.setText(name);
+    m_labelAttack.setText(attack);
+    m_labelDefense.setText(defense);
+    m_labelHealth.setText(health);
 }
 

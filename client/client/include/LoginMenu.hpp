@@ -25,6 +25,7 @@ class LoginMenu : public BasicInterface
 
 		sf::Font m_fontLabel;
         sf::Font m_fontTextbox;
+		AnimatableObject m_loading;
 
 
 	public:

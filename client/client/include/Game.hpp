@@ -39,6 +39,17 @@ private:
     NButton m_buttonNumero8InGame;
     NButton m_buttonMdjInGame;
     NButton m_launchGameButton;
+    NButton m_monsterButton;
+    NButton m_ambianceButton;
+    NButton m_beachButton;
+    NButton m_castleButton;
+    NButton m_forestButton;
+    NButton m_landButton;
+    NButton m_roomButton;
+    NButton m_crapaudButton;
+    NButton m_dragonButton;
+    NButton m_yetiButton;
+
 
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;
@@ -58,12 +69,14 @@ private:
     sf::Font m_fontTextbox;
 
 
-    NPanel m_panelYeti;
+    //NPanel m_panelYeti;
     NPanel m_bibouPanel2;
-    NPanel m_panelDragon;
-    NPanel m_panelCrapaud;
+    //NPanel m_panelDragon;
+    //NPanel m_panelCrapaud;
     NPanel m_contentPaneBackground;
     NPanel m_panelMJ;
+    NPanel m_panelAmbianceMJ;
+    NPanel m_panelMonstresMJ;
 
     NPanel m_panelIconAttack;
     NPanel m_panelIconDefense;
@@ -71,6 +84,11 @@ private:
 
     NButton m_buttonHit;
     NButton m_buttonSummon;
+
+    bool m_isOnMonstrePanel;
+    bool m_isOnAmbiancePanel;
+
+    void displayFeature(std::string);
 
 
 public:
