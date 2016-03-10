@@ -58,6 +58,10 @@ private:
     NPanel m_panelCrapaud;
     NPanel m_contentPaneBackground;
 
+    NPanel m_panelIconAttack;
+    NPanel m_panelIconDefense;
+    NPanel m_panelIconHealth;
+
 
 public:
     // Constructor

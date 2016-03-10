@@ -79,18 +79,25 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelHealth.create("healthPanel", 824, 633,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
 
+    m_panelIconAttack.create("attackIcon", 824,523,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
+
+    m_panelIconDefense.create("defenseIcon", 824,578,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
+
+    m_panelIconHealth.create("healthIcon", 824,633,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
+
 
     m_labelNameCharacter.create("labelNameCharacter", 830, 480, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelAttack.create("labelAttack", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelDefense.create("labelDefense", 830, 600, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelHealth.create("labelHealth", 830, 650, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelAttack.create("labelAttack", 880, 550, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelDefense.create("labelDefense", 880, 600, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelHealth.create("labelHealth", 880, 650, 15, &m_fontLabel, L"", sf::Color::Black);
 
     std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
     std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
     std::wstring currentPlayerDefense = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getArmor();
     std::wstring currentPlayerHealth = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getHealth();
-
-
 
 
     m_labelNameCharacter.setText(currentPlayerName);
@@ -99,9 +106,12 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_labelHealth.setText(currentPlayerHealth);
 
     m_panelNameCharacter.addComponent(&m_labelNameCharacter);
+    m_panelAttack.addComponent(&m_panelIconAttack);
     m_panelAttack.addComponent(&m_labelAttack);
     m_panelDefense.addComponent(&m_labelDefense);
+    m_panelDefense.addComponent(&m_panelIconDefense);
     m_panelHealth.addComponent(&m_labelHealth);
+    m_panelHealth.addComponent(&m_panelIconHealth);
     m_panelCharateristics.addComponent(&m_panelNameCharacter);
     m_panelCharateristics.addComponent(&m_panelAttack);
     m_panelCharateristics.addComponent(&m_panelDefense);
