@@ -68,31 +68,31 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                        ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
 
 
-    m_panelCharateristics.create("charateristicsPanel", 824, 468,
+    m_panelCharateristics.create("charateristicsPanel", 824, 518,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
-    m_panelNameCharacter.create("nameCharacterPanel",824, 468,
+    m_panelNameCharacter.create("nameCharacterPanel",824, 518,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelAttack.create("attackPanel",824, 523,
+    m_panelAttack.create("attackPanel",824, 573,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelDefense.create("defensePanel", 824, 578,
+    m_panelDefense.create("defensePanel", 824, 628,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelHealth.create("healthPanel", 824, 633,
+    m_panelHealth.create("healthPanel", 824, 683,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
 
-    m_panelIconAttack.create("attackIcon", 824,523,
+    m_panelIconAttack.create("attackIcon", 824,573,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
 
-    m_panelIconDefense.create("defenseIcon", 824,578,
+    m_panelIconDefense.create("defenseIcon", 824,628,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
 
-    m_panelIconHealth.create("healthIcon", 824,633,
+    m_panelIconHealth.create("healthIcon", 824,683,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
-    m_labelNameCharacter.create("labelNameCharacter", 830, 480, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelAttack.create("labelAttack", 880, 550, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelDefense.create("labelDefense", 880, 600, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelHealth.create("labelHealth", 880, 650, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelNameCharacter.create("labelNameCharacter", 830, 535, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelAttack.create("labelAttack", 880, 590, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelDefense.create("labelDefense", 880, 645, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelHealth.create("labelHealth", 880, 700, 15, &m_fontLabel, L"", sf::Color::Black);
 
     std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
     std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
@@ -135,7 +135,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelYeti.create("Dragon",450,175,ptr_yeti);
     getContentPane()->addComponent(&m_panelYeti);*/
 
-    m_panelCharateristics.create("charateristicsPanel", 824, 468,
+    /*m_panelCharateristics.create("charateristicsPanel", 824, 468,
                                  ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
     m_panelNameCharacter.create("nameCharacterPanel",824, 468,
                                 ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
@@ -144,7 +144,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelDefense.create("defensePanel", 824, 578,
                           ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
     m_panelHealth.create("healthPanel", 824, 633,
-                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
+                         ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));*/
 
     //m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
     //int var = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
@@ -153,13 +153,13 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //const std::wstring s(ws.str());
 
 
-    m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
+   /* m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
     m_panelAttack.addComponent(&m_labelCharacteristics);
     m_panelCharateristics.addComponent(&m_panelNameCharacter);
     m_panelCharateristics.addComponent(&m_panelAttack);
     m_panelCharateristics.addComponent(&m_panelDefense);
     m_panelCharateristics.addComponent(&m_panelHealth);
-    getContentPane()->addComponent(&m_panelCharateristics);
+    getContentPane()->addComponent(&m_panelCharateristics);*/
 
 }
 
