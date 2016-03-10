@@ -8,7 +8,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
 {
     //Background
-    setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Landscape"));
+    setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
     if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
     {
