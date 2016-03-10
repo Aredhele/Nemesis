@@ -67,6 +67,10 @@ void ResourceLoader::load() {
 	a_tm.addTexture("topBarOptButton_4", pathLogin + "topBarOptionButton_2.png");
 	a_tm.addTexture("exitPanel", pathLogin + "exitPanel.png");
 
+	a_tm.addTexture("ouiButton_1", pathLogin + "OuiButton_1.png");
+	a_tm.addTexture("ouiButton_2", pathLogin + "OuiButton_2.png");
+	a_tm.addTexture("nonButton_1", pathLogin + "NonButton_1.png");
+	a_tm.addTexture("nonButton_2", pathLogin + "NonButton_2.png");
 	a_tm.addTexture("topBarExitButton_1", pathLogin + "topBarExitButton_1.png");
 	a_tm.addTexture("topBarExitButton_2", pathLogin + "topBarExitButton_2.png");
 	a_tm.addTexture("loginBackground", pathLogin + "background.png");
@@ -104,7 +108,10 @@ void ResourceLoader::load() {
 	a_tm.addTexture("logoSmall", pathLogin + "paperSwordTitleSmall.png");
 	a_tm.addTexture("arrowButton_1", pathLogin + "arrowButton_1.png");
 	a_tm.addTexture("arrowButton_2", pathLogin + "arrowButton_2.png");
-
+    a_tm.addTexture("arrowUp_1", pathLogin + "arrowUp_1.png");
+    a_tm.addTexture("arrowUp_2", pathLogin + "arrowUp_2.png");
+    a_tm.addTexture("arrowDown_1", pathLogin + "arrowDown_1.png");
+    a_tm.addTexture("arrowDown_2", pathLogin + "arrowDown_2.png");
 
 	//in warmUp
 	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_inWarmUp.png");

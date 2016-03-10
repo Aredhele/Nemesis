@@ -52,6 +52,7 @@ private:
 protected:
 	bool m_debug;
 	bool m_optionActive;
+	bool m_exitActive;
 	InputHandler m_inputHandler;
 	ManagerGroup * m_ptr_managerGroup;
 

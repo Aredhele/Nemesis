@@ -104,7 +104,6 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
     //Text Box Chat
-
     m_textFieldLogin.create("textFieldLogin", 5, 690,
                             ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
@@ -114,7 +113,10 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelChat.create("chatPanel", 5, 510,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
 
-
+    /*m_arrowUp.create("arrowUp", 290, 520,
+                     ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"),
+                    ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
+*/
     //Panel UI du MJ
     m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
     m_panelAmbianceMJ.create("panelAmbianceMJ", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
