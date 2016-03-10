@@ -23,7 +23,6 @@ std::string Player::getName(){
 
 void Player::setCharacter(int id){
 	//m_ptr_character = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id);
-
 }
 
 Character * Player::getCharacter(){
