@@ -132,6 +132,9 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
             displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
                                       " >> ", "Reponse a la requete n " + stringActionId);
             if(lockCarac(sRequest, numeroPlayer)){
+                displayer->displayMessage("WarmUp " + cast::toString(numeroWarmUp) +
+                                          " >> ", "Bloque perso pour " + sRequest);
+
                 packet << actionID << "Ok";
                 socket->send(packet);
                 sendModifLockCarac(sRequest, numeroPlayer);
