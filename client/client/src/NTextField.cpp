@@ -41,6 +41,8 @@ NTextField::~NTextField() {
  * \param fontSize The size of the displayed text
  * \param flashingDelay The time between two flahses
  */
+
+
 void NTextField::create(std::string id, int x, int y, 
 	sf::Texture * texture_1, sf::Texture * texture_2,
 	sf::Font * ptr_font, int fontSize, 
@@ -143,7 +145,6 @@ std::string NTextField::eventMousePressed(sf::Event * e) {
  * \return id NULL if not found
  */
 std::string NTextField::eventMouseMoved(sf::Event * e) {
-	
 	return "NULL";
 }
 
@@ -221,7 +222,7 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		if(m_charList.size()!=0){
 			m_charList.clear();
 			m_text.setString("");
-			m_cursorPosition.x = 15;
+			m_cursorPosition.x = 14;
 			m_cursorPosition.y = 695;
 		}
 	}
