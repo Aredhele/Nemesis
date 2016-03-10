@@ -77,31 +77,31 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
-    m_panelCharateristics.create("charateristicsPanel", 824, 518,
+    m_panelCharateristics.create("charateristicsPanel", 704, 512,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
-    m_panelNameCharacter.create("nameCharacterPanel",824, 518,
+    /*m_panelNameCharacter.create("nameCharacterPanel",704, 512,
+                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));*/
+    m_panelAttack.create("attackPanel",704, 567,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelAttack.create("attackPanel",824, 573,
+    m_panelDefense.create("defensePanel", 704, 622,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelDefense.create("defensePanel", 824, 628,
-                                    ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
-    m_panelHealth.create("healthPanel", 824, 683,
+    m_panelHealth.create("healthPanel", 704, 677,
                                     ptr_managerGroup->ptr_textureManager->getTexture("statPanel"));
 
-    m_panelIconAttack.create("attackIcon", 824,573,
+    m_panelIconAttack.create("attackIcon", 704,567,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconAttack"));
 
-    m_panelIconDefense.create("defenseIcon", 824,628,
+    m_panelIconDefense.create("defenseIcon", 704,622,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
 
-    m_panelIconHealth.create("healthIcon", 827,686,
+    m_panelIconHealth.create("healthIcon", 707,680,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
-    m_labelNameCharacter.create("labelNameCharacter", 830, 535, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelAttack.create("labelAttack", 880, 590, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelDefense.create("labelDefense", 880, 645, 15, &m_fontLabel, L"", sf::Color::Black);
-    m_labelHealth.create("labelHealth", 880, 700, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelNameCharacter.create("labelNameCharacter", 730, 529, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelAttack.create("labelAttack", 780, 584, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelDefense.create("labelDefense", 780, 639, 15, &m_fontLabel, L"", sf::Color::Black);
+    m_labelHealth.create("labelHealth", 780, 696, 15, &m_fontLabel, L"", sf::Color::Black);
 
 
     m_panelNameCharacter.addComponent(&m_labelNameCharacter);
