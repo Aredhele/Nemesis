@@ -226,6 +226,8 @@ void Game::update(sf::RenderWindow * window,
         m_labelHealth.setText(tristanHealth);
     }
 
+    
+
     // Drawing all content
     basicDraw(window);
 
