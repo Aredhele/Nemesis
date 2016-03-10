@@ -26,6 +26,9 @@ private:
     sf::Texture *ptr_dragon;
     sf::Texture *ptr_yeti;
     sf::Texture *ptr_mdjInGame;
+    sf::Texture *ptr_buttonHit;
+    sf::Texture *ptr_buttonSummon;
+
     NButton m_buttonEldoraInGame;
     NButton m_buttonRemingtonInGame;
     NButton m_buttonTristanInGame;
@@ -61,6 +64,9 @@ private:
     NPanel m_panelIconAttack;
     NPanel m_panelIconDefense;
     NPanel m_panelIconHealth;
+
+    NButton m_buttonHit;
+    NButton m_buttonSummon;
 
 
 public:
