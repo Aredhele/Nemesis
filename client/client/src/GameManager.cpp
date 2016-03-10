@@ -10,12 +10,15 @@
  */
 GameManager::GameManager(bool debug) : Manager(),
                                        m_player()
+
                                                {
 
     m_debug = debug;
 
+
     //Create characters
     int nbChar = 5;
+
 
     for (int i = 0; i < nbChar; i++){
         m_characterList.push_back(new Character());

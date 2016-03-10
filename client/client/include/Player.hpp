@@ -12,7 +12,8 @@ class Player{
 
 private:
     std::string m_name;
-    Character * ptr_character;
+    Character * m_ptr_character;
+    //ManagerGroup * m_ptr_managerGroup;
 
 public:
     //Constructor
@@ -24,7 +25,7 @@ public:
     //Methods
     void setName(std::string name);
     std::string getName();
-    void setCharacter(int id);
+    void setCharacter(Character * ptr_character);
 
     //Getters
     Character * getCharacter();
