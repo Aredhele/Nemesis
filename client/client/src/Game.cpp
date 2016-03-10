@@ -85,7 +85,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelIconDefense.create("defenseIcon", 824,628,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
 
-    m_panelIconHealth.create("healthIcon", 824,683,
+    m_panelIconHealth.create("healthIcon", 827,686,
                                     ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
 
 
@@ -210,7 +210,6 @@ void Game::update(sf::RenderWindow * window,
     }
 
     
-
     // Drawing all content
     basicDraw(window);
 
