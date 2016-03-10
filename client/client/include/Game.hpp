@@ -30,9 +30,11 @@ private:
     NButton m_buttonRemingtonInGame;
     NButton m_buttonTristanInGame;
     NPanel m_panelTableInGame;
+    bool firstConnect;
 
     NButton m_buttonNumero8InGame;
     NButton m_buttonMdjInGame;
+    NButton m_launchGame;
 
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;
@@ -57,6 +59,7 @@ private:
     NPanel m_panelDragon;
     NPanel m_panelCrapaud;
     NPanel m_contentPaneBackground;
+    NPanel m_panelMJ;
 
     NPanel m_panelIconAttack;
     NPanel m_panelIconDefense;

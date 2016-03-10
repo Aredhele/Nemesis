@@ -7,6 +7,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         BasicInterface(debug, ptr_managerGroup)
 
 {
+    firstConnect = true;
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
@@ -68,6 +69,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelChat.create("chatPanel", 30, 510,
                        ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
 
+    //Panel UI du MJ
+    //m_panelMJ.create("MJPanel", 200, 700,null,null,)
+
 
     m_panelCharateristics.create("charateristicsPanel", 824, 518,
                                     ptr_managerGroup->ptr_textureManager->getTexture("charateristicsPanel"));
@@ -121,6 +125,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_textFieldLogin);
     getContentPane()->addComponent(&m_panelChat);
 
+    
+
+
 
 
     //Crapaud
@@ -152,6 +159,13 @@ Game::~Game() {
 void Game::update(sf::RenderWindow * window,
                    sf::Event * e, double frameTime) {
 
+
+   /* if(firstConnect){
+        if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+
+        }
+       return false;
+    }*/ 
     if(!m_ptr_managerGroup->ptr_targetManager->isGame()) //TODO
         return;
 
