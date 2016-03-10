@@ -174,6 +174,9 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		else {
 			m_charList.push_back(
 					static_cast < char >(e->text.unicode));
+			if(m_charList.size()==34){
+				m_charList.push_back('\n');
+			}
 			if(e->text.unicode > 96 || e->text.unicode < 123) {
 				m_cursorPosition.x += m_fontSize / coefFont;
 				//m_cursorPosition.x += m_fontSize;
