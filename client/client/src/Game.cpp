@@ -20,17 +20,18 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                         ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
 
-    //MDJ
-    ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
-    ptr_mdjInGame->setSmooth(true);
-    m_buttonMdjInGame.create("mdjInGame",430,100,ptr_mdjInGame, ptr_mdjInGame);
-    getContentPane()->addComponent(&m_buttonMdjInGame);
 
     //Table
     ptr_tableInGame = ptr_managerGroup->ptr_textureManager->getTexture("tableInGame");
     ptr_tableInGame->setSmooth(true);
     m_panelTableInGame.create("tableInGame",160,190,ptr_tableInGame);
     getContentPane()->addComponent(&m_panelTableInGame);
+
+    //MDJ
+    ptr_mdjInGame = ptr_managerGroup->ptr_textureManager->getTexture("mdjInGame");
+    ptr_mdjInGame->setSmooth(true);
+    m_buttonMdjInGame.create("mdjInGame",430,60,ptr_mdjInGame, ptr_mdjInGame);
+    getContentPane()->addComponent(&m_buttonMdjInGame);
 
 	//Remington
     ptr_remingtonInGame = ptr_managerGroup->ptr_textureManager->getTexture("remingtonInGame");
