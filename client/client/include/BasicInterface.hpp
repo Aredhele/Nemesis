@@ -57,6 +57,7 @@ protected:
 	void errorGoInGame();
 	void errorCharacterSelection();
 	void noError();
+	void setBackground(sf::Texture* backgroundImg);
 
 public:
 	// Constructor

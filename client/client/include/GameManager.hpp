@@ -28,6 +28,7 @@ class GameManager : public Manager {
         Player *  getPlayer();
         Character* getCharacterById(std::string id);
 
+
 };
 
 

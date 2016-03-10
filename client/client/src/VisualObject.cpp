@@ -34,7 +34,11 @@ void VisualObject::init(std::string id, int x, int y,
 sf::Texture * texture) {
 	m_id = id;
 	setPosition(x, y);
-	m_mainSprite.setTexture(*texture);
+
+	if (texture != NULL) {
+		m_mainSprite.setTexture(*texture);
+	}
+
 	m_mainSprite.setPosition(m_position);
 }
 

@@ -36,6 +36,9 @@ class Character{
         void setName(std::wstring name);
         void setDescription(std::wstring description);
         void setId(std::string id);
+
+        //std::string getId();
+
         void setCaracteristics(int atckDmg, int health, int armor);
         void setAbility(int id, std::string name,std::string type);
         Caracteristic * getCaracteristic();

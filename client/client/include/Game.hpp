@@ -14,6 +14,7 @@
 #include "Patch.hpp"
 
 
+
 class Game : public BasicInterface {
 private:
     sf::Texture *ptr_eldoraInGame;
@@ -21,21 +22,38 @@ private:
     sf::Texture *ptr_tristanInGame;
     sf::Texture *ptr_tableInGame;
     sf::Texture *ptr_numero8InGame;
+    sf::Texture *ptr_crapaud;
+    sf::Texture *ptr_dragon;
+    sf::Texture *ptr_yeti;
     sf::Texture *ptr_mdjInGame;
-    NPanel m_panelEldoraInGame;
-    NPanel m_panelRemingtonInGame;
-    NPanel m_panelTristanInGame;
+    NButton m_buttonEldoraInGame;
+    NButton m_buttonRemingtonInGame;
+    NButton m_buttonTristanInGame;
     NPanel m_panelTableInGame;
-    NPanel m_panelNumero8InGame;
-    NPanel m_panelMdjInGame;
+
+    NButton m_buttonNumero8InGame;
+    NButton m_buttonMdjInGame;
+
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;
     NPanel m_panelAttack;
     NPanel m_panelDefense;
     NPanel m_panelHealth;
+    NLabel m_labelNameCharacter;
+    NLabel m_labelAttack;
+    NLabel m_labelDefense;
+    NLabel m_labelHealth;
     NLabel m_labelCharacteristics;
 
     sf::Font m_fontLabel;
+
+
+    NPanel m_panelYeti;
+    NPanel m_bibouPanel;
+    NPanel m_panelDragon;
+    NPanel m_panelCrapaud;
+    NPanel m_contentPaneBackground;
+
 
 public:
     // Constructor
