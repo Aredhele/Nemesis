@@ -124,6 +124,10 @@ void ResourceLoader::load() {
 	a_tm.addTexture("Dragon", pathChar + "Dragon.png");
 	a_tm.addTexture("Yeti",pathChar + "Yeti.png");
 
+	a_tm.addTexture("IconAttaque", pathLogin + "attackIcon.png");
+	a_tm.addTexture("IconDefense", pathLogin + "defenseIcon.png");
+	a_tm.addTexture("IconHealth", pathLogin + "healthIcon.png");
+
 	//Backgrounds
 	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle_2.png");
 
