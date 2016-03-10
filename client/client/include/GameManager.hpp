@@ -7,6 +7,7 @@
 
 #include "Manager.hpp"
 #include "Player.hpp"
+#include "Monster.hpp"
 #include <vector>
 
 #include <string>
@@ -17,6 +18,7 @@ class GameManager : public Manager {
         bool m_debug;
         Player m_player;
         std::vector < Character* > m_characterList;
+        std::vector < Monster* > m_monsterList;
 
     public:
         // Constructor
@@ -25,10 +27,10 @@ class GameManager : public Manager {
         // Destructor
         ~GameManager();
         void initCharacters();
+        void initMonsters();
         Player *  getPlayer();
         Character* getCharacterById(std::string id);
-
-
+        Monster* getMonsterById(std::string id);
 };
 
 
