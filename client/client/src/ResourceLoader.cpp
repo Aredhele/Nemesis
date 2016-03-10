@@ -65,6 +65,7 @@ void ResourceLoader::load() {
 
 	a_tm.addTexture("topBarOptButton_3", pathLogin + "topBarOptionButton_1.png");
 	a_tm.addTexture("topBarOptButton_4", pathLogin + "topBarOptionButton_2.png");
+	a_tm.addTexture("exitPanel", pathLogin + "exitPanel.png");
 
 	a_tm.addTexture("topBarExitButton_1", pathLogin + "topBarExitButton_1.png");
 	a_tm.addTexture("topBarExitButton_2", pathLogin + "topBarExitButton_2.png");
@@ -106,10 +107,10 @@ void ResourceLoader::load() {
 
 
 	//in warmUp
-	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_175.png");
-	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_175.png");
-	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_175.png");
-	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_175.png");
+	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_inWarmUp.png");
+	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_inWarmUp.png");
+	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_inWarmUp.png");
+	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_inWarmUp.png");
 	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_175.png");
 
 	//in game

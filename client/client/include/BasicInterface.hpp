@@ -35,6 +35,10 @@ private:
 	NPanel m_smallTitleLogo;
 	NLabel m_connectionErrorLabel;
 	NPanel m_errorPanel;
+	NPanel m_exitPanel;
+	NLabel m_confirmExitLabel;
+	NButton m_nonButton;
+	NButton m_ouiButton;
 
 
 	sf::Font m_fontLabel;

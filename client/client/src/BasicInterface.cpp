@@ -28,6 +28,10 @@ BasicInterface::BasicInterface(bool debug,
 																  m_smallTitleLogo(),
 																  m_connectionErrorLabel(),
 																  m_errorPanel(),
+																  m_exitPanel(),
+																  m_confirmExitLabel(),
+																  m_nonButton(),
+																  m_ouiButton(),
 																  m_inputHandler(debug)
 
 {
@@ -43,6 +47,14 @@ BasicInterface::BasicInterface(bool debug,
 		std::cout << "Probleme dans le chargement des textures" << std::endl;
 	}
 
+
+	m_exitPanel.create("exitPanel", 50, 212,
+					   a_tm.getTexture("exitPanel"));
+
+	m_confirmExitLabel.create("confimExitLabel", 60, 290, 22, &m_fontLabel,
+							  L"Voulez-vous vraiment quitter le jeu ?", sf::Color(196,130,56));
+
+	m_exitPanel.addComponent(&m_confirmExitLabel);
 
 	m_smallTitleLogo.create("smallTitleLogo", 0, 0,
 							 a_tm.getTexture("logoSmall"));
@@ -103,6 +115,7 @@ BasicInterface::BasicInterface(bool debug,
 
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 	m_errorPanel.setVisible(false);
+	//getContentPane()->addComponent(&m_exitPanel);
 	getContentPane()->addComponent(&m_errorPanel);
 	getContentPane()->addComponent(&m_smallTitleLogo);
     getContentPane()->addComponent(&m_titleLabel);
