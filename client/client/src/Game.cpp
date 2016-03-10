@@ -22,6 +22,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         m_crapaudButton(),
         m_dragonButton(),
         m_yetiButton(),
+        m_yetiPanel(),
+        m_dragonPanel(),
+        m_crapaudPanel(),
         m_panelCharateristics(),
         m_panelNameCharacter(),
         m_panelAttack(),
@@ -172,7 +175,17 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                         ptr_managerGroup->ptr_textureManager->getTexture("yetiButton_2"));
     m_panelMonstresMJ.addComponent(&m_yetiButton);
 
+    m_yetiPanel.create("yetiPanel", 650,190,  ptr_managerGroup->ptr_textureManager->getTexture("Yeti"));
+    m_yetiPanel.setVisible(false);
+    getContentPane()->addComponent(&m_yetiPanel);
 
+    m_dragonPanel.create("dragonPanel", 350,210,  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
+    m_dragonPanel.setVisible(false);
+    getContentPane()->addComponent(&m_dragonPanel);
+
+    m_crapaudPanel.create("crapaudPanel", 520,200,  ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"));
+    m_crapaudPanel.setVisible(false);
+    getContentPane()->addComponent(&m_crapaudPanel);
 
 
 
@@ -368,18 +381,30 @@ void Game::update(sf::RenderWindow * window,
     if(m_isOnMonstrePanel){
         if(m_inputHandler.getComponentId() == "crapaudButton"){
             //TODO : afficher une image de crapaud
+            m_crapaudPanel.setVisible(true);
+            m_yetiPanel.setVisible(false);
+            m_dragonPanel.setVisible(false);
+
             m_isOnMonstrePanel = false;
             m_ambianceButton.setVisible(true);
             m_panelMonstresMJ.setVisible(false);
         }
         if(m_inputHandler.getComponentId() == "dragonButton"){
             //TODO : afficher une image de dragon
+            m_crapaudPanel.setVisible(false);
+            m_yetiPanel.setVisible(false);
+            m_dragonPanel.setVisible(true);
+
             m_isOnMonstrePanel = false;
             m_ambianceButton.setVisible(true);
             m_panelMonstresMJ.setVisible(false);
         }
         if(m_inputHandler.getComponentId() == "yetiButton"){
             //TODO : afficher une image de yeti
+            m_crapaudPanel.setVisible(false);
+            m_yetiPanel.setVisible(true);
+            m_dragonPanel.setVisible(false);
+
             m_isOnMonstrePanel = false;
             m_ambianceButton.setVisible(true);
             m_panelMonstresMJ.setVisible(false);

@@ -50,6 +50,9 @@ private:
     NButton m_dragonButton;
     NButton m_yetiButton;
 
+    NPanel m_yetiPanel;
+    NPanel m_dragonPanel;
+    NPanel m_crapaudPanel;
 
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;

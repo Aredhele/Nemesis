@@ -77,8 +77,8 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
 
     m_validateCharacterButton.setVisible(false);
     m_playButton.setVisible(true);
-    m_playButton.setEnabled(false);
-    //m_playButton.setVisible(false);
+    //m_playButton.setEnabled(false);
+    m_playButton.setVisible(false);
     m_infoCharacterPanel.setVisible(false);
     m_selectCharacterPanel.setVisible(false);
     m_infoCharacterPanel.addComponent(&m_infoCharacterLabel);
@@ -186,7 +186,7 @@ void WarmUp::update(sf::RenderWindow * window,
             str.push_back(static_cast<char>(*it));
         }
 
-        std::cout << "NOM PERSO SELECTIONNE S : " << str << std::endl;
+        //std::cout << "NOM PERSO SELECTIONNE S : " << str << std::endl;
         if (!m_ptr_managerGroup->ptr_networkManager->request(2, str)){
             errorConnection();
         }
@@ -259,7 +259,7 @@ void WarmUp::receiveRequest(){
                 //TODO bloquer les autres personnages
                 m_charSelected = true;
                 //TODO rendre disponible le bouton de lancement du jeu
-                m_playButton.setEnabled(true);
+                m_playButton.setVisible(true);
                 //m_playButton.setVisible(true);
                 std::cout << "Choix validé ! " << std::endl;
 
