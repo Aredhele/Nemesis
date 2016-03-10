@@ -31,8 +31,8 @@ public TriggerableObject
         sf::TcpSocket m_socket;
 		sf::Int32 idRequest;
 		std::string sRequest;
-		sf::Packet m_packet;
-		bool m_hasPacket;
+		std::vector <sf::Packet> m_packet;
+		int m_hasPacket; //Nb de paquets en attente
 		sf::Thread m_threadReceiveRequest;
 
 	public:

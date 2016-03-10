@@ -63,7 +63,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                             ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
-                            15, 0.5, "", 70, sf::Color(196,130,56));
+                            15, 0.5, "", 104, sf::Color(196,130,56));
     //Panel Chat
     m_panelChat.create("chatPanel", 5, 510,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));

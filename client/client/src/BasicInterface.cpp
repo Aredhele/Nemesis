@@ -125,7 +125,7 @@ BasicInterface::~BasicInterface() {
  * Call an error connection on the error panel
  */
 void BasicInterface::errorConnection() {
-	m_connectionErrorLabel.setText(L"Un problème de connexion est survenue.\n"
+	m_connectionErrorLabel.setText(L"Un problème de connexion est survenu.\n"
 										   "  Vérifiez votre connnexion et réessayez.");
 	m_errorPanel.setVisible(true);
 }

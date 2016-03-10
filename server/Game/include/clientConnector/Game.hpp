@@ -6,17 +6,78 @@
 #define SERVER_GAME_HPP
 
 
+#include <SFML/System/Thread.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/System/Sleep.hpp>
+#include <stdio.h>
+#include <tool/tool.hpp>
+#include <clientConnector/Player.hpp>
+#include <SFML/Network/TcpSocket.hpp>
+#include "tool/Configuration.hpp"
+#include <string>
+#include <vector>
+#include <memory>
+
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
+
+
 class Game {
 public:
-    //Constructor
-    Game();
 
+    //Constructor
+    Game(ConsoleDisplayer * displayer,
+          std::vector<bool>  * socketOccupe,
+          std::string nom);
     //Destructor
     ~Game();
 
-private:
+    // Etat
+    enum Etat
+    {
+        Disponible,
+        Indisponible
+    };
 
+    // Méthodes
+    void init();
+    int addPlayer(sf::TcpSocket * socket,
+                      std::string nom, unsigned int indiceSocket);
+    void delPlayer(int i);
+    void launchThreadGame();
+
+    // Getters
+    std::string getMDJName();
+
+    void setMDJName(std::string hote);
+
+
+private:
+    // Members
+    Etat etatGame;
+    ConsoleDisplayer * displayer;
+    sf::Thread thread;
+    bool estEnMarche;
+
+    // Sockets
+    std::vector < bool > * socketOccupe;
+
+
+
+
+    std::string nomHote;
+
+    // Players list
+    Player * tabPlayer[4];
+
+    // Methods
+    void threadGame();
+    void gererRequete(sf::Int32 idRequest, std::string sRequest,
+                      sf::TcpSocket * socket, int numeroPlayer);
+    //void launchGame(); //TODO Creer Game
+    bool lockCarac(std::string sRequest, int nbPLayer);
+    void sendModifLockCarac(std::string sRequest1, int numeroPlayer);
 };
 
 
-#endif //SERVER_GAME_HPP
+#endif //GAME_WARMUP_HPP

@@ -93,11 +93,11 @@ void NetworkManager::requestReceive(){
         sf::Packet newPacket;
         m_status = m_socket.receive(newPacket);
         if (m_status == sf::Socket::Done) {
-            m_packet = newPacket;
+            m_packet.push_back(newPacket);
             std::cout << "Request receive !" << std::endl;
             std::cerr << "Socket status : " << m_status << std::endl;
             //m_packet = &packet;
-            m_hasPacket = true;
+            m_hasPacket = m_hasPacket +1;
             //return packet;
         }
         else{
@@ -119,11 +119,14 @@ void NetworkManager::trigger(uint id, std::vector< std::string> v){
 
 
 void NetworkManager::setPacket(sf::Packet packet){
-    m_packet = packet;
+    m_packet.push_back(packet);
 }
 
 sf::Packet * NetworkManager::getPacket(){
-    return &m_packet;
+    m_hasPacket = m_hasPacket -1;
+    sf::Packet* tmp = &m_packet.at(0);
+    m_packet.erase(m_packet.begin());
+    return tmp;
 }
 
 void NetworkManager::setHasPacket(bool hasPacket){
@@ -131,7 +134,7 @@ void NetworkManager::setHasPacket(bool hasPacket){
 }
 
 bool NetworkManager::getHasPacket(){
-    return m_hasPacket;
+    return (m_hasPacket>0);
 }
 
 void NetworkManager::startThread(){

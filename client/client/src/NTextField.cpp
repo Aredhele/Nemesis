@@ -50,15 +50,18 @@ void NTextField::create(std::string id, int x, int y,
 	// Call super method
 	init(id, x, y, texture_1);
 
-	m_cursorPosition.x = x + 20;
-	m_cursorPosition.y = y + 10;
+
+	m_cursorPosition.x = x + 10;
+	m_cursorPosition.y = y + 5;
+	//std::cout << "Cursur position x " << m_cursorPosition.x << std::endl;
+	//std::cout << "Cursur position y " << m_cursorPosition.y << std::endl;
 
 	m_secondSprite.setTexture(*texture_2);
 	m_secondSprite.setPosition(m_cursorPosition);
 
 	sf::Vector2f textPosition(
-		m_cursorPosition.x + 3,
-		m_cursorPosition.y + 2);
+		m_cursorPosition.x + 1,
+		m_cursorPosition.y + 1);
 
 	// Init sf::texte
 	m_text.setFont(*ptr_font);
@@ -151,7 +154,7 @@ std::string NTextField::eventMouseMoved(sf::Event * e) {
  */
 void NTextField::eventTextEntered(sf::Event * e) {
 
-	std::cout << "TextEntered detected" << std::endl;
+	//std::cout << "TextEntered detected" << std::endl;
 	float coefFont = 1.65;
 
 	if(!m_isEnable || !m_isActive) return;
@@ -168,14 +171,21 @@ void NTextField::eventTextEntered(sf::Event * e) {
 			//m_cursorPosition.x += m_fontSize / 1.5;
 			m_cursorPosition.x += m_fontSize / coefFont;
 			m_secondSprite.setPosition(m_cursorPosition);
-		} else if(e->text.unicode == 13) { // Carriage Return
-			m_isActive = false;
+		/*} else if(e->text.unicode == 13) { // Carriage Return
+			m_isActive = false;*/
 		}
 		else {
 			m_charList.push_back(
 					static_cast < char >(e->text.unicode));
 			if(m_charList.size()==34){
 				m_charList.push_back('\n');
+				m_cursorPosition.x = 05;
+				m_cursorPosition.y = 715;
+			}
+			else if(m_charList.size()==69){
+				m_charList.push_back('\n');
+				m_cursorPosition.x = 05;
+				m_cursorPosition.y = 730;
 			}
 			if(e->text.unicode > 96 || e->text.unicode < 123) {
 				m_cursorPosition.x += m_fontSize / coefFont;
@@ -205,6 +215,15 @@ void NTextField::eventTextEntered(sf::Event * e) {
 			}
 		}
 		return;
+	}
+
+	if(e->text.unicode == 13){
+		if(m_charList.size()!=0){
+			m_charList.clear();
+			m_text.setString("");
+			m_cursorPosition.x = 15;
+			m_cursorPosition.y = 695;
+		}
 	}
 }
 
