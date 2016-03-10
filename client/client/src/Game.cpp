@@ -143,7 +143,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //const std::wstring s(ws.str());
 
 
-    m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"s", sf::Color::Black);
+    m_labelCharacteristics.create("charateristicsLabel", 830, 550, 15, &m_fontLabel, L"", sf::Color::Black);
     m_panelAttack.addComponent(&m_labelCharacteristics);
     m_panelCharateristics.addComponent(&m_panelNameCharacter);
     m_panelCharateristics.addComponent(&m_panelAttack);
