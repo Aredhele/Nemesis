@@ -47,6 +47,10 @@ Player *  GameManager::getPlayer(){
     return &m_player;
 }
 
+Monster * GameManager::getMonster(){
+    return &m_monster;
+}
+
 
 /**
  * \brief Initialize de characters with a name and a description
@@ -93,17 +97,17 @@ void GameManager::initCharacters(){
 
 void GameManager::initMonsters(){
 
-    m_monsterList[0]->setName(L"Insecte Velu");
-    m_monsterList[0]->setId("insecte");
-    m_monsterList[0]->setCaracteristics(5,500,10);
+    m_monsterList[0]->setName(L"Yeti des montagnes");
+    m_monsterList[0]->setId("yeti");
+    m_monsterList[0]->setCaracteristics(50,500,40);
 
-    m_monsterList[1]->setName(L"Chien des Enfers");
-    m_monsterList[1]->setId("chien");
-    m_monsterList[1]->setCaracteristics(150,1500,20);
+    m_monsterList[1]->setName(L"Dragon du chateau");
+    m_monsterList[1]->setId("dragon");
+    m_monsterList[1]->setCaracteristics(300,5000,20);
 
-    m_monsterList[2]->setName(L"Blob Gluant");
-    m_monsterList[2]->setId("boss");
-    m_monsterList[2]->setCaracteristics(300,5000,40);
+    m_monsterList[2]->setName(L"Crapaux gluant");
+    m_monsterList[2]->setId("crapaud");
+    m_monsterList[2]->setCaracteristics(5,500,10);
 }
 
 Character* GameManager::getCharacterById(std::string id){
