@@ -20,7 +20,7 @@
 
 class BasicInterface : public Updatable
 {
-private:
+protected:
 	NPanel m_contentPane;
 	NPanel m_topBar;
 	NPanel m_optionPanel;

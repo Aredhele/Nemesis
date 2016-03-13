@@ -22,6 +22,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 		m_paperSwordTitlePanel()
 {
 	noError();
+	m_smallTitleLogo.setVisible(false);
 	ptr_managerGroup->ptr_musicManager->
 			createPlaylist("playlistMenu", true, 1.2);
 	ptr_managerGroup->ptr_musicManager->
@@ -42,10 +43,10 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 
 	//m_loading.create("loading", 488,695,
 	//				 ptr_managerGroup->ptr_textureManager->getTexture("loading"),
-	//				 true, 0.1, 49,  49, 8);
+	//			 true, 0.1, 49,  49, 8);
 
-	//m_loading.setVisible(false);
-	getContentPane()->addComponent(&m_loading);
+	//m_loading.setVisible(true);
+	//getContentPane()->addComponent(&m_loading);
 	//m_loading.start();
 
 	m_bibouPanel.create("bibouPanel", 0, 400,
@@ -90,16 +91,12 @@ void LoginMenu::update(sf::RenderWindow * window,
 	// Basic Interface updating
 	basicInput(e, frameTime);
 
-
-	if(m_inputHandler.getComponentId() == "connectButton") {
+	sf::Event ev = *e;
+	if(m_inputHandler.getComponentId() == "connectButton" || ev.key.code == 13) {
 		//m_loading.setVisible(true);
 		tryConnection();
 	}
 
-	sf::Event ev = *e;
-	if(ev.key.code == 13)
-		//m_loading.setVisible(true);
-		tryConnection();
 
 	// Drawing all content
 	basicDraw(window);
@@ -108,10 +105,12 @@ void LoginMenu::update(sf::RenderWindow * window,
 void LoginMenu::tryConnection(){
 	//m_errorPanel.setVisible(false);
 	if(m_textFieldLogin.getString() != "") {
+		//sf::sleep(sf::milliseconds(2500));
 		if (m_ptr_managerGroup->ptr_networkManager->connect()) {
 			m_ptr_managerGroup->ptr_networkManager->startThread();
 			m_ptr_managerGroup->ptr_gameManager->getPlayer()->setName(m_textFieldLogin.getString());
 			//m_loading.setVisible(false);
+			m_smallTitleLogo.setVisible(true);
 			m_ptr_managerGroup->ptr_targetManager->isOnLobby();
 		}
 		else{

@@ -24,7 +24,7 @@ Lobby::Lobby(bool debug, ManagerGroup * ptr_managerGroup) :
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
 
-    m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours...", sf::Color::White);
+    m_monSuperLabel.create("monSuperLabel", 450, 100, 20, &m_font, L"Parties en cours...", sf::Color(196,130,56));
 
     m_refreshButton.create("refreshButton", 50, 700,
                         ptr_managerGroup->ptr_textureManager->getTexture("refreshButton_1"),

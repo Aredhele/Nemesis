@@ -54,26 +54,39 @@ void NTextField::create(std::string id, int x, int y,
 
 
 	m_cursorPosition.x = x + 10;
-	m_cursorPosition.y = y + 5;
+	m_cursorPosition.y = y + 7;
 	//std::cout << "Cursur position x " << m_cursorPosition.x << std::endl;
 	//std::cout << "Cursur position y " << m_cursorPosition.y << std::endl;
 
 	m_secondSprite.setTexture(*texture_2);
 	m_secondSprite.setPosition(m_cursorPosition);
 
-	sf::Vector2f textPosition(
-		m_cursorPosition.x + 1,
-		m_cursorPosition.y + 1);
+	m_textPosition.x = m_cursorPosition.x + 1;
+	m_textPosition.y = m_cursorPosition.y + 7;
 
 	// Init sf::texte
 	m_text.setFont(*ptr_font);
 	m_text.setString(text);
 	m_text.setCharacterSize(fontSize);
-	m_text.setPosition(textPosition);
+	m_text.setPosition(m_textPosition);
 	m_text.setColor(color);
 	m_maxSize = maxSize;
 	m_fontSize = fontSize;
 }
+
+
+void NTextField::setTextPosition(int x, int y){
+	m_textPosition.x = x;
+	m_textPosition.y = y;
+	m_text.setPosition(m_textPosition);
+}
+
+void NTextField::setCursorPosition(int x, int y){
+	m_cursorPosition.x = x;
+	m_cursorPosition.y = y;
+	m_secondSprite.setPosition(m_cursorPosition);
+}
+
 
 /*!
  * \brief Draw the current state of the button
@@ -166,26 +179,50 @@ void NTextField::eventTextEntered(sf::Event * e) {
 				m_charList.pop_back();
 				m_cursorPosition.x -= m_fontSize / coefFont;
 				m_secondSprite.setPosition(m_cursorPosition);
+                if(m_charList.size()==69){
+                    m_cursorPosition.x = 311;
+                    m_cursorPosition.y = 713;
+                }
+                else if(m_charList.size()==34){
+                    m_cursorPosition.x = 311;
+                    m_cursorPosition.y = 695;
+                }
+                m_secondSprite.setPosition(m_cursorPosition);
 			}
-		} else if(e->text.unicode == 32) { // Space
-			m_charList.push_back(' ');
-			//m_cursorPosition.x += m_fontSize / 1.5;
-			m_cursorPosition.x += m_fontSize / coefFont;
-			m_secondSprite.setPosition(m_cursorPosition);
-		} else if(e->text.unicode == 13) { // Carriage Return
-			m_isActive = false;
 		}
+		else if(e->text.unicode == 32) { // Space
+			m_charList.push_back(' ');
+            if(m_charList.size()==34){
+                m_charList.push_back('\n');
+                m_cursorPosition.x = 0;
+                m_cursorPosition.y = 713;
+            }
+            else if(m_charList.size()==69){
+                m_charList.push_back('\n');
+                m_cursorPosition.x = 0;
+                m_cursorPosition.y = 730;
+            }
+            //m_cursorPosition.x += m_fontSize / 1.5;
+            m_cursorPosition.x += m_fontSize / coefFont;
+            m_secondSprite.setPosition(m_cursorPosition);
+        }
+        else if(e->text.unicode == 13) { // Carriage Return
+            m_isActive = false;
+        }
+        else if (e->text.unicode == 9){ //Tabulation
+            return;
+        }
 		else {
 			m_charList.push_back(
 					static_cast < char >(e->text.unicode));
 			if(m_charList.size()==34){
 				m_charList.push_back('\n');
-				m_cursorPosition.x = 05;
-				m_cursorPosition.y = 715;
+				m_cursorPosition.x = 0;
+				m_cursorPosition.y = 713;
 			}
 			else if(m_charList.size()==69){
 				m_charList.push_back('\n');
-				m_cursorPosition.x = 05;
+				m_cursorPosition.x = 0;
 				m_cursorPosition.y = 730;
 			}
 			if(e->text.unicode > 96 || e->text.unicode < 123) {
@@ -208,8 +245,17 @@ void NTextField::eventTextEntered(sf::Event * e) {
 				if(m_charList.size() > 0) {
 					m_charList.pop_back();
 					m_cursorPosition.x -= m_fontSize / coefFont;
-					m_secondSprite.setPosition(m_cursorPosition);
 
+                    if(m_charList.size()==69){
+                        m_cursorPosition.x = 300;
+                        m_cursorPosition.y = 713;
+                    }
+                    else if(m_charList.size()==69){
+                        m_charList.push_back('\n');
+                        m_cursorPosition.x = 300;
+                        m_cursorPosition.y = 695;
+                    }
+                    m_secondSprite.setPosition(m_cursorPosition);
 					// Updating string
 					m_text.setString(m_charList);
 				}
@@ -248,4 +294,11 @@ void NTextField::update(double frameTime) {
  */
 std::string const& NTextField::getString() {
 	return m_charList;
+}
+
+void NTextField::empty(){
+	m_charList = "";
+	m_text.setString(m_charList);
+	setCursorPosition(7, 695);
+	m_isActive = true;
 }

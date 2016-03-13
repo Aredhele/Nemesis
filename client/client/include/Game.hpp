@@ -66,7 +66,9 @@ private:
     NLabel m_labelCharacteristics;
 
     NPanel m_panelChat;
-    NTextField m_textFieldLogin;
+    NTextField m_textChat;
+    NButton m_arrowUp;
+    NButton m_arrowDown;
 
     sf::Font m_fontLabel;
     sf::Font m_fontTextbox;
@@ -105,6 +107,8 @@ public:
     // Methods
     virtual void update(sf::RenderWindow * window,
                         sf::Event * e, double frameTime);
+
+    void receiveRequest();
 };
 
 

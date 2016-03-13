@@ -36,7 +36,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         m_labelHealth(),
         m_labelCharacteristics(),
         m_panelChat(),
-        m_textFieldLogin(),
+        m_textChat(),
         m_bibouPanel2(),
         m_contentPaneBackground(),
         m_panelMJ(),
@@ -56,7 +56,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
-    if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
+    if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
     {
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
@@ -104,19 +104,28 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
     //Text Box Chat
-    m_textFieldLogin.create("textFieldLogin", 5, 690,
+    m_textChat.create("textFieldLogin", 5, 690,
                             ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
                             15, 0.5, "", 104, sf::Color(196,130,56));
+
+    m_textChat.setTextPosition(7, 693);
+    m_textChat.setCursorPosition(7, 695);
     //Panel Chat
     m_panelChat.create("chatPanel", 5, 510,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
 
     /*m_arrowUp.create("arrowUp", 290, 520,
-                     ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"),
-                    ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
+                     ptr_managerGroup->ptr_textureManager->getTexture("arrowUp_1"),
+                    ptr_managerGroup->ptr_textureManager->getTexture("arrowUp_2"));
+    m_arrowDown.create("arrowDown", 300, 645,
+                       ptr_managerGroup->ptr_textureManager->getTexture("arrowDown_1"),
+                       ptr_managerGroup->ptr_textureManager->getTexture("arrowDown_2"));
 */
+    m_panelChat.addComponent(&m_arrowUp);
+    m_panelChat.addComponent(&m_arrowDown);
+
     //Panel UI du MJ
     m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
     m_panelAmbianceMJ.create("panelAmbianceMJ", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconDefense"));
@@ -240,15 +249,12 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_panelMonstresMJ.setVisible(false);
     m_panelAmbianceMJ.setVisible(false);
     getContentPane()->addComponent(&m_panelCharateristics);
-    getContentPane()->addComponent(&m_textFieldLogin);
+    getContentPane()->addComponent(&m_textChat);
     getContentPane()->addComponent(&m_panelChat);
     getContentPane()->addComponent(&m_panelMJ);
     getContentPane()->addComponent(&m_panelMJ);
     getContentPane()->addComponent(&m_panelMonstresMJ);
     getContentPane()->addComponent(&m_panelAmbianceMJ);
-
-
-
 
 
 
@@ -261,6 +267,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     ptr_buttonSummon->setSmooth(true);
     m_buttonSummon.create("buttonSummon", 490, 550, ptr_buttonSummon, ptr_buttonSummon);
     getContentPane()->addComponent(&m_buttonSummon);
+
 
 }
 
@@ -284,7 +291,6 @@ void Game::update(sf::RenderWindow * window,
         return;
 
     if(firstConnect){
-
         //TODO : régler ce problème de Label qui ne s'affiche pas
         std::wstring currentPlayerName = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
         std::wstring currentPlayerAttack = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamage();
@@ -307,6 +313,10 @@ void Game::update(sf::RenderWindow * window,
 
         }
         firstConnect = false;
+    }
+
+    if(m_ptr_managerGroup->ptr_networkManager->getHasPacket()){
+        receiveRequest();
     }
 
     // Basic Interface updating
@@ -416,10 +426,21 @@ void Game::update(sf::RenderWindow * window,
 
 
     sf::Event ev = *e;
-    if(ev.key.code == 13) {
-        std::cout << m_textFieldLogin.getString() << std::endl;
-        //TODO : vider le m_textFieldLogin
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
+        std::cout << "Appuie sur Enter" << std::endl;
+        std::string text = m_textChat.getString();
+        std::cout << text << std::endl;
+        //TODO : vider le m_textChat
+        m_textChat.empty();
         //TODO : envoyer le texte saisie au serveur
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+        std::cout << "up" << std::endl;
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+        std::cout << "down" << std::endl;
     }
 
 
@@ -443,3 +464,8 @@ void Game::displayFeature(std::string id){
     m_labelHealth.setText(health);
 }
 
+
+void Game::receiveRequest(){
+    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
+    sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
+}

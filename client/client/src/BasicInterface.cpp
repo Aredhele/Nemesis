@@ -66,7 +66,7 @@ BasicInterface::BasicInterface(bool debug,
 
 	m_exitPanel.addComponent(&m_confirmExitLabel);
 
-	m_smallTitleLogo.create("smallTitleLogo", 0, 0,
+	m_smallTitleLogo.create("smallTitleLogo", 15, 5,
 							 a_tm.getTexture("logoSmall"));
 	// Creating m_contentPane
 	m_contentPane.create("mainPanel", 0, 0,
