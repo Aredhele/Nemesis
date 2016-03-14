@@ -65,7 +65,12 @@ void ResourceLoader::load() {
 
 	a_tm.addTexture("topBarOptButton_3", pathLogin + "topBarOptionButton_1.png");
 	a_tm.addTexture("topBarOptButton_4", pathLogin + "topBarOptionButton_2.png");
+	a_tm.addTexture("exitPanel", pathLogin + "exitPanel.png");
 
+	a_tm.addTexture("ouiButton_1", pathLogin + "OuiButton_1.png");
+	a_tm.addTexture("ouiButton_2", pathLogin + "OuiButton_2.png");
+	a_tm.addTexture("nonButton_1", pathLogin + "NonButton_1.png");
+	a_tm.addTexture("nonButton_2", pathLogin + "NonButton_2.png");
 	a_tm.addTexture("topBarExitButton_1", pathLogin + "topBarExitButton_1.png");
 	a_tm.addTexture("topBarExitButton_2", pathLogin + "topBarExitButton_2.png");
 	a_tm.addTexture("loginBackground", pathLogin + "background.png");
@@ -103,13 +108,16 @@ void ResourceLoader::load() {
 	a_tm.addTexture("logoSmall", pathLogin + "paperSwordTitleSmall.png");
 	a_tm.addTexture("arrowButton_1", pathLogin + "arrowButton_1.png");
 	a_tm.addTexture("arrowButton_2", pathLogin + "arrowButton_2.png");
-
+    a_tm.addTexture("arrowUp_1", pathLogin + "arrowUp_1.png");
+    a_tm.addTexture("arrowUp_2", pathLogin + "arrowUp_2.png");
+    a_tm.addTexture("arrowDown_1", pathLogin + "arrowDown_1.png");
+    a_tm.addTexture("arrowDown_2", pathLogin + "arrowDown_2.png");
 
 	//in warmUp
-	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_175.png");
-	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_175.png");
-	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_175.png");
-	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_175.png");
+	a_tm.addTexture("numero8InWarmUp", pathChar +  "Numero_8_inWarmUp.png");
+	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_inWarmUp.png");
+	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_inWarmUp.png");
+	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_inWarmUp.png");
 	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_175.png");
 
 	//in game
@@ -138,6 +146,27 @@ void ResourceLoader::load() {
 	a_tm.addTexture("buttonHit", pathLogin + "buttonHit.png");
 	a_tm.addTexture("buttonSummon", pathLogin + "buttonSummon.png");
 
+
+	a_tm.addTexture("ambianceButton_1", pathLogin + "ambianceButton_1.png");
+	a_tm.addTexture("ambianceButton_2", pathLogin + "ambianceButton_2.png");
+	a_tm.addTexture("beachButton_1", pathLogin + "beachButton_1.png");
+	a_tm.addTexture("beachButton_2", pathLogin + "beachButton_1.png");
+	a_tm.addTexture("castleButton_1", pathLogin + "castleButton_1.png");
+	a_tm.addTexture("castleButton_2", pathLogin + "castleButton_2.png");
+	a_tm.addTexture("crapaudButton_1", pathLogin + "crapaudButton_1.png");
+	a_tm.addTexture("crapaudButton_2", pathLogin + "crapaudButton_2.png");
+	a_tm.addTexture("forestButton_1", pathLogin + "forestButton_1.png");
+	a_tm.addTexture("forestButton_2", pathLogin + "forestButton_2.png");
+	a_tm.addTexture("landButton_1", pathLogin + "landButton_1.png");
+	a_tm.addTexture("landButton_2", pathLogin + "landButton_2.png");
+	a_tm.addTexture("monsterButton_1", pathLogin + "monsterButton_1.png");
+	a_tm.addTexture("monsterButton_2", pathLogin + "monsterButton_2.png");
+	a_tm.addTexture("roomButton_1", pathLogin + "roomButton_1.png");
+	a_tm.addTexture("roomButton_2", pathLogin + "roomButton_2.png");
+	a_tm.addTexture("yetiButton_1", pathLogin + "yetiButton_1.png");
+	a_tm.addTexture("yetiButton_2", pathLogin + "yetiButton_2.png");
+	a_tm.addTexture("dragonButton_1", pathLogin + "dragonButton_1.png");
+	a_tm.addTexture("dragonButton_2", pathLogin + "dragonButton_2.png");
 
 	//Backgrounds
 	a_tm.addTexture("background_Castle_2",pathBackground + "Background_Castle_2.png");

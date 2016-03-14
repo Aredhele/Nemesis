@@ -22,6 +22,7 @@ class NTextField : public VisualObject
 		int m_maxSize;
 		int m_fontSize;
 		sf::Vector2f m_cursorPosition;
+		sf::Vector2f m_textPosition;
 		std::string m_charList;
 
 	public:
@@ -51,6 +52,11 @@ class NTextField : public VisualObject
 
 		// Getters
 		std::string const& getString();
+
+		void empty();
+
+		void setTextPosition(int x, int y);
+		void setCursorPosition(int x, int y);
 };
 
 #endif // DEF_NTEXT_FIELD_HPP

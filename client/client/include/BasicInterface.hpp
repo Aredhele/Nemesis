@@ -20,7 +20,7 @@
 
 class BasicInterface : public Updatable
 {
-private:
+protected:
 	NPanel m_contentPane;
 	NPanel m_topBar;
 	NPanel m_optionPanel;
@@ -35,6 +35,10 @@ private:
 	NPanel m_smallTitleLogo;
 	NLabel m_connectionErrorLabel;
 	NPanel m_errorPanel;
+	NPanel m_exitPanel;
+	NLabel m_confirmExitLabel;
+	NButton m_nonButton;
+	NButton m_ouiButton;
 
 
 	sf::Font m_fontLabel;
@@ -48,6 +52,7 @@ private:
 protected:
 	bool m_debug;
 	bool m_optionActive;
+	bool m_exitActive;
 	InputHandler m_inputHandler;
 	ManagerGroup * m_ptr_managerGroup;
 

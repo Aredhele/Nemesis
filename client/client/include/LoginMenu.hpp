@@ -11,6 +11,7 @@
 
 #include "BasicInterface.hpp"
 #include "SFML/System.hpp"
+#include "SFML/Window.hpp"
 
 class LoginMenu : public BasicInterface
 {
@@ -24,6 +25,7 @@ class LoginMenu : public BasicInterface
 
 		sf::Font m_fontLabel;
         sf::Font m_fontTextbox;
+		AnimatableObject m_loading;
 
 
 	public:
@@ -36,6 +38,7 @@ class LoginMenu : public BasicInterface
 		// Methods
 		virtual void update(sf::RenderWindow * window, 
 							sf::Event * e, double frameTime);
+		void tryConnection();
 };
 
 #endif // DEF_LOGING_MENU_HPP

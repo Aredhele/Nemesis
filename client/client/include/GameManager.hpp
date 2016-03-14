@@ -17,6 +17,7 @@ class GameManager : public Manager {
     private:
         bool m_debug;
         Player m_player;
+        Monster m_monster;
         std::vector < Character* > m_characterList;
         std::vector < Monster* > m_monsterList;
 
@@ -29,6 +30,7 @@ class GameManager : public Manager {
         void initCharacters();
         void initMonsters();
         Player *  getPlayer();
+        Monster * getMonster();
         Character* getCharacterById(std::string id);
         Monster* getMonsterById(std::string id);
 };

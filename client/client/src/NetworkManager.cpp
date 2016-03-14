@@ -90,6 +90,7 @@ bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
 void NetworkManager::requestReceive(){
     //sf::Packet  * packet = new sf::Packet();
     while(true){
+
         sf::Packet newPacket;
         m_status = m_socket.receive(newPacket);
         if (m_status == sf::Socket::Done) {
@@ -97,8 +98,12 @@ void NetworkManager::requestReceive(){
             std::cout << "Request receive !" << std::endl;
             std::cerr << "Socket status : " << m_status << std::endl;
             //m_packet = &packet;
-            m_hasPacket = m_hasPacket +1;
+            m_hasPacket = m_hasPacket + 1;
             //return packet;
+        }
+        else if(m_status == sf::Socket::Disconnected){
+            std::cout << "Déconneté du serveur " << std::endl;
+            break;
         }
         else{
             std::cerr << "Unable to receive from server" << std::endl;

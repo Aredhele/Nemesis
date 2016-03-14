@@ -28,11 +28,16 @@ BasicInterface::BasicInterface(bool debug,
 																  m_smallTitleLogo(),
 																  m_connectionErrorLabel(),
 																  m_errorPanel(),
+																  m_exitPanel(),
+																  m_confirmExitLabel(),
+																  m_nonButton(),
+																  m_ouiButton(),
 																  m_inputHandler(debug)
 
 {
 	m_debug = debug;
 	m_optionActive = false;
+	m_exitActive = false;
 	m_ptr_managerGroup = ptr_managerGroup;
 
 	// Setting up aliases
@@ -44,7 +49,24 @@ BasicInterface::BasicInterface(bool debug,
 	}
 
 
-	m_smallTitleLogo.create("smallTitleLogo", 0, 0,
+	m_exitPanel.create("exitPanel", 212, 50,
+					   a_tm.getTexture("exitPanel"));
+
+	m_confirmExitLabel.create("confimExitLabel", 290, 60, 22, &m_fontLabel,
+							  L"Voulez-vous vraiment quitter le jeu ?", sf::Color(196,130,56));
+
+	m_ouiButton.create("ouiButton", 350, 100,
+					   a_tm.getTexture("ouiButton_1"), a_tm.getTexture("ouiButton_2"));
+
+	m_nonButton.create("nonButton", 450, 100,
+					   a_tm.getTexture("nonButton_1"), a_tm.getTexture("nonButton_2"));
+
+	m_exitPanel.addComponent(&m_ouiButton);
+	m_exitPanel.addComponent(&m_nonButton);
+
+	m_exitPanel.addComponent(&m_confirmExitLabel);
+
+	m_smallTitleLogo.create("smallTitleLogo", 15, 5,
 							 a_tm.getTexture("logoSmall"));
 	// Creating m_contentPane
 	m_contentPane.create("mainPanel", 0, 0,
@@ -93,12 +115,17 @@ BasicInterface::BasicInterface(bool debug,
 										  "  Vérifiez votre connnexion et réessayez.",
 								  sf::Color::White);
 
+
+
 	// Creating optionPanel
 	m_optionPanel.create("optionPanel", 710, 55,
 						 a_tm.getTexture("optionPanel"));
 
+
+
 	m_errorPanel.addComponent(&m_connectionErrorLabel);
 	m_errorPanel.setVisible(false);
+	//getContentPane()->addComponent(&m_exitPanel);
 	getContentPane()->addComponent(&m_errorPanel);
 	getContentPane()->addComponent(&m_smallTitleLogo);
     getContentPane()->addComponent(&m_titleLabel);
@@ -214,7 +241,17 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 
 		// Exiting game !
 		if(m_inputHandler.getComponentId() == "exitButton") {
+			/*if(!m_exitActive){
+				m_exitActive = true;
+				m_interface.push_back(&m_exitPanel);
+			}
+			else{
+				m_exitActive = false;
+				m_interface.pop_back();
+			}
+			*/
 			m_ptr_managerGroup->ptr_targetManager->exit();
+
 		}
 			// Option menu
 		else if(m_inputHandler.getComponentId() == "optButton") {
@@ -284,6 +321,24 @@ void BasicInterface::basicInput(sf::Event * e, double frameTime) {
 			}
 		}
 	}
+
+	/*if(m_extitActive){
+		m_inputHandler.handleInput(e, &m_optionPanel, false);
+
+		if(m_inputHandler.getComponentId() != "NULL") {
+			if(m_inputHandler.getComponentId() == "ouiButton")
+			{
+				m_ptr_managerGroup->ptr_targetManager->exit();
+			}
+			else if(m_inputHandler.getComponentId() == "nonButton"){
+				m_exitActive = false;
+				m_interface.pop_back();
+
+			}
+		}
+
+	}*/
+
 
 	//Check for contentPane Event
 	m_inputHandler.handleInput(e, &m_contentPane, true);
