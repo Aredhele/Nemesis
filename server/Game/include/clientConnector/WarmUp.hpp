@@ -13,7 +13,6 @@
 #include <tool/tool.hpp>
 #include <clientConnector/Player.hpp>
 #include <SFML/Network/TcpSocket.hpp>
-#include "tool/Configuration.hpp"
 #include <string>
 #include <vector>
 #include <memory>
@@ -26,7 +25,7 @@ class WarmUp {
 public:
 
     //Constructor
-    WarmUp(int i, ConsoleDisplayer * displayer,
+    WarmUp(int i,
           std::vector<bool>  * socketOccupe,
           std::vector < Game * > * listePartie,
           std::string nom);
@@ -58,12 +57,12 @@ public:
 private:
     // Members
     Etat etatWarmUp;
-    ConsoleDisplayer * displayer;
     sf::Thread thread;
     bool estEnMarche;
+    int nbJoueur;
 
     // Sockets
-    std::vector < bool > * socketOccupe;
+    std::vector < bool > * m_socketOccupe;
 
     // game list
     std::vector < Game * > * listePartie;

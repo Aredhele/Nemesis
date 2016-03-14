@@ -13,10 +13,10 @@
 #include <tool/tool.hpp>
 #include <clientConnector/Player.hpp>
 #include <SFML/Network/TcpSocket.hpp>
-#include "tool/Configuration.hpp"
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
 
 #define SSTR( x ) static_cast< std::ostringstream & >( \
         ( std::ostringstream() << std::dec << x ) ).str()
@@ -26,8 +26,7 @@ class Game {
 public:
 
     //Constructor
-    Game(ConsoleDisplayer * displayer,
-          std::vector<bool>  * socketOccupe,
+    Game(std::vector<bool>  * socketOccupe,
           std::string nom);
     //Destructor
     ~Game();
@@ -55,7 +54,6 @@ public:
 private:
     // Members
     Etat etatGame;
-    ConsoleDisplayer * displayer;
     sf::Thread thread;
     bool estEnMarche;
 

@@ -22,13 +22,6 @@ MySQLConnector::MySQLConnector() {
     init("127.0.0.1", "root", "", "Nemesis", 0, 0);
 }
 
-/**
- * \brief Constructor.
- * \param conf The config for db connection
- */
-MySQLConnector::MySQLConnector(Configuration conf) {
-    // TODO
-}
 
 /**
  * Destructor.

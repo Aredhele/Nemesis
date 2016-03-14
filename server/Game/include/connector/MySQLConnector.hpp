@@ -19,7 +19,6 @@
 
 #include "mysql/mysql.h"
 
-#include "tool/Configuration.hpp"
 #include "database/Table.hpp"
 
 class MySQLConnector {
@@ -45,7 +44,6 @@ class MySQLConnector {
     public:
         // Constructor
         MySQLConnector();
-        MySQLConnector(Configuration conf);
 
         // Destructor
         ~MySQLConnector();

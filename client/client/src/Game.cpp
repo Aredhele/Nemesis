@@ -456,24 +456,9 @@ void Game::update(sf::RenderWindow * window,
         {
              m_buttonEldoraHealing.setVisible(true);
         }
-        ifCharacterHits("buttonHit", selectedMonster);
+        //ifCharacterHits("buttonHit", selectedMonster);
     }
-    if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "remington"){
-        
-        ifCharacterHits("buttonHit", selectedMonster);
-        ifCharacterSummons("buttonSummon", selectedMonster);
 
-    }
-    if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "numero8"){
-        
-        ifCharacterHits("buttonHit", selectedMonster);
-        ifCharacterSummons("buttonSummon", selectedMonster);
-    }
-    if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "tristan"){
-        
-        ifCharacterHits("buttonHit", selectedMonster);
-        ifCharacterSummons("buttonSummon", selectedMonster);
-    }
 
 
     ifSummonEldoraHealing("eldoraHealing", "remington", 1500); //TODO CHANGE
