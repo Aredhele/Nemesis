@@ -92,7 +92,7 @@ void LoginMenu::update(sf::RenderWindow * window,
 	basicInput(e, frameTime);
 
 	sf::Event ev = *e;
-	if(m_inputHandler.getComponentId() == "connectButton" || ev.key.code == 13) {
+	if(m_inputHandler.getComponentId() == "connectButton" || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 		//m_loading.setVisible(true);
 		tryConnection();
 	}

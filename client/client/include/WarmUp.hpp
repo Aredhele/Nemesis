@@ -45,6 +45,8 @@ public:
         void displayInfoCharacters(std::string characterName);
 
         void receiveRequest();
+
+        void blockCharacters();
 };
 
 #endif //CLIENT_WARMUP_HPP
