@@ -1,22 +1,22 @@
 #include <SFML/Network/Packet.hpp>
 #include "clientConnector/WarmUp.hpp"
 
-WarmUp::WarmUp(int i, ConsoleDisplayer * displayer, std::vector < bool > * socketOccupe,
+WarmUp::WarmUp(int i, std::vector < bool > * socketOccupe,
              std::vector < Game * > * listePartie, std::string nomHote) :
         thread(&WarmUp::threadWarmUp, this)
 {
-    this->displayer = displayer;
-    this->etatWarmUp = Etat::Disponible;
-    this->numeroWarmUp = i;
-    this->nomHote = nomHote;
+    etatWarmUp = Etat::Disponible;
+    numeroWarmUp = i;
+    nomHote = nomHote;
     estEnMarche = false;
-    this->listePartie = listePartie;
+    listePartie = listePartie;
+    nbJoueur = 0;
 
     for(i = 0; i < 5; i++) {
         tabPlayer[i] = new Player();
     }
 
-    this->socketOccupe = socketOccupe;
+    m_socketOccupe = socketOccupe;
 }
 
 /**
@@ -26,9 +26,6 @@ void WarmUp::init() {
     nomHote = "aucun";
     etatWarmUp = WarmUp::Disponible;
     estEnMarche = false;
-
-    for(int i = 0; i < 5; i++)
-        tabPlayer[i]->init();
 }
 
 /**
@@ -40,7 +37,6 @@ void WarmUp::threadWarmUp() {
 
     sf::Socket::Status socketStatus;
     char octetsRecus[1024];
-    std::size_t nbOctetsRecus;
 
     // Variables pour la gestion du temps
     sf::Clock horloge;
@@ -67,10 +63,10 @@ void WarmUp::threadWarmUp() {
                         break;
 
                     case sf::Socket::Done:
-                        displayer->displayMessage("th " + cast::toString(numeroWarmUp), " << "+
-                                 std::string(octetsRecus) + " - Player n°" +
+                        std::cout << "th " + cast::toString(numeroWarmUp) << " << "+
+                                 std::string(octetsRecus) + " - Player n " +
                                                           cast::toString(i) +
-                                  " [" + tabPlayer[i]->getNamePlayer() + "]");
+                                  " [" + tabPlayer[i]->getNamePlayer() + "]" << std::endl;
 
 
                         // Gestion de la requête
@@ -110,9 +106,9 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
     std::string stringActionId = SSTR( actionID );
     puts( SSTR( actionID ).c_str() );
 
-    displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                       "info", "ActionID = " + stringActionId +
-                               ", ARG = " + std::string(sRequest));
+    std::cout << cast::toString(numeroWarmUp) +
+                       "info" << "ActionID = " + stringActionId +
+                               ", ARG = " + std::string(sRequest) << std::endl;
     sf::Packet packet;
 
 
@@ -122,25 +118,22 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
         case 1: // Lancer la partie
             //launchGame();
 
-            displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                               " >> ", "Reponse a la requete n " + stringActionId);
-            displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                               "info", "La partie va commencer, le WarmUp va etre libere");
+            std::cout << "Reponse a la requete n " + stringActionId << std::endl;
+            std::cout << "La partie va commencer, le WarmUp va etre libere" << std::endl;
             break;
 
         case 2: //Lock un perso
-            displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                                      " >> ", "Reponse a la requete n " + stringActionId);
+            std::cout <<  "Reponse a la requete n " + stringActionId << std::endl;
             if(lockCarac(sRequest, numeroPlayer)){
 
-                displayer->displayMessage("info", "Requete de lock acceptee pour "+sRequest+
-                        ", envoi de la requete");
+                std::cout << "Requete de lock acceptee pour "+sRequest+
+                        ", envoi de la requete" << std::endl;
                 packet << actionID << "Ok";
                 socket->send(packet);
                 sendModifLockCarac(sRequest, numeroPlayer);
             }
             else{
-                displayer->displayMessage("warn", "Le joueur n'a pas reussi a lock : " + sRequest);
+                std::cout << "Le joueur n'a pas reussi a lock : " + sRequest << std::endl;
                 packet << actionID << "False";
                 socket->send(packet);
             }
@@ -156,8 +149,7 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
 
 //Send to a thread listening
 void WarmUp::sendModifLockCarac(std::string sRequest, int numeroPlayer){
-    displayer->displayMessage("sa " + cast::toString(numeroWarmUp) +
-                              " >> ", "Envoi du changement du WarmUp : perso lock ");
+    std::cout << "Envoi du changement du WarmUp : perso lock " << std::endl;
     for(int i = 0; i < 5; i++) {
         if (tabPlayer[i]->isHere()) {
             sf::Packet packet;
@@ -188,12 +180,10 @@ bool WarmUp::lockCarac(std::string sRequest, int nbPLayer ) {
  * \return
  */
 void WarmUp::launchThreadWarmUp() {
-
-    std::string type = "sa " + cast::toString(numeroWarmUp);
     thread.launch();
 
-    this->displayer->displayMessage(type, "Le thread n°" +
-            cast::toString(numeroWarmUp) + " a démarré");
+    std::cout <<  "Le thread n " +
+            cast::toString(numeroWarmUp) + " a demarre" << std::endl;
 }
 
 /**
@@ -204,7 +194,7 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
 
     // TODO retourner qqch si le WarmUp est plein (Fait ? (bug ?))
     // (normalement impossible !)
-    this->displayer->displayMessage("warn", "Le joueur est ajoute au thread !");
+    std::cout << "Le joueur est ajoute au thread !" << std::endl;
     for(int i = 0; i < 5; i++) {
         if(!tabPlayer[i]->isHere()) {
             tabPlayer[i]->init(socket, nom, indiceSocket, i);
@@ -217,19 +207,19 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
             socket->send(packet);
 
             if(i == 4) {
-                std::string type = "sa " + cast::toString(numeroWarmUp);
-                this->displayer->displayMessage("warn", "Le WarmUp est complet !");
+                std::cout << "Le WarmUp est complet !" << std::endl;
                 etatWarmUp = Etat::Indisponible;
             }
 
             if(i == 0) {
-                this->displayer->displayMessage("info", std::string("Le Player [") +
+                std::cout << std::string("Le Player [") +
                                                  nom + "] est devenu l'hote du WarmUp n " +
-                        cast::toString(numeroWarmUp));
+                        cast::toString(numeroWarmUp) << std::endl;
 
                 nomHote = nom;
                 launchThreadWarmUp();
             }
+            nbJoueur = nbJoueur +1;
             return i;
         }
     }
@@ -240,10 +230,13 @@ int WarmUp::addPlayer(sf::TcpSocket * socket,
  * \brief Retire un Player du WarmUp
  */
 void WarmUp::delPlayer(int i) {
-
-    socketOccupe->at(tabPlayer[i]->getIndiceSocket()) = false;
+    nbJoueur = nbJoueur -1;
+    m_socketOccupe->at(tabPlayer[i]->getIndiceSocket()) = NULL;
     tabPlayer[i]->disconnect();
     etatWarmUp = Etat::Disponible;
+    if(nbJoueur == 0) {
+        etatWarmUp = Etat::Indisponible;
+    }
 }
 
 /**
@@ -251,24 +244,24 @@ void WarmUp::delPlayer(int i) {
  * \return m_estDisponible Vraie si le WarmUp est vide
  */
 WarmUp::Etat WarmUp::getStateWarmUp() {
-    return this->etatWarmUp;
+    return etatWarmUp;
 }
 
 /**
  * \brief Retourne le numero du WarmUp de 0 à x
- * \return this->numeroWarmUp Le numero du WarmUp
+ * \return numeroWarmUp Le numero du WarmUp
  */
 int WarmUp::getNbWarmUp() {
-    return this->numeroWarmUp;
+    return numeroWarmUp;
 }
 
 
 /**
  * \brief Retourne le nom de l'hôte courant, sinon "aucun"
- * \return this->nomHote le nom de l'hôte
+ * \return nomHote le nom de l'hôte
  */
 std::string WarmUp::getMDJName() {
-    return this->nomHote;
+    return nomHote;
 }
 
 /**
@@ -276,7 +269,7 @@ std::string WarmUp::getMDJName() {
  * \param hote Le nom de l'hôte
  */
 void WarmUp::setMDJName(std::string hote) {
-    this->nomHote = hote;
+    nomHote = hote;
 }
 
 

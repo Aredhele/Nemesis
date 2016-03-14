@@ -29,7 +29,7 @@ SET SFLIB=-B%DIRSFML% %GRAPH% %WINDO% %SYSTE% %AUDIO% %MAIN% %NET%
 
 REM --- BEG CLIENT ---
 CD src
-g++ %FLAGS% *.cpp -c -I%DIRINC%
+g++ %FLAGS% -g -Wall *.cpp -c -I%DIRINC%
 g++ *.o -o %EXENAME% %SFLIB%
 
 DEL .*

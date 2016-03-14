@@ -1,11 +1,10 @@
 #include <SFML/Network/Packet.hpp>
 #include "clientConnector/Game.hpp"
 
-Game::Game(ConsoleDisplayer * displayer, std::vector < bool > * socketOccupe,
+Game::Game(std::vector < bool > * socketOccupe,
                 std::string nomHote) :
         thread(&Game::threadGame, this)
 {
-    this->displayer = displayer;
     this->etatGame = Etat::Disponible;
     this->nomHote = nomHote;
     estEnMarche = false;
@@ -65,8 +64,8 @@ void Game::threadGame() {
                         break;
 
                     case sf::Socket::Done:
-                        displayer->displayMessage("game", " << "+ std::string(octetsRecus) + " - Player n " +
-                                cast::toString(i) + " [" + tabPlayer[i]->getNamePlayer() + "]");
+                        std::cout <<"game" <<  std::string(octetsRecus) + " - Player n " << i <<
+                                " [" + tabPlayer[i]->getNamePlayer() + "]" << std::endl;
 
 
                         // Gestion de la requête
@@ -106,8 +105,8 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,
     std::string stringActionId = SSTR( actionID );
     puts( SSTR( actionID ).c_str() );
 
-    displayer->displayMessage("game info", "ActionID = " + stringActionId +
-                                      ", ARG = " + std::string(sRequest));
+    std::cout <<"game info" << "ActionID = " + stringActionId +
+                                      ", ARG = " + std::string(sRequest) << std::endl;
     sf::Packet packet;
 
 
@@ -117,12 +116,12 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,
         case 1: // Lancer la partie //TODO Changer les cases
             //launchGame();
 
-            displayer->displayMessage("game >> ", "Reponse a la requete n " + stringActionId);
-            displayer->displayMessage("game info", "La partie va commencer");
+            std::cout <<"game >> " << "Reponse a la requete n " + stringActionId << std::endl;
+            std::cout <<"game info" << "La partie va commencer" << std::endl;
             break;
 
         case 2: //Lock un perso
-            displayer->displayMessage("game >> ", "Reponse a la requete n " + stringActionId);
+            std::cout <<"game >> " << "Reponse a la requete n " + stringActionId << std::endl;
             if(lockCarac(sRequest, numeroPlayer)){
                 packet << actionID << "Ok";
                 socket->send(packet);
@@ -140,7 +139,7 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,
 
 //Send to a thread listening
 void Game::sendModifLockCarac(std::string sRequest, int numeroPlayer){
-    displayer->displayMessage("game >> ", "Envoi du changement du Game : perso lock ");
+    std::cout <<"game >> " << "Envoi du changement du Game : perso lock " << std::endl;
     for(int i = 0; i < 5; i++) {
         if (tabPlayer[i]->isHere()) {
             sf::Packet packet;
@@ -172,7 +171,7 @@ void Game::launchThreadGame() {
 
     thread.launch();
 
-    this->displayer->displayMessage("game", "Le thread a demarre");
+    std::cout <<"game" << "Le thread a demarre" << std::endl;
 }
 
 /**
