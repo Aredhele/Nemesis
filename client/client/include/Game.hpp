@@ -55,6 +55,8 @@ private:
     NPanel m_yetiPanel;
     NPanel m_dragonPanel;
     NPanel m_crapaudPanel;
+    NPanel m_feu;
+    NPanel m_feu2;
 
     NPanel m_panelCharateristics;
     NPanel m_panelNameCharacter;
@@ -71,6 +73,9 @@ private:
     NTextField m_textChat;
     NButton m_arrowUp;
     NButton m_arrowDown;
+
+    AnimatableObject m_flammes;
+    AnimatableObject m_flammes2;
 
     sf::Font m_fontLabel;
     sf::Font m_fontTextbox;

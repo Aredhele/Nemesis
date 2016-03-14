@@ -56,7 +56,8 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
-    if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
+    if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") ||
+            !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
     {
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
@@ -65,6 +66,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_bibouPanel2.create("bibouPanel2", 0, 490,
                          ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
+
+    //Animations
+
 
 
     //Table
@@ -197,6 +201,23 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_crapaudPanel.create("crapaudPanel", 520,200,  ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"));
     m_crapaudPanel.setVisible(false);
     getContentPane()->addComponent(&m_crapaudPanel);
+
+    //Animations
+    m_feu.create("feu", 350,110,  ptr_managerGroup->ptr_textureManager->getTexture("feu"));
+    getContentPane()->addComponent(&m_feu);
+
+    m_feu2.create("feu", 635,110,  ptr_managerGroup->ptr_textureManager->getTexture("feu"));
+    getContentPane()->addComponent(&m_feu2);
+
+    m_flammes.create("flammes", 350, 65,
+                     ptr_managerGroup->ptr_textureManager->getTexture("flammes"),
+                     true, 0.1, 121, 70, 5);
+    getContentPane()->addComponent(&m_flammes);
+
+    m_flammes2.create("flammes", 635, 65,
+                      ptr_managerGroup->ptr_textureManager->getTexture("flammes"),
+                      true, 0.15, 121, 70, 5);
+    getContentPane()->addComponent(&m_flammes2);
 
 
 
@@ -374,30 +395,50 @@ void Game::update(sf::RenderWindow * window,
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "castleButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(true);
+            m_feu2.setVisible(true);
+            m_flammes.setVisible(true);
+            m_flammes2.setVisible(true);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "forestButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "landButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "roomButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
     /*}*/
