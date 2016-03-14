@@ -218,7 +218,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     m_flammes2.create("flammes", 635, 65,
                       ptr_managerGroup->ptr_textureManager->getTexture("flammes"),
-                      true, 0.15, 121, 70, 5);
+                      true, 0.12, 121, 70, 5);
     getContentPane()->addComponent(&m_flammes2);
 
 
