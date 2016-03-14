@@ -22,6 +22,11 @@ void Monster::deselectMonster(){
 	m_choosed = false;
 }
 
+bool Monster::getSelectMonster(){
+
+	return m_choosed;
+}
+
 std::wstring Monster::getName(){
 
 	return m_name;

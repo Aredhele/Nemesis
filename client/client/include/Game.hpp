@@ -97,22 +97,15 @@ private:
 
     std::string selectedMonster;
 
-    NButton m_buttonEldoraHealing;
-    NButton m_buttonRemingtonHealing;
-    NButton m_buttonTristanHealing;
-    NButton m_buttonNumero8Healing;
-
-    NButton m_buttonHittingRemington;
-    NButton m_buttonHittingEldora;
-    NButton m_buttonHittingNumero8;
-    NButton m_buttonHittingTristan;
+    bool isSpecial;
+    bool isHitting;
 
     void displayFeature(std::string);
-    void ifCharacterHits(std::string id, std::string monster);
-    void ifMonsterHits(std::string id, std::string character, std::string monster);
-    void ifCharacterSummons(std::string id, std::string monster);
-    void ifMonsterSummons(std::string, std::string character, std::string monster);
-    void ifSummonEldoraHealing(std::string id, std::string character, int maxPv);
+    void characterHits(std::string monster);
+    void monsterHits(std::string character, std::string monster);
+    void characterSummons(std::string monster);
+    void monsterSummons(std::string character, std::string monster);
+    void summonEldoraHealing(std::string character, int maxPv);
 
 
 public:
