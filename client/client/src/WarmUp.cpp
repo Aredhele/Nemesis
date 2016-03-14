@@ -76,8 +76,6 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
                                   L"", sf::Color::Black);
 
     m_validateCharacterButton.setVisible(false);
-    m_playButton.setVisible(true);
-    //m_playButton.setEnabled(false);
     m_playButton.setVisible(false);
     m_infoCharacterPanel.setVisible(false);
     m_selectCharacterPanel.setVisible(false);
@@ -257,10 +255,10 @@ void WarmUp::receiveRequest(){
             *packet >> sRequest;
             if (sRequest=="Ok"){
                 //TODO bloquer les autres personnages
+                blockCharacters();
                 m_charSelected = true;
                 //TODO rendre disponible le bouton de lancement du jeu
                 m_playButton.setVisible(true);
-                //m_playButton.setVisible(true);
                 std::cout << "Choix validé ! " << std::endl;
 
             }
@@ -278,4 +276,12 @@ void WarmUp::receiveRequest(){
             break;
     }
 
+}
+
+void WarmUp::blockCharacters() {
+    m_eldoraButton.setEnabled(false);
+    m_numero8Button.setEnabled(false);
+    m_remingtonButton.setEnabled(false);
+    m_tristanButton.setEnabled(false);
+    m_mdjButton.setEnabled(false);
 }
