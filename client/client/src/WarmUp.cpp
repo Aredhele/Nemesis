@@ -269,7 +269,7 @@ void WarmUp::update(sf::RenderWindow * window,
         }
     }
     if(m_inputHandler.getComponentId() == "validateCharButton"){
-        std::wstring wstr = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
+        /*std::wstring wstr = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
 
         std::string str;
         for(std::wstring::const_iterator it = wstr.begin();
@@ -278,7 +278,8 @@ void WarmUp::update(sf::RenderWindow * window,
         {
             str.push_back(static_cast<char>(*it));
         }
-
+        */
+        std::string str = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId();
         //Envoie notre choix de perso
         if (!m_ptr_managerGroup->ptr_networkManager->request(5, str)){
             errorConnection();
@@ -331,54 +332,59 @@ void WarmUp::displayInfoCharacters(std::string characterName){
 }
 
 void WarmUp::receiveRequest(){
-    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
-    sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
 
-    sf::Int32 idRequest;
-    *packet >> idRequest;
-    std::string sRequest;
-    std::string sRequest2;
+    std::vector <sf::Packet> packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
 
-    std::cout << "IdRequest " << idRequest << std::endl;
-    std::cout << "sRequest " << sRequest << std::endl;
+    for(unsigned int i = 0; i < packet.size(); i++) {
 
-    switch (idRequest){
-        case 4:
-            //On peut rentrer en jeu
-            *packet >> sRequest;
-            if (sRequest=="Ok"){
-                m_ptr_managerGroup->ptr_targetManager->isOnGame();
-            }
-            else{
-                errorGoInGame();
-            }
-            break;
+        sf::Int32 idRequest;
+        packet.at(i) >> idRequest;
+        std::string sRequest;
+        std::string sRequest2;
 
-        case 5:
-            // Personnage sélectionné
-            *packet >> sRequest;
-            if (sRequest=="Ok"){
-                m_validateCharacterButton.setEnabled(false);
-                blockCharacters();
-                m_charSelected = true;
-                m_playButton.setVisible(true);
-                std::cout << "Choix validé ! " << std::endl;
+        std::cout << "IdRequest recu " << idRequest << std::endl;
+        std::cout << "sRequest recu " << sRequest << std::endl;
 
-            }
-            else{
-                errorCharacterSelection();
-            }
-            break;
+        switch (idRequest) {
+            case 4:
+                //On peut rentrer en jeu
+                packet.at(i) >> sRequest;
+                if (sRequest == "Ok") {
+                    m_ptr_managerGroup->ptr_targetManager->isOnGame();
+                }
+                else {
+                    errorGoInGame();
+                }
+                break;
 
-        case 6:
-            //Nom perso - nom joueur
-            // ex : "eldora""Lucas"
-            *packet >> sRequest >> sRequest2;
-            m_nbPlayer++;
-            m_nbCharLocked++;
-            if (sRequest!=m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId())
+            case 5:
+                // Personnage sélectionné
+                packet.at(i) >> sRequest;
+                if (sRequest == "Ok") {
+                    m_validateCharacterButton.setEnabled(false);
+                    blockCharacters();
+                    m_charSelected = true;
+                    m_playButton.setVisible(true);
+                    std::cout << "Choix validé ! " << std::endl;
+
+                }
+                else {
+                    errorCharacterSelection();
+                }
+                break;
+
+            case 6:
+                //Nom perso - nom joueur
+                // ex : "eldora""Lucas"
+                packet.at(i) >> sRequest >> sRequest2;
+                m_nbPlayer++;
+                m_nbCharLocked++;
                 blockCharacter(sRequest, sRequest2);
-            break;
+                break;
+            default:
+                std::cout << "IDRequete non conforme : (WarmUp : " << idRequest << ")" << std::endl;
+                break;
+        }
     }
 
 }

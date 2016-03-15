@@ -48,7 +48,7 @@ public TriggerableObject
 		void requestReceive();
 
 		void setPacket(sf::Packet packet);
-		sf::Packet * getPacket();
+		std::vector <sf::Packet> getPacket();
 		void setHasPacket(bool hasPacket);
 		bool getHasPacket();
 

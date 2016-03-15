@@ -138,10 +138,12 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
             break;
 
         case 6: //Update tous les locks déjà passés quand on arrive
-            std::cout << "On envoi les locks déjà réalisés" << std::endl;
+            std::cout << "On envoi les locks deja realises" << std::endl;
             sendModifLockCaracIni(numeroPlayer);
+            break;
 
         default:
+            std::cout << "MDR LE CLIENT EST UN BOUFFON (ID-Niveau WarmUp : "<< actionID <<")" << std::endl;
             break;
     }
 }

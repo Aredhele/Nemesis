@@ -13,7 +13,7 @@
  * \param debug The debug mode
  */
 InputHandler::InputHandler(bool debug) {
-	m_debug = debug;
+	m_debug = false;
 	m_mouseLock = true;
 	m_textEntered = true;
 	testBug = 2;
@@ -62,7 +62,6 @@ void InputHandler::handleInput(sf::Event * e,
 			else {
 				testBug--;
 			}
-		std::cout << testBug << std::endl;
                 break;
 
             case sf::Event::KeyReleased:

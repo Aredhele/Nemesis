@@ -447,7 +447,6 @@ void Game::update(sf::RenderWindow * window,
     }
 
     if(m_inputHandler.getComponentId() == "monsterButton"){
-        std::cout << "CLIC MONSTRE" << std::endl;
 
         m_isOnMonstrePanel = true;
         m_isOnAmbiancePanel = false;
@@ -575,9 +574,7 @@ void Game::update(sf::RenderWindow * window,
     }
 
 
-    sf::Event ev = *e;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
-        std::cout << "Appuie sur Enter" << std::endl;
         std::string text = m_textChat.getString();
         std::cout << text << std::endl;
         //TODO : vider le m_textChat
@@ -616,34 +613,35 @@ void Game::displayFeature(std::string id){
 
 
 void Game::receiveRequest() {
-    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
-    sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
-    //TODO
+    std::vector <sf::Packet> packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
 
-    sf::Int32 idRequest;
-    *packet >> idRequest;
-    std::string sRequest;
-    std::string sRequest2;
+    for(unsigned int i = 0; i < packet.size(); i++) {
 
-    std::cout << "IdRequest " << idRequest << std::endl;
-    std::cout << "sRequest " << sRequest << std::endl;
+        sf::Int32 idRequest;
+        packet.at(i) >> idRequest;
+        std::string sRequest;
+        std::string sRequest2;
 
-    switch (idRequest){
-        case 1:
-            //On reçoit un message pour le chat
-            *packet >> sRequest;
-            addTextToChat(sRequest);
-            break;
+        std::cout << "IdRequest " << idRequest << std::endl;
+        std::cout << "sRequest " << sRequest << std::endl;
 
-        case 2:
+        switch (idRequest) {
+            case 1:
+                //On reçoit un message pour le chat
+                packet.at(i) >> sRequest;
+                addTextToChat(sRequest);
+                break;
 
-            break;
+            case 2:
 
-        case 3:
-            //TODO : Désactiver le personnage (idRequest)
-            //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+                break;
 
-            break;
+            case 3:
+                //TODO : Désactiver le personnage (idRequest)
+                //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+
+                break;
+        }
     }
 
 }

@@ -19,6 +19,7 @@ NetworkManager::NetworkManager(bool debug) :
     //m_serverAddress = "25.76.184.229";
     m_serverAddress = "127.0.0.1";
 	m_serverPort = 6002;
+    m_hasPacket = 0;
 
 	//TODO : Régler le problème avec fichier de Configuration
 	/*
@@ -53,7 +54,6 @@ bool NetworkManager::connect(){
     }
 
     std::cout << "Connection established !" << std::endl;
-    std::cerr << "Socket status : " << m_status << std::endl;
 
     m_socket.setBlocking(true);
 
@@ -78,8 +78,7 @@ bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
         return false;
     }
 
-    std::cout << "Request send !" << std::endl;
-    std::cerr << "Socket status : " << m_status << std::endl;
+    std::cout << "Request send : " << idRequest <<", argument : "<< sRequest << std::endl;
     return true;
 }
 /**
@@ -96,24 +95,22 @@ void NetworkManager::requestReceive(){
         m_status = m_socket.receive(newPacket);
         if (m_status == sf::Socket::Done) {
             m_packet.push_back(newPacket);
-            std::cout << "Request receive !" << std::endl;
-            std::cerr << "Socket status : " << m_status << std::endl;
             //m_packet = &packet;
+            //std::cout << "Request receive !" << std::endl;
             m_hasPacket = m_hasPacket + 1;
             //return packet;
         }
         else if(m_status == sf::Socket::Disconnected){
-            std::cout << "Déconneté du serveur " << std::endl;
+            std::cerr << "Déconnecte du serveur " << std::endl;
             break;
         }
         else{
             std::cerr << "Unable to receive from server" << std::endl;
-            m_hasPacket = false;
+            m_hasPacket = 0;
             //return NULL;
         }
     }
 }
-
 
 void NetworkManager::trigger(uint id){
     return;
@@ -128,11 +125,13 @@ void NetworkManager::setPacket(sf::Packet packet){
     m_packet.push_back(packet);
 }
 
-sf::Packet * NetworkManager::getPacket(){
-    m_hasPacket = m_hasPacket -1;
+std::vector <sf::Packet>  NetworkManager::getPacket(){
+    /*m_hasPacket = m_hasPacket -1;
     sf::Packet* tmp = &m_packet.at(0);
-    m_packet.erase(m_packet.begin());
-    return tmp;
+    m_packet.erase(m_packet.begin());*/
+    m_hasPacket = 0;
+
+    return m_packet;
 }
 
 void NetworkManager::setHasPacket(bool hasPacket){
