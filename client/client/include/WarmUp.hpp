@@ -25,10 +25,32 @@ class WarmUp : public BasicInterface
         NPanel m_infoCharacterPanel;
         NLabel m_infoCharacterLabel;
 
+        NLabel m_numero8LockLabel;
+        NLabel m_eldoraLockLabel;
+        NLabel m_remingtonLockLabel;
+        NLabel m_tristanLockLabel;
+        NLabel m_mdjLockLabel;
+
         NButton m_playButton;
         NButton m_returnButton;
 
+        NPanel m_characterLockPanel1;
+        NPanel m_characterLockPanel2;
+        NPanel m_characterLockPanel3;
+        NPanel m_characterLockPanel4;
+
+        NPanel m_numero8Lock;
+        NPanel m_eldoraLock;
+        NPanel m_tristanLock;
+        NPanel m_remingtonLock;
+        NPanel m_mdjLock;
+
+
         sf::Font m_fontLabel;
+        sf::Font m_fontLabel2;
+
+        int m_nbPlayer;
+        int m_nbCharLocked;
 
 
 public:
@@ -47,6 +69,12 @@ public:
         void receiveRequest();
 
         void blockCharacters();
+
+    void blockCharacter(std::string characterName, std::string playerName );
+
+    void adaptPosition(NPanel panel, NLabel label);
+
+    std::wstring s2ws(std::string string);
 };
 
 #endif //CLIENT_WARMUP_HPP

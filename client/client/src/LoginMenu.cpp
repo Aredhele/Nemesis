@@ -45,7 +45,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 	//				 ptr_managerGroup->ptr_textureManager->getTexture("loading"),
 	//			 true, 0.1, 49,  49, 8);
 
-	//m_loading.setVisible(true);
+	//m_loading.setVisible(false);
 	//getContentPane()->addComponent(&m_loading);
 	//m_loading.start();
 
@@ -91,9 +91,8 @@ void LoginMenu::update(sf::RenderWindow * window,
 	// Basic Interface updating
 	basicInput(e, frameTime);
 
-	sf::Event ev = *e;
 	if(m_inputHandler.getComponentId() == "connectButton" || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-		//m_loading.setVisible(true);
+        //m_loading.setVisible(true);
 		tryConnection();
 	}
 
@@ -103,9 +102,10 @@ void LoginMenu::update(sf::RenderWindow * window,
 }
 
 void LoginMenu::tryConnection(){
+	//;
 	//m_errorPanel.setVisible(false);
 	if(m_textFieldLogin.getString() != "") {
-		//sf::sleep(sf::milliseconds(2500));
+
 		if (m_ptr_managerGroup->ptr_networkManager->connect()) {
 			m_ptr_managerGroup->ptr_networkManager->startThread();
 			m_ptr_managerGroup->ptr_gameManager->getPlayer()->setName(m_textFieldLogin.getString());

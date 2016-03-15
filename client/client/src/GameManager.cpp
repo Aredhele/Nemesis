@@ -60,19 +60,19 @@ void GameManager::initCharacters(){
 
     m_characterList[0]->setName(L"Numero 8");
     m_characterList[0]->setId("numero8");
-    m_characterList[0]->setDescription(L"Salut à toi !\n J’ai pour seul nom le chiffre 8.\nIl me vient de la prison dans laquelle je suis née.\nJ’y ai été entrainé pour devenir un guerrier puissant. Rien ne m’arrête !\nJe fonce dans la bataille tête baissée et je n’ai jamais été vaincu. ");
+    m_characterList[0]->setDescription(L"Salut à toi !\nJ’ai pour seul nom le chiffre 8.\nIl me vient de la prison dans laquelle je suis née.\nJ’y ai été entrainé pour devenir un guerrier puissant. Rien ne m’arrête !\nJe fonce dans la bataille tête baissée et je n’ai jamais été vaincu. ");
     m_characterList[0]->setCaracteristics(200,3000,30);
     m_characterList[0]->setAbility(0,"Toto","toto");
 
     m_characterList[1]->setName(L"Remington");
     m_characterList[1]->setId("remington");
-    m_characterList[1]->setDescription(L"… Je suis né de la nuit.\nRelevé parmi les morts, j’aime les recoins sombres et discrets pour frapper\nmes ennemis dans le dos.");
+    m_characterList[1]->setDescription(L"...Je suis né de la nuit.\nRelevé parmi les morts, j’aime les recoins sombres et discrets pour\nfrapper mes ennemis dans le dos.");
     m_characterList[1]->setCaracteristics(300,1500,30);
     m_characterList[1]->setAbility(10, "Toto", "toto");
 
     m_characterList[2]->setName(L"Eldora Dragnir");
     m_characterList[2]->setId("eldora");
-    m_characterList[2]->setDescription(L"Bonjour à vous !\nJe suis une elfe de la lumière.\nElevée dans le royaume de la Lorian, mes compétences en soin sont inégalées\ndans toutes les terres du nord.");
+    m_characterList[2]->setDescription(L"Bonjour à vous !\nJe suis une elfe de la lumière.\nElevée dans le royaume de la Lorian, mes compétences en soin sont\ninégalées dans toutes les terres du nord.");
     m_characterList[2]->setCaracteristics(100,5000,40);
     m_characterList[2]->setAbility(20, "Toto", "toto");
 
@@ -84,7 +84,7 @@ void GameManager::initCharacters(){
 
     m_characterList[4]->setName(L"Maitre du jeu");
     m_characterList[4]->setId("mdj");
-    m_characterList[4]->setDescription(L"Bienvenue voyageur ! \nJe suis le maître du jeu. \nVotre destin reposera entre mes mains…");
+    m_characterList[4]->setDescription(L"Bienvenue voyageur ! \nJe suis le maître du jeu. \nVotre destin reposera entre mes mains...");
     m_characterList[4]->setCaracteristics(0,0,0);
     m_characterList[4]->setAbility(40, "Toto", "toto");
 

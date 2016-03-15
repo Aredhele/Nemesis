@@ -119,7 +119,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_textChat.setTextPosition(7, 693);
     m_textChat.setCursorPosition(7, 695);
     //Panel Chat
-    m_panelChat.create("chatPanel", 5, 510,
+    m_panelChat.create("chatPanel", 5, 495,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
 
     /*m_arrowUp.create("arrowUp", 290, 520,
@@ -361,7 +361,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
                 && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-                && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+                && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("remington" , selectedMonster);
            isHitting = false;
@@ -386,7 +386,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("eldora" , selectedMonster);
            isHitting = false;
@@ -411,7 +411,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("numero8" , selectedMonster);
            isHitting = false;
@@ -435,7 +435,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("tristan" , selectedMonster);
            isHitting = false;
@@ -618,6 +618,37 @@ void Game::displayFeature(std::string id){
 void Game::receiveRequest() {
     m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
     sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
+    //TODO
+
+    sf::Int32 idRequest;
+    *packet >> idRequest;
+    std::string sRequest;
+    std::string sRequest2;
+
+    std::cout << "IdRequest " << idRequest << std::endl;
+    std::cout << "sRequest " << sRequest << std::endl;
+
+    switch (idRequest){
+        case 1:
+            //On reçoit un message pour le chat
+            *packet >> sRequest;
+            addTextToChat(sRequest);
+            break;
+
+        case 2:
+
+            break;
+
+        case 3:
+            //TODO : Désactiver le personnage (idRequest)
+            //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+
+            break;
+    }
+
+}
+
+void Game::addTextToChat(std::string message){
     //TODO
 }
 
