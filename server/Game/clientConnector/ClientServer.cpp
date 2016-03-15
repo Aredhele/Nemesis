@@ -205,17 +205,17 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,
             id = 2;
             rep = "False";
 
-            socket->setBlocking(true);
+            //socket->setBlocking(true);
 
             if(!joinWarmUp(socket, sRequest, indiceSocket)){
                 packet << id << rep;
                 socket->send(packet);
                 std::cout << "/!\\warn Impossible de rejoindre le warmUp" << std::endl;
-                socket->setBlocking(false);
+                //socket->setBlocking(false);
             }
             else{
                 std::cout << "Autorise a rejoindre le warmUp" << std::endl;
-                socket->setBlocking(false);
+                //socket->setBlocking(false);
             }
 
             break;
@@ -235,6 +235,7 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,
             std::cout << "Recupere la liste des WarmUps" << std::endl;
             break;
         default:
+            std::cout << "MDR LE CLIENT EST UN BOUFFON" << std::endl;
             break;
     }
 }

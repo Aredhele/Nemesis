@@ -142,6 +142,7 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
             sendModifLockCaracIni(numeroPlayer);
 
         default:
+            std::cout << "MDR LE CLIENT EST UN BOUFFON" << std::endl;
             break;
     }
 }

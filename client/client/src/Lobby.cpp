@@ -122,9 +122,6 @@ void Lobby::requestJoinWarmUp(int idWarmUp){
     if(m_ptr_managerGroup->ptr_networkManager->request(2, "" + cast::toString(idWarmUp) +
                 std::string("&") + std::string(m_ptr_managerGroup
                  ->ptr_gameManager->getPlayer()->getName() ))){
-
-        std::cout << "Requete pour rejoindre WarmUp réussi par " <<
-        m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
     }
     else{
         errorConnection();
@@ -147,7 +144,9 @@ void Lobby::receiveRequest(){
         case 2:
             //Rejoindre les salons
             if(sRequest == "Ok"){
-                std::cout << "On rejoint bien le warmUp" << std::endl;
+                std::cout << "Requete pour rejoindre WarmUp réussi par " <<
+                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
+
                 m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
             }
             else{
