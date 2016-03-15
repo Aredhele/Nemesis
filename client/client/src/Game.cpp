@@ -221,6 +221,11 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                       true, 0.12, 121, 70, 5);
     getContentPane()->addComponent(&m_flammes2);
 
+    m_mdjAnimation.create("mdjAnimation", 538, 179,
+                          ptr_managerGroup->ptr_textureManager->getTexture("mdjAnimation"),
+                          true, 0.1, 19, 19, 22);
+    getContentPane()->addComponent(&m_mdjAnimation);
+
 
 
     m_panelCharateristics.create("charateristicsPanel", 704, 512,
