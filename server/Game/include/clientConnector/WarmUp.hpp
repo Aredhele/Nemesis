@@ -80,6 +80,7 @@ private:
     void launchGame(); //TODO Creer Game
     bool lockCarac(std::string sRequest, int nbPLayer);
     void sendModifLockCarac(std::string sRequest1, int numeroPlayer);
+    void sendModifLockCaracIni(int numeroPlayer);
 };
 
 
