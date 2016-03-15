@@ -180,6 +180,7 @@ void ResourceLoader::load() {
 
 	//Animations
 	a_tm.addTexture("flammes", pathAnimation + "animationFlamme.png");
+	a_tm.addTexture("mdjAnimation", pathAnimation + "mdj.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);

@@ -76,6 +76,7 @@ private:
 
     AnimatableObject m_flammes;
     AnimatableObject m_flammes2;
+    AnimatableObject m_mdjAnimation;
 
     sf::Font m_fontLabel;
     sf::Font m_fontTextbox;
