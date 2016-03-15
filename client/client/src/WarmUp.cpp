@@ -19,6 +19,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_returnButton()
 {
 
+    m_nbPlayer = 0;
     m_charSelected = false;
     noError();
     int leftBorder = 15;
@@ -199,6 +200,11 @@ void WarmUp::update(sf::RenderWindow * window,
         m_selectCharacterPanel.setVisible(false);
         m_ptr_managerGroup->ptr_targetManager->isOnLobby();
     }*/
+
+    /*if (m_nbPlayer==5){
+        m_playButton.setVisible(true);
+    }*/
+
     if(m_inputHandler.getComponentId() == "playButton") {
         if (m_charSelected){
             m_playButton.setVisible(false);
@@ -268,10 +274,14 @@ void WarmUp::receiveRequest(){
             break;
 
         case 3:
-            //
+            //Nom perso - nom joueur
+            // ex : "eldora""Lucas"
             *packet >> sRequest >> sRequest2;
-            //TODO : Désactiver le personnage (idRequest)
+            m_nbPlayer++;
+            //TODO : Désactiver le personnage
             //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+            blockCharacter(sRequest);
+
 
             break;
     }
@@ -284,4 +294,30 @@ void WarmUp::blockCharacters() {
     m_remingtonButton.setEnabled(false);
     m_tristanButton.setEnabled(false);
     m_mdjButton.setEnabled(false);
+    m_nbPlayer++;
+}
+
+void WarmUp::blockCharacter(std::string character) {
+    if (character=="eldora") {
+        m_eldoraButton.setEnabled(false);
+
+    }
+    if (character=="remington"){
+        m_remingtonButton.setEnabled(false);
+
+    }
+    if (character=="mdj"){
+        m_mdjButton.setEnabled(false);
+
+    }
+    if (character=="tristan"){
+        m_tristanButton.setEnabled(false);
+
+    }
+    if (character=="numero8"){
+        m_numero8Button.setEnabled(false);
+
+    }
+
+
 }

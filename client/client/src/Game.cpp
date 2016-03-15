@@ -519,6 +519,37 @@ void Game::receiveRequest() {
     m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
     sf::Packet *packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
     //TODO
+
+    sf::Int32 idRequest;
+    *packet >> idRequest;
+    std::string sRequest;
+    std::string sRequest2;
+
+    std::cout << "IdRequest " << idRequest << std::endl;
+    std::cout << "sRequest " << sRequest << std::endl;
+
+    switch (idRequest){
+        case 1:
+            //On reçoit un message pour le chat
+            *packet >> sRequest;
+            addTextToChat(sRequest);
+            break;
+
+        case 2:
+
+            break;
+
+        case 3:
+            //TODO : Désactiver le personnage (idRequest)
+            //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
+
+            break;
+    }
+
+}
+
+void Game::addTextToChat(std::string message){
+    //TODO
 }
 
 

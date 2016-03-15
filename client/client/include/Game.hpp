@@ -128,6 +128,7 @@ public:
                         sf::Event * e, double frameTime);
 
     void receiveRequest();
+    void addTextToChat(std::string message);
 };
 
 

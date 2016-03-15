@@ -99,7 +99,7 @@ void ResourceLoader::load() {
     a_tm.addTexture("rejoindreButton_1", pathLogin + "rejoindreButton_1.png");
     a_tm.addTexture("rejoindreButton_2", pathLogin + "rejoindreButton_2.png");
 	a_tm.addTexture("bibouPanel", pathLogin + "bibouPanel.png");
-	a_tm.addTexture("bibouPanel2", pathLogin + "bibouPanel_2.png");
+	a_tm.addTexture("bibouPanel2", pathLogin + "bibouPanel2.png");
 	a_tm.addTexture("paperSwordTitlePanel", pathLogin + "paperSwordTitleFull.png");
 	a_tm.addTexture("backButton_1", pathLogin + "backButton_1.png");
 	a_tm.addTexture("backButton_2", pathLogin + "backButton_2.png");
@@ -117,7 +117,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("remingtonInWarmUp", pathChar + "Remington_inWarmUp.png");
 	a_tm.addTexture("tristanInWarmUp", pathChar + "Tristan_De_La_Mortifere_inWarmUp.png");
 	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_inWarmUp.png");
-	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_175.png");
+	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_inWarmUp.png");
 
 	//in game
 	a_tm.addTexture("eldoraInGame",pathChar + "Eldora_Dragnir_inGame.png");

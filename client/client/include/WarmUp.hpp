@@ -30,6 +30,8 @@ class WarmUp : public BasicInterface
 
         sf::Font m_fontLabel;
 
+        int m_nbPlayer;
+
 
 public:
         // Constructor
@@ -47,6 +49,8 @@ public:
         void receiveRequest();
 
         void blockCharacters();
+
+    void blockCharacter(std::string basic_string);
 };
 
 #endif //CLIENT_WARMUP_HPP
