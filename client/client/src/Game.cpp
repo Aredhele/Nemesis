@@ -119,7 +119,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_textChat.setTextPosition(7, 693);
     m_textChat.setCursorPosition(7, 695);
     //Panel Chat
-    m_panelChat.create("chatPanel", 5, 510,
+    m_panelChat.create("chatPanel", 5, 495,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
 
     /*m_arrowUp.create("arrowUp", 290, 520,
@@ -356,7 +356,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
                 && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-                && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+                && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("remington" , selectedMonster);
            isHitting = false;
@@ -381,7 +381,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("eldora" , selectedMonster);
            isHitting = false;
@@ -406,7 +406,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("numero8" , selectedMonster);
            isHitting = false;
@@ -430,7 +430,7 @@ void Game::update(sf::RenderWindow * window,
         }
         else if(isHitting 
             && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
-            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster()){
 
            monsterHits("tristan" , selectedMonster);
            isHitting = false;

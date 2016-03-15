@@ -120,6 +120,13 @@ void ResourceLoader::load() {
 	a_tm.addTexture("eldoraInWarmUp", pathChar +  "Eldora_Dragnir_inWarmUp.png");
 	a_tm.addTexture("mdjInWarmUp",pathChar + "Mdj_inWarmUp.png");
 
+	a_tm.addTexture("characterLock", pathLogin + "SelectionPerso.png");
+	a_tm.addTexture("numero8Lock", pathChar + "Numero_8_48.png");
+	a_tm.addTexture("eldoraLock", pathChar + "Eldora_Dragnir_48.png");
+	a_tm.addTexture("remingtonLock", pathChar + "Remington_48.png");
+	a_tm.addTexture("tristanLock", pathChar + "Tristan_De_La_Mortifere_48.png");
+	a_tm.addTexture("mdjLock", pathChar + "mdj_48.png");
+
 	//in game
 	a_tm.addTexture("eldoraInGame",pathChar + "Eldora_Dragnir_inGame.png");
 	a_tm.addTexture("numero8InGame",pathChar + "Numero_8_inGame.PNG");
@@ -138,7 +145,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("IconDefense", pathLogin + "defenseIcon.png");
 	a_tm.addTexture("IconHealth", pathLogin + "healthIcon.png");
 
-	a_tm.addTexture("chatPanel", pathLogin + "chatPanel.png");
+	a_tm.addTexture("chatPanel", pathLogin + "chat.png");
 	a_tm.addTexture("chatTextBox", pathLogin + "chatTextBox.png");
 	a_tm.addTexture("textBoxCursorChat", pathLogin + "curseurChatTextBox.png");
 	a_tm.addTexture("loading", pathLogin + "loading.png");
