@@ -36,6 +36,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_nbPlayer = 0;
     m_nbCharLocked = 0;
     m_charSelected = false;
+    m_firstConnect = true;
     noError();
     int leftBorder = 15;
 
@@ -203,6 +204,14 @@ void WarmUp::update(sf::RenderWindow * window,
         receiveRequest();
     }
 
+    if(m_firstConnect){
+        //Demande un update des perso déjà locked
+        if (!m_ptr_managerGroup->ptr_networkManager->request(6, "")){
+            errorConnection();
+        }
+        m_firstConnect=false;
+    }
+
     // Basic Interface updating
     basicInput(e, frameTime);
 
@@ -269,7 +278,8 @@ void WarmUp::update(sf::RenderWindow * window,
             str.push_back(static_cast<char>(*it));
         }
 
-        if (!m_ptr_managerGroup->ptr_networkManager->request(2, str)){
+        //Envoie notre choix de perso
+        if (!m_ptr_managerGroup->ptr_networkManager->request(5, str)){
             errorConnection();
         }
 
@@ -283,16 +293,21 @@ void WarmUp::update(sf::RenderWindow * window,
         m_ptr_managerGroup->ptr_targetManager->isOnLobby();
     }*/
 
-    /*if (m_nbPlayer==5){
+    //TODO : change condition to ==5
+    if (m_nbPlayer==2){
         m_playButton.setVisible(true);
-    }*/
+    }
 
     if(m_inputHandler.getComponentId() == "playButton") {
         if (m_charSelected){
             m_playButton.setVisible(false);
             m_infoCharacterPanel.setVisible(false);
             m_selectCharacterPanel.setVisible(false);
-            m_ptr_managerGroup->ptr_targetManager->isOnGame();
+
+            //Demande l'autorisation de rentrer en jeu
+            if (!m_ptr_managerGroup->ptr_networkManager->request(4, "")){
+                errorConnection();
+            }
         }
     }
 
@@ -327,7 +342,7 @@ void WarmUp::receiveRequest(){
     std::cout << "sRequest " << sRequest << std::endl;
 
     switch (idRequest){
-        case 1:
+        case 4:
             //On peut rentrer en jeu
             *packet >> sRequest;
             if (sRequest=="Ok"){
@@ -338,7 +353,7 @@ void WarmUp::receiveRequest(){
             }
             break;
 
-        case 2:
+        case 5:
             // Personnage sélectionné
             *packet >> sRequest;
             if (sRequest=="Ok"){
@@ -354,16 +369,13 @@ void WarmUp::receiveRequest(){
             }
             break;
 
-        case 3:
+        case 6:
             //Nom perso - nom joueur
             // ex : "eldora""Lucas"
             *packet >> sRequest >> sRequest2;
             m_nbPlayer++;
             m_nbCharLocked++;
-            //TODO : Désactiver le personnage
-            //TODO : Afficher le nom du joueur avec l'image du personnage sélectionné
             blockCharacter(sRequest, sRequest2);
-
             break;
     }
 

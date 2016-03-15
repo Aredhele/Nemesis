@@ -110,14 +110,14 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     getContentPane()->addComponent(&m_buttonTristanInGame);
 
     //Text Box Chat
-    m_textChat.create("textFieldLogin", 5, 690,
+    m_textChat.create("textFieldLogin", 5, 675,
                             ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                             ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                             &m_fontTextbox,
                             15, 0.5, "", 104, sf::Color(196,130,56));
 
-    m_textChat.setTextPosition(7, 693);
-    m_textChat.setCursorPosition(7, 695);
+    m_textChat.setTextPosition(7, 678);
+    m_textChat.setCursorPosition(7, 680);
     //Panel Chat
     m_panelChat.create("chatPanel", 5, 495,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
