@@ -97,21 +97,21 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
 
     m_characterLockPanel1.create("characterLock1", 100, 505,
                                  ptr_managerGroup->ptr_textureManager->getTexture("characterLock"));
-    m_characterLockPanel2.create("characterLock2", 450, 575,
+    m_characterLockPanel2.create("characterLock2", 100, 575,
                                  ptr_managerGroup->ptr_textureManager->getTexture("characterLock"));
-    m_characterLockPanel3.create("characterLock3", 100, 575,
+    m_characterLockPanel3.create("characterLock3", 450, 505,
                                  ptr_managerGroup->ptr_textureManager->getTexture("characterLock"));
-    m_characterLockPanel4.create("characterLock4", 450, 505,
+    m_characterLockPanel4.create("characterLock4", 450, 575,
                                  ptr_managerGroup->ptr_textureManager->getTexture("characterLock"));
 
     m_numero8Lock.create("numero8Lock", 102, 507,
                          ptr_managerGroup->ptr_textureManager->getTexture("numero8Lock"));
     m_eldoraLock.create("eldoraLock", 452, 577,
                          ptr_managerGroup->ptr_textureManager->getTexture("eldoraLock"));
-    m_tristanLock.create("remingtonLock", 102, 577,
-                         ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
-    m_remingtonLock.create("tristanLock", 452, 507,
+    m_tristanLock.create("tristanLock", 102, 577,
                          ptr_managerGroup->ptr_textureManager->getTexture("tristanLock"));
+    m_remingtonLock.create("remingtonLock", 452, 507,
+                         ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     m_mdjLock.create("mdjLock", 452, 507,
                          ptr_managerGroup->ptr_textureManager->getTexture("mdjLock"));
 
@@ -361,10 +361,9 @@ void WarmUp::receiveRequest(){
                 // Personnage sélectionné
                 packet.at(i) >> sRequest;
                 if (sRequest == "Ok") {
-                    m_validateCharacterButton.setEnabled(false);
+                    m_validateCharacterButton.setVisible(false);
                     blockCharacters();
                     m_charSelected = true;
-                    m_playButton.setVisible(true);
                     std::cout << "Choix validé ! " << std::endl;
 
                 }
@@ -378,8 +377,13 @@ void WarmUp::receiveRequest(){
                 // ex : "eldora""Lucas"
                 packet.at(i) >> sRequest >> sRequest2;
                 m_nbPlayer++;
-                m_nbCharLocked++;
-                blockCharacter(sRequest, sRequest2);
+
+            std::cout << "perso locked " <<
+                    m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() << std::endl;
+                if (sRequest!=m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId()) {
+                    m_nbCharLocked++;
+                    blockCharacter(sRequest, sRequest2);
+                }
                 break;
             default:
                 std::cout << "IDRequete non conforme : (WarmUp : " << idRequest << ")" << std::endl;
@@ -395,47 +399,182 @@ void WarmUp::blockCharacters() {
     m_remingtonButton.setEnabled(false);
     m_tristanButton.setEnabled(false);
     m_mdjButton.setEnabled(false);
-    m_nbPlayer++;
 }
 
 void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
     std::wstring wplayerName = s2ws(playerName);
 
     if (characterName=="eldora") {
+        std::cout << "perso locked " << characterName << std::endl;
         m_eldoraButton.setEnabled(false);
-        adaptPosition(&m_eldoraLock, &m_eldoraLockLabel);
+        switch (m_nbCharLocked){
+            case 1 :
+                m_characterLockPanel1.setVisible(true);
+                m_eldoraLock.setPosition(102, 507);
+                m_eldoraLockLabel.setPosition(175, 520); //175,520
+                std::cout << "position changed" << std::endl;
+                break;
+            case 2 :
+                m_characterLockPanel2.setVisible(true);
+                m_eldoraLock.setPosition(102, 577);
+                m_eldoraLockLabel.setPosition(175, 590);
+                break;
+            case 3:
+                m_characterLockPanel3.setVisible(true);
+                m_eldoraLock.setPosition(452, 507);
+                m_eldoraLockLabel.setPosition(525, 520);
+                break;
+            case 4:
+                m_characterLockPanel4.setVisible(true);
+                m_eldoraLock.setPosition(452, 577);
+                m_eldoraLockLabel.setPosition(525, 590);
+                break;
+            default:
+                std::cout << "position pas adaptée " << std::endl;
+                break;
+        }
+        //adaptPosition(&m_eldoraLock, &m_eldoraLockLabel);
         m_eldoraLockLabel.setText(wplayerName);
         m_eldoraLockLabel.setVisible(true);
         m_eldoraLock.setVisible(true);
+
     }
 
     if (characterName=="remington"){
+        std::cout << "perso locked " << characterName << std::endl;
         m_remingtonButton.setEnabled(false);
-        adaptPosition(&m_remingtonLock, &m_remingtonLockLabel);
+        switch (m_nbCharLocked){
+            case 1 :
+                m_characterLockPanel1.setVisible(true);
+                m_remingtonLock.setPosition(102, 507);
+                m_remingtonLockLabel.setPosition(175, 520); //175,520
+                std::cout << "position changed" << std::endl;
+                break;
+            case 2 :
+                m_characterLockPanel2.setVisible(true);
+                m_remingtonLock.setPosition(102, 577);
+                m_remingtonLockLabel.setPosition(175, 590);
+                break;
+            case 3:
+                m_characterLockPanel3.setVisible(true);
+                m_remingtonLock.setPosition(452, 507);
+                m_remingtonLockLabel.setPosition(525, 520);
+                break;
+            case 4:
+                m_characterLockPanel4.setVisible(true);
+                m_remingtonLock.setPosition(452, 577);
+                m_remingtonLockLabel.setPosition(525, 590);
+                break;
+            default:
+                std::cout << "position pas adaptée " << std::endl;
+                break;
+        }
+        //adaptPosition(&m_remingtonLock, &m_remingtonLockLabel);
         m_remingtonLockLabel.setText(wplayerName);
         m_remingtonLockLabel.setVisible(true);
         m_remingtonLock.setVisible(true);
     }
 
     if (characterName=="mdj"){
+        std::cout << "perso locked " << characterName << std::endl;
         m_mdjButton.setEnabled(false);
-        adaptPosition(&m_mdjLock, &m_mdjLockLabel);
+        switch (m_nbCharLocked){
+            case 1 :
+                m_characterLockPanel1.setVisible(true);
+                m_mdjLock.setPosition(102, 507);
+                m_mdjLockLabel.setPosition(175, 520); //175,520
+                std::cout << "position changed" << std::endl;
+                break;
+            case 2 :
+                m_characterLockPanel2.setVisible(true);
+                m_mdjLock.setPosition(102, 577);
+                m_mdjLockLabel.setPosition(175, 590);
+                break;
+            case 3:
+                m_characterLockPanel3.setVisible(true);
+                m_mdjLock.setPosition(452, 507);
+                m_mdjLockLabel.setPosition(525, 520);
+                break;
+            case 4:
+                m_characterLockPanel4.setVisible(true);
+                m_mdjLock.setPosition(452, 577);
+                m_mdjLockLabel.setPosition(525, 590);
+                break;
+            default:
+                std::cout << "position pas adaptée " << std::endl;
+                break;
+        }
+        //adaptPosition(&m_mdjLock, &m_mdjLockLabel);
         m_mdjLockLabel.setText(wplayerName);
         m_mdjLockLabel.setVisible(true);
         m_mdjLock.setVisible(true);
     }
 
     if (characterName=="tristan"){
+        std::cout << "perso locked " << characterName << std::endl;
         m_tristanButton.setEnabled(false);
-        adaptPosition(&m_tristanLock, &m_tristanLockLabel);
+        switch (m_nbCharLocked){
+            case 1 :
+                m_characterLockPanel1.setVisible(true);
+                m_tristanLock.setPosition(102, 507);
+                m_tristanLockLabel.setPosition(175, 520); //175,520
+                std::cout << "position changed" << std::endl;
+                break;
+            case 2 :
+                m_characterLockPanel2.setVisible(true);
+                m_tristanLock.setPosition(102, 577);
+                m_tristanLockLabel.setPosition(175, 590);
+                break;
+            case 3:
+                m_characterLockPanel3.setVisible(true);
+                m_tristanLock.setPosition(452, 507);
+                m_tristanLockLabel.setPosition(525, 520);
+                break;
+            case 4:
+                m_characterLockPanel4.setVisible(true);
+                m_tristanLock.setPosition(452, 577);
+                m_tristanLockLabel.setPosition(525, 590);
+                break;
+            default:
+                std::cout << "position pas adaptée " << std::endl;
+                break;
+        }
+        //adaptPosition(&m_tristanLock, &m_tristanLockLabel);
         m_tristanLockLabel.setText(wplayerName);
         m_tristanLockLabel.setVisible(true);
         m_tristanLock.setVisible(true);
     }
 
     if (characterName=="numero8"){
+        std::cout << "perso locked " << characterName << std::endl;
         m_numero8Button.setEnabled(false);
-        adaptPosition(&m_numero8Lock, &m_numero8LockLabel);
+        switch (m_nbCharLocked){
+            case 1 :
+                m_characterLockPanel1.setVisible(true);
+                m_numero8Lock.setPosition(102, 507);
+                m_numero8LockLabel.setPosition(175, 520); //175,520
+                std::cout << "position changed" << std::endl;
+                break;
+            case 2 :
+                m_characterLockPanel2.setVisible(true);
+                m_numero8Lock.setPosition(102, 577);
+                m_numero8LockLabel.setPosition(175, 590);
+                break;
+            case 3:
+                m_characterLockPanel3.setVisible(true);
+                m_numero8Lock.setPosition(452, 507);
+                m_numero8LockLabel.setPosition(525, 520);
+                break;
+            case 4:
+                m_characterLockPanel4.setVisible(true);
+                m_numero8Lock.setPosition(452, 577);
+                m_numero8LockLabel.setPosition(525, 590);
+                break;
+            default:
+                std::cout << "position pas adaptée " << std::endl;
+                break;
+        }
+        //adaptPosition(&m_numero8Lock, &m_numero8LockLabel);
         m_numero8LockLabel.setText(wplayerName);
         m_numero8LockLabel.setVisible(true);
         m_numero8Lock.setVisible(true);
@@ -445,11 +584,12 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 }
 
 void WarmUp::adaptPosition(NPanel *panel, NLabel *label) {
+    std::cout << "nb char locked " << m_nbCharLocked << std::endl;
     switch (m_nbCharLocked){
         case 1 :
             m_characterLockPanel1.setVisible(true);
             panel->setPosition(102, 507);
-            label->setPosition(175, 520);
+            label->setPosition(175, 520); //175,520
             break;
         case 2 :
             m_characterLockPanel2.setVisible(true);

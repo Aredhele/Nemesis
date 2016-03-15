@@ -130,8 +130,9 @@ std::vector <sf::Packet>  NetworkManager::getPacket(){
     sf::Packet* tmp = &m_packet.at(0);
     m_packet.erase(m_packet.begin());*/
     m_hasPacket = 0;
-
-    return m_packet;
+    std::vector <sf::Packet> tmp = m_packet;
+    m_packet.clear();
+    return tmp;
 }
 
 void NetworkManager::setHasPacket(bool hasPacket){

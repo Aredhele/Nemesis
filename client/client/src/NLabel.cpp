@@ -101,3 +101,8 @@ void NLabel::update(double frameTime) {
 void NLabel::setText(std::wstring text){
 	m_text.setString(text);
 }
+
+void NLabel::setPosition(float x, float y) {
+
+	m_text.setPosition(x, y);
+}

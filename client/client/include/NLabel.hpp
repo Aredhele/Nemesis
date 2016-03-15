@@ -36,6 +36,7 @@ class NLabel : public VisualObject
 		virtual std::string eventMouseMoved(sf::Event * e);
 		virtual void eventTextEntered(sf::Event * e);
 		virtual void update(double frameTime);
+		void setPosition(float x, float y);
 };
 
 #endif // DEF_NLABEL_HPP
