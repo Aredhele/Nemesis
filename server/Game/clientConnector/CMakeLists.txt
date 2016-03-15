@@ -9,7 +9,6 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 set(HEADER_FILES
         ../include/clientConnector/ClientServer.hpp
-        ../../../../NemesisOldServer/include/ConsoleDisplayer.hpp
         ../include/clientConnector/ClientThread.hpp
         ../include/clientConnector/Game.hpp
         ../include/tool/tool.hpp)
