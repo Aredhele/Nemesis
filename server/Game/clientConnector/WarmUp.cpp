@@ -111,19 +111,17 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
                                ", ARG = " + std::string(sRequest) << std::endl;
     sf::Packet packet;
 
-
+    std::cout << "Reponse a la requete n " + stringActionId << std::endl;
     switch(actionID)
     {
 
-        case 1: // Lancer la partie
+        case 4: // Lancer la partie
             //launchGame();
 
-            std::cout << "Reponse a la requete n " + stringActionId << std::endl;
             std::cout << "La partie va commencer, le WarmUp va etre libere" << std::endl;
             break;
 
-        case 2: //Lock un perso
-            std::cout <<  "Reponse a la requete n " + stringActionId << std::endl;
+        case 5: //Lock un perso
             if(lockCarac(sRequest, numeroPlayer)){
 
                 std::cout << "Requete de lock acceptee pour "+sRequest+
@@ -137,14 +135,30 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
                 packet << actionID << "False";
                 socket->send(packet);
             }
-
-
             break;
+
+        case 6: //Update tous les locks déjà passés quand on arrive
+            std::cout << "On envoi les locks déjà réalisés" << std::endl;
+            sendModifLockCaracIni(numeroPlayer);
 
         default:
             break;
     }
+}
 
+void WarmUp::sendModifLockCaracIni(int numeroPlayer) {
+    for(int i = 0; i < 5; i++) {
+        if (tabPlayer[i]->isHere() && tabPlayer[i]->getNameChar() != "Nan") {
+            sf::Packet packet;
+            sf::Int32 idRequest = 6;
+            std::string nomChar = tabPlayer[i]->getNameChar();
+            std::string nomPlayer = tabPlayer[i]->getNamePlayer();
+
+            //Renvoie 6-NomPerso-NomJoueur
+            packet << idRequest << nomChar << nomPlayer;
+            tabPlayer[numeroPlayer]->getSocket()->send(packet);
+        }
+    }
 }
 
 //Send to a thread listening
@@ -155,9 +169,9 @@ void WarmUp::sendModifLockCarac(std::string sRequest, int numeroPlayer){
             sf::Packet packet;
             sf::Int32 idRequest;
             std::string nomPlayer = tabPlayer[numeroPlayer]->getNamePlayer();
-            idRequest = 3;
+            idRequest = 6;
 
-            //Renvoie 3-NomPerso-NomJoueur
+            //Renvoie 6-NomPerso-NomJoueur
             packet << idRequest << sRequest << nomPlayer;
             tabPlayer[i]->getSocket()->send(packet);
         }

@@ -226,7 +226,6 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,
             id = 3;
             listeSalonClient = getWarmUpList();
 
-
             socket->setBlocking(true);
             packet << id << listeSalonClient;
             socket->send(packet);
