@@ -79,8 +79,6 @@ void Lobby::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "createButton") {
         std::cout << "Creation WarmUp" << std::endl;
         requestCreateNewWarmUp();
-        std::cout << "Update liste WarmUp" << std::endl;
-        requestUpdateWarmUp();
         std::cout << "Join WarmUp" << std::endl;
         requestJoinWarmUp(nbWarmUp);
 
@@ -95,7 +93,6 @@ void Lobby::update(sf::RenderWindow * window,
 }
 
 void Lobby::requestCreateNewWarmUp(){
-    std::cout << "debug 1" << std::endl;
     if(m_ptr_managerGroup->ptr_networkManager->request(1,
                          m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() )){
 
@@ -108,7 +105,6 @@ void Lobby::requestCreateNewWarmUp(){
 }
 
 void Lobby::requestUpdateWarmUp(){
-    std::cout << "debug 11" << std::endl;
     if(m_ptr_managerGroup->ptr_networkManager->request(3, "")){
         std::cout << "Requete update salon bien envoyé" << std::endl;
     }
@@ -118,7 +114,6 @@ void Lobby::requestUpdateWarmUp(){
 }
 
 void Lobby::requestJoinWarmUp(int idWarmUp){
-    std::cout << "debug 111" << std::endl;
     if(m_ptr_managerGroup->ptr_networkManager->request(2, "" + cast::toString(idWarmUp) +
                 std::string("&") + std::string(m_ptr_managerGroup
                  ->ptr_gameManager->getPlayer()->getName() ))){
@@ -130,45 +125,45 @@ void Lobby::requestJoinWarmUp(int idWarmUp){
 
 void Lobby::receiveRequest(){
 
-    m_ptr_managerGroup->ptr_networkManager->setHasPacket(false);
-    sf::Packet* packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
+    std::vector <sf::Packet> packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
 
-    sf::Int32 idRequest;
-    std::string sRequest;
-    *packet >> idRequest >> sRequest;
+    for(unsigned int i = 0; i < packet.size(); i++){
+        sf::Int32 idRequest;
+        std::string sRequest;
+        packet.at(i) >> idRequest >> sRequest;
 
-    std::cout << "debug idRequest : " << idRequest << std::endl;
-    std::cout << "debug sRequest : " << sRequest << std::endl;
+        std::cout << "debug idRequest : " << idRequest << std::endl;
+        std::cout << "debug sRequest : " << sRequest << std::endl;
 
-    switch (idRequest){
-        case 2:
-            //Rejoindre les salons
-            if(sRequest == "Ok"){
-                std::cout << "Requete pour rejoindre WarmUp réussi par " <<
-                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
+        switch (idRequest){
+            case 2:
+                //Rejoindre les salons
+                if(sRequest == "Ok"){
+                    std::cout << "Requete pour rejoindre WarmUp réussi par " <<
+                    m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
 
-                m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
-            }
-            else{
-                std::cout << "Le warmUp est complet" << std::endl;
-                errorWarmUpFull();
-            }
-            break;
+                    m_ptr_managerGroup->ptr_targetManager->isOnWarmUp();
+                }
+                else{
+                    std::cout << "Le warmUp est complet" << std::endl;
+                    errorWarmUpFull();
+                }
+                break;
 
-        case 3:
-            // Récupération la liste des salons
-            std::cout << "debug 22" << std::endl;
+            case 3:
+                // Récupération la liste des salons
 
-            updateNewWarmUp(sRequest);
-            break;
+                updateNewWarmUp(sRequest);
+                break;
+        }
     }
+
 
 }
 
 
 
 void Lobby::updateNewWarmUp(std::string sRequest){
-    std::cout << "debug 3" << std::endl;
     std::cout << sRequest << std::endl;
     if(sRequest.length() != 0) {
         char *cstr = new char[sRequest.length() + 1];

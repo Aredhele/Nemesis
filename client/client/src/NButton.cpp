@@ -85,8 +85,8 @@ std::string NButton::eventMousePressed(sf::Event * e) {
 	sf::FloatRect mousePosition(e->mouseButton.x, 
 	e->mouseButton.y, 1, 1);
 
-	std::cout << m_mainSprite.getGlobalBounds().top << std::endl;
-	std::cout << m_mainSprite.getGlobalBounds().left << std::endl;
+	//std::cout << m_mainSprite.getGlobalBounds().top << std::endl;
+	//std::cout << m_mainSprite.getGlobalBounds().left << std::endl;
 
 	if(m_mainSprite.getGlobalBounds().
 	intersects(mousePosition)) {

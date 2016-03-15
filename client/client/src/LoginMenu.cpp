@@ -32,7 +32,7 @@ LoginMenu::LoginMenu(bool debug, ManagerGroup * ptr_managerGroup) :
 
 	if (!m_fontLabel.loadFromFile("../res/font/Quicksand.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
 	{
-		std::cout << "Probleme dans le chargement des textures" << std::endl;
+		std::cerr << "Probleme dans le chargement des fonts" << std::endl;
 	}
 
 	m_connectButton.create("connectButton", 442, 570,
