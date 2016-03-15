@@ -37,6 +37,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_nbCharLocked = 0;
     m_charSelected = false;
     m_firstConnect = true;
+    m_characterSelected = "";
     noError();
     int leftBorder = 15;
 
@@ -375,7 +376,8 @@ void WarmUp::receiveRequest(){
             *packet >> sRequest >> sRequest2;
             m_nbPlayer++;
             m_nbCharLocked++;
-            blockCharacter(sRequest, sRequest2);
+            if (sRequest!=m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId())
+                blockCharacter(sRequest, sRequest2);
             break;
     }
 
@@ -395,7 +397,7 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
     if (characterName=="eldora") {
         m_eldoraButton.setEnabled(false);
-        adaptPosition(m_eldoraLock, m_eldoraLockLabel);
+        adaptPosition(&m_eldoraLock, &m_eldoraLockLabel);
         m_eldoraLockLabel.setText(wplayerName);
         m_eldoraLockLabel.setVisible(true);
         m_eldoraLock.setVisible(true);
@@ -403,7 +405,7 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
     if (characterName=="remington"){
         m_remingtonButton.setEnabled(false);
-        adaptPosition(m_remingtonLock, m_remingtonLockLabel);
+        adaptPosition(&m_remingtonLock, &m_remingtonLockLabel);
         m_remingtonLockLabel.setText(wplayerName);
         m_remingtonLockLabel.setVisible(true);
         m_remingtonLock.setVisible(true);
@@ -411,7 +413,7 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
     if (characterName=="mdj"){
         m_mdjButton.setEnabled(false);
-        adaptPosition(m_mdjLock, m_mdjLockLabel);
+        adaptPosition(&m_mdjLock, &m_mdjLockLabel);
         m_mdjLockLabel.setText(wplayerName);
         m_mdjLockLabel.setVisible(true);
         m_mdjLock.setVisible(true);
@@ -419,7 +421,7 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
     if (characterName=="tristan"){
         m_tristanButton.setEnabled(false);
-        adaptPosition(m_tristanLock, m_tristanLockLabel);
+        adaptPosition(&m_tristanLock, &m_tristanLockLabel);
         m_tristanLockLabel.setText(wplayerName);
         m_tristanLockLabel.setVisible(true);
         m_tristanLock.setVisible(true);
@@ -427,7 +429,7 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
     if (characterName=="numero8"){
         m_numero8Button.setEnabled(false);
-        adaptPosition(m_numero8Lock, m_numero8LockLabel);
+        adaptPosition(&m_numero8Lock, &m_numero8LockLabel);
         m_numero8LockLabel.setText(wplayerName);
         m_numero8LockLabel.setVisible(true);
         m_numero8Lock.setVisible(true);
@@ -436,27 +438,27 @@ void WarmUp::blockCharacter(std::string characterName, std::string playerName) {
 
 }
 
-void WarmUp::adaptPosition(NPanel panel, NLabel label) {
+void WarmUp::adaptPosition(NPanel *panel, NLabel *label) {
     switch (m_nbCharLocked){
         case 1 :
             m_characterLockPanel1.setVisible(true);
-            panel.setPosition(102, 507);
-            label.setPosition(175, 520);
+            panel->setPosition(102, 507);
+            label->setPosition(175, 520);
             break;
         case 2 :
             m_characterLockPanel2.setVisible(true);
-            panel.setPosition(102, 577);
-            label.setPosition(175, 590);
+            panel->setPosition(102, 577);
+            label->setPosition(175, 590);
             break;
         case 3:
             m_characterLockPanel3.setVisible(true);
-            panel.setPosition(452, 507);
-            label.setPosition(525, 520);
+            panel->setPosition(452, 507);
+            label->setPosition(525, 520);
             break;
         case 4:
             m_characterLockPanel4.setVisible(true);
-            panel.setPosition(452, 577);
-            label.setPosition(525, 590);
+            panel->setPosition(452, 577);
+            label->setPosition(525, 590);
             break;
         default:break;
     }

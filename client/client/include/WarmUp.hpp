@@ -52,6 +52,7 @@ class WarmUp : public BasicInterface
 
         int m_nbPlayer;
         int m_nbCharLocked;
+        std::string m_characterSelected;
 
 
 public:
@@ -73,7 +74,7 @@ public:
 
     void blockCharacter(std::string characterName, std::string playerName );
 
-    void adaptPosition(NPanel panel, NLabel label);
+    void adaptPosition(NPanel *panel, NLabel *label);
 
     std::wstring s2ws(std::string string);
 };
