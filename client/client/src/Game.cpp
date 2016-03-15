@@ -53,10 +53,13 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     firstConnect = true;
     m_isOnMonstrePanel = false;
     m_isOnAmbiancePanel = false;
+    isSpecial = false;
+    isHitting = false;
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
-    if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") || !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
+    if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") ||
+            !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
     {
         std::cout << "Probleme dans le chargement des textures" << std::endl;
     }
@@ -65,6 +68,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_bibouPanel2.create("bibouPanel2", 0, 490,
                          ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
+
+    //Animations
+
 
 
     //Table
@@ -198,6 +204,23 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_crapaudPanel.setVisible(false);
     getContentPane()->addComponent(&m_crapaudPanel);
 
+    //Animations
+    m_feu.create("feu", 350,110,  ptr_managerGroup->ptr_textureManager->getTexture("feu"));
+    getContentPane()->addComponent(&m_feu);
+
+    m_feu2.create("feu", 635,110,  ptr_managerGroup->ptr_textureManager->getTexture("feu"));
+    getContentPane()->addComponent(&m_feu2);
+
+    m_flammes.create("flammes", 350, 65,
+                     ptr_managerGroup->ptr_textureManager->getTexture("flammes"),
+                     true, 0.1, 121, 70, 5);
+    getContentPane()->addComponent(&m_flammes);
+
+    m_flammes2.create("flammes", 635, 65,
+                      ptr_managerGroup->ptr_textureManager->getTexture("flammes"),
+                      true, 0.12, 121, 70, 5);
+    getContentPane()->addComponent(&m_flammes2);
+
 
 
     m_panelCharateristics.create("charateristicsPanel", 704, 512,
@@ -267,21 +290,6 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     ptr_buttonSummon->setSmooth(true);
     m_buttonSummon.create("buttonSummon", 490, 550, ptr_buttonSummon, ptr_buttonSummon);
     getContentPane()->addComponent(&m_buttonSummon);
-
-    ptr_buttonEldoraHealing = ptr_managerGroup->ptr_textureManager->getTexture("yetiButton_1");
-    ptr_buttonEldoraHealing->setSmooth(true);
-    m_buttonEldoraHealing.create("eldoraHealing", 580, 540, ptr_buttonEldoraHealing, ptr_buttonEldoraHealing);
-    m_buttonEldoraHealing.setVisible(false);
-    getContentPane()->addComponent(&m_buttonEldoraHealing);
-
-
-    ptr_buttonHittingRemington = ptr_managerGroup->ptr_textureManager->getTexture("yetiButton_1");
-    ptr_buttonHittingRemington->setSmooth(true);
-    m_buttonHittingRemington.create("hittingRemington", 580, 540, ptr_buttonHittingRemington, ptr_buttonHittingRemington);
-    m_buttonHittingRemington.setVisible(false);
-    getContentPane()->addComponent(&m_buttonHittingRemington);
-
-
 }
 
 /*!
@@ -335,19 +343,102 @@ void Game::update(sf::RenderWindow * window,
 
     //Evenement sur les panneaux des joueurs
     if(m_inputHandler.getComponentId() == "remingtonInGame") {
-        displayFeature("remington");
 
+        if (isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "eldora")
+        {
+            summonEldoraHealing("remington", 1500);
+            isSpecial = false;
+        }
+        else if(isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+
+            monsterSummons("remington", selectedMonster);
+            isSpecial = false;
+        }
+        else if(isHitting 
+                && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
+                && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+
+           monsterHits("remington" , selectedMonster);
+           isHitting = false;
+
+        }else{
+            
+            displayFeature("remington");
+        }
+        
     }
     if(m_inputHandler.getComponentId() == "eldoraInGame"){
-        displayFeature("eldora");
+        
+        if (isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "eldora")
+        {
+            summonEldoraHealing("eldora", 5000);
+            isSpecial = false;
+        }
+        else if(isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+
+            monsterSummons("eldora", selectedMonster);
+            isSpecial = false;
+        }
+        else if(isHitting 
+            && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+
+           monsterHits("eldora" , selectedMonster);
+           isHitting = false;
+
+        }else{
+            
+            displayFeature("eldora");
+        }
 
     }
     if(m_inputHandler.getComponentId() == "numero8InGame"){
-        displayFeature("numero8");
+        
+        if (isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "eldora")
+        {
+            summonEldoraHealing("numero8", 3000);
+            isSpecial = false;
+        }
+        else if(isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
 
+            monsterSummons("numero8", selectedMonster);
+            isSpecial = false;
+        }
+        else if(isHitting 
+            && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+
+           monsterHits("numero8" , selectedMonster);
+           isHitting = false;
+
+        }else{
+            
+            displayFeature("numero8");
+        }
     }
     if(m_inputHandler.getComponentId() == "tristanInGame"){
-        displayFeature("tristan");
+        
+        if (isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "eldora")
+        {
+            summonEldoraHealing("tristan", 3000);
+            isSpecial = false;
+        }
+        else if(isSpecial && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"){
+
+            monsterSummons("tristan", selectedMonster);
+            isSpecial = false;
+        }
+        else if(isHitting 
+            && m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj"
+            && m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->getSelectMonster() == true){
+
+           monsterHits("tristan" , selectedMonster);
+           isHitting = false;
+
+        }else{
+            
+            displayFeature("tristan");
+        }
     }
 
     if(m_inputHandler.getComponentId() == "monsterButton"){
@@ -374,30 +465,50 @@ void Game::update(sf::RenderWindow * window,
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "castleButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(true);
+            m_feu2.setVisible(true);
+            m_flammes.setVisible(true);
+            m_flammes2.setVisible(true);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "forestButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "landButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
         if(m_inputHandler.getComponentId() == "roomButton"){
             setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
             m_panelAmbianceMJ.setVisible(false);
             m_monsterButton.setVisible(true);
+            m_feu.setVisible(false);
+            m_feu2.setVisible(false);
+            m_flammes.setVisible(false);
+            m_flammes2.setVisible(false);
             m_isOnAmbiancePanel = false;
         }
     /*}*/
@@ -413,6 +524,8 @@ void Game::update(sf::RenderWindow * window,
             m_panelMonstresMJ.setVisible(false);
 
             selectedMonster = "crapaud"; //a Monster is selected
+            m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->selectMonster();
+
         }
         if(m_inputHandler.getComponentId() == "dragonButton"){
             //TODO : afficher une image de dragon
@@ -425,6 +538,7 @@ void Game::update(sf::RenderWindow * window,
             m_panelMonstresMJ.setVisible(false);
 
             selectedMonster = "dragon"; //a Monster is selected
+            m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->selectMonster();
 
         }
         if(m_inputHandler.getComponentId() == "yetiButton"){
@@ -438,40 +552,22 @@ void Game::update(sf::RenderWindow * window,
             m_panelMonstresMJ.setVisible(false);
 
             selectedMonster = "yeti"; //a Monster is selected
-      
+            m_ptr_managerGroup->ptr_gameManager->getMonsterById(selectedMonster)->selectMonster();
+
         }
     }
     
-    //For each character, we can hit with normal or special attack
-    if (m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "mdj")
-    {
-         if (m_inputHandler.getComponentId() == "buttonHit" || m_inputHandler.getComponentId() == "buttonSummon")
-            {
-                m_buttonHittingRemington.setVisible(true);
-            }
+    //we can hit with normal or special attack
+    if (m_inputHandler.getComponentId() == "buttonHit"){
+
+        isSpecial = false;
+        isHitting = true;
+
+    }else if(m_inputHandler.getComponentId() == "buttonSummon"){
+
+        isHitting = false;
+        isSpecial = true; 
     }
-    if(m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId() == "eldora"){
-
-        if (m_inputHandler.getComponentId() == "buttonSummon")
-        {
-             m_buttonEldoraHealing.setVisible(true);
-        }
-        //ifCharacterHits("buttonHit", selectedMonster);
-    }
-
-
-
-    ifSummonEldoraHealing("eldoraHealing", "remington", 1500); //TODO CHANGE
-    /*ifSummonEldoraHealing("eldoraHealing", "eldora", ???);
-    ifSummonEldoraHealing("tristanHealing", "tristan", ???);
-    ifSummonEldoraHealing("numero8Healing", "numero8", ???);*/
-    
-    ifMonsterHits("hittingRemington", "remington", selectedMonster);
-    //ifMonsterSummons("summoningRemington", "remington", selectedMonster);
-   /* ifMonsterHits("m_buttonHittingEldora", "eldora", selectedMonster);
-    ifMonsterHits("m_buttonHittingNumero8", "numero8", selectedMonster);
-    ifMonsterHits("m_buttonHittingTristan", "tristan", selectedMonster);
-*/
 
 
     sf::Event ev = *e;
@@ -497,7 +593,6 @@ void Game::update(sf::RenderWindow * window,
     //if (e->type == sf::TextE)
     // Drawing all content
     basicDraw(window);
-
 }
 
 
@@ -553,92 +648,65 @@ void Game::addTextToChat(std::string message){
 }
 
 
-void Game::ifSummonEldoraHealing(std::string id, std::string character, int maxPV){
+void Game::summonEldoraHealing(std::string character, int maxPV){
 
-    if(m_inputHandler.getComponentId() == id) {
+    m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
+        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
+        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() + 500,
+        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
 
-        std::cout << "CLIC QQ" << std::endl;
-        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
-            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
-            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() + 500,
-            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
-
-        m_buttonEldoraHealing.setVisible(false);
-
-        if (m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() > maxPV)
-        {
+    if (m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() > maxPV)
+    {
         std::cout << "MAX PV" << std::endl;
         m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
         m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
         1500,
         m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
-        }
-        displayFeature(character);
     }
+    displayFeature(character);
+    isSpecial = false;
 }
 
-void Game::ifCharacterHits(std::string id, std::string monster){
+void Game::characterHits(std::string monster){
 
-    if (m_inputHandler.getComponentId() == id)
-    {
-        m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->setCaracteristics(
-                    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
-                    m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->hitDamage(
-                                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamageInt(), 
-                                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getHealthInt()),
-                    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getArmorInt());
-    }
+    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->setCaracteristics(
+                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
+                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->hitDamage(
+                            m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamageInt(), 
+                            m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getHealthInt()),
+                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getArmorInt());
 }
 
-void Game::ifMonsterHits(std::string id, std::string character, std::string monster){
+void Game::monsterHits(std::string character, std::string monster){
 
-    if (m_inputHandler.getComponentId() == id)
-    {
-        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->hitDamage(
-                                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
-                                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt()),
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
+    m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->hitDamage(
+                            m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
+                            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt()),
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
 
-        if (m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() <= 0)
-        {
-            m_buttonSummon.setVisible(false);
-            m_buttonHit.setVisible(false);
-        }
-        displayFeature(character);
-    }
+    displayFeature(character);
 }
 
-void Game::ifCharacterSummons(std::string id, std::string monster){
+void Game::characterSummons(std::string monster){
 
-    if (m_inputHandler.getComponentId() == id)
-    {
-        m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->setCaracteristics(
-                    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
-                    m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->summonDamage(
-                                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamageInt(), 
-                                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getHealthInt()),
-                    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getArmorInt());
-    }
+    m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->setCaracteristics(
+                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
+                m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->summonDamage(
+                            m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getCaracteristic()->getAttackDamageInt(), 
+                            m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getHealthInt()),
+                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getArmorInt());
 }
 
-void Game::ifMonsterSummons(std::string id, std::string character, std::string monster){
+void Game::monsterSummons(std::string character, std::string monster){
 
-    if (m_inputHandler.getComponentId() == id)
-    {
-        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->summonDamage(
-                                m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
-                                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt()),
-                m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
+    m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getAttackDamageInt(),
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->summonDamage(
+                            m_ptr_managerGroup->ptr_gameManager->getMonsterById(monster)->getCaracteristic()->getAttackDamageInt(),
+                            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt()),
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getArmorInt());
 
-        if (m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->getCaracteristic()->getHealthInt() <= 0)
-        {
-            m_buttonSummon.setVisible(false);
-            m_buttonHit.setVisible(false);
-        }
-        displayFeature(character);
-    }
+    displayFeature(character);
 }

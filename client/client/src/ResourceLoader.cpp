@@ -57,6 +57,7 @@ void ResourceLoader::load() {
 	const std::string pathLogin = "../res/texture/menu/login/";
 	const std::string pathChar = "../res/characters/";
 	const std::string pathBackground = "../res/backgrounds/";
+	const std::string pathAnimation = "../res/animation/";
 
 	// Loading ...
 	a_tm.addTexture("topBarLogMenu", pathLogin + "topBarLogMenu.png");
@@ -145,7 +146,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("buttonHit", pathLogin + "buttonHit.png");
 	a_tm.addTexture("buttonSummon", pathLogin + "buttonSummon.png");
 
-
+	a_tm.addTexture("feu", pathLogin + "feu.png");
 	a_tm.addTexture("ambianceButton_1", pathLogin + "ambianceButton_1.png");
 	a_tm.addTexture("ambianceButton_2", pathLogin + "ambianceButton_2.png");
 	a_tm.addTexture("beachButton_1", pathLogin + "beachButton_1.png");
@@ -176,6 +177,9 @@ void ResourceLoader::load() {
 	a_tm.addTexture("Background_Room",pathBackground + "Background_Room.png");
 	a_tm.addTexture("Background_Room_2",pathBackground + "Background_Room_2.png");
 
+
+	//Animations
+	a_tm.addTexture("flammes", pathAnimation + "animationFlamme.png");
 
 	a_mm.setState(true);
 	a_tm.setState(true);
