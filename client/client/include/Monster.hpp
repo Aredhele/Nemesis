@@ -25,7 +25,7 @@ class Monster{
         //Methods
         void selectMonster();
         void deselectMonster();
-        bool getSelectMonster();
+        bool isMonsterSelected();
         std::wstring getName();
         std::string getId();
         void setName(std::wstring name);

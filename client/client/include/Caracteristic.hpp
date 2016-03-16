@@ -22,19 +22,11 @@ class Caracteristic{
 
 		//Methods 
 
-		void setCaracteristicsEldora(int atckDmg, int health, int armor);
-		void setCaracteristicsRemington(int atckDmg, int health, int armor);
-		void setCaracteristicsTristan(int atckDmg, int health, int armor);
-		void setCaracteristicsNumero8(int atckDmg, int health, int armor);
 		void setCaracteristics(int atckDmg, int health, int armor);
 
-		std::wstring getArmor();
-		std::wstring getHealth();
-		std::wstring getAttackDamage();
-
-		int getArmorInt();
-		int getHealthInt();
-		int getAttackDamageInt();
+		int getArmor();
+		int getHealth();
+		int getAttackDamage();
 
 };
 

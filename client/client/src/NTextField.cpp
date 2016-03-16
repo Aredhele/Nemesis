@@ -299,6 +299,6 @@ std::string const& NTextField::getString() {
 void NTextField::empty(){
 	m_charList = "";
 	m_text.setString(m_charList);
-	setCursorPosition(7, 695);
+	setCursorPosition(7, 680);
 	m_isActive = true;
 }

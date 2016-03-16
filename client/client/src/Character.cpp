@@ -4,11 +4,12 @@
 
 #include "Character.hpp"
 
-Character::Character(){
+Character::Character() {
 
 	ptr_caracteristic = new Caracteristic();
 	ptr_ability = new Ability();
     m_choosed = false;
+
 
 }
 

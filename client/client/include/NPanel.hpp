@@ -34,9 +34,9 @@ class NPanel : public VisualObject
 		virtual std::string eventMouseMoved(sf::Event * e);
 		virtual void eventTextEntered(sf::Event * e);
 		virtual void update(double frameTime);
-
 		void addComponent(VisualObject * component);
 		void removeLastComponent();
+
 };
 
 #endif // DEF_NPANEL_HPP

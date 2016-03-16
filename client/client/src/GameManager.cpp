@@ -85,7 +85,7 @@ void GameManager::initCharacters(){
     m_characterList[4]->setName(L"Maitre du jeu");
     m_characterList[4]->setId("mdj");
     m_characterList[4]->setDescription(L"Bienvenue voyageur ! \nJe suis le maître du jeu. \nVotre destin reposera entre mes mains...");
-    m_characterList[4]->setCaracteristics(0,0,0);
+    m_characterList[4]->setCaracteristics(9999999,9999999,9999999);
     m_characterList[4]->setAbility(40, "Toto", "toto");
 
     /*for (int i = 0; i < 5; i++){

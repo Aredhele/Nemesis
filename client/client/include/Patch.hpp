@@ -22,6 +22,13 @@ namespace cast
 		os << t;
 		return os.str();
 	}
+
+	template <typename T> std::wstring intToWstring(const T& t) {
+		std::wostringstream ws;
+		ws << t;
+		const std::wstring s(ws.str());
+		return s;
+	}
 }
 
 #endif // DEF_PATCH_HPP

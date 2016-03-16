@@ -155,6 +155,9 @@ void Lobby::receiveRequest(){
 
                 updateNewWarmUp(sRequest);
                 break;
+            default:
+                std::cout << "LOBBY : IDRequete non conforme -> " << idRequest << std::endl;
+                break;
         }
     }
 

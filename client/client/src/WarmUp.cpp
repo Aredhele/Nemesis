@@ -303,7 +303,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }*/
 
     //TODO : change condition to ==5
-    if (m_nbPlayer==2){
+    if (m_nbPlayer==5){
         noError();
         m_loading.setVisible(false);
         m_playButton.setVisible(true);
@@ -397,7 +397,7 @@ void WarmUp::receiveRequest(){
                 }
                 break;
             default:
-                std::cout << "IDRequete non conforme : (WarmUp : " << idRequest << ")" << std::endl;
+                std::cout << "WARM UP : IDRequete non conforme -> " << idRequest << std::endl;
                 break;
         }
     }

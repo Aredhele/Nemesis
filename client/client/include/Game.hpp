@@ -95,16 +95,33 @@ private:
     NPanel m_panelIconDefense;
     NPanel m_panelIconHealth;
 
+    NPanel m_numero8Mini;
+    NPanel m_eldoraMini;
+    NPanel m_tristanMini;
+    NPanel m_remingtonMini;
+    NPanel m_mdjMini;
+    NPanel m_playerIcon;
+
     NButton m_buttonHit;
     NButton m_buttonSummon;
 
-    bool m_isOnMonstrePanel;
-    bool m_isOnAmbiancePanel;
+    bool m_isOnMonstrePanel = false;
+    bool m_isOnAmbiancePanel= false;
 
+    Player * m_player;
     std::string selectedMonster;
 
     bool isSpecial;
     bool isHitting;
+    bool isEldora = false;
+    bool isRemington = false;
+    bool isNumero8 = false;
+    bool isTristan = false;
+    bool isMdj = false;
+    bool isOnCastle = true;
+    bool hasCrapaud = false;
+    bool hasDragon = false;
+    bool hasYeti = false;
 
     void displayFeature(std::string);
     void characterHits(std::string monster);
@@ -128,6 +145,10 @@ public:
 
     void receiveRequest();
     void addTextToChat(std::string message);
+
+    void initPlayerCharacter();
+    Character * getCharacter(std::string id);
+    Monster * getMonster(std::string id);
 };
 
 

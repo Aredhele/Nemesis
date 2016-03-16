@@ -8,6 +8,7 @@
 #include <string>
 #include "Caracteristic.hpp"
 #include "Ability.hpp"
+#include "NPanel.hpp"
 
 class Character{
 
@@ -18,6 +19,7 @@ class Character{
         std::string m_id;
         Caracteristic *ptr_caracteristic;
         Ability *ptr_ability;
+        NPanel m_iconCharacter;
 
     public:
         //Constructor

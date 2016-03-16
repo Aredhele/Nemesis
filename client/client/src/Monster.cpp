@@ -22,7 +22,7 @@ void Monster::deselectMonster(){
 	m_choosed = false;
 }
 
-bool Monster::getSelectMonster(){
+bool Monster::isMonsterSelected(){
 
 	return m_choosed;
 }

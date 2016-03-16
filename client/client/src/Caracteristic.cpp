@@ -12,64 +12,17 @@ Caracteristic::Caracteristic(){
 
 Caracteristic::~Caracteristic(){ }
 
-void Caracteristic::setCaracteristicsEldora(int atckDmg, int health, int armor){
-	m_attackDamage = atckDmg;
-	m_health = health;
-	m_armor = armor;
-}
 
-void Caracteristic::setCaracteristicsTristan(int atckDmg, int health, int armor){
-	m_attackDamage = atckDmg;
-	m_health = health;
-	m_armor = armor;
-}
-
-void Caracteristic::setCaracteristicsRemington(int atckDmg, int health, int armor){
-	m_attackDamage = atckDmg;
-	m_health = health;
-	m_armor = armor;
-}
-
-void Caracteristic::setCaracteristicsNumero8(int atckDmg, int health, int armor){
-	m_attackDamage = atckDmg;
-	m_health = health;
-	m_armor = armor;
-}
-
-std::wstring Caracteristic::getHealth(){
-
-	int var = m_health;
-	std::wostringstream ws;
-    ws << var;
-    const std::wstring s(ws.str());
-	return s;
-}
-
-std::wstring Caracteristic::getArmor(){
-	int var = m_armor;
-	std::wostringstream ws;
-    ws << var;
-    const std::wstring s(ws.str());
-    return s;
-}
-
-std::wstring Caracteristic::getAttackDamage(){
-	int var = m_attackDamage;
-	std::wostringstream ws;
-    ws << var;
-    const std::wstring s(ws.str());
-    return s;
-}
-
-int Caracteristic::getHealthInt(){
+int Caracteristic::getHealth(){
 	return m_health;
 }
 
-int Caracteristic::getArmorInt(){
+
+int Caracteristic::getArmor(){
 	return m_armor;
 }
 
-int Caracteristic::getAttackDamageInt(){
+int Caracteristic::getAttackDamage(){
 	return m_attackDamage;
 }
 
