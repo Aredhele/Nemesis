@@ -220,7 +220,35 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                           true, 0.1, 19, 19, 22);
     getContentPane()->addComponent(&m_mdjAnimation);
 
+    m_attackAnimation.create("attackAnimation", 500,350,
+                             ptr_managerGroup->ptr_textureManager->getTexture("attackAnimation"),
+                             false, 0.1, 192,192,6);
+    getContentPane()->addComponent(&m_attackAnimation);
+    m_attackAnimation.setVisible(false);
 
+    m_numero8Special.create("numero8Special", 500,350,
+                             ptr_managerGroup->ptr_textureManager->getTexture("numero8Special"),
+                             false, 0.07, 192,192,6);
+    getContentPane()->addComponent(&m_numero8Special);
+    m_numero8Special.setVisible(false);
+
+    m_eldoraSpecial.create("eldoraSpecial", 500,350,
+                            ptr_managerGroup->ptr_textureManager->getTexture("eldoraSpecial"),
+                            false, 0.1, 192,192,6);
+    getContentPane()->addComponent(&m_eldoraSpecial);
+    m_eldoraSpecial.setVisible(false);
+
+    m_remingtonSpecial.create("remingtonSpecial", 500,350,
+                           ptr_managerGroup->ptr_textureManager->getTexture("remingtonSpecial"),
+                           false, 0.07, 192,192,6);
+    getContentPane()->addComponent(&m_remingtonSpecial);
+    m_remingtonSpecial.setVisible(false);
+
+    m_tristanSpecial.create("tristanSpecial", 500,350,
+                              ptr_managerGroup->ptr_textureManager->getTexture("tristanSpecial"),
+                              false, 0.1, 192,192,6);
+    getContentPane()->addComponent(&m_tristanSpecial);
+    m_tristanSpecial.setVisible(false);
 
     //Characteristiques
     m_panelCharateristics.create("charateristicsPanel", 675, 495,
@@ -359,6 +387,8 @@ void Game::update(sf::RenderWindow * window,
     if(m_ptr_managerGroup->ptr_networkManager->getHasPacket()){
         receiveRequest();
     }
+
+    checkStateAnimation();
 
     // Basic Interface updating
     basicInput(e, frameTime);
@@ -605,12 +635,13 @@ void Game::update(sf::RenderWindow * window,
 
     //we can hit with normal or special attack
     if (m_inputHandler.getComponentId() == "buttonHit"){
-
+        m_attackAnimation.setVisible(true);
+        m_attackAnimation.play();
         isSpecial = false;
         isHitting = true;
 
     }else if(m_inputHandler.getComponentId() == "buttonSummon"){
-
+        specialAnimation();
         isHitting = false;
         isSpecial = true;
     }
@@ -824,7 +855,48 @@ void Game::initPlayerCharacter() {
     }
     isRemington=true;
 }
+void Game::specialAnimation(){
+    if(isEldora){
+        m_eldoraSpecial.setVisible(true);
+        m_eldoraSpecial.play();
+    }
+    if(isTristan){
+        m_tristanSpecial.setVisible(true);
+        m_tristanSpecial.play();
+    }
+    if(isRemington){
+        m_remingtonSpecial.setVisible(true);
+        m_remingtonSpecial.play();
+    }
+    if(isNumero8){
+        m_numero8Special.setVisible(true);
+        m_numero8Special.play();
+    }
+    if(isMdj){
+        m_attackAnimation.setVisible(true);
+        m_attackAnimation.play();
+    }
 
+}
+
+
+void Game::checkStateAnimation(){
+    if(m_attackAnimation.isStopped()){
+        m_attackAnimation.setVisible(false);
+    }
+    if(m_eldoraSpecial.isStopped()){
+        m_eldoraSpecial.setVisible(false);
+    }
+    if(m_remingtonSpecial.isStopped()){
+        m_remingtonSpecial.setVisible(false);
+    }
+    if(m_tristanSpecial.isStopped()){
+        m_tristanSpecial.setVisible(false);
+    }
+    if(m_numero8Special.isStopped()){
+        m_numero8Special.setVisible(false);
+    }
+}
 Character * Game::getCharacter(std::string id){
     return m_ptr_managerGroup->ptr_gameManager->getCharacterById(id);
 }

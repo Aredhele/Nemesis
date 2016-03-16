@@ -49,6 +49,8 @@ class AnimatableObject : public VisualObject
 		virtual std::string eventMouseMoved(sf::Event * e);
 		virtual void eventTextEntered(sf::Event * e);
 		virtual void update(double frameTime);
+		void play();
+		bool isStopped();
 
 		void start();
 		void pause();

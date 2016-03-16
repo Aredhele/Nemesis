@@ -187,6 +187,12 @@ void ResourceLoader::load() {
 
 
 	//Animations
+
+	a_tm.addTexture("attackAnimation", pathAnimation + "attack_animate.png");
+	a_tm.addTexture("numero8Special", pathAnimation + "numero8Special.png");
+	a_tm.addTexture("remingtonSpecial", pathAnimation + "remingtonSpecial.png");
+	a_tm.addTexture("eldoraSpecial", pathAnimation + "eldoraSpecial.png");
+	a_tm.addTexture("tristanSpecial", pathAnimation + "tristanSpecial.png");
 	a_tm.addTexture("flammes", pathAnimation + "animationFlamme.png");
 	a_tm.addTexture("mdjAnimation", pathAnimation + "mdj.png");
 

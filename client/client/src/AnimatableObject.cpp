@@ -43,6 +43,7 @@ int w, int step) {
 	m_frameHeight = h;
 	m_frameWidth = w;
 	m_lenght = step;
+	m_currentStep = 0;
 
 	m_state = AnimationState::PLAY;
 
@@ -107,13 +108,26 @@ void AnimatableObject::update(double frameTime) {
 			if(m_currentStep + 1 >= m_lenght) {
 				if(m_repeat) m_currentStep = 0;
 				else m_state = AnimationState::STOP;
-			} else {
-				m_currentStep++;
 			}
+			else
+				m_currentStep++;
 			
 			m_mainSprite.setTextureRect(sf::IntRect(
 			m_currentStep * m_frameWidth, 0, 
 			m_frameWidth, m_frameHeight));
 		}
 	}
+}
+
+void AnimatableObject::play(){
+	m_state = AnimationState::PLAY;
+	m_currentStep = 0;
+	m_mainSprite.setTextureRect(sf::IntRect(
+			0, 0,
+			m_frameWidth, m_frameHeight));
+
+}
+
+bool AnimatableObject::isStopped(){
+	return m_state == AnimationState::STOP;
 }

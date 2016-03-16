@@ -22,7 +22,7 @@ class Caracteristic{
 		~Caracteristic();
 
 		//Methods 
-		void setMaxHealth(int maxHealth)
+		void setMaxHealth(int maxHealth);
 		void setCaracteristics(int atckDmg, int health, int armor);
 
 		int getArmor();

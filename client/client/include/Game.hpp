@@ -77,6 +77,12 @@ private:
     AnimatableObject m_flammes;
     AnimatableObject m_flammes2;
     AnimatableObject m_mdjAnimation;
+    AnimatableObject m_attackAnimation;
+    AnimatableObject m_numero8Special;
+    AnimatableObject m_eldoraSpecial;
+    AnimatableObject m_remingtonSpecial;
+    AnimatableObject m_tristanSpecial;
+
 
     sf::Font m_fontLabel;
     sf::Font m_fontTextbox;
@@ -129,6 +135,8 @@ private:
     void characterSummons(std::string monster);
     void monsterSummons(std::string character, std::string monster);
     void summonEldoraHealing(std::string character);
+    void checkStateAnimation();
+    void specialAnimation();
 
 
 public:
