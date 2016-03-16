@@ -59,6 +59,7 @@ protected:
 	void errorWarmUpFull();
 	void errorConnection();
 	void errorPseudo();
+	void waitingPlayers();
 	void errorGoInGame();
 	void errorCharacterSelection();
 	void noError();

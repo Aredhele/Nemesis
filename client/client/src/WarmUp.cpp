@@ -30,7 +30,8 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
         m_eldoraLock(),
         m_tristanLock(),
         m_remingtonLock(),
-        m_mdjLock()
+        m_mdjLock(),
+        m_loading()
 {
 
     m_nbPlayer = 0;
@@ -145,6 +146,12 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_remingtonLockLabel.setVisible(false);
     m_mdjLockLabel.setVisible(false);
 
+    m_loading.create("loading", 964,708,
+    				 ptr_managerGroup->ptr_textureManager->getTexture("loading"),
+    			 true, 0.1, 49,  49, 8);
+
+    m_loading.setVisible(false);
+    getContentPane()->addComponent(&m_loading);
 
 
 
@@ -297,6 +304,8 @@ void WarmUp::update(sf::RenderWindow * window,
 
     //TODO : change condition to ==5
     if (m_nbPlayer==2){
+        noError();
+        m_loading.setVisible(false);
         m_playButton.setVisible(true);
     }
 
@@ -361,6 +370,8 @@ void WarmUp::receiveRequest(){
                 // Personnage sélectionné
                 packet.at(i) >> sRequest;
                 if (sRequest == "Ok") {
+                    waitingPlayers();
+                    m_loading.setVisible(true);
                     m_validateCharacterButton.setVisible(false);
                     blockCharacters();
                     m_charSelected = true;

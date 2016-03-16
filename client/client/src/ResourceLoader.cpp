@@ -148,7 +148,7 @@ void ResourceLoader::load() {
 	a_tm.addTexture("chatPanel", pathLogin + "chat.png");
 	a_tm.addTexture("chatTextBox", pathLogin + "chatTextBox.png");
 	a_tm.addTexture("textBoxCursorChat", pathLogin + "curseurChatTextBox.png");
-	a_tm.addTexture("loading", pathLogin + "loading.png");
+	a_tm.addTexture("loading", pathAnimation + "loading.png");
 
 	a_tm.addTexture("buttonHit", pathLogin + "buttonHit.png");
 	a_tm.addTexture("buttonSummon", pathLogin + "buttonSummon.png");

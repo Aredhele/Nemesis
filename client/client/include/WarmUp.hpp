@@ -46,6 +46,8 @@ class WarmUp : public BasicInterface
         NPanel m_remingtonLock;
         NPanel m_mdjLock;
 
+        AnimatableObject m_loading;
+
 
         sf::Font m_fontLabel;
         sf::Font m_fontLabel2;

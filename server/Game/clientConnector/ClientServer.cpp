@@ -279,7 +279,7 @@ bool ClientServer::joinWarmUp(sf::TcpSocket * socket, std::string param,
         return false;
     }
 
-    if(listeWarmUp[cast::toInt(idSalon_C)]->getStateWarmUp()== WarmUp::Indisponible) return false;
+    //if(listeWarmUp[cast::toInt(idSalon_C)]->getStateWarmUp()== WarmUp::Indisponible) return false;
 
     std::cout <<"info " << "ARG_1 = " + std::string(idSalon_C) +
                                      ", ARG_2 = " + std::string(nomJoueur_C) << std::endl;

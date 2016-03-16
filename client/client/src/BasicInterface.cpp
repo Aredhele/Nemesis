@@ -187,6 +187,13 @@ void BasicInterface::errorWarmUpFull(){
 	m_errorPanel.setVisible(true);
 }
 
+
+void BasicInterface::waitingPlayers(){
+	m_connectionErrorLabel.setText(L"      En attente des autres joueurs...");
+	m_errorPanel.setVisible(true);
+}
+
+
 void BasicInterface::noError(){
 	m_errorPanel.setVisible(false);
 	m_errorPanel.setVisible(false);
