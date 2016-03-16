@@ -228,25 +228,25 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     m_numero8Special.create("numero8Special", 500,350,
                              ptr_managerGroup->ptr_textureManager->getTexture("numero8Special"),
-                             false, 0.07, 192,192,6);
+                             false, 0.07, 192,192,7);
     getContentPane()->addComponent(&m_numero8Special);
     m_numero8Special.setVisible(false);
 
     m_eldoraSpecial.create("eldoraSpecial", 500,350,
                             ptr_managerGroup->ptr_textureManager->getTexture("eldoraSpecial"),
-                            false, 0.1, 192,192,6);
+                            false, 0.1, 192,192,13);
     getContentPane()->addComponent(&m_eldoraSpecial);
     m_eldoraSpecial.setVisible(false);
 
     m_remingtonSpecial.create("remingtonSpecial", 500,350,
                            ptr_managerGroup->ptr_textureManager->getTexture("remingtonSpecial"),
-                           false, 0.07, 192,192,6);
+                           false, 0.07, 192,192,8);
     getContentPane()->addComponent(&m_remingtonSpecial);
     m_remingtonSpecial.setVisible(false);
 
     m_tristanSpecial.create("tristanSpecial", 500,350,
                               ptr_managerGroup->ptr_textureManager->getTexture("tristanSpecial"),
-                              false, 0.1, 192,192,6);
+                              false, 0.1, 192,192,7);
     getContentPane()->addComponent(&m_tristanSpecial);
     m_tristanSpecial.setVisible(false);
 
@@ -853,8 +853,10 @@ void Game::initPlayerCharacter() {
         m_playerIcon.setSprite(
                 m_ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     }
-    isRemington=true;
+    isNumero8=true;
 }
+
+//TODO : Changer pour adapter aux requetes du serveur
 void Game::specialAnimation(){
     if(isEldora){
         m_eldoraSpecial.setVisible(true);
