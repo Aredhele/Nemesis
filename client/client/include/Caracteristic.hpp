@@ -13,6 +13,7 @@ class Caracteristic{
 		int m_attackDamage;
 		int m_health;
 		int m_armor;
+		int m_maxHealth;
 
 
 	public:
@@ -21,7 +22,7 @@ class Caracteristic{
 		~Caracteristic();
 
 		//Methods 
-
+		void setMaxHealth(int maxHealth)
 		void setCaracteristics(int atckDmg, int health, int armor);
 
 		int getArmor();

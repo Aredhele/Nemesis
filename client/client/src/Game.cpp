@@ -53,14 +53,14 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         m_panelIconHealth(),
         m_buttonHit(),
         m_buttonSummon()
-
-
 {
+    noError();
     firstConnect = true;
     m_isOnMonstrePanel = false;
     m_isOnAmbiancePanel = false;
     isSpecial = false;
     isHitting = false;
+
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
 
@@ -74,7 +74,6 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_bibouPanel2.create("bibouPanel2", 0, 490,
                          ptr_managerGroup->ptr_textureManager->getTexture("bibouPanel2"));
     getContentPane()->addComponent(&m_bibouPanel2);
-
 
     //Table
     ptr_tableInGame = ptr_managerGroup->ptr_textureManager->getTexture("tableInGame");
@@ -369,7 +368,7 @@ void Game::update(sf::RenderWindow * window,
 
         if (isSpecial && isEldora)
         {
-            summonEldoraHealing("remington", 1500);
+            summonEldoraHealing("remington");
             isSpecial = false;
         }
         else if(isSpecial && isMdj){
@@ -394,7 +393,7 @@ void Game::update(sf::RenderWindow * window,
 
         if (isSpecial && isEldora)
         {
-            summonEldoraHealing("eldora", 5000);
+            summonEldoraHealing("eldora");
             isSpecial = false;
         }
         else if(isSpecial && isMdj){
@@ -419,7 +418,7 @@ void Game::update(sf::RenderWindow * window,
 
         if (isSpecial && isEldora)
         {
-            summonEldoraHealing("numero8", 3000);
+            summonEldoraHealing("numero8");
             isSpecial = false;
         }
         else if(isSpecial && isMdj){
@@ -443,7 +442,7 @@ void Game::update(sf::RenderWindow * window,
 
         if (isSpecial && isEldora)
         {
-            summonEldoraHealing("tristan", 3000);
+            summonEldoraHealing("tristan");
             isSpecial = false;
         }
         else if(isSpecial && isMdj){
@@ -721,7 +720,7 @@ void Game::addTextToChat(std::string message){
 }
 
 
-void Game::summonEldoraHealing(std::string character, int maxPV){
+void Game::summonEldoraHealing(std::string character){
 
     int attackDamage = getCharacter(character)->getCaracteristic()->getAttackDamage();
     int armor = getCharacter(character)->getCaracteristic()->getArmor();
@@ -731,19 +730,6 @@ void Game::summonEldoraHealing(std::string character, int maxPV){
             attackDamage,
             health + 200,
             armor);
-
-    health = getCharacter(character)->getCaracteristic()->getHealth();
-    attackDamage = getCharacter(character)->getCaracteristic()->getAttackDamage();
-    armor = getCharacter(character)->getCaracteristic()->getArmor();
-
-    if (health > maxPV)
-    {
-        std::cout << "MAX PV" << std::endl;
-        m_ptr_managerGroup->ptr_gameManager->getCharacterById(character)->setCaracteristics(
-                attackDamage,
-                1500,
-                armor);
-    }
 
     displayFeature(character);
 
@@ -836,8 +822,7 @@ void Game::initPlayerCharacter() {
         m_playerIcon.setSprite(
                 m_ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     }
-
-    isMdj=true;
+    isRemington=true;
 }
 
 Character * Game::getCharacter(std::string id){

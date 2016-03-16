@@ -19,7 +19,6 @@ class Character{
         std::string m_id;
         Caracteristic *ptr_caracteristic;
         Ability *ptr_ability;
-        NPanel m_iconCharacter;
 
     public:
         //Constructor
@@ -40,7 +39,7 @@ class Character{
         void setId(std::string id);
 
         //std::string getId();
-
+        void setMaxHealth(int maxHealth);
         void setCaracteristics(int atckDmg, int health, int armor);
         void setAbility(int id, std::string name,std::string type);
         Caracteristic * getCaracteristic();

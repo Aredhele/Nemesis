@@ -128,7 +128,7 @@ private:
     void monsterHits(std::string character, std::string monster);
     void characterSummons(std::string monster);
     void monsterSummons(std::string character, std::string monster);
-    void summonEldoraHealing(std::string character, int maxPv);
+    void summonEldoraHealing(std::string character);
 
 
 public:
