@@ -116,6 +116,7 @@ private:
 
     Player * m_player;
     std::string selectedMonster;
+    std::string selectedChar;
 
     bool isSpecial;
     bool isHitting;
@@ -130,15 +131,16 @@ private:
     bool hasYeti = false;
 
     void displayFeature(std::string);
-    void characterHits(std::string monster);
-    void monsterHits(std::string character, std::string monster);
-    void characterSummons(std::string monster);
-    void monsterSummons(std::string character, std::string monster);
-    void summonEldoraHealing(std::string character);
+    void characterAttack(std::string idMonster);
+    void monsterAttack(std::string idCharacter, std::string idMonster);
+    void characterSpecialAttack(std::string idMonster);
+    void monsterSpecialAttack(std::string idCharacter, std::string idMonster);
+    void eldoraHealing(std::string idCharacter);
     void checkStateAnimation();
-    void specialAnimation();
-
-
+    void specialAnimation(std::string id);
+    void attackAnimation(std::string id);
+    void changeAmbiance(std::string ambiance);
+    void displayMonster(int i, std::string monster);
 public:
     // Constructor
     Game(bool debug, ManagerGroup * ptr_managerGroup);
@@ -152,6 +154,7 @@ public:
                         sf::Event * e, double frameTime);
 
     void receiveRequest();
+    void request(int idRequest, std::string sRequest);
     void addTextToChat(std::string message);
 
     void initPlayerCharacter();

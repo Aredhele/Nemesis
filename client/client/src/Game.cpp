@@ -60,6 +60,8 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_isOnAmbiancePanel = false;
     isSpecial = false;
     isHitting = false;
+    selectedChar = "NULL";
+    selectedMonster = "NULL";
 
     //Background
     setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
@@ -189,19 +191,19 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_yetiMonsterButton.create("yetiPanel", 650,190,
                                ptr_managerGroup->ptr_textureManager->getTexture("Yeti"),
                                ptr_managerGroup->ptr_textureManager->getTexture("Yeti"));
-    m_yetiMonsterButton.setVisible(false);
+    m_yetiMonsterButton.setVisible(true);
     getContentPane()->addComponent(&m_yetiMonsterButton);
 
     m_dragonMonsterButton.create("dragonPanel", 350,210,
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"),
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
-    m_dragonMonsterButton.setVisible(false);
+    m_dragonMonsterButton.setVisible(true);
     getContentPane()->addComponent(&m_dragonMonsterButton);
 
     m_crapaudMonsterButton.create("crapaudPanel", 520,200,
                                   ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"),
                                   ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"));
-    m_crapaudMonsterButton.setVisible(false);
+    m_crapaudMonsterButton.setVisible(true);
     getContentPane()->addComponent(&m_crapaudMonsterButton);
 
     //Animations
@@ -401,105 +403,34 @@ void Game::update(sf::RenderWindow * window,
 
     //Evenement sur les panneaux des joueurs
     if(m_inputHandler.getComponentId() == "remingtonInGame") {
-
-        if (isSpecial && isEldora)
-        {
-            summonEldoraHealing("remington");
-            isSpecial = false;
-        }
-        else if(isSpecial && isMdj){
-
-            monsterSummons("remington", selectedMonster);
-            isSpecial = false;
-        }
-        else if(isHitting
-                && isMdj
-                && getMonster(selectedMonster)->isMonsterSelected()){
-
-            monsterHits("remington" , selectedMonster);
-            isHitting = false;
-
-        }else{
-
-            displayFeature("remington");
-        }
-
+        if(!isMdj) selectedMonster="NULL";
+        if(selectedChar!="remington") selectedMonster="NULL";
+        selectedChar = "remington";
+        displayFeature("remington");
     }
     if(m_inputHandler.getComponentId() == "eldoraInGame"){
-
-        if (isSpecial && isEldora)
-        {
-            summonEldoraHealing("eldora");
-            isSpecial = false;
-        }
-        else if(isSpecial && isMdj){
-
-            monsterSummons("eldora", selectedMonster);
-            isSpecial = false;
-        }
-        else if(isHitting
-                && isMdj
-                && getMonster(selectedMonster)->isMonsterSelected()){
-
-            monsterHits("eldora" , selectedMonster);
-            isHitting = false;
-
-        }else{
-
-            displayFeature("eldora");
-        }
-
+        if(!isMdj) selectedMonster="NULL";
+        if(selectedChar!="eldora") selectedMonster="NULL";
+        selectedChar = "eldora";
+        displayFeature("eldora");
     }
     if(m_inputHandler.getComponentId() == "numero8InGame"){
-
-        if (isSpecial && isEldora)
-        {
-            summonEldoraHealing("numero8");
-            isSpecial = false;
-        }
-        else if(isSpecial && isMdj){
-
-            monsterSummons("numero8", selectedMonster);
-            isSpecial = false;
-        }
-        else if(isHitting
-                && isMdj
-                && getMonster(selectedMonster)->isMonsterSelected()){
-
-            monsterHits("numero8" , selectedMonster);
-            isHitting = false;
-
-        }else{
-
-            displayFeature("numero8");
-        }
+        if(!isMdj) selectedMonster="NULL";
+        if(selectedChar!="numero8") selectedMonster="NULL";
+        selectedChar = "numero8";
+        displayFeature("numero8");
     }
     if(m_inputHandler.getComponentId() == "tristanInGame"){
+        if(!isMdj) selectedMonster="NULL";
+        if(selectedChar!="tristan") selectedMonster="NULL";
+        selectedChar = "tristan";
+        displayFeature("tristan");
 
-        if (isSpecial && isEldora)
-        {
-            summonEldoraHealing("tristan");
-            isSpecial = false;
-        }
-        else if(isSpecial && isMdj){
-
-            monsterSummons("tristan", selectedMonster);
-            isSpecial = false;
-        }
-        else if(isHitting
-                && isMdj
-                && getMonster(selectedMonster)->isMonsterSelected()){
-
-            monsterHits("tristan" , selectedMonster);
-            isHitting = false;
-
-        }else{
-
-            displayFeature("tristan");
-        }
     }
     if(m_inputHandler.getComponentId() == "mdjInGame"){
-
+        if(!isMdj) selectedMonster="NULL";
+        if(selectedChar!="mdj") selectedMonster="NULL";
+        selectedMonster="NULL";
         displayFeature("mdj");
     }
 
@@ -533,36 +464,51 @@ void Game::update(sf::RenderWindow * window,
     }
 
     if(m_inputHandler.getComponentId() == "beachButton"){
+        //request(8, "beach");
         setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
         isOnCastle = false;
+
+
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "castleButton"){
+        //request(8, "castle");
         setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
         isOnCastle = true;
+
+
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "forestButton"){
+        //request(8, "forest");
         setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
         isOnCastle = false;
+
+
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "landButton"){
+        //request(8, "landscape");
         setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
         isOnCastle = false;
+
+
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "roomButton"){
+        //request(8, "room");
         setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
         isOnCastle = false;
+
+
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
         m_isOnAmbiancePanel = false;
@@ -582,74 +528,130 @@ void Game::update(sf::RenderWindow * window,
     }
 
 
+    if(m_inputHandler.getComponentId()=="yetiPanel"){
+        if(!isMdj) selectedChar="NULL";
+        if(selectedMonster=="yeti") selectedChar="NULL";
+        selectedMonster = "yeti";
+        displayFeature(selectedMonster);
+    }
+    if(m_inputHandler.getComponentId()=="crapaudPanel"){
+        if(!isMdj) selectedChar="NULL";
+        if(selectedMonster=="crapaud") selectedChar="NULL";
+        selectedMonster = "crapaud";
+        displayFeature(selectedMonster);
+    }
+    if(m_inputHandler.getComponentId()=="dragonPanel"){
+        if(!isMdj) selectedChar="NULL";
+        if(selectedMonster=="dragon") selectedChar="NULL";
+        selectedMonster = "dragon";
+        displayFeature(selectedMonster);
+    }
+
+
     if(m_inputHandler.getComponentId() == "crapaudButton"){
         //TODO : Envoyer une requete et afficher seulement à la réponse
         if (hasCrapaud){
-            m_crapaudMonsterButton.setVisible(false);
-            hasCrapaud = false;
+            //request(9, "crapaud");
+            displayMonster(9, "crapaud");
+            /*m_crapaudMonsterButton.setVisible(false);
+            hasCrapaud = false;*/
         }else{
-            m_crapaudMonsterButton.setVisible(true);
-            hasCrapaud = true;
+            //request(10, "crapaud");
+            displayMonster(10, "crapaud");
+            /*if(selectedMonster=="crapaud")
+                selectedMonster="NULL";
 
+            m_crapaudMonsterButton.setVisible(true);
+            hasCrapaud = true;*/
         }
 
         m_isOnMonstrePanel = false;
         m_ambianceButton.setVisible(true);
         m_panelMonstresMJ.setVisible(false);
-
-        selectedMonster = "crapaud"; //a Monster is selected
-        getMonster(selectedMonster)->selectMonster();
 
     }
     if(m_inputHandler.getComponentId() == "dragonButton"){
         //TODO : Envoyer une requete et afficher seulement à la réponse
 
         if (hasDragon){
-            m_dragonMonsterButton.setVisible(false);
-            hasDragon = false;
+            //request(9, "dragon");
+            displayMonster(9, "dragon");
+            /*m_dragonMonsterButton.setVisible(false);
+            hasDragon = false;*/
         }else{
+            //request(10, "crapaud");
+            displayMonster(10, "dragon");
+            /*if(selectedMonster=="dragon")
+                selectedMonster="NULL";
             m_dragonMonsterButton.setVisible(true);
-            hasDragon = true;
+            hasDragon = true;*/
 
         }
         m_isOnMonstrePanel = false;
         m_ambianceButton.setVisible(true);
         m_panelMonstresMJ.setVisible(false);
 
-        selectedMonster = "dragon"; //a Monster is selected
-        getMonster(selectedMonster)->selectMonster();
+        //getMonster(selectedMonster)->selectMonster();
 
     }
     if(m_inputHandler.getComponentId() == "yetiButton"){
         //TODO : Envoyer une requete et afficher seulement à la réponse
 
         if (hasYeti){
-            m_yetiMonsterButton.setVisible(false);
-            hasYeti = false;
+            //request(9, "yeti");
+            displayMonster(9, "yeti");
+            /*m_yetiMonsterButton.setVisible(false);
+            hasYeti = false;*/
         }else{
+            //request(10, "crapaud");
+            displayMonster(10, "yeti");
+            /*if(selectedMonster=="yeti")
+                selectedMonster="NULL";
             m_yetiMonsterButton.setVisible(true);
-            hasYeti = true;
+            hasYeti = true;*/
         }
         m_isOnMonstrePanel = false;
         m_ambianceButton.setVisible(true);
         m_panelMonstresMJ.setVisible(false);
-
-        selectedMonster = "yeti"; //a Monster is selected
-        getMonster(selectedMonster)->selectMonster();
     }
 
 
     //we can hit with normal or special attack
     if (m_inputHandler.getComponentId() == "buttonHit"){
-        m_attackAnimation.setVisible(true);
-        m_attackAnimation.play();
-        isSpecial = false;
-        isHitting = true;
+        if(isMdj){
+            if(selectedChar!="NULL" && selectedMonster!="NULL"){
+                //Le monstre sélectionné attaque le personnage sélectionné
+                monsterAttack(selectedChar, selectedMonster);
+
+            }
+        }else{
+            if(selectedMonster!="NULL"){
+                characterAttack(selectedMonster);
+
+            }
+        }
 
     }else if(m_inputHandler.getComponentId() == "buttonSummon"){
-        specialAnimation();
-        isHitting = false;
-        isSpecial = true;
+
+        if(isMdj){
+            if(selectedChar!="NULL" && selectedMonster!="NULL"){
+                //Le monstre sélectionné attaque le personnage sélectionné
+                monsterSpecialAttack(selectedChar, selectedMonster);
+            }
+        }
+        else if (isEldora){
+            if(selectedChar!="NULL" && selectedMonster=="NULL"){
+                eldoraHealing(selectedChar);
+            }
+        }
+        else{
+            if(selectedMonster!="NULL"){
+                characterSpecialAttack(selectedMonster);
+            }
+        }
+        //specialAnimation(selectedChar);
+        //isHitting = false;
+        //isSpecial = true;
     }
 
 
@@ -678,11 +680,24 @@ void Game::update(sf::RenderWindow * window,
 
 
 void Game::displayFeature(std::string id){
-    //std::string i = m_ptr_managerGroup->ptr_gameManager->getCharacterById(id)->getId();
-    std::wstring name = getCharacter(id)->getName();
-    int attack = getCharacter(id)->getCaracteristic()->getAttackDamage();
-    int defense = getCharacter(id)->getCaracteristic()->getArmor();
-    int health = getCharacter(id)->getCaracteristic()->getHealth();
+    std::wstring name;
+    int attack;
+    int defense;
+    int health;
+
+    if(id!="yeti" && id!="crapaud" && id!="dragon"){
+        name = getCharacter(id)->getName();
+        attack = getCharacter(id)->getCaracteristic()->getAttackDamage();
+        defense = getCharacter(id)->getCaracteristic()->getArmor();
+        health = getCharacter(id)->getCaracteristic()->getHealth();
+    }
+    else{
+        name = getMonster(id)->getName();
+        attack = getMonster(id)->getCaracteristic()->getAttackDamage();
+        defense = getMonster(id)->getCaracteristic()->getArmor();
+        health = getMonster(id)->getCaracteristic()->getHealth();
+    }
+
 
     //Convert to wstring to display
     std::wstring sAttack = cast::intToWstring(attack);
@@ -714,6 +729,11 @@ void Game::displayFeature(std::string id){
         m_mdjMini.setVisible(true);
 }
 
+void Game::request(int idRequest, std::string sRequest){
+    if (!m_ptr_managerGroup->ptr_networkManager->request(idRequest, sRequest)) {
+        errorConnection();
+    }
+}
 
 void Game::receiveRequest() {
     std::vector <sf::Packet> packet = m_ptr_managerGroup->ptr_networkManager->getPacket();
@@ -730,13 +750,18 @@ void Game::receiveRequest() {
 
         switch (idRequest) {
             case 8:
-
+                //On change d'ambiance
+                //sRequest = nom de l'ambiance (ex : "chateau")
+                packet.at(i) >> sRequest;
+                changeAmbiance(sRequest);
                 break;
             case 9:
-
+                packet.at(i) >> sRequest;
+                displayMonster(9, sRequest);
                 break;
             case 10:
-
+                packet.at(i) >> sRequest;
+                displayMonster(10, sRequest);
                 break;
             case 11:
 
@@ -752,86 +777,160 @@ void Game::receiveRequest() {
 
 }
 
+void Game::displayMonster(int i, std::string monster) {
+    if(monster=="crapaud"){
+        if(i==9){   //cache un monstre
+            m_crapaudMonsterButton.setVisible(false);
+            hasCrapaud = false;
+        }
+        if(i==10){     //cache un monstre
+            if(selectedMonster=="crapaud")
+                selectedMonster="NULL";
+            hasCrapaud = true;
+            m_crapaudMonsterButton.setVisible(true);
+        }
+    }
+    if(monster=="yeti"){
+        if(i==9){   //cache un monstre
+            m_yetiMonsterButton.setVisible(false);
+            hasYeti = false;
+        }
+        if(i==10){     //cache un monstre
+            if(selectedMonster=="yeti")
+                selectedMonster="NULL";
+            m_yetiMonsterButton.setVisible(true);
+            hasYeti = true;
+        }
+    }
+    if(monster=="dragon"){
+        if(i==9){   //cache un monstre
+            m_dragonMonsterButton.setVisible(false);
+            hasDragon = false;
+        }
+        if(i==10){     //cache un monstre
+            if(selectedMonster=="dragon")
+                selectedMonster="NULL";
+            m_dragonMonsterButton.setVisible(true);
+            hasDragon = true;
+        }
+    }
+}
+void Game::changeAmbiance(std::string ambiance){
+    if (ambiance=="room"){
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
+        isOnCastle=false;
+    }
+    if(ambiance=="castle"){
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+        isOnCastle=true;
+    }
+    if(ambiance=="forest"){
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
+        isOnCastle=false;
+    }
+    if(ambiance=="landscape"){
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
+        isOnCastle=false;
+    }
+    if(ambiance=="beach"){
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
+        isOnCastle=false;
+    }
+
+
+}
+
+
 void Game::addTextToChat(std::string message){
     //TODO
 }
 
 
-void Game::summonEldoraHealing(std::string character){
+void Game::eldoraHealing(std::string idCharacter){
 
-    int attackDamage = getCharacter(character)->getCaracteristic()->getAttackDamage();
-    int armor = getCharacter(character)->getCaracteristic()->getArmor();
-    int health = getCharacter(character)->getCaracteristic()->getHealth();
+    int attackDamage = getCharacter(idCharacter)->getCaracteristic()->getAttackDamage();
+    int armor = getCharacter(idCharacter)->getCaracteristic()->getArmor();
+    int health = getCharacter(idCharacter)->getCaracteristic()->getHealth();
 
-    getCharacter(character)->setCaracteristics(
+    getCharacter(idCharacter)->setCaracteristics(
             attackDamage,
             health + 200,
             armor);
 
-    displayFeature(character);
-
-    isSpecial = false;
+    specialAnimation(idCharacter);
+    displayFeature(idCharacter);
 }
 
-void Game::characterHits(std::string monster){
-
-    int monsterHealth = getMonster(monster)->getCaracteristic()->getHealth();
-    int monsterArmor = getMonster(monster)->getCaracteristic()->getArmor();
-    int monsterAttack = getMonster(monster)->getCaracteristic()->getAttackDamage();
+//Le perso attaque un monstre
+void Game::characterAttack(std::string idMonster){
+    int monsterHealth = getMonster(idMonster)->getCaracteristic()->getHealth();
+    int monsterArmor = getMonster(idMonster)->getCaracteristic()->getArmor();
+    int monsterAttack = getMonster(idMonster)->getCaracteristic()->getAttackDamage();
     int attack = m_player->getCharacter()->getCaracteristic()->getAttackDamage();
 
-    getMonster(monster)->setCaracteristics(
+    getMonster(idMonster)->setCaracteristics(
             monsterAttack,
-            m_player->getCharacter()->hitDamage(attack, monsterHealth),
+            getMonster(idMonster)->hitDamage(attack, monsterHealth),
             monsterArmor);
+
+    attackAnimation(selectedMonster);
+    displayFeature(idMonster);
+
 }
 
-void Game::monsterHits(std::string character, std::string monster){
+//Le monstre attaque un perso
+void Game::monsterAttack(std::string idCharacter, std::string idMonster){
 
-    int attackDamage = getCharacter(character)->getCaracteristic()->getAttackDamage();
-    int armor = getCharacter(character)->getCaracteristic()->getArmor();
-    int health = getCharacter(character)->getCaracteristic()->getHealth();
-    int monsterAttack = getMonster(monster)->getCaracteristic()->getAttackDamage();
+    int attackDamage = getCharacter(idCharacter)->getCaracteristic()->getAttackDamage();
+    int armor = getCharacter(idCharacter)->getCaracteristic()->getArmor();
+    int health = getCharacter(idCharacter)->getCaracteristic()->getHealth();
+    int monsterAttack = getMonster(idMonster)->getCaracteristic()->getAttackDamage();
 
 
-    getCharacter(character)->setCaracteristics(
+    getCharacter(idCharacter)->setCaracteristics(
             attackDamage,
-            getCharacter(character)->hitDamage(monsterAttack, health),
+            getCharacter(idCharacter)->hitDamage(monsterAttack, health),
             armor);
-
-    displayFeature(character);
+    attackAnimation(selectedChar);
+    displayFeature(idCharacter);
 }
 
-void Game::characterSummons(std::string monster){
+void Game::characterSpecialAttack(std::string idMonster){
 
-    int monsterHealth = getMonster(monster)->getCaracteristic()->getHealth();
-    int monsterArmor = getMonster(monster)->getCaracteristic()->getArmor();
-    int monsterAttack = getMonster(monster)->getCaracteristic()->getAttackDamage();
+    int monsterHealth = getMonster(idMonster)->getCaracteristic()->getHealth();
+    int monsterArmor = getMonster(idMonster)->getCaracteristic()->getArmor();
+    int monsterAttack = getMonster(idMonster)->getCaracteristic()->getAttackDamage();
     int attack = m_player->getCharacter()->getCaracteristic()->getAttackDamage();
 
-    getMonster(monster)->setCaracteristics(
+    getMonster(idMonster)->setCaracteristics(
             monsterAttack,
             m_player->getCharacter()->summonDamage(attack, monsterHealth),
             monsterArmor);
 
+    specialAnimation(idMonster);
+    displayFeature(idMonster);
 }
 
-void Game::monsterSummons(std::string character, std::string monster){
+void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
 
-    int attackDamage = getCharacter(character)->getCaracteristic()->getAttackDamage();
-    int armor = getCharacter(character)->getCaracteristic()->getArmor();
-    int health = getCharacter(character)->getCaracteristic()->getHealth();
-    int monsterAttack = getMonster(monster)->getCaracteristic()->getAttackDamage();
+    int attackDamage = getCharacter(idCharacter)->getCaracteristic()->getAttackDamage();
+    int armor = getCharacter(idCharacter)->getCaracteristic()->getArmor();
+    int health = getCharacter(idCharacter)->getCaracteristic()->getHealth();
+    int monsterAttack = getMonster(idMonster)->getCaracteristic()->getAttackDamage();
 
-    getCharacter(character)->setCaracteristics(
+    getCharacter(idCharacter)->setCaracteristics(
             attackDamage,
-            getCharacter(character)->summonDamage(monsterAttack, health),
+            getCharacter(idCharacter)->summonDamage(monsterAttack, health),
             armor);
 
-    displayFeature(character);
+    specialAnimation(idCharacter);
+    displayFeature(idCharacter);
 }
 
 void Game::initPlayerCharacter() {
+    m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById("mdj"));;
+
     m_player = m_ptr_managerGroup->ptr_gameManager->getPlayer();
 
     if(m_player->getCharacter()->getId()=="mdj"){
@@ -859,28 +958,101 @@ void Game::initPlayerCharacter() {
         m_playerIcon.setSprite(
                 m_ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     }
-    isMdj=true;
 }
 
+
+void Game::attackAnimation(std::string id){
+    int x;
+    int y;
+    if (id=="eldora"){
+        x=720;
+        y=210;
+    }
+    if (id=="numero8"){
+        x=190;
+        y=70;
+    }
+    if (id=="remington"){
+        x=690;
+        y=70;
+    }
+    if (id=="tristan"){
+        x=185;
+        y=210;
+    }
+    if (id=="yeti"){
+        x=625;
+        y=175;
+    }
+    if (id=="crapaud"){
+        x=500;
+        y=180;
+    }
+    if (id=="dragon"){
+        x=335;
+        y=200;
+    }
+
+    m_attackAnimation.setPosition(x, y);
+    m_attackAnimation.setVisible(true);
+    m_attackAnimation.play();
+
+}
 //TODO : Changer pour adapter aux requetes du serveur
-void Game::specialAnimation(){
+void Game::specialAnimation(std::string id){
+    int x;
+    int y;
+    if (id=="eldora"){
+        x=720;
+        y=210;
+    }
+    if (id=="numero8"){
+        x=190;
+        y=70;
+    }
+    if (id=="remington"){
+        x=690;
+        y=70;
+    }
+    if (id=="tristan"){
+        x=185;
+        y=210;
+    }
+    if (id=="yeti"){
+        x=625;
+        y=175;
+    }
+    if (id=="crapaud"){
+        x=500;
+        y=180;
+    }
+    if (id=="dragon"){
+        x=335;
+        y=200;
+    }
+
     if(isEldora){
+        m_eldoraSpecial.setPosition(x, y);
         m_eldoraSpecial.setVisible(true);
         m_eldoraSpecial.play();
     }
     if(isTristan){
+        m_tristanSpecial.setPosition(x, y);
         m_tristanSpecial.setVisible(true);
         m_tristanSpecial.play();
     }
     if(isRemington){
+        m_remingtonSpecial.setPosition(x, y);
         m_remingtonSpecial.setVisible(true);
         m_remingtonSpecial.play();
     }
     if(isNumero8){
+        m_numero8Special.setPosition(x, y);
         m_numero8Special.setVisible(true);
         m_numero8Special.play();
     }
     if(isMdj){
+        m_attackAnimation.setPosition(x, y);
         m_attackAnimation.setVisible(true);
         m_attackAnimation.play();
     }

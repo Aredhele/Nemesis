@@ -110,7 +110,7 @@ void GameManager::initMonsters(){
     m_monsterList[1]->setId("dragon");
     m_monsterList[1]->setCaracteristics(300,5000,20);
 
-    m_monsterList[2]->setName(L"Crapaux gluant");
+    m_monsterList[2]->setName(L"Crapaud gluant");
     m_monsterList[2]->setId("crapaud");
     m_monsterList[2]->setCaracteristics(5,500,10);
 }

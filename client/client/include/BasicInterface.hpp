@@ -54,7 +54,6 @@ protected:
 	bool m_optionActive;
 	bool m_exitActive;
 	InputHandler m_inputHandler;
-	ManagerGroup * m_ptr_managerGroup;
 
 	void errorWarmUpFull();
 	void errorConnection();
@@ -66,6 +65,7 @@ protected:
 	void setBackground(sf::Texture* backgroundImg);
 
 public:
+
 	// Constructor
 	BasicInterface(bool debug, ManagerGroup * ptr_managerGroup);
 
@@ -76,7 +76,7 @@ public:
 	// Game logic
 	void basicDraw(sf::RenderWindow * window);
 	void basicInput(sf::Event * e, double frameTime);
-
+	ManagerGroup * m_ptr_managerGroup;
 	// Getters
 	NPanel * getContentPane();
 	NPanel * getTopBar();

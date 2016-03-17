@@ -276,16 +276,7 @@ void WarmUp::update(sf::RenderWindow * window,
         }
     }
     if(m_inputHandler.getComponentId() == "validateCharButton"){
-        /*std::wstring wstr = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getName();
 
-        std::string str;
-        for(std::wstring::const_iterator it = wstr.begin();
-            it != wstr.end();
-            ++it)
-        {
-            str.push_back(static_cast<char>(*it));
-        }
-        */
         std::string str = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId();
         //Envoie notre choix de perso
         if (!m_ptr_managerGroup->ptr_networkManager->request(5, str)){
@@ -294,16 +285,8 @@ void WarmUp::update(sf::RenderWindow * window,
 
     }
 
-
-    /*if(m_inputHandler.getComponentId() == "returnButton") {
-        m_playButton.setVisible(false);
-        m_infoCharacterPanel.setVisible(false);
-        m_selectCharacterPanel.setVisible(false);
-        m_ptr_managerGroup->ptr_targetManager->isOnLobby();
-    }*/
-
     //TODO : change condition to ==5
-    if (m_nbPlayer==5){
+    if (m_nbPlayer==1){
         noError();
         m_loading.setVisible(false);
         m_playButton.setVisible(true);
