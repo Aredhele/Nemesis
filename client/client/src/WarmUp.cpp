@@ -214,7 +214,7 @@ void WarmUp::update(sf::RenderWindow * window,
 
     if(m_firstConnect){
         //Demande un update des perso déjà locked
-        if (!m_ptr_managerGroup->ptr_networkManager->request(6, "")){
+        if (!m_ptr_managerGroup->ptr_networkManager->request(6, "","")){
             errorConnection();
         }
         m_firstConnect=false;
@@ -222,8 +222,7 @@ void WarmUp::update(sf::RenderWindow * window,
 
     // Basic Interface updating
     basicInput(e, frameTime);
-
-    //TODO : Afficher les info des personnages
+    
     if(m_inputHandler.getComponentId() == "numero8Button") {
         if(!m_charSelected){
             //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(3);
@@ -279,14 +278,14 @@ void WarmUp::update(sf::RenderWindow * window,
 
         std::string str = m_ptr_managerGroup->ptr_gameManager->getPlayer()->getCharacter()->getId();
         //Envoie notre choix de perso
-        if (!m_ptr_managerGroup->ptr_networkManager->request(5, str)){
+        if (!m_ptr_managerGroup->ptr_networkManager->request(5, str,"")){
             errorConnection();
         }
 
     }
 
     //TODO : change condition to ==5
-    if (m_nbPlayer==1){
+    if (m_nbPlayer==5){
         noError();
         m_loading.setVisible(false);
         m_playButton.setVisible(true);
@@ -299,7 +298,7 @@ void WarmUp::update(sf::RenderWindow * window,
             m_selectCharacterPanel.setVisible(false);
 
             //Demande l'autorisation de rentrer en jeu
-            if (!m_ptr_managerGroup->ptr_networkManager->request(4, "")){
+            if (!m_ptr_managerGroup->ptr_networkManager->request(4, "","")){
                 errorConnection();
             }
         }

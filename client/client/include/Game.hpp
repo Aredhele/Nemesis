@@ -131,9 +131,9 @@ private:
     bool hasYeti = false;
 
     void displayFeature(std::string);
-    void characterAttack(std::string idMonster);
+    void characterAttack(std::string string, std::string idMonster);
     void monsterAttack(std::string idCharacter, std::string idMonster);
-    void characterSpecialAttack(std::string idMonster);
+    void characterSpecialAttack(std::string idCharacter, std::string idMonster);
     void monsterSpecialAttack(std::string idCharacter, std::string idMonster);
     void eldoraHealing(std::string idCharacter);
     void checkStateAnimation();
@@ -154,7 +154,7 @@ public:
                         sf::Event * e, double frameTime);
 
     void receiveRequest();
-    void request(int idRequest, std::string sRequest);
+    void request(int idRequest, std::string sRequest, std::string sRequest2);
     void addTextToChat(std::string message);
 
     void initPlayerCharacter();

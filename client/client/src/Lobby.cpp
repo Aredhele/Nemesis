@@ -93,8 +93,7 @@ void Lobby::update(sf::RenderWindow * window,
 }
 
 void Lobby::requestCreateNewWarmUp(){
-    if(m_ptr_managerGroup->ptr_networkManager->request(1,
-                         m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() )){
+    if(m_ptr_managerGroup->ptr_networkManager->request(1, m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName(),"")){
 
         std::cout << "Creation WarmUp réussi par " <<
                 m_ptr_managerGroup->ptr_gameManager->getPlayer()->getName() << std::endl;
@@ -105,7 +104,7 @@ void Lobby::requestCreateNewWarmUp(){
 }
 
 void Lobby::requestUpdateWarmUp(){
-    if(m_ptr_managerGroup->ptr_networkManager->request(3, "")){
+    if(m_ptr_managerGroup->ptr_networkManager->request(3, "","")){
         std::cout << "Requete update salon bien envoyé" << std::endl;
     }
     else{
@@ -115,8 +114,8 @@ void Lobby::requestUpdateWarmUp(){
 
 void Lobby::requestJoinWarmUp(int idWarmUp){
     if(m_ptr_managerGroup->ptr_networkManager->request(2, "" + cast::toString(idWarmUp) +
-                std::string("&") + std::string(m_ptr_managerGroup
-                 ->ptr_gameManager->getPlayer()->getName() ))){
+                                                          std::string("&") + std::string(m_ptr_managerGroup
+                                                                                                 ->ptr_gameManager->getPlayer()->getName()),"")){
     }
     else{
         errorConnection();

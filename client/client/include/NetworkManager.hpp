@@ -44,7 +44,7 @@ public TriggerableObject
 		void stopThread();
 
         bool connect();
-		bool  request(sf::Int32 idRequest, std::string sRequest);
+		bool request(int idRequest, std::string sRequest, std::string string);
 		void requestReceive();
 
 		void setPacket(sf::Packet packet);

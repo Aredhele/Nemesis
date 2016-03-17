@@ -66,10 +66,13 @@ bool NetworkManager::connect(){
  *  id 1 : get list of WarmUp
  *  id 1 : create WarmUp
  */
-bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
+bool NetworkManager::request(int idRequest, std::string sRequest, std::string sRequest2) {
 
     sf::Packet packet;
-    packet << idRequest << sRequest;
+    if(sRequest2!="")
+        packet << idRequest << sRequest;
+    else
+        packet << idRequest << sRequest << sRequest2;
 
     m_status = m_socket.send(packet);
 
@@ -78,7 +81,7 @@ bool NetworkManager::request(sf::Int32 idRequest, std::string sRequest){
         return false;
     }
 
-    std::cout << "Request send : " << idRequest <<", argument : "<< sRequest << std::endl;
+    std::cout << "Request send : " << idRequest <<", argument : "<< sRequest << " ; " << sRequest2 << std::endl;
     return true;
 }
 /**
