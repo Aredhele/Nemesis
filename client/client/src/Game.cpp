@@ -22,9 +22,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         m_crapaudButton(),
         m_dragonButton(),
         m_yetiButton(),
-        m_yetiPanel(),
-        m_dragonPanel(),
-        m_crapaudPanel(),
+        m_yetiMonsterButton(),
+        m_dragonMonsterButton(),
+        m_crapaudMonsterButton(),
         m_panelCharateristics(),
         m_panelNameCharacter(),
         m_panelAttack(),
@@ -186,17 +186,23 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
 
 
-    m_yetiPanel.create("yetiPanel", 650,190,  ptr_managerGroup->ptr_textureManager->getTexture("Yeti"));
-    m_yetiPanel.setVisible(false);
-    getContentPane()->addComponent(&m_yetiPanel);
+    m_yetiMonsterButton.create("yetiPanel", 650,190,
+                               ptr_managerGroup->ptr_textureManager->getTexture("Yeti"),
+                               ptr_managerGroup->ptr_textureManager->getTexture("Yeti"));
+    m_yetiMonsterButton.setVisible(false);
+    getContentPane()->addComponent(&m_yetiMonsterButton);
 
-    m_dragonPanel.create("dragonPanel", 350,210,  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
-    m_dragonPanel.setVisible(false);
-    getContentPane()->addComponent(&m_dragonPanel);
+    m_dragonMonsterButton.create("dragonPanel", 350,210,
+                                 ptr_managerGroup->ptr_textureManager->getTexture("Dragon"),
+                                 ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
+    m_dragonMonsterButton.setVisible(false);
+    getContentPane()->addComponent(&m_dragonMonsterButton);
 
-    m_crapaudPanel.create("crapaudPanel", 520,200,  ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"));
-    m_crapaudPanel.setVisible(false);
-    getContentPane()->addComponent(&m_crapaudPanel);
+    m_crapaudMonsterButton.create("crapaudPanel", 520,200,
+                                  ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"),
+                                  ptr_managerGroup->ptr_textureManager->getTexture("Crapaud"));
+    m_crapaudMonsterButton.setVisible(false);
+    getContentPane()->addComponent(&m_crapaudMonsterButton);
 
     //Animations
     m_feu.create("feu", 350,110,  ptr_managerGroup->ptr_textureManager->getTexture("feu"));
@@ -222,7 +228,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     m_attackAnimation.create("attackAnimation", 500,350,
                              ptr_managerGroup->ptr_textureManager->getTexture("attackAnimation"),
-                             false, 0.1, 192,192,6);
+                             false, 0.05, 192,192,6);
     getContentPane()->addComponent(&m_attackAnimation);
     m_attackAnimation.setVisible(false);
 
@@ -234,19 +240,19 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     m_eldoraSpecial.create("eldoraSpecial", 500,350,
                             ptr_managerGroup->ptr_textureManager->getTexture("eldoraSpecial"),
-                            false, 0.1, 192,192,13);
+                            false, 0.07, 192,192,13);
     getContentPane()->addComponent(&m_eldoraSpecial);
     m_eldoraSpecial.setVisible(false);
 
     m_remingtonSpecial.create("remingtonSpecial", 500,350,
                            ptr_managerGroup->ptr_textureManager->getTexture("remingtonSpecial"),
-                           false, 0.07, 192,192,8);
+                           false, 0.05, 192,192,8);
     getContentPane()->addComponent(&m_remingtonSpecial);
     m_remingtonSpecial.setVisible(false);
 
     m_tristanSpecial.create("tristanSpecial", 500,350,
                               ptr_managerGroup->ptr_textureManager->getTexture("tristanSpecial"),
-                              false, 0.1, 192,192,7);
+                              false, 0.08, 192,192,7);
     getContentPane()->addComponent(&m_tristanSpecial);
     m_tristanSpecial.setVisible(false);
 
@@ -579,10 +585,10 @@ void Game::update(sf::RenderWindow * window,
     if(m_inputHandler.getComponentId() == "crapaudButton"){
         //TODO : Envoyer une requete et afficher seulement à la réponse
         if (hasCrapaud){
-            m_crapaudPanel.setVisible(false);
+            m_crapaudMonsterButton.setVisible(false);
             hasCrapaud = false;
         }else{
-            m_crapaudPanel.setVisible(true);
+            m_crapaudMonsterButton.setVisible(true);
             hasCrapaud = true;
 
         }
@@ -599,10 +605,10 @@ void Game::update(sf::RenderWindow * window,
         //TODO : Envoyer une requete et afficher seulement à la réponse
 
         if (hasDragon){
-            m_dragonPanel.setVisible(false);
+            m_dragonMonsterButton.setVisible(false);
             hasDragon = false;
         }else{
-            m_dragonPanel.setVisible(true);
+            m_dragonMonsterButton.setVisible(true);
             hasDragon = true;
 
         }
@@ -618,10 +624,10 @@ void Game::update(sf::RenderWindow * window,
         //TODO : Envoyer une requete et afficher seulement à la réponse
 
         if (hasYeti){
-            m_yetiPanel.setVisible(false);
+            m_yetiMonsterButton.setVisible(false);
             hasYeti = false;
         }else{
-            m_yetiPanel.setVisible(true);
+            m_yetiMonsterButton.setVisible(true);
             hasYeti = true;
         }
         m_isOnMonstrePanel = false;
@@ -853,7 +859,7 @@ void Game::initPlayerCharacter() {
         m_playerIcon.setSprite(
                 m_ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     }
-    isNumero8=true;
+    isMdj=true;
 }
 
 //TODO : Changer pour adapter aux requetes du serveur

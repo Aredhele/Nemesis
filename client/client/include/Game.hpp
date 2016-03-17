@@ -52,9 +52,9 @@ private:
     NButton m_dragonButton;
     NButton m_yetiButton;
 
-    NPanel m_yetiPanel;
-    NPanel m_dragonPanel;
-    NPanel m_crapaudPanel;
+    NButton m_yetiMonsterButton;
+    NButton m_dragonMonsterButton;
+    NButton m_crapaudMonsterButton;
     NPanel m_feu;
     NPanel m_feu2;
 
