@@ -222,7 +222,7 @@ void WarmUp::update(sf::RenderWindow * window,
 
     // Basic Interface updating
     basicInput(e, frameTime);
-    
+
     if(m_inputHandler.getComponentId() == "numero8Button") {
         if(!m_charSelected){
             //m_ptr_managerGroup->ptr_gameManager->getPlayer->setCharacter(3);
@@ -292,19 +292,19 @@ void WarmUp::update(sf::RenderWindow * window,
     }
 
     if(m_inputHandler.getComponentId() == "playButton") {
-        if (m_charSelected){
-            m_playButton.setVisible(false);
-            m_infoCharacterPanel.setVisible(false);
-            m_selectCharacterPanel.setVisible(false);
 
-            //Demande l'autorisation de rentrer en jeu
-            if (!m_ptr_managerGroup->ptr_networkManager->request(4, "","")){
-                errorConnection();
-            }
+        m_playButton.setVisible(false);
+        m_infoCharacterPanel.setVisible(false);
+        m_selectCharacterPanel.setVisible(false);
+
+        //TODO change
+        //Demande l'autorisation de rentrer en jeu
+        if (!m_ptr_managerGroup->ptr_networkManager->request(4, "","")){
+            errorConnection();
         }
-    }
+        //m_ptr_managerGroup->ptr_targetManager->isOnGame();
 
-    //
+    }
 
     // Drawing all content
     basicDraw(window);

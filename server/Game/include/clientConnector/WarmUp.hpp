@@ -60,6 +60,7 @@ private:
     sf::Thread thread;
     bool estEnMarche;
     int nbJoueur;
+    int askForPlay;
 
     // Sockets
     std::vector < bool > * m_socketOccupe;

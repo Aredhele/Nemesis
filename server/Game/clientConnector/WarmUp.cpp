@@ -11,7 +11,7 @@ WarmUp::WarmUp(int i, std::vector < bool > * socketOccupe,
     estEnMarche = false;
     listePartie = listePartie;
     nbJoueur = 0;
-
+    askForPlay=0;
     for(i = 0; i < 5; i++) {
         tabPlayer[i] = new Player();
     }
@@ -116,9 +116,15 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
     {
 
         case 4: // Lancer la partie
-            //launchGame();
+            askForPlay++;
+            std::cout << "Demande pour jouer : " << askForPlay << std::endl;
+            if(askForPlay==5){
+                launchGame();
+                std::cout << "La partie va commencer, le WarmUp va etre libere" << std::endl;
+            }
 
-            std::cout << "La partie va commencer, le WarmUp va etre libere" << std::endl;
+
+
             break;
 
         case 5: //Lock un perso
@@ -294,9 +300,10 @@ void WarmUp::setMDJName(std::string hote) {
  * \param
  * \return
  */
-/*
+
 void WarmUp::launchGame() {
 
+    sf::Packet packet;
     // TODO - Faire les vérifications de début de partie
     // TODO - Creer toutes les méthodes dans Game
 
@@ -306,30 +313,42 @@ void WarmUp::launchGame() {
     //listePartie->push_back(new Game(socketOccupe, displayer));
 
     unsigned int index = listePartie->size() - 1;
+    std::cout << "INDEX : " << index << std::endl;
 
     // On insère les Players dans la partie
-    for(int j = 0; j < 4; j++) {
+    for(int j = 0; j < 5; j++) {
+        sf::Int32 id = 4;
+        std::string rep = "Ok";
+
+        sf::Packet packet;
+        packet << id << rep;
 
         // On vérifie si le Player est présent
         if(tabPlayer[j]->isHere()) {
-
+            tabPlayer[j]->getSocket()->send(packet);
             // On l'ajoute à la partie
-            listePartie->at(index)->ajouterPlayer();
+            /*listePartie->at(index)->ajouterPlayer();
             listePartie->at(index)->obtenirPlayer(j)->init(
                     tabPlayer[j]->getSocket(),
                     tabPlayer[j]->getNamePlayer(),
                     tabPlayer[j]->getIndiceSocket(),
                     tabPlayer[j]->getNumeroPlayer()
-            );
+            );*/
         }
     }
+
+    /*
     // On doit maintenant détruire le WarmUp
     // On le rend disponible
     init();
 
     // On lance le thread
     listePartie->at(index)->demarrerPartie();
-}*/
+     */
+}
+
+
+
 WarmUp::~WarmUp() {
 
 }

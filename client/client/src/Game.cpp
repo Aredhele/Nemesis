@@ -197,7 +197,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_dragonMonsterButton.create("dragonPanel", 350,210,
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"),
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
-    m_dragonMonsterButton.setVisible(false);
+    m_dragonMonsterButton.setVisible(true);
     getContentPane()->addComponent(&m_dragonMonsterButton);
 
     m_crapaudMonsterButton.create("crapaudPanel", 520,200,
@@ -911,8 +911,8 @@ void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
 }
 
 void Game::initPlayerCharacter() {
-    /*m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
-            m_ptr_managerGroup->ptr_gameManager->getCharacterById("mdj"));*/
+    m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+            m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
 
     m_player = m_ptr_managerGroup->ptr_gameManager->getPlayer();
 

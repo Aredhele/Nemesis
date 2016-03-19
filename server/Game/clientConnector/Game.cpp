@@ -55,7 +55,8 @@ void Game::threadGame() {
                         packet);
                 sf::Int32 idRequest;
                 std::string sRequest;
-                packet >>idRequest >> sRequest;
+                std::string sRequest2;
+                //packet >>idRequest >> sRequest >> sRequest2;
 
                 switch(socketStatus)
                 {
@@ -64,21 +65,26 @@ void Game::threadGame() {
                         break;
 
                     case sf::Socket::Done:
+                        std::cout << "Reception d'une requete du player " << i <<
+                                "[" << tabPlayer[i]->getNamePlayer() << std::endl;
+                        broadcastRequest(packet);
+                        /*
                         std::cout <<"game" <<  std::string(octetsRecus) + " - Player n " << i <<
                                 " [" + tabPlayer[i]->getNamePlayer() + "]" << std::endl;
 
 
                         // Gestion de la requête
-                        gererRequete(idRequest, sRequest, tabPlayer[i]->getSocket(),
+                        gererRequete(idRequest, sRequest, sRequest2, tabPlayer[i]->getSocket(),
                                      tabPlayer[i]->getNumeroPlayer());
+                        */
                         break;
 
                     case sf::Socket::Error:
-                        delPlayer(i);
+                        //delPlayer(i);
                         break;
 
                     case sf::Socket::Disconnected:
-                        delPlayer(i);
+                        //delPlayer(i);
                         break;
 
                     default:
@@ -96,7 +102,16 @@ void Game::threadGame() {
         horloge.restart();
     }
 }
-void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,
+
+void Game::broadcastRequest(sf::Packet packet){
+    for (int i = 0; i < 5; i++){
+        tabPlayer[i]->getSocket()->send(packet);
+    }
+}
+
+
+/*
+void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,std::string sRequest2,
                           sf::TcpSocket * socket, int numeroPlayer) {
 
     // Conversion de l'actionID en entier
@@ -135,9 +150,10 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,
             break;
     }
 
-}
+}*/
 
 //Send to a thread listening
+/*
 void Game::sendModifLockCarac(std::string sRequest, int numeroPlayer){
     std::cout <<"game >> " << "Envoi du changement du Game : perso lock " << std::endl;
     for(int i = 0; i < 5; i++) {
@@ -153,7 +169,8 @@ void Game::sendModifLockCarac(std::string sRequest, int numeroPlayer){
         }
     }
 }
-
+*/
+/*
 bool Game::lockCarac(std::string sRequest, int nbPLayer ) {
     for(int i =0; i < sizeof(tabPlayer); i++ ){
         if(tabPlayer[i]->getNameChar() == sRequest) return false;
@@ -161,7 +178,7 @@ bool Game::lockCarac(std::string sRequest, int nbPLayer ) {
     (tabPlayer[nbPLayer]->setNameChar(sRequest));
     return true;
 }
-
+*/
 /**
  * \brief // TODO
  * \param
