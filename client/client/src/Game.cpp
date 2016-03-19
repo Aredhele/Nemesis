@@ -444,59 +444,59 @@ void Game::update(sf::RenderWindow * window,
     }
 
     if(m_inputHandler.getComponentId() == "beachButton"){
-        //request(8, "beach", "");
-        changeAmbiance("beach");
+        request(8, "beach", "");
+        /*changeAmbiance("beach");
         /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
-        isOnCastle = false;*/
+        isOnCastle = false;
 
 
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
-        m_isOnAmbiancePanel = false;
+        m_isOnAmbiancePanel = false;*/
     }
     if(m_inputHandler.getComponentId() == "castleButton"){
-        //request(8, "castle", "");
-        changeAmbiance("castle");
+        request(8, "castle", "");
+        /*changeAmbiance("castle");
         /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
-        isOnCastle = true;*/
+        isOnCastle = true;
 
 
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
-        m_isOnAmbiancePanel = false;
+        m_isOnAmbiancePanel = false;*/
     }
     if(m_inputHandler.getComponentId() == "forestButton"){
-        //request(8, "forest", "");
-        changeAmbiance("forest");
+        request(8, "forest", "");
+        /*changeAmbiance("forest");
         /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
-        isOnCastle = false;*/
+        isOnCastle = false;
 
 
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
-        m_isOnAmbiancePanel = false;
+        m_isOnAmbiancePanel = false;*/
     }
     if(m_inputHandler.getComponentId() == "landButton"){
-        //request(8, "landscape", "");
-        changeAmbiance("landscape");
-        /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
-        isOnCastle = false;*/
+        request(8, "landscape", "");
+        /*changeAmbiance("landscape");
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
+        isOnCastle = false;
 
 
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
-        m_isOnAmbiancePanel = false;
+        m_isOnAmbiancePanel = false;*/
     }
     if(m_inputHandler.getComponentId() == "roomButton"){
-        //request(8, "room", "");
-        changeAmbiance("room");
-        /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
-        isOnCastle = false;*/
+        request(8, "room", "");
+        /*changeAmbiance("room");
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
+        isOnCastle = false;
 
 
         m_panelAmbianceMJ.setVisible(false);
         m_monsterButton.setVisible(true);
-        m_isOnAmbiancePanel = false;
+        m_isOnAmbiancePanel = false;*/
     }
 
     //On regarde si on est dans la pièce Chateau pour afficher les flammes
@@ -720,7 +720,7 @@ void Game::receiveRequest() {
                 addTextToChat(sRequest);
             case 8:
                 //On change d'ambiance
-                //sRequest = nom de l'ambiance (ex : "chateau")
+                //sRequest = nom de l'ambiance (ex : "castle")
                 packet.at(i) >> sRequest;
                 changeAmbiance(sRequest);
                 break;
@@ -804,7 +804,7 @@ void Game::changeAmbiance(std::string ambiance){
         isOnCastle=false;
     }
     if(ambiance=="castle"){
-        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Castle"));
         isOnCastle=true;
     }
     if(ambiance=="forest"){

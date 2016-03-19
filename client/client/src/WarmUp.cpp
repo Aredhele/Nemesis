@@ -38,6 +38,7 @@ WarmUp::WarmUp(bool debug, ManagerGroup * ptr_managerGroup) :
     m_nbCharLocked = 0;
     m_charSelected = false;
     m_firstConnect = true;
+    m_waiting = true;
     m_characterSelected = "";
     noError();
     int leftBorder = 15;
@@ -285,7 +286,7 @@ void WarmUp::update(sf::RenderWindow * window,
     }
 
     //TODO : change condition to ==5
-    if (m_nbPlayer==5){
+    if (m_nbPlayer==5 && m_waiting){
         noError();
         m_loading.setVisible(false);
         m_playButton.setVisible(true);
@@ -293,6 +294,7 @@ void WarmUp::update(sf::RenderWindow * window,
 
     if(m_inputHandler.getComponentId() == "playButton") {
         if (m_charSelected){
+            m_waiting = false;
             m_playButton.setVisible(false);
             m_infoCharacterPanel.setVisible(false);
             m_selectCharacterPanel.setVisible(false);

@@ -179,7 +179,7 @@ void ResourceLoader::load() {
 	//Backgrounds
 	a_tm.addTexture("background_Castle_2",pathBackground + "Background_Castle_2.png");
 	a_tm.addTexture("Background_Beach",pathBackground + "Background_Beach.png");
-	a_tm.addTexture("background_Castle",pathBackground + "Background_Castle.png");
+	a_tm.addTexture("Background_Castle",pathBackground + "Background_Castle.png");
 	a_tm.addTexture("Background_Forest",pathBackground + "Background_Forest.png");
 	a_tm.addTexture("Background_Landscape",pathBackground + "Background_Landscape.png");
 	a_tm.addTexture("Background_Room",pathBackground + "Background_Room.png");

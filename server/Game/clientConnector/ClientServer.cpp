@@ -198,7 +198,7 @@ void ClientServer::requestManager( sf::Int32 idRequest, std::string sRequest,
     {
         case 1: // Le client veut créer un salon
             listeWarmUp.push_back(new WarmUp(listeWarmUp.size()+1,
-                         &listeSocketOccupee, &listeGame, sRequest));
+                         &listeSocketOccupee, listeGame, sRequest));
             break;
 
         case 2: // Le client veut rejoindre un salon

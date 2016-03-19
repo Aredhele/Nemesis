@@ -54,6 +54,7 @@ class WarmUp : public BasicInterface
 
         int m_nbPlayer;
         int m_nbCharLocked;
+        bool m_waiting;
         std::string m_characterSelected;
 
 

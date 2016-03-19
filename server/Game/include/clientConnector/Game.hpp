@@ -45,10 +45,7 @@ public:
     void delPlayer(int i);
     void launchThreadGame();
 
-    // Getters
-    std::string getMDJName();
 
-    void setMDJName(std::string hote);
 
 
 private:
@@ -70,11 +67,9 @@ private:
 
     // Methods
     void threadGame();
-    void gererRequete(sf::Int32 idRequest, std::string sRequest,
-                      sf::TcpSocket * socket, int numeroPlayer);
-    //void launchGame(); //TODO Creer Game
-    bool lockCarac(std::string sRequest, int nbPLayer);
-    void sendModifLockCarac(std::string sRequest1, int numeroPlayer);
+    /*void gererRequete(sf::Int32 idRequest, std::string sRequest, std::string sRequest2,
+                      sf::TcpSocket * socket, int numeroPlayer);*/
+    void broadcastRequest(sf::Packet packet);
 };
 
 
