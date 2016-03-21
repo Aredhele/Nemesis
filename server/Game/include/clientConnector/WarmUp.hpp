@@ -27,7 +27,7 @@ public:
     //Constructor
     WarmUp(int i,
           std::vector<bool>  * socketOccupe,
-          std::vector < Game * > * listePartie,
+          std::vector < Game * > listePartie,
           std::string nom);
     //Destructor
     ~WarmUp();
@@ -66,7 +66,7 @@ private:
     std::vector < bool > * m_socketOccupe;
 
     // game list
-    std::vector < Game * > * listePartie;
+    std::vector < Game * > listePartie;
 
     int numeroWarmUp;
     std::string nomHote;

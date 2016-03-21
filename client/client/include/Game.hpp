@@ -137,7 +137,7 @@ private:
     void monsterSpecialAttack(std::string idCharacter, std::string idMonster);
     void eldoraHealing(std::string idCharacter);
     void checkStateAnimation();
-    void specialAnimation(std::string id);
+    void specialAnimation(std::string cible, std::string attaquant);
     void attackAnimation(std::string id);
     void changeAmbiance(std::string ambiance);
     void displayMonster(int i, std::string monster);

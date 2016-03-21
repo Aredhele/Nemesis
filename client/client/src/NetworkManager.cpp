@@ -69,7 +69,7 @@ bool NetworkManager::connect(){
 bool NetworkManager::request(int idRequest, std::string sRequest, std::string sRequest2) {
 
     sf::Packet packet;
-    if(sRequest2!="")
+    if(sRequest2=="")
         packet << idRequest << sRequest;
     else
         packet << idRequest << sRequest << sRequest2;

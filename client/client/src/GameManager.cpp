@@ -101,15 +101,24 @@ void GameManager::initCharacters(){
 }
 
 void GameManager::initMonsters(){
+    initDragon();
+    initYeti();
+    initCrapaud();
+}
 
-    m_monsterList[0]->setName(L"Yeti des montagnes");
-    m_monsterList[0]->setId("yeti");
-    m_monsterList[0]->setCaracteristics(50,500,40);
-
+void GameManager::initDragon(){
     m_monsterList[1]->setName(L"Dragon du chateau");
     m_monsterList[1]->setId("dragon");
     m_monsterList[1]->setCaracteristics(300,5000,20);
+}
 
+void GameManager::initYeti(){
+    m_monsterList[0]->setName(L"Yeti des montagnes");
+    m_monsterList[0]->setId("yeti");
+    m_monsterList[0]->setCaracteristics(50,500,40);
+}
+
+void GameManager::initCrapaud(){
     m_monsterList[2]->setName(L"Crapaud gluant");
     m_monsterList[2]->setId("crapaud");
     m_monsterList[2]->setCaracteristics(5,500,10);
@@ -132,6 +141,7 @@ Monster* GameManager::getMonsterById(std::string id){
             return m_monsterList[i];
         }
     }
+    return 0;
 }
 
 

@@ -2,7 +2,7 @@
 #include "clientConnector/WarmUp.hpp"
 
 WarmUp::WarmUp(int i, std::vector < bool > * socketOccupe,
-             std::vector < Game * > * listePartie, std::string nomHote) :
+             std::vector < Game * > listePartie, std::string nomHote) :
         thread(&WarmUp::threadWarmUp, this)
 {
     etatWarmUp = Etat::Disponible;
@@ -122,9 +122,6 @@ void WarmUp::gererRequete(sf::Int32 idRequest, std::string sRequest,
                 launchGame();
                 std::cout << "La partie va commencer, le WarmUp va etre libere" << std::endl;
             }
-
-
-
             break;
 
         case 5: //Lock un perso
@@ -303,16 +300,9 @@ void WarmUp::setMDJName(std::string hote) {
 
 void WarmUp::launchGame() {
 
-    sf::Packet packet;
-    // TODO - Faire les vérifications de début de partie
-    // TODO - Creer toutes les méthodes dans Game
+    listePartie.push_back(new Game(m_socketOccupe, nomHote));
 
-
-    //TODO Créer la partie
-
-    //listePartie->push_back(new Game(socketOccupe, displayer));
-
-    unsigned int index = listePartie->size() - 1;
+    unsigned int index = listePartie.size() - 1;
     std::cout << "INDEX : " << index << std::endl;
 
     // On insère les Players dans la partie
@@ -327,24 +317,20 @@ void WarmUp::launchGame() {
         if(tabPlayer[j]->isHere()) {
             tabPlayer[j]->getSocket()->send(packet);
             // On l'ajoute à la partie
-            /*listePartie->at(index)->ajouterPlayer();
-            listePartie->at(index)->obtenirPlayer(j)->init(
-                    tabPlayer[j]->getSocket(),
-                    tabPlayer[j]->getNamePlayer(),
-                    tabPlayer[j]->getIndiceSocket(),
-                    tabPlayer[j]->getNumeroPlayer()
-            );*/
+            listePartie.at(index)->addPlayer(tabPlayer[j]->getSocket(),
+                                             tabPlayer[j]->getNamePlayer(),
+                                             tabPlayer[j]->getIndiceSocket());
         }
     }
 
-    /*
+
+   // On lance le thread
+   listePartie.at(index)->launchThreadGame();
+
     // On doit maintenant détruire le WarmUp
     // On le rend disponible
     init();
 
-    // On lance le thread
-    listePartie->at(index)->demarrerPartie();
-     */
 }
 
 

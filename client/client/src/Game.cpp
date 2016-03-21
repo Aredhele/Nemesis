@@ -64,7 +64,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     selectedMonster = "NULL";
 
     //Background
-    setBackground(ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+    setBackground(ptr_managerGroup->ptr_textureManager->getTexture("Background_Castle"));
 
     if (!m_fontLabel.loadFromFile("../res/font/Roboto-Regular.ttf") ||
         !m_fontTextbox.loadFromFile("../res/font/LucidaTypewriterRegular.ttf"))
@@ -197,7 +197,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_dragonMonsterButton.create("dragonPanel", 350,210,
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"),
                                  ptr_managerGroup->ptr_textureManager->getTexture("Dragon"));
-    m_dragonMonsterButton.setVisible(true);
+    m_dragonMonsterButton.setVisible(false);
     getContentPane()->addComponent(&m_dragonMonsterButton);
 
     m_crapaudMonsterButton.create("crapaudPanel", 520,200,
@@ -444,8 +444,8 @@ void Game::update(sf::RenderWindow * window,
     }
 
     if(m_inputHandler.getComponentId() == "beachButton"){
-        //request(8, "beach", "");
-        changeAmbiance("beach");
+        request(8, "beach", "");
+        /*changeAmbiance("beach");
         /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Beach"));
         isOnCastle = false;*/
 
@@ -455,9 +455,9 @@ void Game::update(sf::RenderWindow * window,
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "castleButton"){
-        //request(8, "castle", "");
-        changeAmbiance("castle");
-        /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+        request(8, "castle", "");
+        /*changeAmbiance("castle");
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
         isOnCastle = true;*/
 
 
@@ -466,8 +466,8 @@ void Game::update(sf::RenderWindow * window,
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "forestButton"){
-        //request(8, "forest", "");
-        changeAmbiance("forest");
+        request(8, "forest", "");
+        /*changeAmbiance("forest");
         /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Forest"));
         isOnCastle = false;*/
 
@@ -477,9 +477,9 @@ void Game::update(sf::RenderWindow * window,
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "landButton"){
-        //request(8, "landscape", "");
-        changeAmbiance("landscape");
-        /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
+        request(8, "landscape", "");
+        /*changeAmbiance("landscape");
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Landscape"));
         isOnCastle = false;*/
 
 
@@ -488,9 +488,9 @@ void Game::update(sf::RenderWindow * window,
         m_isOnAmbiancePanel = false;
     }
     if(m_inputHandler.getComponentId() == "roomButton"){
-        //request(8, "room", "");
-        changeAmbiance("room");
-        /*setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
+        request(8, "room", "");
+        /*changeAmbiance("room");
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Room"));
         isOnCastle = false;*/
 
 
@@ -535,11 +535,11 @@ void Game::update(sf::RenderWindow * window,
 
     if(m_inputHandler.getComponentId() == "crapaudButton"){
         if (hasCrapaud){
-            //request(9, "crapaud", "");
-            displayMonster(9, "crapaud");
+            request(9, "crapaud", "");
+            //displayMonster(9, "crapaud");
         }else{
-            //request(10, "crapaud", "");
-            displayMonster(10, "crapaud");
+            request(10, "crapaud", "");
+            //displayMonster(10, "crapaud");
         }
 
         m_isOnMonstrePanel = false;
@@ -549,11 +549,11 @@ void Game::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "dragonButton"){
         if (hasDragon){
-            //request(9, "dragon", "");
-            displayMonster(9, "dragon");
+            request(9, "dragon", "");
+            //displayMonster(9, "dragon");
         }else{
-            //request(10, "crapaud", "");
-            displayMonster(10, "dragon");
+            request(10, "dragon", "");
+            //displayMonster(10, "dragon");
         }
         m_isOnMonstrePanel = false;
         m_ambianceButton.setVisible(true);
@@ -564,11 +564,11 @@ void Game::update(sf::RenderWindow * window,
     }
     if(m_inputHandler.getComponentId() == "yetiButton"){
         if (hasYeti){
-            //request(9, "yeti", "");
-            displayMonster(9, "yeti");
+            request(9, "yeti", "");
+            //displayMonster(9, "yeti");
         }else{
-            //request(10, "crapaud", "");
-            displayMonster(10, "yeti");
+            request(10, "yeti", "");
+            //displayMonster(10, "yeti");
         }
         m_isOnMonstrePanel = false;
         m_ambianceButton.setVisible(true);
@@ -580,15 +580,16 @@ void Game::update(sf::RenderWindow * window,
     if (m_inputHandler.getComponentId() == "buttonHit"){
         if(isMdj){
             if(selectedChar!="NULL" && selectedMonster!="NULL"){
+                std::cout << "id monstre : " << selectedMonster << std::endl;
                 //Le monstre sélectionné attaque le personnage sélectionné
-                //request(11, selectedChar, selectedMonster);
-                monsterAttack(selectedChar, selectedMonster);
+                request(11, selectedChar, selectedMonster);
+                //monsterAttack(selectedChar, selectedMonster);
 
             }
         }else{
             if(selectedMonster!="NULL"){
-                //request(12, m_player->getCharacter()->getId(), selectedMonster);
-                characterAttack(m_player->getCharacter()->getId(), selectedMonster);
+                request(12, m_player->getCharacter()->getId(), selectedMonster);
+                //characterAttack(m_player->getCharacter()->getId(), selectedMonster);
 
             }
         }
@@ -598,20 +599,20 @@ void Game::update(sf::RenderWindow * window,
         if(isMdj){
             if(selectedChar!="NULL" && selectedMonster!="NULL"){
                 //Le monstre sélectionné attaque le personnage sélectionné
-                //request(13, selectedChar, selectedMonster);
-                monsterSpecialAttack(selectedChar, selectedMonster);
+                request(13, selectedChar, selectedMonster);
+                //monsterSpecialAttack(selectedChar, selectedMonster);
             }
         }
         else if (isEldora){
             if(selectedChar!="NULL" && selectedMonster=="NULL"){
-                //request(15, selectedChar, "");
-                eldoraHealing(selectedChar);
+                request(15, selectedChar, "");
+                //eldoraHealing(selectedChar);
             }
         }
         else{
             if(selectedMonster!="NULL"){
-                //request(14, m_player->getCharacter()->getId(), selectedMonster);
-                characterSpecialAttack(m_player->getCharacter()->getId(), selectedMonster);
+                request(14, m_player->getCharacter()->getId(), selectedMonster);
+                //characterSpecialAttack(m_player->getCharacter()->getId(), selectedMonster);
             }
         }
         //specialAnimation(selectedChar);
@@ -622,8 +623,8 @@ void Game::update(sf::RenderWindow * window,
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
         std::string text = m_textChat.getString();
-        std::cout << text << std::endl;
-        //request(7, text, "");
+        //std::cout << text << std::endl;
+        request(7, text, "");
         //m_textChat.empty();
     }
 
@@ -720,7 +721,7 @@ void Game::receiveRequest() {
                 addTextToChat(sRequest);
             case 8:
                 //On change d'ambiance
-                //sRequest = nom de l'ambiance (ex : "chateau")
+                //sRequest = nom de l'ambiance (ex : "castle")
                 packet.at(i) >> sRequest;
                 changeAmbiance(sRequest);
                 break;
@@ -804,7 +805,7 @@ void Game::changeAmbiance(std::string ambiance){
         isOnCastle=false;
     }
     if(ambiance=="castle"){
-        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("background_Castle"));
+        setBackground(m_ptr_managerGroup->ptr_textureManager->getTexture("Background_Castle"));
         isOnCastle=true;
     }
     if(ambiance=="forest"){
@@ -823,9 +824,9 @@ void Game::changeAmbiance(std::string ambiance){
 
 }
 
-
+//TODO
 void Game::addTextToChat(std::string message){
-    //TODO
+    std::cout << message << std::endl;
 }
 
 
@@ -840,7 +841,7 @@ void Game::eldoraHealing(std::string idCharacter){
             health + 200,
             armor);
 
-    specialAnimation(idCharacter);
+    specialAnimation(idCharacter, "eldora");
     displayFeature(idCharacter);
 }
 
@@ -856,8 +857,26 @@ void Game::characterAttack(std::string idCharacter, std::string idMonster) {
             getMonster(idMonster)->hitDamage(attack, monsterHealth),
             monsterArmor);
 
-    attackAnimation(selectedMonster);
+
+    attackAnimation(idMonster);
     displayFeature(idMonster);
+    monsterHealth = getMonster(idMonster)->getCaracteristic()->getHealth();
+    if (monsterHealth<=0){
+        displayFeature(m_player->getCharacter()->getId());
+        selectedMonster="NULL";
+        if (idMonster == "dragon"){
+            m_ptr_managerGroup->ptr_gameManager->initDragon();
+            m_dragonMonsterButton.setVisible(false);
+        }
+        if (idMonster == "yeti"){
+            m_ptr_managerGroup->ptr_gameManager->initYeti();
+            m_yetiMonsterButton.setVisible(false);
+        }
+        if (idMonster == "crapaud"){
+            m_ptr_managerGroup->ptr_gameManager->initCrapaud();
+            m_crapaudMonsterButton.setVisible(false);
+        }
+    }
 
 }
 
@@ -869,12 +888,11 @@ void Game::monsterAttack(std::string idCharacter, std::string idMonster){
     int health = getCharacter(idCharacter)->getCaracteristic()->getHealth();
     int monsterAttack = getMonster(idMonster)->getCaracteristic()->getAttackDamage();
 
-
     getCharacter(idCharacter)->setCaracteristics(
             attackDamage,
             getCharacter(idCharacter)->hitDamage(monsterAttack, health),
             armor);
-    attackAnimation(selectedChar);
+    attackAnimation(idCharacter);
     displayFeature(idCharacter);
 }
 
@@ -890,8 +908,25 @@ void Game::characterSpecialAttack(std::string idCharacter, std::string idMonster
             getCharacter(idCharacter)->summonDamage(attack, monsterHealth),
             monsterArmor);
 
-    specialAnimation(idMonster);
+    specialAnimation(idMonster, idCharacter);
     displayFeature(idMonster);
+    monsterHealth = getMonster(idMonster)->getCaracteristic()->getHealth();
+    if (monsterHealth<=0){
+        displayFeature(m_player->getCharacter()->getId());
+        selectedMonster="NULL";
+        if (idMonster == "dragon"){
+            m_ptr_managerGroup->ptr_gameManager->initDragon();
+            m_dragonMonsterButton.setVisible(false);
+        }
+        if (idMonster == "yeti"){
+            m_ptr_managerGroup->ptr_gameManager->initYeti();
+            m_yetiMonsterButton.setVisible(false);
+        }
+        if (idMonster == "crapaud"){
+            m_ptr_managerGroup->ptr_gameManager->initCrapaud();
+            m_crapaudMonsterButton.setVisible(false);
+        }
+    }
 }
 
 void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
@@ -906,13 +941,13 @@ void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
             getCharacter(idCharacter)->summonDamage(monsterAttack, health),
             armor);
 
-    specialAnimation(idCharacter);
+    specialAnimation(idCharacter, "mdj");
     displayFeature(idCharacter);
 }
 
 void Game::initPlayerCharacter() {
-    m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
-            m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
+    //m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+   //         m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
 
     m_player = m_ptr_managerGroup->ptr_gameManager->getPlayer();
 
@@ -944,34 +979,35 @@ void Game::initPlayerCharacter() {
 }
 
 
-void Game::attackAnimation(std::string id){
+void Game::attackAnimation(std::string cible){
+    std::cout << "Attaque ! Cible : " << cible << std::endl;
     int x;
     int y;
-    if (id=="eldora"){
+    if (cible=="eldora"){
         x=720;
         y=210;
     }
-    if (id=="numero8"){
+    if (cible=="numero8"){
         x=190;
         y=70;
     }
-    if (id=="remington"){
+    if (cible=="remington"){
         x=690;
         y=70;
     }
-    if (id=="tristan"){
+    if (cible=="tristan"){
         x=185;
         y=210;
     }
-    if (id=="yeti"){
+    if (cible=="yeti"){
         x=625;
         y=175;
     }
-    if (id=="crapaud"){
+    if (cible=="crapaud"){
         x=500;
         y=180;
     }
-    if (id=="dragon"){
+    if (cible=="dragon"){
         x=335;
         y=200;
     }
@@ -982,59 +1018,59 @@ void Game::attackAnimation(std::string id){
 
 }
 //TODO : Changer pour adapter aux requetes du serveur
-void Game::specialAnimation(std::string id){
+void Game::specialAnimation(std::string cible, std::string attaquant){
     int x;
     int y;
-    if (id=="eldora"){
+    if (cible=="eldora"){
         x=720;
         y=210;
     }
-    if (id=="numero8"){
+    if (cible=="numero8"){
         x=190;
         y=70;
     }
-    if (id=="remington"){
+    if (cible=="remington"){
         x=690;
         y=70;
     }
-    if (id=="tristan"){
+    if (cible=="tristan"){
         x=185;
         y=210;
     }
-    if (id=="yeti"){
+    if (cible=="yeti"){
         x=625;
         y=175;
     }
-    if (id=="crapaud"){
+    if (cible=="crapaud"){
         x=500;
         y=180;
     }
-    if (id=="dragon"){
+    if (cible=="dragon"){
         x=335;
         y=200;
     }
 
-    if(isEldora){
+    if(attaquant=="eldora"){
         m_eldoraSpecial.setPosition(x, y);
         m_eldoraSpecial.setVisible(true);
         m_eldoraSpecial.play();
     }
-    if(isTristan){
+    if(attaquant=="tristan"){
         m_tristanSpecial.setPosition(x, y);
         m_tristanSpecial.setVisible(true);
         m_tristanSpecial.play();
     }
-    if(isRemington){
+    if(attaquant=="remington"){
         m_remingtonSpecial.setPosition(x, y);
         m_remingtonSpecial.setVisible(true);
         m_remingtonSpecial.play();
     }
-    if(isNumero8){
+    if(attaquant=="numero8"){
         m_numero8Special.setPosition(x, y);
         m_numero8Special.setVisible(true);
         m_numero8Special.play();
     }
-    if(isMdj){
+    if(attaquant=="mdj"){
         m_attackAnimation.setPosition(x, y);
         m_attackAnimation.setVisible(true);
         m_attackAnimation.play();

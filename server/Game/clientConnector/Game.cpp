@@ -109,7 +109,6 @@ void Game::broadcastRequest(sf::Packet packet){
     }
 }
 
-
 /*
 void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,std::string sRequest2,
                           sf::TcpSocket * socket, int numeroPlayer) {
@@ -128,22 +127,12 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,std::string sR
     switch(actionID)
     {
 
-        case 1: // Lancer la partie //TODO Changer les cases
-            //launchGame();
+        case 1:
 
-            std::cout <<"game >> " << "Reponse a la requete n " + stringActionId << std::endl;
-            std::cout <<"game info" << "La partie va commencer" << std::endl;
             break;
 
-        case 2: //Lock un perso
-            std::cout <<"game >> " << "Reponse a la requete n " + stringActionId << std::endl;
-            if(lockCarac(sRequest, numeroPlayer)){
-                packet << actionID << "Ok";
-                socket->send(packet);
-                sendModifLockCarac(sRequest, numeroPlayer);
-            }
-            packet << actionID << "False";
-            socket->send(packet);
+        case 2:
+
             break;
 
         default:
@@ -152,33 +141,6 @@ void Game::gererRequete(sf::Int32 idRequest, std::string sRequest,std::string sR
 
 }*/
 
-//Send to a thread listening
-/*
-void Game::sendModifLockCarac(std::string sRequest, int numeroPlayer){
-    std::cout <<"game >> " << "Envoi du changement du Game : perso lock " << std::endl;
-    for(int i = 0; i < 5; i++) {
-        if (tabPlayer[i]->isHere()) {
-            sf::Packet packet;
-            sf::Int32 idRequest;
-            std::string nomPlayer = tabPlayer[numeroPlayer]->getNamePlayer();
-            idRequest = 3;
-
-            //Renvoie 3-NomPerso-NomJoueur
-            packet << idRequest << sRequest << nomPlayer;
-            tabPlayer[i]->getSocket()->send(packet);
-        }
-    }
-}
-*/
-/*
-bool Game::lockCarac(std::string sRequest, int nbPLayer ) {
-    for(int i =0; i < sizeof(tabPlayer); i++ ){
-        if(tabPlayer[i]->getNameChar() == sRequest) return false;
-    }
-    (tabPlayer[nbPLayer]->setNameChar(sRequest));
-    return true;
-}
-*/
 /**
  * \brief // TODO
  * \param
@@ -227,22 +189,6 @@ void Game::delPlayer(int i) {
     etatGame = Etat::Disponible;
 }
 
-
-/**
- * \brief Retourne le nom de l'hôte courant, sinon "aucun"
- * \return this->nomHote le nom de l'hôte
- */
-std::string Game::getMDJName() {
-    return this->nomHote;
-}
-
-/**
- * \brief Fixe le nom de l'hôte
- * \param hote Le nom de l'hôte
- */
-void Game::setMDJName(std::string hote) {
-    this->nomHote = hote;
-}
 
 
 Game::~Game() {
