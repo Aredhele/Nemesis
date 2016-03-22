@@ -38,11 +38,12 @@ sf::Font * ptr_font, std::wstring text, sf::Color color) {
 	m_id = id;
 	m_position.x = x;
 	m_position.y = y;
-
+	m_Stext = text;
 	m_text.setFont(*ptr_font);
 	m_text.setString(text);
 	m_text.setCharacterSize(size);
 	m_text.setPosition(m_position);
+	m_color = color;
 	m_text.setColor(color);
 }
 
@@ -100,6 +101,19 @@ void NLabel::update(double frameTime) {
 
 void NLabel::setText(std::wstring text){
 	m_text.setString(text);
+	m_Stext = text;
+}
+
+void NLabel::setColor(sf::Color color){
+	m_text.setColor(color);
+	m_color = color;
+}
+
+std::wstring NLabel::getSText(){
+	return m_Stext;
+}
+sf::Color NLabel::getColor(){
+	return m_color;
 }
 
 void NLabel::setPosition(float x, float y) {

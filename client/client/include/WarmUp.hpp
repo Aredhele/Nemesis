@@ -15,6 +15,7 @@ class WarmUp : public BasicInterface
 
         bool m_charSelected;
         bool m_firstConnect;
+
         NButton m_numero8Button;
         NButton m_remingtonButton;
         NButton m_tristanButton;
@@ -31,6 +32,7 @@ class WarmUp : public BasicInterface
         NLabel m_remingtonLockLabel;
         NLabel m_tristanLockLabel;
         NLabel m_mdjLockLabel;
+
 
         NButton m_playButton;
         NButton m_returnButton;

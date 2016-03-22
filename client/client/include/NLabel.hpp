@@ -16,6 +16,8 @@ class NLabel : public VisualObject
 	private:
 		sf::Font * m_ptr_font;
 		sf::Text m_text;
+		std::wstring m_Stext;
+		sf::Color m_color;
 
 	public:
 		// Constructor
@@ -28,14 +30,19 @@ class NLabel : public VisualObject
 		void create(std::string id, int x, int y, 
 		int size, sf::Font * ptr_font,
 		std::wstring text, sf::Color color);
+		std::wstring getSText();
 
 		void setText(std::wstring text);
+		sf::Color getColor();
 
 		virtual void draw(sf::RenderWindow * window);
 		virtual std::string eventMousePressed(sf::Event * e);
 		virtual std::string eventMouseMoved(sf::Event * e);
 		virtual void eventTextEntered(sf::Event * e);
 		virtual void update(double frameTime);
+
+	void setColor(sf::Color color);
+
 		void setPosition(float x, float y);
 };
 

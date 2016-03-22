@@ -69,6 +69,7 @@ private:
     NLabel m_labelHealth;
     NLabel m_labelCharacteristics;
 
+    std::vector<NLabel*> m_labelChatVector;
     NPanel m_panelChat;
     NTextField m_textChat;
     NButton m_arrowUp;
@@ -155,7 +156,7 @@ public:
 
     void receiveRequest();
     void request(int idRequest, std::string sRequest, std::string sRequest2);
-    void addTextToChat(std::string message);
+    void addTextToChat(std::string message, std::string perso);
 
     void initPlayerCharacter();
     Character * getCharacter(std::string id);

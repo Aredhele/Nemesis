@@ -179,12 +179,12 @@ void NTextField::eventTextEntered(sf::Event * e) {
 				m_charList.pop_back();
 				m_cursorPosition.x -= m_fontSize / coefFont;
 				m_secondSprite.setPosition(m_cursorPosition);
-                if(m_charList.size()==69){
-                    m_cursorPosition.x = 311;
+                if(m_charList.size()==67){
+                    m_cursorPosition.x = 304;
                     m_cursorPosition.y = 698;
                 }
-                else if(m_charList.size()==34){
-                    m_cursorPosition.x = 311;
+                else if(m_charList.size()==33){
+                    m_cursorPosition.x = 304;
                     m_cursorPosition.y = 680;
                 }
                 m_secondSprite.setPosition(m_cursorPosition);
@@ -192,12 +192,12 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		}
 		else if(e->text.unicode == 32) { // Space
 			m_charList.push_back(' ');
-            if(m_charList.size()==34){
+            if(m_charList.size()==33){
                 m_charList.push_back('\n');
                 m_cursorPosition.x = 0;
                 m_cursorPosition.y = 698;
             }
-            else if(m_charList.size()==69){
+            else if(m_charList.size()==67){
                 m_charList.push_back('\n');
                 m_cursorPosition.x = 0;
                 m_cursorPosition.y = 715;
@@ -215,12 +215,12 @@ void NTextField::eventTextEntered(sf::Event * e) {
 		else {
 			m_charList.push_back(
 					static_cast < char >(e->text.unicode));
-			if(m_charList.size()==34){
+			if(m_charList.size()==33){
 				m_charList.push_back('\n');
 				m_cursorPosition.x = 0;
 				m_cursorPosition.y = 698;
 			}
-			else if(m_charList.size()==69){
+			else if(m_charList.size()==67){
 				m_charList.push_back('\n');
 				m_cursorPosition.x = 0;
 				m_cursorPosition.y = 715;
@@ -246,13 +246,13 @@ void NTextField::eventTextEntered(sf::Event * e) {
 					m_charList.pop_back();
 					m_cursorPosition.x -= m_fontSize / coefFont;
 
-                    if(m_charList.size()==69){
-                        m_cursorPosition.x = 300;
+                    if(m_charList.size()==67){
+                        m_cursorPosition.x = 304;
                         m_cursorPosition.y = 698;
                     }
-                    else if(m_charList.size()==69){
+                    else if(m_charList.size()==33){
                         m_charList.push_back('\n');
-                        m_cursorPosition.x = 300;
+                        m_cursorPosition.x = 304;
                         m_cursorPosition.y = 680;
                     }
                     m_secondSprite.setPosition(m_cursorPosition);

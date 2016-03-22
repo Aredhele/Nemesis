@@ -21,6 +21,7 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
         m_roomButton(),
         m_crapaudButton(),
         m_dragonButton(),
+        m_labelChatVector(),
         m_yetiButton(),
         m_yetiMonsterButton(),
         m_dragonMonsterButton(),
@@ -118,13 +119,21 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
                       ptr_managerGroup->ptr_textureManager->getTexture("chatTextBox"),
                       ptr_managerGroup->ptr_textureManager->getTexture("textBoxCursorChat"),
                       &m_fontTextbox,
-                      15, 0.5, "", 104, sf::Color(196,130,56));
+                      15, 0.5, "", 101, sf::Color(196,130,56));
     m_textChat.setTextPosition(7, 678);
     m_textChat.setCursorPosition(7, 680);
 
     //Panel Chat
     m_panelChat.create("chatPanel", 5, 495,
                        ptr_managerGroup->ptr_textureManager->getTexture("chatPanel"));
+
+    for(int i = 0; i < 11; i++){
+        NLabel* label = new NLabel();
+        m_labelChatVector.push_back(label);
+    }
+    for(int i = 0; i < m_labelChatVector.size(); i++){
+        m_labelChatVector.at(i)->create("labelChat"+i, 7, 495+15*i, 15, &m_fontLabel, L"", sf::Color::Black );
+    }
 
     //Panel UI du MJ
     m_panelMJ.create("MJPanel", 2000, 2000,ptr_managerGroup->ptr_textureManager->getTexture("IconHealth"));
@@ -288,6 +297,10 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
     m_labelHealth.create("labelHealth", 840, 665, 15, &m_fontLabel, L"Santé : ", sf::Color::Black);
     getContentPane()->addComponent(&m_labelHealth);
 
+
+
+
+
     m_numero8Mini.create("numero8Mini", 767,497,
                          ptr_managerGroup->ptr_textureManager->getTexture("numero8Lock"));
     getContentPane()->addComponent(&m_numero8Mini);
@@ -323,6 +336,9 @@ Game::Game(bool debug, ManagerGroup * ptr_managerGroup):
 
     getContentPane()->addComponent(&m_textChat);
     getContentPane()->addComponent(&m_panelChat);
+    for(unsigned int i = 0; i < m_labelChatVector.size(); i++){
+        getContentPane()->addComponent(m_labelChatVector.at(i));
+    }
     getContentPane()->addComponent(&m_panelMJ);
     getContentPane()->addComponent(&m_panelMJ);
     getContentPane()->addComponent(&m_panelMonstresMJ);
@@ -622,10 +638,14 @@ void Game::update(sf::RenderWindow * window,
 
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
+
         std::string text = m_textChat.getString();
-        //std::cout << text << std::endl;
-        request(7, text, "");
-        //m_textChat.empty();
+        if(text != ""){
+            text = text + "\n";
+            //std::cout << text << std::endl;
+            request(7, text, m_player->getCharacter()->getId());
+            //m_textChat.empty();
+        }
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
@@ -635,8 +655,6 @@ void Game::update(sf::RenderWindow * window,
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
         std::cout << "down" << std::endl;
     }
-
-
 
     //if (e->type == sf::TextE)
     // Drawing all content
@@ -665,9 +683,9 @@ void Game::displayFeature(std::string id){
 
 
     //Convert to wstring to display
-    std::wstring sAttack = cast::intToWstring(attack);
-    std::wstring sDefense = cast::intToWstring(defense);
-    std::wstring sHealth = cast::intToWstring(health);
+    std::wstring sAttack = cast::toWstring(attack);
+    std::wstring sDefense = cast::toWstring(defense);
+    std::wstring sHealth = cast::toWstring(health);
 
     m_labelNameCharacter.setText(name);
     m_labelAttack.setText(L"Attaque : " + sAttack);
@@ -716,9 +734,9 @@ void Game::receiveRequest() {
 
         switch (idRequest) {
             case 7:
-                packet.at(i) >> sRequest;
+                packet.at(i) >> sRequest >> sRequest2;
                 m_textChat.empty();
-                addTextToChat(sRequest);
+                addTextToChat(sRequest, sRequest2);
             case 8:
                 //On change d'ambiance
                 //sRequest = nom de l'ambiance (ex : "castle")
@@ -824,9 +842,32 @@ void Game::changeAmbiance(std::string ambiance){
 
 }
 
-//TODO
-void Game::addTextToChat(std::string message){
+
+void Game::addTextToChat(std::string message, std::string perso){
     std::cout << message << std::endl;
+    std::string tmp;
+    std::istringstream isstringstream(message);
+
+    while(std::getline(isstringstream, tmp)){
+        std::wstring ws(tmp.size(), L' '); // Overestimate number of code points.
+        ws.resize(std::mbstowcs(&ws[0], tmp.c_str(), tmp.size()));
+
+        for(unsigned int i = 0; i < m_labelChatVector.size()-1; i++){
+            m_labelChatVector.at(i)->setText(m_labelChatVector.at(i+1)->getSText());
+            m_labelChatVector.at(i)->setColor(m_labelChatVector.at(i+1)->getColor());
+        }
+        m_labelChatVector.at(m_labelChatVector.size()-1)->setText(ws);
+        if(perso=="eldora")
+            m_labelChatVector.at(m_labelChatVector.size()-1)->setColor(sf::Color(218,74,44,255));
+        if(perso=="numero8")
+            m_labelChatVector.at(m_labelChatVector.size()-1)->setColor(sf::Color(22,134,190,255));
+        if(perso=="mdj")
+            m_labelChatVector.at(m_labelChatVector.size()-1)->setColor(sf::Color(114,113,113,255));
+        if(perso=="remington")
+            m_labelChatVector.at(m_labelChatVector.size()-1)->setColor(sf::Color(198,157,103,255));
+        if(perso=="tristan")
+            m_labelChatVector.at(m_labelChatVector.size()-1)->setColor(sf::Color(55,143,86,255));
+    }
 }
 
 
@@ -946,10 +987,13 @@ void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
 }
 
 void Game::initPlayerCharacter() {
-    m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
-           m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
+
+    //m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+    //       m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
+
 
     m_player = m_ptr_managerGroup->ptr_gameManager->getPlayer();
+    //addTextToChat("Bonjour meusieur","eldora");
 
     if(m_player->getCharacter()->getId()=="mdj"){
         isMdj=true;
@@ -977,7 +1021,6 @@ void Game::initPlayerCharacter() {
                 m_ptr_managerGroup->ptr_textureManager->getTexture("remingtonLock"));
     }
 }
-
 
 void Game::attackAnimation(std::string cible){
     std::cout << "Attaque ! Cible : " << cible << std::endl;
@@ -1017,7 +1060,7 @@ void Game::attackAnimation(std::string cible){
     m_attackAnimation.play();
 
 }
-//TODO : Changer pour adapter aux requetes du serveur
+
 void Game::specialAnimation(std::string cible, std::string attaquant){
     int x;
     int y;
@@ -1078,7 +1121,6 @@ void Game::specialAnimation(std::string cible, std::string attaquant){
 
 }
 
-
 void Game::checkStateAnimation(){
     if(m_attackAnimation.isStopped()){
         m_attackAnimation.setVisible(false);
@@ -1096,6 +1138,7 @@ void Game::checkStateAnimation(){
         m_numero8Special.setVisible(false);
     }
 }
+
 Character * Game::getCharacter(std::string id){
     return m_ptr_managerGroup->ptr_gameManager->getCharacterById(id);
 }
