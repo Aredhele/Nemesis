@@ -946,8 +946,8 @@ void Game::monsterSpecialAttack(std::string idCharacter, std::string idMonster){
 }
 
 void Game::initPlayerCharacter() {
-    //m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
-   //         m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
+    m_ptr_managerGroup->ptr_gameManager->getPlayer()->setCharacter(
+           m_ptr_managerGroup->ptr_gameManager->getCharacterById("eldora"));
 
     m_player = m_ptr_managerGroup->ptr_gameManager->getPlayer();
 

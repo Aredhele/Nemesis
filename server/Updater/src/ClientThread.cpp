@@ -85,24 +85,12 @@ void ClientThread::client() {
 			return;
 		}
 
-		//std::cout << "Received path [" << i << "] : " << lines << std::endl;
-
-		// Saving feedback in file
-		// fprintf(f, "[%d] %s\n", i, lines);
-
 		while(m_ptr_clientSocket->receive(hash, 40, received) == sf::Socket::Disconnected) {
 			std::cerr << "Paquet re-wait" << std::endl;
 			return;
 		}
 
 		hash[40] = '\0';
-
-		//std::cout << "Received hash [" << i << "] : " << hash << "C" << std::endl;
-		//std::cout << strlen(hash) << std::endl;
-
-
-		// Saving feedback in file
-		// fprintf(f, "[%d] %s\n", i, hash);
 
 		m_ptr_fileManager->addClientFileToList(lines);
 		m_ptr_fileManager->addClientHashToList(hash);
@@ -202,8 +190,8 @@ void ClientThread::client() {
   		}
 
   		if(nbEssai == 3) {
+			std::cout << "FAIL TO SEND FILES !!" << std::endl;
   			break;
-  			std::cout << "FAIL TO SEND FILES !!" << std::endl;
   		}
 
   		is.close();
