@@ -644,7 +644,7 @@ void Game::update(sf::RenderWindow * window,
             text = text + "\n";
             //std::cout << text << std::endl;
             request(7, text, m_player->getCharacter()->getId());
-            //m_textChat.empty();
+            m_textChat.empty();
         }
     }
 
@@ -735,7 +735,7 @@ void Game::receiveRequest() {
         switch (idRequest) {
             case 7:
                 packet.at(i) >> sRequest >> sRequest2;
-                m_textChat.empty();
+                //m_textChat.empty();
                 addTextToChat(sRequest, sRequest2);
             case 8:
                 //On change d'ambiance
@@ -906,14 +906,17 @@ void Game::characterAttack(std::string idCharacter, std::string idMonster) {
         displayFeature(m_player->getCharacter()->getId());
         selectedMonster="NULL";
         if (idMonster == "dragon"){
+            hasDragon = false;
             m_ptr_managerGroup->ptr_gameManager->initDragon();
             m_dragonMonsterButton.setVisible(false);
         }
         if (idMonster == "yeti"){
+            hasYeti = true;
             m_ptr_managerGroup->ptr_gameManager->initYeti();
             m_yetiMonsterButton.setVisible(false);
         }
         if (idMonster == "crapaud"){
+            hasCrapaud = false;
             m_ptr_managerGroup->ptr_gameManager->initCrapaud();
             m_crapaudMonsterButton.setVisible(false);
         }
